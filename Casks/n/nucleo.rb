@@ -1,9 +1,9 @@
 cask "nucleo" do
-  version "4.1.0"
-  sha256 "eed2d105f3f8c53ec052014c05165e63780e33a0f532fae1a188a56db9e91e9e"
+  version "4.1.2"
+  sha256 "8108a8d6899e76b37d51a3d697c6b2e0fd2f9e7a0ef999beda120186873dbc24"
 
-  url "https://nucleo-app-releases.s3-accelerate.amazonaws.com/mac/Nucleo_#{version}.zip",
-      verified: "nucleo-app-releases.s3-accelerate.amazonaws.com/"
+  url "https://nucleo-app-releases.s3.amazonaws.com/mac/Nucleo_#{version}.zip",
+      verified: "nucleo-app-releases.s3.amazonaws.com/"
   name "Nucleo"
   desc "Icon manager and library"
   homepage "https://nucleoapp.com/"

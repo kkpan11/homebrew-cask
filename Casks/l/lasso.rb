@@ -1,5 +1,5 @@
 cask "lasso" do
-  version "1.6.3"
+  version "1.7.1"
   sha256 :no_check
 
   url "https://f003.backblazeb2.com/file/lasso-app/Lasso.dmg",
@@ -19,6 +19,7 @@ cask "lasso" do
   app "Lasso.app"
 
   zap trash: [
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.heavylightapps.lassolaunchhelper.sfl*",
     "~/Library/Application Support/com.heavylightapps.lasso",
     "~/Library/Application Support/Lasso",
     "~/Library/Caches/com.heavylightapps.lasso",
