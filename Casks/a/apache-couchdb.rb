@@ -1,9 +1,9 @@
 cask "apache-couchdb" do
   arch arm: "arm64", intel: "x86_64"
 
-  version "3.3.3-2"
-  sha256 arm:   "ab2c24a8511fb9e8749727ec63510ba63d1a017090b72787a1ab9d8959498bb0",
-         intel: "d863d74ab65df1f5cfd79fd2601e2f631201eeec0667a74bab251d8cffbe1070"
+  version "3.5.1"
+  sha256 arm:   "0adddf00aabc686f6f471546345712c86f9eb573fd364eff87e0768d0a96f11e",
+         intel: "528f6e2b6cf4352d4012ed5db29ab64861c187e0154c5a62649a1d7a41ad3ad7"
 
   url "https://couchdbneighbourhoodie.fra1.digitaloceanspaces.com/downloads/#{version}/mac/#{arch}/Apache-CouchDB.zip",
       verified: "couchdbneighbourhoodie.fra1.digitaloceanspaces.com/"
@@ -13,11 +13,11 @@ cask "apache-couchdb" do
 
   livecheck do
     url "https://neighbourhood.ie/download-apache-couchdb-mac/"
-    regex(%r{href=.*?/(\d+(?:[.-]\d+)*)/mac/(arm64|x86_64)/Apache-CouchDB\.zip}i)
+    regex(%r{href=.*?/(\d+(?:[.-]\d+)*)/mac/#{arch}/Apache-CouchDB\.zip}i)
   end
 
   # see https://neighbourhood.ie/download-apache-couchdb-mac/
-  depends_on macos: ">= :ventura"
+  depends_on macos: ">= :big_sur"
 
   app "Apache CouchDB.app"
 

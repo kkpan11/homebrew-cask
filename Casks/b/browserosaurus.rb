@@ -1,17 +1,18 @@
 cask "browserosaurus" do
   arch arm: "arm64", intel: "x64"
 
-  version "20.8.0"
-  sha256 arm:   "99c74e18416921be65a9cc2abe07e49b694bde5524187b0a13f4f904017c882f",
-         intel: "481049c81b655f8662ecc3e74badfec219e265cdad20c5e1bcec283423b0b73c"
+  version "20.12.0"
+  sha256 arm:   "f90072dd87c8f8966d5c038a1f4c6a9f1c3d61fe088e8ac6499b7e400e994566",
+         intel: "2694fa08a218c93569005db4098d3f1e3862abbcd0e1dae85f4a370922268506"
 
   url "https://github.com/will-stone/browserosaurus/releases/download/v#{version}/Browserosaurus-darwin-#{arch}-#{version}.zip"
   name "Browserosaurus"
   desc "Open-source browser prompter"
   homepage "https://github.com/will-stone/browserosaurus"
 
+  deprecate! date: "2025-08-30", because: :discontinued
+
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "Browserosaurus.app"
 

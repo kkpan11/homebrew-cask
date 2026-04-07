@@ -10,6 +10,8 @@ cask "mark-text" do
   desc "Markdown editor"
   homepage "https://github.com/marktext/marktext"
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   auto_updates true
 
   app "MarkText.app"
@@ -20,11 +22,4 @@ cask "mark-text" do
     "~/Library/Preferences/com.github.marktext.marktext.plist",
     "~/Library/Saved Application State/com.github.marktext.marktext.savedState",
   ]
-
-  caveats <<~EOS
-    The Apple Silicon (ARM) version of #{token} is not signed. It will display an error stating it is damaged and can't
-    be opened. Please see https://github.com/marktext/marktext/issues/2983 for details and workarounds.
-
-    This is something only the developer, not Homebrew, can fix.
-  EOS
 end

@@ -1,8 +1,11 @@
 cask "010-editor" do
-  version "14.0.1"
-  sha256 "a82255a458541feb2ece91b7dbc9ce4d404c95bc0794cc32c9eecc8d17d7cf59"
+  arch arm: "ARM64", intel: "64"
 
-  url "https://download.sweetscape.com/010EditorMac64Installer#{version}.dmg"
+  version "16.0.4"
+  sha256 arm:   "fb253925d3cd4b605f8992ec04bcb20be89e54da9b2166daded7819532035ad9",
+         intel: "bec2345607091a57894d0e42d496a20a410b7d67f08058720b1fba8f99a57489"
+
+  url "https://download.sweetscape.com/010EditorMac#{arch}Installer#{version}.dmg"
   name "010 Editor"
   desc "Text editor"
   homepage "https://www.sweetscape.com/"
@@ -11,6 +14,8 @@ cask "010-editor" do
     url "https://www.sweetscape.com/download/010editor/"
     regex(/Version:?\s*(\d+(?:\.\d+)+),\s*macOS/i)
   end
+
+  depends_on macos: ">= :big_sur"
 
   app "010 Editor.app"
 

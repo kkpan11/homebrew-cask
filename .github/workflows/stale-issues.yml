@@ -12,9 +12,11 @@ on:
     - cron: "0 0 * * *"
   issue_comment:
 
-permissions:
-  issues: write
-  pull-requests: write
+permissions: {}
+
+defaults:
+  run:
+    shell: bash -xeuo pipefail {0}
 
 concurrency:
   group: stale-issues
@@ -29,10 +31,14 @@ jobs:
           contains(github.event.pull_request.labels.*.name, 'stale')
         )
       )
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
     steps:
       - name: Mark/Close Stale Issues and Pull Requests
-        uses: actions/stale@v9
+        uses: actions/stale@b5d41d4e1d5dceea10e7104786b73624c18a190f # v10.2.0
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           days-before-stale: 21
@@ -45,6 +51,7 @@ jobs:
             recent activity. It will be closed if no further activity occurs.
           exempt-issue-labels: "gsoc-outreachy,help wanted,in progress"
           exempt-pr-labels: "gsoc-outreachy,help wanted,in progress"
+          delete-branch: true
 
   bump-pr-stale:
     if: >
@@ -54,10 +61,14 @@ jobs:
           contains(github.event.pull_request.labels.*.name, 'stale')
         )
       )
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
     steps:
       - name: Mark/Close Stale `bump-formula-pr` and `bump-cask-pr` Pull Requests
-        uses: actions/stale@v9
+        uses: actions/stale@b5d41d4e1d5dceea10e7104786b73624c18a190f # v10.2.0
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           days-before-stale: 2
@@ -68,3 +79,4 @@ jobs:
             pull request open, add a `help wanted` or `in progress` label.
           exempt-pr-labels: "help wanted,in progress"
           any-of-labels: "bump-formula-pr,bump-cask-pr"
+          delete-branch: true

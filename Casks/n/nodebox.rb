@@ -13,12 +13,14 @@ cask "nodebox" do
     regex(/href=.*?NodeBox[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
   end
 
-  depends_on macos: ">= :catalina"
-
   app "NodeBox.app"
 
   zap trash: [
     "~/Library/Logs/NodeBox",
     "~/Library/NodeBox",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

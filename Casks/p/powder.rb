@@ -1,16 +1,24 @@
 cask "powder" do
-  version "98.2"
-  sha256 :no_check
+  arch arm: "aarch64", intel: "x86_64"
 
-  url "https://powdertoy.co.uk/Download/powder.dmg"
+  version "99.5.394"
+  sha256 arm:   "355ac24b9af8f55f8ecef2a0f2cefa89c04efd171dc501f113862d901f4c881a",
+         intel: "00ecc496e488aa5cacd8d365b9202c6cb7441606224d2a0f1b20fed386b49696"
+
+  url "https://github.com/The-Powder-Toy/The-Powder-Toy/releases/download/v#{version}/powder-v#{version}-#{arch}-darwin-macos.dmg",
+      verified: "github.com/The-Powder-Toy/The-Powder-Toy/"
   name "Powder Toy"
   desc "Physics sandbox game"
   homepage "https://powdertoy.co.uk/"
 
   livecheck do
-    url :homepage
-    regex(%r{macOS</dt>\n\t*<dd class="Version">(\d+(?:\.\d+)+)}i)
+    url :url
+    strategy :github_latest
   end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
+  depends_on macos: ">= :big_sur"
 
   app "The Powder Toy.app"
 

@@ -1,19 +1,25 @@
 cask "adobe-creative-cloud" do
   arch arm: "macarm64", intel: "osx10"
 
-  version "6.1.0.587.7"
-  sha256 arm:   "d0ceaf057c0b995f98f8e14a9deb413fd03ef60dfe948dd73eb16fb8bdb0d326",
-         intel: "f5c14f83008a94165b7c873d368475c45c5c42dc86381ab99b137dd35f3998f9"
+  version "6.8.1.865"
+  sha256 arm:   "bedbaf48288b5d09cd86450f13d91b311411b4e535eee414c9f50c161f3765ec",
+         intel: "235f15c69e1734ad7178703089301d243be731cb3519558c04c1b9d409c338e2"
 
   # If url breaks you can find the latest static urls - https://helpx.adobe.com/download-install/kb/creative-cloud-desktop-app-download.html
-  url "https://ccmdl.adobe.com/AdobeProducts/KCCC/CCD/#{version.dots_to_underscores}/#{arch}/ACCCx#{version.dots_to_underscores}.dmg"
+  url "https://ccmdls.adobe.com/AdobeProducts/StandaloneBuilds/ACCC/ESD/#{version.major_minor_patch}/#{version.split(".").fourth}/#{arch}/ACCCx#{version.dots_to_underscores}.dmg"
   name "Adobe Creative Cloud"
   desc "Collection of apps and services for photography, design, video, web, and UX"
   homepage "https://www.adobe.com/creativecloud.html"
 
   livecheck do
     url "https://ffc-static-cdn.oobesaas.adobe.com/features/v3/#{arch}/ccdConfig.xml"
-    regex(/ccd\.fw\.update\.greenline\.latest.*?"version".*?"(\d+(?:\.\d+)+)"/i)
+    strategy :xml do |xml|
+      item = xml.elements["//feature-entry[@id='ccd.fw.update.greenline.latest']/data"]&.text&.strip
+      next if item.blank?
+
+      json = Homebrew::Livecheck::Strategy::Json.parse_json(item)
+      json["version"]
+    end
   end
 
   auto_updates true
@@ -24,10 +30,6 @@ cask "adobe-creative-cloud" do
     sudo:         true,
     print_stderr: false,
   }
-
-  uninstall_preflight do
-    set_ownership "/Library/Application Support/Adobe"
-  end
 
   uninstall_postflight do
     stdout, * = system_command "/bin/launchctl", args: ["print", "gui/#{Process.uid}"]
@@ -48,6 +50,7 @@ cask "adobe-creative-cloud" do
               "com.adobe.acc.installer",
               "com.adobe.acc.installer.v2",
               "com.adobe.AdobeCreativeCloud",
+              "com.adobe.AdobeDesktopService",
               "com.adobe.ccxprocess",
             ],
             quit:         "com.adobe.acc.AdobeCreativeCloud",
@@ -130,8 +133,4 @@ cask "adobe-creative-cloud" do
         "~/Library/Application Support/Adobe",
         "~/Library/Logs/Adobe",
       ]
-
-  caveats do
-    requires_rosetta
-  end
 end

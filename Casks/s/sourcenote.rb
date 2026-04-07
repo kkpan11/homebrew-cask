@@ -12,6 +12,8 @@ cask "sourcenote" do
     strategy :sparkle
   end
 
+  auto_updates true
+
   app "SourceNote.app"
 
   zap trash: [

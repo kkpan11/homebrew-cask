@@ -1,16 +1,32 @@
 cask "audius" do
-  version "1.5.66"
-  sha256 "9ea406067b559107bb7e4de6a80b6c45413b791448cbcd1b54cb52b99b0c6084"
+  arch arm: "-arm64"
 
-  url "https://download.audius.co/Audius-#{version}.dmg"
+  on_arm do
+    version "1.5.161"
+    sha256 "5ced8f562a65dfa8f5ce7310788792c943d61c326a3b1fae8fbcacd47f62d2e0"
+
+    livecheck do
+      url "https://download.audius.co/latest-mac.yml"
+      strategy :electron_builder
+    end
+
+    depends_on macos: ">= :monterey"
+  end
+  on_intel do
+    version "1.5.66"
+    sha256 "ed894a7eca86e9e858454f125c69b39ff2a8f8a5d27f637aa444caba7bfa4855"
+
+    livecheck do
+      skip "Legacy version"
+    end
+
+    depends_on macos: ">= :catalina"
+  end
+
+  url "https://download.audius.co/Audius-#{version}#{arch}.dmg"
   name "Audius"
   desc "Music streaming and sharing platform"
   homepage "https://audius.co/"
-
-  livecheck do
-    url "https://s3-us-west-1.amazonaws.com/download.audius.co/latest-mac.yml"
-    strategy :electron_builder
-  end
 
   auto_updates true
 

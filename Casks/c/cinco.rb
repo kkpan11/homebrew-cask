@@ -10,8 +10,10 @@ cask "cinco" do
 
   livecheck do
     url "https://ls5download.cs.tu-dortmund.de/cinco/releases/"
-    regex(%r{href="(\d+(?:\.\d+)+)/"}i)
+    regex(%r{href=["']?v?(\d+(?:\.\d+)+)/?["' >]}i)
   end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   pkg "Install Cinco.pkg"
 
@@ -26,5 +28,6 @@ cask "cinco" do
   caveats do
     license "https://www.eclipse.org/legal/epl-v10.html"
     depends_on_java "11"
+    requires_rosetta
   end
 end

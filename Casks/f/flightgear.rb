@@ -1,16 +1,16 @@
 cask "flightgear" do
-  version "2020.3.19"
-  sha256 "8cfa99b69a05f19929b9380995076fa0129d7536c78d303a50b81a098b02f477"
+  version "2024.1.5"
+  sha256 "713b12e126cbdab9325a46e105ba71a0bf691358795758796dd707658a4bc0aa"
 
-  url "https://downloads.sourceforge.net/flightgear/FlightGear-#{version}.dmg",
-      verified: "sourceforge.net/flightgear/"
+  url "https://mirrors.ibiblio.org/flightgear/ftp/release-#{version.major_minor}/flightgear-#{version}-macos-universal.dmg",
+      verified: "mirrors.ibiblio.org/flightgear/"
   name "FlightGear"
   desc "Flight simulator"
   homepage "https://www.flightgear.org/"
 
   livecheck do
     url "https://www.flightgear.org/download/"
-    regex(/FlightGear[._-]?v?(\d+(?:\.\d+)+)\.dmg/i)
+    regex(/href=.*?flightgear[._-]?v?(\d+(?:\.\d+)+)(?:[._-]macos)?(?:[._-]universal)?\.dmg/i)
   end
 
   app "FlightGear.app"

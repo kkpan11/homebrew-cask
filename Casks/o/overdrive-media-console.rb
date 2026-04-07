@@ -8,19 +8,12 @@ cask "overdrive-media-console" do
   desc "Get eBooks, audiobooks, and videos from your local library"
   homepage "https://www.overdrive.com/"
 
-  livecheck do
-    url :url
-    strategy :extract_plist do |items|
-      item = items["com.overdrive.overdrivemediaconsole"]
-      item.short_version[/(\d+(?:\.\d+)+)/]
-    end
-  end
+  deprecate! date: "2024-07-04", because: :discontinued
+  disable! date: "2025-07-04", because: :discontinued
+
+  rename "OverDrive-Mac-Installer-Version-*.pkg", "OverDrive-Mac-Installer.pkg"
 
   pkg "OverDrive-Mac-Installer.pkg"
-
-  preflight do
-    staged_path.glob("OverDrive-Mac-Installer-Version-*.pkg").first.rename(staged_path/"OverDrive-Mac-Installer.pkg")
-  end
 
   uninstall pkgutil: "com.overdrive.overdriveMediaConsole.*"
 

@@ -8,12 +8,19 @@ cask "toptracker" do
   desc "Time tracking and invoice processing"
   homepage "https://tracker.toptal.com/tracker/"
 
-  livecheck do
-    url "https://tracker-api.toptal.com/desktop/updates/mac"
-    strategy :sparkle
-  end
-
-  depends_on macos: ">= :sierra"
+  deprecate! date: "2025-03-31", because: :unmaintained
+  disable! date: "2026-04-01", because: :unmaintained
 
   app "TopTracker.app"
+
+  zap trash: [
+    "~/Library/Application Support/TopTracker",
+    "~/Library/HTTPStorages/com.toptracker",
+    "~/Library/Preferences/com.toptracker.plist",
+    "~/Library/Saved Application State/com.toptracker.savedState",
+  ]
+
+  caveats do
+    requires_rosetta
+  end
 end

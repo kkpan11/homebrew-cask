@@ -1,25 +1,41 @@
 cask "texworks" do
-  version "0.6.9,202402120642,68a2e99"
-  sha256 "470cf77767cca7efff47ca0514b4fb0318c9bf15d4242065678fe4e55a9f1456"
+  arch arm: "arm64", intel: "x86_64"
 
-  url "https://github.com/TeXworks/texworks/releases/download/release-#{version.csv.first}/TeXworks-macos11-#{version.csv.first}-#{version.csv.second}-git_#{version.csv.third}.dmg",
+  on_arm do
+    version "0.6.10,202502131353,7380941"
+    sha256 "813964827bbea219f7f05d7a03c76260162010bebc70746ccce60c77a3537b24"
+  end
+  on_intel do
+    version "0.6.11,202602100758,7951fd8"
+    sha256 "8d8989c202508ba964681293c15cffd0388429a14f6e828b391cf252db5a40d3"
+  end
+
+  url "https://github.com/TeXworks/texworks/releases/download/release-#{version.csv.first}/TeXworks-macos11-#{version.csv.first}-#{arch}-#{version.csv.second}-git_#{version.csv.third}.dmg",
       verified: "github.com/TeXworks/texworks/"
   name "TeXworks"
-  desc "Main codebase"
+  desc "LaTeX editor"
   homepage "https://www.tug.org/texworks/"
 
+  # Not every GitHub release provides a file for all architectures,
+  # so we check multiple recent releases instead of only the "latest" release.
   livecheck do
     url :url
-    regex(/^TeXworks-macos11[._-]v?(\d+(?:\.\d+)+)-(\d+)-git_(.*?)\.dmg$/i)
-    strategy :github_latest do |json, regex|
-      json["assets"]&.map do |asset|
-        match = asset["name"]&.match(regex)
-        next if match.blank?
+    regex(/^TeXworks[._-]macos11[._-]v?(\d+(?:\.\d+)+)[._-]#{arch}[._-](\d+)[._-]git[._-](.*?)\.dmg$/i)
+    strategy :github_releases do |json, regex|
+      json.map do |release|
+        next if release["draft"] || release["prerelease"]
 
-        "#{match[1]},#{match[2]},#{match[3]}"
-      end
+        release["assets"]&.map do |asset|
+          match = asset["name"]&.match(regex)
+          next if match.blank?
+
+          "#{match[1]},#{match[2]},#{match[3]}"
+        end
+      end.flatten
     end
   end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   depends_on macos: ">= :big_sur"
 

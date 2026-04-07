@@ -1,6 +1,6 @@
 cask "opera-gx" do
-  version "108.0.5067.43"
-  sha256 "92c00b48b6a75e1258679bae91d9b4b90cc5517a5524b3fd94ed3137c9d9e6ed"
+  version "129.0.5823.64"
+  sha256 "da19ced625acb29550ad7e32ad8d2fbbc05053606b8b76442b9a004bd5cd2fac"
 
   url "https://get.geo.opera.com/pub/opera_gx/#{version}/mac/Opera_GX_#{version}_Setup.dmg"
   name "Opera GX"
@@ -13,8 +13,17 @@ cask "opera-gx" do
   end
 
   auto_updates true
+  depends_on macos: ">= :big_sur"
 
   app "Opera GX.app"
 
-  zap trash: "~/Library/Application Support/com.operasoftware.OperaGX"
+  zap trash: [
+    "~/Library/Application Support/com.operasoftware.OperaGX",
+    "~/Library/Caches/com.operasoftware.Installer.OperaGX",
+    "~/Library/Caches/com.operasoftware.OperaGX",
+    "~/Library/Cookies/com.operasoftware.OperaGX.binarycookies",
+    "~/Library/HTTPStorages/com.operasoftware.Installer.OperaGX",
+    "~/Library/Preferences/com.operasoftware.OperaGX.plist",
+    "~/Library/Saved Application State/com.operasoftware.OperaGX.savedState",
+  ]
 end

@@ -1,6 +1,6 @@
 cask "insomnia" do
-  version "8.6.1"
-  sha256 "e18e9ee5c43d2747a7a76b5e5d5342beb8db847d77d28a78e4157167103be091"
+  version "12.5.0"
+  sha256 "ebe2ff850eab58d56e11ea53a99ce048cb716c1292fcb3d8ab2be8a4e4673d04"
 
   url "https://github.com/Kong/insomnia/releases/download/core%40#{version}/Insomnia.Core-#{version}.dmg",
       verified: "github.com/Kong/insomnia/"
@@ -8,16 +8,21 @@ cask "insomnia" do
   desc "HTTP and GraphQL Client"
   homepage "https://insomnia.rest/"
 
-  # Upstream previously used a date-based version scheme (e.g., `2023.5.8`)
-  # before switching to a typical `8.1.0` format. The date-based versions are
-  # numerically higher, so we have to avoid matching them.
+  # The upstream server only returns a JSON response if the provided version is
+  # lower than the newest version. This uses a X.0.0 version in the `url` to
+  # work around it but this won't work for a new major version (e.g., 1.0.0)
+  # where the provided version and newest version are equal, so this uses the
+  # previous major for a new major release.
   livecheck do
-    url :url
-    regex(/^core@v?(\d{1,3}(?:\.\d+)+)$/i)
+    url "https://updates.insomnia.rest/builds/check/mac?v=#{version.end_with?(".0.0") ? (version.major.to_i - 1) : version.major}.0.0&app=com.insomnia.app&channel=stable"
+    strategy :json do |json|
+      json["name"]
+    end
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
+  conflicts_with cask: "insomnia@alpha"
+  depends_on macos: ">= :monterey"
 
   app "Insomnia.app"
 

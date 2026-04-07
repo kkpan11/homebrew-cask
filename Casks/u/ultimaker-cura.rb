@@ -1,26 +1,30 @@
 cask "ultimaker-cura" do
   arch arm: "ARM64", intel: "X64"
 
-  on_arm do
-    version "5.6.0"
-    sha256 "c046ffa25acbede20936f289d63fbe8ad034901a049173acd713efdc31e273ef"
-  end
-  on_intel do
-    version "5.6.0"
-    sha256 "11a32451595639ddfb9a67d22b4c6efd8f1daad0cc731b1d9e0c357b74424aee"
-  end
+  version "5.12.0"
+  sha256 arm:   "db2c58e47e6c20f2731feb73406ee62d5763c01c22f16109728ff02b66d0108e",
+         intel: "13acd9f15aea3fc9dd8ca4e220ab8c982a4546bbc71da96a6008e3f17d7ac315"
 
-  url "https://github.com/Ultimaker/Cura/releases/download/#{version}/Ultimaker-Cura-#{version}-macos-#{arch}.dmg",
+  url "https://github.com/Ultimaker/Cura/releases/download/#{version.csv.second || version.csv.first}/UltiMaker-Cura-#{version.csv.first}-macos-#{arch}.dmg",
       verified: "github.com/Ultimaker/Cura/"
-  name "Ultimaker Cura"
+  name "UltiMaker Cura"
   name "Cura"
   desc "3D printer and slicing GUI"
   homepage "https://ultimaker.com/software/ultimaker-cura"
 
   livecheck do
     url :url
-    strategy :github_latest
+    regex(/^(\d+(?:\.\d+)+)/i)
+    strategy :github_latest do |json, regex|
+      tag = json["tag_name"]&.sub(/^\D+/, "")
+      match = tag&.match(regex)
+      next if match.blank?
+
+      (match[1] == tag) ? match[1] : "#{match[1]},#{tag}"
+    end
   end
+
+  depends_on macos: ">= :big_sur"
 
   app "UltiMaker Cura.app"
 

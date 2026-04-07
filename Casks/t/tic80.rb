@@ -9,6 +9,8 @@ cask "tic80" do
   desc "Fantasy computer for making, playing and sharing tiny games"
   homepage "https://tic80.com/"
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "tic80.app"
 
   uninstall quit: "com.nesbox.tic"
@@ -17,4 +19,8 @@ cask "tic80" do
     "~/Library/Application Support/com.nesbox.tic",
     "~/Library/Saved Application State/com.nesbox.tic.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

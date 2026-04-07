@@ -6,5 +6,12 @@ cask "octomouse" do
   name "OctoMouse"
   homepage "https://github.com/KonsomeJona/OctoMouse"
 
+  deprecate! date: "2024-09-08", because: :unmaintained
+  disable! date: "2025-09-09", because: :unmaintained
+
   app "OctoMouse.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

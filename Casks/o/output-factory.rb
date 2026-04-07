@@ -1,5 +1,5 @@
 cask "output-factory" do
-  version "2.5.7"
+  version "3.2.1"
   sha256 :no_check
 
   url "https://zevrix.com/downloads/OutputFactory.dmg"
@@ -8,11 +8,15 @@ cask "output-factory" do
   homepage "https://zevrix.com/OutputFactory/"
 
   livecheck do
-    url "https://zevrix.com/download/"
-    regex(/Output\s*Factory\s*(\d+(?:\.\d+)+)/i)
+    url "https://zevrix.com/zsversioncontrol/ZSVersionControl.xml"
+    strategy :xml do |xml|
+      xml.elements[
+        "//dict/key[text()='Output Factory']/following-sibling::dict[1]/key[text()='version']",
+      ]&.next_element&.text
+    end
   end
 
-  installer manual: "Output Factory Installer.app"
+  app "Output Factory Installer.app/Contents/Resources/appPackage/Output Factory.app"
 
   uninstall trash: "/Applications/Adobe Indesign */Plug-Ins/Zevrix/Output Factory.app"
 

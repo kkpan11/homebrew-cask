@@ -7,10 +7,8 @@ cask "idisplay" do
   desc "Use a tablet as an extra screen"
   homepage "https://getidisplay.com/"
 
-  livecheck do
-    url :url
-    strategy :extract_plist
-  end
+  deprecate! date: "2024-07-17", because: :unmaintained
+  disable! date: "2025-07-17", because: :unmaintained
 
   pkg "iDisplay.pkg"
 

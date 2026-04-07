@@ -8,6 +8,8 @@ cask "mu-editor" do
   desc "Small, simple editor for beginner Python programmers"
   homepage "https://codewith.mu/"
 
+  deprecate! date: "2025-08-31", because: :unmaintained
+
   app "Mu Editor.app"
 
   zap trash: [
@@ -15,4 +17,8 @@ cask "mu-editor" do
         "~/Library/Logs/mu",
       ],
       rmdir: "~/mu_code"
+
+  caveats do
+    requires_rosetta
+  end
 end

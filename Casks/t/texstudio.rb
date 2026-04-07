@@ -1,16 +1,21 @@
 cask "texstudio" do
-  version "4.7.3"
-  sha256 "ce1cd5ab82d907165e232dfc5ccf8329f086e375f4936c6b9da9b0091ddd0674"
+  arch arm: "-m1"
 
-  url "https://github.com/texstudio-org/texstudio/releases/download/#{version}/texstudio-#{version}-osx.dmg",
+  version "4.9.3"
+  sha256 arm:   "32ef7a5ae65baf61601ce2dd8be555e7ef2cca67939577ba37c14d5312e2a802",
+         intel: "2784e967dc11687c86381f72c59df53087f2eacf1ddacb886b2ba5095f13c399"
+
+  url "https://github.com/texstudio-org/texstudio/releases/download/#{version}/texstudio-#{version}-osx#{arch}.zip",
       verified: "github.com/texstudio-org/texstudio/"
   name "TeXstudio"
   desc "LaTeX editor"
   homepage "https://texstudio.org/"
 
-  depends_on macos: ">= :big_sur"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
-  app "texstudio.app"
+  depends_on macos: ">= :ventura"
+
+  app "texstudio-#{version}-osx#{arch}.app"
 
   zap trash: [
     "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/texstudio.sfl*",

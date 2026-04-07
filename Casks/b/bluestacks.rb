@@ -1,25 +1,37 @@
 cask "bluestacks" do
-  version "10.4.0.6907,f1d20c10cba982dc3ee4b6d975380943"
-  sha256 "b3c5220119bbd29bfcd9f7f3eea4b1054e9cbb7ca8be134b3647aebf64210c00"
+  version "5.21.755.7538,1529da11b27a4261b53c9f709495861e"
+  sha256 "47424550e139ec3808cd68eccf6f6a193f51c5a37706cf03d329ba3232b34242"
 
-  url "https://mac-cdn.bluestacks.com/public/app-player/mac/nxt_mac/#{version.csv.first}/#{version.csv.second}/md5/x64/BlueStacks_X_#{version.csv.first}.dmg"
+  url "https://ak-build.bluestacks.com/public/app-player/mac/nxt_mac2/#{version.csv.first}/#{version.csv.second}/BlueStacksInstaller_#{version.csv.first}.pkg"
   name "BlueStacks"
   desc "Mobile gaming platform"
   homepage "https://www.bluestacks.com/"
 
   livecheck do
-    url "https://cloud.bluestacks.com/api/getdownloadnow?platform=mac&mac_version=#{MacOS.full_version}"
-    regex(%r{/(\d+(?:\.\d+)*)/([^/]+)/})
+    url "https://cloud.bluestacks.com/api/getdownloadnow?platform=mac"
+    regex(%r{/(\d+(?:\.\d+)*)/([^/]+)/}i)
     strategy :header_match do |headers, regex|
-      headers["location"].scan(regex).map { |match| "#{match[0]},#{match[1]}" }
+      match = headers["location"]&.match(regex)
+      next if match.blank?
+
+      "#{match[1]},#{match[2]}"
     end
   end
 
-  depends_on macos: ">= :high_sierra"
+  depends_on arch: :arm64
+  depends_on macos: ">= :big_sur"
 
-  app "BlueStacks X.app"
+  pkg "BlueStacksInstaller_#{version.csv.first}.pkg"
+
+  uninstall launchctl: "com.now.gg.BlueStacks.cleanup",
+            pkgutil:   [
+              "com.now.gg.BlueStacks",
+              "com.now.gg.BlueStacksMIM",
+            ],
+            delete:    "/Applications/BlueStacksMIM.app"
 
   zap trash: [
+        "/Users/Shared/Library/Application Support/BlueStacks",
         "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.bluestacks.bluestacks-support-tool.sfl*",
         "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.bluestacks.bluestacks.sfl*",
         "~/Library/BlueStacks",

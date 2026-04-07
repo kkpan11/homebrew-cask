@@ -1,8 +1,8 @@
 cask "dbngin" do
-  version "7.0,70"
-  sha256 "7c0b16912eea1fc229bd2088dabf2d568e62aa1aafef77f534af9797aac68411"
+  version "7.9,79"
+  sha256 "f17bb5510cde768e8c0eef1d7c6b94b0ea29ee020292ffe3ec9bb7bb46a19fdd"
 
-  url "https://download.dbngin.com/#{version.csv.second}/DBngin.dmg"
+  url "https://files.dbngin.com/macos/#{version.csv.second}/DBngin.dmg"
   name "DBngin"
   desc "Database version management tool"
   homepage "https://dbngin.com/"
@@ -13,7 +13,6 @@ cask "dbngin" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "DBngin.app"
 

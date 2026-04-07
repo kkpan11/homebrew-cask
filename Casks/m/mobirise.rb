@@ -1,14 +1,16 @@
 cask "mobirise" do
-  version "5.9.0"
+  arch arm: "-m"
+
+  version "6.1.12"
   sha256 :no_check
 
-  url "https://download.mobirise.com/MobiriseSetup.dmg"
+  url "https://download.mobirise.com/MobiriseSetup#{arch}.dmg"
   name "Mobirise"
   desc "No-code website creator"
   homepage "https://mobirise.com/"
 
   livecheck do
-    url "https://mobirise.com/history.html"
+    url "https://history.mobirisesite.com"
     regex(/>\s*Mobirise\s+v?(\d+(?:\.\d+)+)/i)
   end
 

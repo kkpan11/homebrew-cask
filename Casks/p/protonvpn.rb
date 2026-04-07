@@ -1,19 +1,24 @@
 cask "protonvpn" do
-  version "4.1.11"
-  sha256 "53972ab60a1ccd2f0f9204ea53dba8208a2f6dc1ec26dd2d250bc6efd6740ccf"
+  version "6.4.0"
+  sha256 "179352ecd36ac4d25c97b8056aa5ad5b107105b57a06da7b732c83a5e80418b4"
 
-  url "https://protonvpn.com/download/ProtonVPN_mac_v#{version}.dmg"
+  url "https://vpn.protondownload.com/download/macos/#{version}/ProtonVPN_mac_v#{version}.dmg",
+      verified: "vpn.protondownload.com/"
   name "ProtonVPN"
   desc "VPN client focusing on security"
   homepage "https://protonvpn.com/"
 
+  # The Sparkle feed can contain items on the "beta" channel, so we restrict
+  # matching to the default channel.
   livecheck do
-    url "https://protonvpn.com/download/macos-update3.xml"
-    regex(/ProtonVPN_mac_v?(\d+(?:\.\d+)+)\.dmg/i)
+    url "https://protonvpn.com/download/macos/updates/v5/sparkle.xml"
+    strategy :sparkle do |items|
+      items.find { |item| item.channel.nil? }&.short_version
+    end
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :sonoma"
 
   app "ProtonVPN.app"
 
@@ -21,8 +26,8 @@ cask "protonvpn" do
             quit:      "ch.protonvpn.mac"
 
   zap trash: [
-    "~/Library/Application Scripts/ch.protonvpn.mac",
-    "~/Library/Application Scripts/ch.protonvpn.ProtonVPNStarter",
+    "~/Library/Application Scripts/*.group.ch.protonvpn.mac",
+    "~/Library/Application Scripts/ch.protonvpn.*",
     "~/Library/Application Support/CrashReporter/ProtonVPN*",
     "~/Library/Application Support/ProtonVPN",
     "~/Library/Caches/ch.protonvpn.mac",
@@ -30,6 +35,7 @@ cask "protonvpn" do
     "~/Library/Caches/SentryCrash/ProtonVPN",
     "~/Library/Containers/ch.protonvpn.*",
     "~/Library/Cookies/ch.protonvpn.mac.binarycookies",
+    "~/Library/Group Containers/*.group.ch.protonvpn.mac",
     "~/Library/Logs/ProtonVPN.log",
     "~/Library/Preferences/ch.protonvpn.mac.plist",
     "~/Library/WebKit/ch.protonvpn.mac",

@@ -1,6 +1,6 @@
 cask "adobe-dng-converter" do
-  version "16.2.1"
-  sha256 "e08774b6dc17d14dddc0ac7539cfa23aefe88e3c007775de0e9d1d10d3eb88b8"
+  version "18.2.2"
+  sha256 "4bd18a539cebbef317cf277a5f4933022432647ae324554af235630f181119b0"
 
   url "https://download.adobe.com/pub/adobe/dng/mac/DNGConverter_#{version.dots_to_underscores}.dmg"
   name "Adobe DNG Converter"
@@ -8,11 +8,18 @@ cask "adobe-dng-converter" do
   homepage "https://helpx.adobe.com/camera-raw/using/adobe-dng-converter.html"
 
   livecheck do
-    url "https://www.adobe.com/go/dng_converter_mac"
-    strategy :header_match
+    url "https://www.adobe.com/go/dng_converter_mac",
+        user_agent: :curl
+    regex(/DNGConverter[._-]v?(\d+(?:[._]\d+)+)\.dmg/i)
+    strategy :header_match do |headers, regex|
+      match = headers["location"]&.match(regex)
+      next if match.blank?
+
+      match[1].tr("_", ".")
+    end
   end
 
-  depends_on macos: ">= :mojave"
+  depends_on macos: ">= :sonoma"
 
   pkg "DNGConverter_#{version.dots_to_underscores}.pkg"
 

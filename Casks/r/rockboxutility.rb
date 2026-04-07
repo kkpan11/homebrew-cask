@@ -12,6 +12,8 @@ cask "rockboxutility" do
     regex(/RockboxUtility[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "RockboxUtility.app"
 
   zap trash: [
@@ -19,4 +21,8 @@ cask "rockboxutility" do
     "~/Library/Preferences/org.rockbox.rbutil.plist",
     "~/Library/Saved Application State/org.rockbox.rbutil.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

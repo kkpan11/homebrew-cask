@@ -1,9 +1,9 @@
 cask "owncloud" do
   arch arm: "arm64", intel: "x86_64"
 
-  version "5.2.1.13040"
-  sha256 arm:   "49bd5a5a30c6af0c8fbf2acd180838761de6db303cea8cbf54706b208aa20b9c",
-         intel: "99f6645678b1f6f7ca75a61c0bbeb2ca7412730bcde41ecfcac8e121afbe14ad"
+  version "6.0.3.18040"
+  sha256 arm:   "fac26c6153d51bedb261cf328644009bcf4a8418855ce4204d4ad0d2f58cdb7d",
+         intel: "170dc34564d4d538442f75cb14f03974d13e9ccb7ce7319cdab008e55c119433"
 
   url "https://download.owncloud.com/desktop/ownCloud/stable/#{version}/mac/ownCloud-#{version}-#{arch}.pkg"
   name "ownCloud"
@@ -12,11 +12,10 @@ cask "owncloud" do
 
   livecheck do
     url "https://owncloud.com/desktop-app/"
-    regex(/href=.*?owncloud[._-]v?(\d+(?:\.\d+)+)[._-]x86[._-]64\.pkg/i)
+    regex(/href=.*?owncloud[._-]v?(\d+(?:\.\d+)+)[._-]#{arch}\.pkg/i)
   end
 
   auto_updates true
-  depends_on macos: ">= :sierra"
 
   pkg "ownCloud-#{version}-#{arch}.pkg"
 

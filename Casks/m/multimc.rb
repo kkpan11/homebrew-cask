@@ -9,11 +9,14 @@ cask "multimc" do
 
   livecheck do
     url "https://files.multimc.org/update/osx64-5.15.2/stable/index.json"
-    regex(/"Name":\s*"(\d+(?:\.\d+)+)"/i)
+    strategy :json do |json|
+      json["Versions"]&.map { |version| version["Name"] }
+    end
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "MultiMC.app"
 
@@ -22,4 +25,8 @@ cask "multimc" do
     "~/Library/Preferences/org.multimc.MultiMC5.plist",
     "~/Library/Saved Application State/org.multimc.MultiMC5.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -1,25 +1,18 @@
 cask "impactor" do
-  version "0.9.56"
-  sha256 "e73c88bb617462fb997821d2db7e7c50936af59bc790523805eeed6517249841"
+  version "2.2.0"
+  sha256 "4aed8470a286485b1d332a78d35a927ade25df961b03b170a5567f1064949d99"
 
-  url "https://cache.saurik.com/impactor/mac/Impactor_#{version}.dmg",
-      verified: "cache.saurik.com/impactor/"
+  url "https://github.com/khcrysalis/Impactor/releases/download/v#{version}/Impactor-macos-universal.dmg"
   name "Impactor"
-  desc "GUI tool for working with mobile devices"
-  homepage "http://www.cydiaimpactor.com/"
+  desc "Sideloading application for iOS/tvOS"
+  homepage "https://github.com/khcrysalis/Impactor/"
 
   livecheck do
-    url "https://cydia.saurik.com/api/latest/1"
-    strategy :header_match
+    url :url
+    strategy :github_latest
   end
 
   app "Impactor.app"
 
-  zap trash: [
-    "~/Library/Application Support/Impactor",
-    "~/Library/Caches/com.saurik.Impactor",
-    "~/Library/Cookies/com.saurik.Impactor.binarycookies",
-    "~/Library/Preferences/com.saurik.Impactor.plist",
-    "~/Library/Saved Application State/com.saurik.Impactor.savedState",
-  ]
+  zap trash: "~/.config/PlumeImpactor"
 end

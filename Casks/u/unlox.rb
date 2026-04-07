@@ -7,12 +7,12 @@ cask "unlox" do
   desc "Unlock your computer with your fingerprint"
   homepage "https://unlox.it/get"
 
-  livecheck do
-    url "https://unlox.it/download/update.php"
-    strategy :sparkle, &:version
-  end
-
-  depends_on macos: ">= :high_sierra"
+  deprecate! date: "2025-03-02", because: :unmaintained
+  disable! date: "2026-03-02", because: :unmaintained
 
   app "Unlox.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

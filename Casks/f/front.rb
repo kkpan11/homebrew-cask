@@ -1,9 +1,9 @@
 cask "front" do
   arch arm: "arm64", intel: "x64"
 
-  version "3.50.2"
-  sha256 arm:   "2ec01dc19cbfe161f30979eaa876613594c63f3e1593e6556006e25ceca0c76b",
-         intel: "a0c902c5975f2dbc320d5c50a9c4b54172c8a43ed528fee66bd82ff1ccdfc30c"
+  version "3.71.1"
+  sha256 arm:   "2663f99cd60788900959bccd2167d05af940c8ec293cb9e850102a6be6814f84",
+         intel: "f4173817b2bdd9da49212b9abf6cbeee9130afe9bd2966f2da7653e60763429e"
 
   url "https://dl.frontapp.com/desktop/builds/#{version}/Front-#{version}-#{arch}.zip",
       verified: "dl.frontapp.com/desktop/builds/"
@@ -16,7 +16,8 @@ cask "front" do
     strategy :electron_builder
   end
 
-  depends_on macos: ">= :el_capitan"
+  auto_updates true
+  depends_on macos: ">= :big_sur"
 
   app "Front.app"
 

@@ -1,9 +1,9 @@
 cask "dangerzone" do
   arch arm: "arm64", intel: "i686"
 
-  version "0.6.0"
-  sha256 arm:   "334e0baeba59199d513b59ef3cae6d33519a79e7733bc9e3f199d90a25f27d17",
-         intel: "839a0727b4fad565e76919cb0c8379adc5d217eed1ed343022abdc1559a9af7b"
+  version "0.10.0"
+  sha256 arm:   "20b0b32d30b46c53907b7d8543091c7d31cf02dc8bd1ee1ae67f7469ac001821",
+         intel: "6067caa80f2d390684d0fbdd6e00aad36fdf11226de5fe351202e05dada5d318"
 
   url "https://github.com/freedomofpress/dangerzone/releases/download/v#{version}/Dangerzone-#{version}-#{arch}.dmg",
       verified: "github.com/freedomofpress/dangerzone/"
@@ -15,6 +15,8 @@ cask "dangerzone" do
     url :url
     strategy :github_latest
   end
+
+  depends_on macos: ">= :big_sur"
 
   app "Dangerzone.app"
 

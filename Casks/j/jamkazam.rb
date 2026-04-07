@@ -16,4 +16,8 @@ cask "jamkazam" do
   app "JamKazam.app"
 
   zap trash: "~/Library/Application Support/JamKazam"
+
+  caveats do
+    requires_rosetta
+  end
 end

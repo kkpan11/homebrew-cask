@@ -1,6 +1,6 @@
 cask "aptakube" do
-  version "1.6.3"
-  sha256 "d13aa255e9ef3551d2ff7d61a7c9ce107e47732b09c6d96fbfb3646ba9ceafeb"
+  version "1.15.2"
+  sha256 "5feeae770dbfa392cac873c6aadf4188ec0a292b5138589cdc6ad90cd9c3bed0"
 
   url "https://releases.aptakube.com/Aptakube_#{version}_universal.dmg"
   name "Aptakube"
@@ -9,11 +9,12 @@ cask "aptakube" do
 
   livecheck do
     url "https://aptakube.com/api/latest"
-    regex(/"version": "(\d+(?:\.\d+)+)"/i)
+    strategy :json do |json|
+      json["version"]
+    end
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
 
   app "Aptakube.app"
 

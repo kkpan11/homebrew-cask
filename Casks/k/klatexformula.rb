@@ -8,10 +8,16 @@ cask "klatexformula" do
   desc "Generate images from LaTeX equations"
   homepage "https://klatexformula.sourceforge.io/"
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "klatexformula.app"
 
   zap trash: [
     "~/Library/Preferences/org.klatexformula.klatexformula.plist",
     "~/Library/Saved Application State/org.klatexformula.klatexformula.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

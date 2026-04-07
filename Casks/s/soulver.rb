@@ -1,6 +1,6 @@
 cask "soulver" do
-  version "3.10.2,434"
-  sha256 "85d828c9f018d3fac1ec6cf0430f3c476a2a42ce06254b6fbfa9d153332c051c"
+  version "3.15.2,507"
+  sha256 "3d0fe2ab0dbdacb56165a95b9a886cdd4802b72805ca19a76d856f7146215a5f"
 
   url "https://soulver.app/mac/sparkle/soulver-#{version.csv.first}-#{version.csv.second}.zip"
   name "Soulver"
@@ -13,9 +13,11 @@ cask "soulver" do
   end
 
   auto_updates true
-  depends_on macos: ">= :big_sur"
+  conflicts_with cask: "soulver-cli"
+  depends_on macos: ">= :ventura"
 
   app "Soulver #{version.major}.app"
+  binary "#{appdir}/Soulver #{version.major}.app/Contents/MacOS/CLI/soulver"
 
   zap trash: [
     "~/Library/Application Scripts/app.soulver.mac.QuicklookInSpotlight",

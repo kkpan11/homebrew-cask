@@ -12,6 +12,8 @@ cask "valley" do
     regex(%r{href=.*?/Unigine_Valley-(\d+(?:\.\d+)*)\.dmg}i)
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "Valley.app"
 
   zap trash: [
@@ -19,4 +21,8 @@ cask "valley" do
     "~/Library/Application Support/Valley",
     "~/Library/Saved Application State/com.Unigine.Valley.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

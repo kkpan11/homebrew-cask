@@ -2,7 +2,7 @@ cask "pieces-os" do
   arch arm: "-arm64"
   livecheck_arch = on_arch_conditional arm: "_arm64"
 
-  version "8.1.0"
+  version "12.3.10"
   sha256 :no_check
 
   url "https://builds.pieces.app/stages/production/os_server/macos#{arch}/download"
@@ -16,7 +16,6 @@ cask "pieces-os" do
   end
 
   auto_updates true
-  depends_on macos: ">= :big_sur"
 
   app "Pieces OS.app"
 

@@ -12,7 +12,7 @@ cask "macast" do
     strategy :github_latest
   end
 
-  depends_on macos: ">= :mojave"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "Macast.app"
 
@@ -21,4 +21,8 @@ cask "macast" do
     "~/Library/Preferences/cn.xfangfang.Macast.plist",
     "~/Library/Saved Application State/cn.xfangfang.Macast.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -8,10 +8,8 @@ cask "brackets" do
   desc "Open-source code editor for web-development"
   homepage "https://brackets.io/"
 
-  livecheck do
-    url :homepage
-    regex(/brackets\.(\d+(?:\.\d+)+)\.dmg/i)
-  end
+  deprecate! date: "2024-04-06", because: :discontinued
+  disable! date: "2025-04-08", because: :discontinued
 
   app "Brackets.app"
 
@@ -19,4 +17,8 @@ cask "brackets" do
     "~/Library/Application Support/Brackets",
     "~/Library/Preferences/io.brackets.appshell.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

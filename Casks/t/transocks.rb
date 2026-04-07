@@ -22,11 +22,14 @@ cask "transocks" do
 
   zap trash: [
     "~/Library/Application Support/CrashReporter/穿梭Transocks*",
-    "~/Library/Application Support/CrashReporter/穿梭Transocks*",
     "~/Library/Caches/com.transocks.mac.signed",
     "~/Library/Logs/DiagnosticReports/穿梭Transocks*",
     "~/Library/Preferences/com.transocks.mac.signed.plist",
     "~/Library/Preferences/group.com.transocks.mac.plist",
     "~/Library/Saved Application State/com.transocks.mac.signed.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

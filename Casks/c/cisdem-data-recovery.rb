@@ -1,8 +1,9 @@
 cask "cisdem-data-recovery" do
-  version "15.0.0"
+  version "19.2.0"
   sha256 :no_check
 
-  url "https://download.cisdem.com/cisdem-datarecovery.dmg"
+  url "https://download.cisdem.com/cisdem-datarecovery.dmg",
+      user_agent: :fake
   name "Cisdem Data Recovery"
   desc "Recover lost data"
   homepage "https://www.cisdem.com/data-recovery-mac.html"
@@ -11,8 +12,6 @@ cask "cisdem-data-recovery" do
     url "https://www.cisdem.com/js/notes/data-recovery-mac.js"
     regex(/(\d+(?:\.\d+)+)\s+\(\d+(?:-\d+)+\)/i)
   end
-
-  depends_on macos: ">= :sierra"
 
   app "Cisdem Data Recovery.app"
 

@@ -1,12 +1,6 @@
 cask "dash" do
-  on_high_sierra :or_older do
-    version "4.6.7"
-    sha256 "e2b5eb996645b25f12ccae15e24b1b0d8007bc5fed925e14ce7be45a2b693fb6"
-  end
-  on_mojave :or_newer do
-    version "7.2.1"
-    sha256 "815a11f6efd7701830d321918274c36a768c643003f52079a6bb331dd41202f5"
-  end
+  version "8.1.1"
+  sha256 "bf66b0fa12fa8b800e5233c06aa41373f6444d3c8cf9635aca1eb6a528a01513"
 
   url "https://kapeli.com/downloads/v#{version.major}/Dash.zip"
   name "Dash"
@@ -14,13 +8,12 @@ cask "dash" do
   homepage "https://kapeli.com/dash"
 
   livecheck do
-    url "https://kapeli.com/Dash#{version.major}.xml"
+    url "https://kapeli.com/Dash.xml"
     strategy :sparkle, &:short_version
   end
 
   auto_updates true
-  conflicts_with cask: "homebrew/cask-versions/dash6"
-  depends_on macos: ">= :high_sierra"
+  conflicts_with cask: "dash@6"
 
   app "Dash.app"
 

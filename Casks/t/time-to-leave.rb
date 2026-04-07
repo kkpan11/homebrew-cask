@@ -1,11 +1,11 @@
 cask "time-to-leave" do
-  version "3.0.0"
-  sha256 "25fef73ac373e37ba8c0363e25e7e0996afb048466698777e9f0a0e5bb8876a0"
+  version "4.0.0"
+  sha256 "c9550185217167a9257d05b550ff48780058d6c031a99660302528af205d2068"
 
-  url "https://github.com/thamara/time-to-leave/releases/download/#{version}/time-to-leave-#{version}.dmg"
+  url "https://github.com/TTLApp/time-to-leave/releases/download/#{version}/time-to-leave-#{version}.dmg"
   name "Time To Leave"
   desc "Log work hours and get notified when it's time to leave the office"
-  homepage "https://github.com/thamara/time-to-leave"
+  homepage "https://github.com/TTLApp/time-to-leave"
 
   # A tag using the stable version format is sometimes marked as "Pre-release"
   # on the GitHub releases page, so we have to use the `GithubLatest` strategy.
@@ -14,6 +14,8 @@ cask "time-to-leave" do
     regex(/^\D*?(\d+(?:\.\d+)+)$/i)
     strategy :github_latest
   end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "Time To Leave.app"
 

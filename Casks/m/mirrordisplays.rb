@@ -7,7 +7,12 @@ cask "mirrordisplays" do
   name "Mirror Displays"
   homepage "https://fabiancanas.com/open-source/mirror-displays"
 
-  depends_on macos: ">= :high_sierra"
+  deprecate! date: "2024-07-27", because: :unmaintained
+  disable! date: "2025-07-27", because: :unmaintained
 
   app "MirrorDisplays.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

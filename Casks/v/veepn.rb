@@ -1,6 +1,6 @@
 cask "veepn" do
-  version "2.3.6"
-  sha256 "85a4c6aa7c2650f8501905bf466fb237eef2571aec465af44930cc15cf0f3a5b"
+  version "2.3.22"
+  sha256 "ce806418f558266ccb7ef6bfbd833bccd4eac503fd7e75e0f54ec15834272c01"
 
   url "https://download.veepn.com/mac/VeePN_v#{version}.dmg"
   name "VeePN"
@@ -12,7 +12,7 @@ cask "veepn" do
     strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :big_sur"
+  depends_on macos: ">= :monterey"
 
   app "VeePN.app"
 

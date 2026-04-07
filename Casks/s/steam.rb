@@ -1,5 +1,5 @@
 cask "steam" do
-  version "4.0"
+  version "6.0"
   sha256 :no_check
 
   url "https://cdn.cloudflare.steamstatic.com/client/installer/steam.dmg",
@@ -29,9 +29,13 @@ cask "steam" do
             delete:    "~/Library/Application Support/Steam/Steam.AppBundle"
 
   zap trash: [
-    "~/Library/Application Support/Steam/",
+    "~/Library/Application Support/Steam",
     "~/Library/LaunchAgents/com.valvesoftware.steamclean.plist",
     "~/Library/Preferences/com.valvesoftware.steam.helper.plist",
-    "~/Library/Saved Application State/com.valvesoftware.steam.savedState/",
+    "~/Library/Saved Application State/com.valvesoftware.steam.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

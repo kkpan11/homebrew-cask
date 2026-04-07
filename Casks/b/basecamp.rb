@@ -1,18 +1,18 @@
 cask "basecamp" do
   arch arm: "_arm64"
 
-  version "3,2.3.14"
-  sha256 arm:   "6d545f87121acfcc731cd4915e07b4f5701f0706e7ee57023160eebb363faaff",
-         intel: "58684eee2d30b9c3211276a8e961638de4c6f2da9a7fff241492b8a264c88ed9"
+  version "3,2.5.2"
+  sha256 arm:   "434e37465b4959f468f797fd9eaf3b493e8556763bfc7fb3a2c0ce15eed7b5cb",
+         intel: "35eeb1fde93a8c338436321f27787b5fe948c30ea51d376f850b32721067fde5"
 
-  url "https://bc#{version.major}-desktop.s3.amazonaws.com/mac#{arch}/basecamp#{version.major}-#{version.csv.second}.zip",
-      verified: "bc3-desktop.s3.amazonaws.com/"
+  url "https://basecamp.com/desktop/mac#{arch}/basecamp#{version.major}-#{version.csv.second}.zip",
+      verified: "basecamp.com/desktop/"
   name "Basecamp"
   desc "All-In-One Toolkit for Working Remotely"
-  homepage "https://basecamp.com/help/#{version}/guides/apps/mac"
+  homepage "https://3.basecamp-help.com/"
 
   livecheck do
-    url "https://bc#{version.major}-desktop.s3.amazonaws.com/mac#{arch}/updates.json"
+    url "https://basecamp.com/desktop/mac#{arch}/updates.json"
     regex(/basecamp(\d*)[_-]v?(\d+(?:\.\d+)+)/i)
     strategy :json do |json, regex|
       match = json["url"]&.match(regex)
@@ -23,9 +23,9 @@ cask "basecamp" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :big_sur"
 
-  app "Basecamp #{version.major}.app"
+  app "Basecamp.app"
 
   zap trash: [
     "~/Library/Application Support/Basecamp*",

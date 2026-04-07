@@ -12,7 +12,14 @@ cask "isubtitle" do
     strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :catalina"
-
   app "iSubtitle.app"
+
+  zap trash: [
+    "~/Library/Application Support/iSubtitle",
+    "~/Library/Caches/se.bitfield.iSubtitle-*.sw",
+    "~/Library/HTTPStorages/se.bitfield.iSubtitle-*.sw",
+    "~/Library/HTTPStorages/se.bitfield.iSubtitle-*.sw.binarycookies",
+    "~/Library/Preferences/se.bitfield.iSubtitle-*.sw.plist",
+    "~/Library/Saved Application State/se.bitfield.iSubtitle-*.sw.savedState",
+  ]
 end

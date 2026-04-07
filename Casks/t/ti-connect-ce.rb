@@ -1,6 +1,6 @@
 cask "ti-connect-ce" do
-  version "6.0.1.344,D96C79959E494383BDCA94D0478FFF05"
-  sha256 "e112df8a5b4d441d262b03e17966c84136bdc71d64387bfa52a83937e4885bb9"
+  version "6.0.3.619,8FBF9DDB6AF4466A9049339AFA889822"
+  sha256 "70e2c79e9a98f6e66500ce9ee58ba7269754455f0278c45ff5e50818d8da5f48"
 
   url "https://education.ti.com/download/en/ed-tech/68CEDD34FDC94622B4DBD173E6A0D8C3/#{version.csv.second}/TIConnectCE-#{version.csv.first}.dmg"
   name "TI Connect™ CE"
@@ -22,4 +22,8 @@ cask "ti-connect-ce" do
     "~/Library/Preferences/com.ti.et.elg.tiConnect.TIConnectApplication.plist",
     "~/Library/Saved Application State/com.ti.et.elg.tiConnect.TIConnectApplication.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

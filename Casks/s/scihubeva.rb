@@ -1,14 +1,16 @@
 cask "scihubeva" do
   arch arm: "arm64", intel: "x86_64"
 
-  version "6.2.5"
-  sha256 arm:   "0a0cc3dac89a1fb96a5e7a5f5e9c871eabc3d0804f777a94a2010173a8f03097",
-         intel: "bf08005c7565d32a848821e9e3029e241ecb17bfb22bd7affa601eac7d659269"
+  version "6.5.1"
+  sha256 arm:   "769aa2eff2e44b926bbde6b1611355af09cabd50e281864ea57d2d3051d8754d",
+         intel: "30171d1122694f6fbf5ef3f79141ffa111de99cef19ae992bd895d3106dee810"
 
   url "https://github.com/leovan/SciHubEVA/releases/download/v#{version}/SciHubEVA-#{arch}-v#{version}.dmg"
   name "Sci-Hub EVA"
   desc "Cross-platform Sci-Hub GUI application powered by Python and Qt"
   homepage "https://github.com/leovan/SciHubEVA"
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   auto_updates true
   depends_on macos: ">= :big_sur"

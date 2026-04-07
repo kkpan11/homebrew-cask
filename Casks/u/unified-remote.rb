@@ -12,7 +12,9 @@ cask "unified-remote" do
     strategy :header_match
   end
 
-  depends_on macos: ">= :high_sierra"
-
   app "Unified Remote.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

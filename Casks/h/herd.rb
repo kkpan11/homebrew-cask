@@ -1,6 +1,6 @@
 cask "herd" do
-  version "1.5.0"
-  sha256 "3a31161f7b3c6cc757d96e02ae521ba51e45811294cf29d62dedb0c81e545406"
+  version "1.28.0"
+  sha256 "1da70ed216b7c7545437292bd09cc9545bffcd9497287282664f12f9f18e74cd"
 
   url "https://download.herdphp.com/app_versions/Herd_#{version}.dmg",
       verified: "download.herdphp.com/app_versions/"
@@ -25,8 +25,11 @@ cask "herd" do
     "~/Herd",
     "~/Library/Application Support/Herd",
     "~/Library/Caches/de.beyondco.herd",
+    "~/Library/Caches/SentryCrash/Herd",
     "~/Library/HTTPStorages/de.beyondco.herd",
+    "~/Library/HTTPStorages/de.beyondco.herd.binarycookies",
     "~/Library/Preferences/de.beyondco.herd.plist",
     "~/Library/Saved Application State/de.beyondco.herd.savedState",
+    "~/Library/WebKit/de.beyondco.herd",
   ]
 end

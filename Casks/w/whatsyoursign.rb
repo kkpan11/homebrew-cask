@@ -1,12 +1,12 @@
 cask "whatsyoursign" do
-  version "2.2.2"
-  sha256 "0359af12087997ce205d86c5ffe752084502c5896b474d4ae556da8e7147468e"
+  version "3.2.2"
+  sha256 "becd29117f4ab68d890f513eaa0d3fbdeb7dd66bd3a2268b365180435852d319"
 
   url "https://github.com/objective-see/WhatsYourSign/releases/download/v#{version}/WhatsYourSign_#{version}.zip",
       verified: "github.com/objective-see/"
   name "What's Your Sign?"
   desc "Shows a files cryptographic signing information"
-  homepage "https://objective-see.com/products/whatsyoursign.html"
+  homepage "https://objective-see.org/products/whatsyoursign.html"
 
   installer manual: "WhatsYourSign Installer.app"
 

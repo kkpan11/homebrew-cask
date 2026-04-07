@@ -1,15 +1,19 @@
 cask "lx-music" do
   arch arm: "arm64", intel: "x64"
 
-  version "2.6.0"
-  sha256 arm:   "a466b3c9b77ea39090bb0214bd35e8c6bc7fa229487b79ed622f102123e1623c",
-         intel: "a1ea4201bec9511cf63579c71c27d4c25eb4c8f1625e092e664ff394c8f596c1"
+  version "2.12.1"
+  sha256 arm:   "92f2c04dfa0959e3aabaa0ac9717e97a55adf79cbce08e22a1c1e92b77bbc04f",
+         intel: "c50f148503d75e841e5acd44dd14a916aa1d87385a3290318e793b56b1807aef"
 
   url "https://github.com/lyswhut/lx-music-desktop/releases/download/v#{version}/lx-music-desktop-#{version}-#{arch}.dmg"
   name "LX Music Assistant Desktop Edition"
   name "洛雪音乐助手桌面版"
   desc "Music app base on Electron & Vue"
   homepage "https://github.com/lyswhut/lx-music-desktop/"
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
+  depends_on macos: ">= :big_sur"
 
   app "lx-music-desktop.app"
 

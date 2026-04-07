@@ -8,9 +8,15 @@ cask "teeworlds" do
 
   livecheck do
     url "https://teeworlds.com/?page=downloads"
-    regex(%r{href=.*?/teeworlds-(\d+(?:\.\d+)*)-osx\.dmg}i)
+    regex(%r{href=.*?/teeworlds[._-](\d+(?:\.\d+)*)[._-]osx\.dmg}i)
   end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "Teeworlds.app"
   app "Teeworlds Server.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

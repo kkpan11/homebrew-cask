@@ -13,14 +13,15 @@ cask "xbar" do
     strategy :header_match
   end
 
-  depends_on macos: ">= :high_sierra"
-
   app "xbar.app"
 
-  uninstall quit: "xbar.v#{version}"
+  uninstall quit:       "com.xbarapp.app",
+            login_item: "xbar"
 
   zap trash: [
-    "~/Library/Preferences/xbar.v#{version}.plist",
-    "~/Library/WebKit/xbar.v#{version}",
+    "~/Library/Application Support/xbar",
+    "~/Library/Caches/com.xbarapp.app",
+    "~/Library/Preferences/com.xbarapp.app.plist",
+    "~/Library/WebKit/com.xbarapp.app",
   ]
 end

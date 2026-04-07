@@ -12,12 +12,14 @@ cask "4k-video-to-mp3" do
     regex(%r{href=.*?/4kvideotomp3_(\d+(?:\.\d+)+)\.dmg}i)
   end
 
-  depends_on macos: ">= :high_sierra"
-
   app "4K Video to MP3.app"
 
   zap trash: [
     "~/Library/Application Support/4kdownload.com",
     "~/Library/Preferences/com.4kdownload.4K Video to MP3.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -2,23 +2,26 @@ cask "taccy" do
   version "1.15,2023.06"
   sha256 "d5f1f00ff105007c8a64f277aa230a0caf1ea89a19e742d972f329d067afd7c3"
 
-  url "https://eclecticlightdotcom.files.wordpress.com/#{version.csv.second.major}/#{version.csv.second.minor}/#{token}#{version.csv.first.no_dots}.zip",
-      verified: "eclecticlightdotcom.files.wordpress.com/"
+  url "https://eclecticlight.co/wp-content/uploads/#{version.csv.second.major}/#{version.csv.second.minor}/#{token}#{version.csv.first.no_dots}.zip"
   name "Taccy"
   desc "Troubleshoot signature and privacy problems in applications"
   homepage "https://eclecticlight.co/taccy-signet-precize-alifix-utiutility-alisma/"
 
   livecheck do
     url "https://raw.githubusercontent.com/hoakleyelc/updates/master/eclecticapps.plist"
-    regex(%r{/(\d+)/(\d+)/taccy(\d+)\.zip}i)
-    strategy :page_match do |page, regex|
-      page.scan(regex).map do |match|
-        "#{match[2].split("", 2).join(".")},#{match[0]}.#{match[1]}"
-      end
+    regex(%r{/(\d+)/(\d+)/[^/]+?$}i)
+    strategy :xml do |xml, regex|
+      item = xml.elements["//dict[key[text()='AppName']/following-sibling::*[1][text()='Taccy']]"]
+      next unless item
+
+      version = item.elements["key[text()='Version']"]&.next_element&.text
+      url = item.elements["key[text()='URL']"]&.next_element&.text
+      match = url.strip.match(regex) if url
+      next if version.blank? || match.blank?
+
+      "#{version.strip},#{match[1]}.#{match[2]}"
     end
   end
-
-  depends_on macos: ">= :high_sierra"
 
   app "#{token}#{version.csv.first.no_dots}/Taccy.app"
 

@@ -4,10 +4,10 @@ cask "itau" do
   sha256 :no_check
 
   on_arm do
-    version "2.3.2.15"
+    version "2.3.2.22"
   end
   on_intel do
-    version "2.2.2.15"
+    version "2.2.2.22"
   end
 
   url "https://guardiao.itau.com.br/UpdateServer/aplicativoitau#{arch}.dmg"
@@ -22,5 +22,10 @@ cask "itau" do
 
   app "Itau.app"
 
-  zap trash: "~/.aplicativoitau"
+  zap trash: [
+    "~/.aplicativoitau",
+    "~/Library/Caches/br.com.itau.aplicativoitau",
+    "~/Library/Preferences/br.com.itau.aplicativoitau.plist",
+    "~/Library/Saved Application State/br.com.itau.aplicativoitau.savedState",
+  ]
 end

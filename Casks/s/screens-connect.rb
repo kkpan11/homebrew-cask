@@ -1,6 +1,6 @@
 cask "screens-connect" do
-  version "5.1.2,22738"
-  sha256 "aa12db946b98f42daf6d1023ac73c1bd62ff762916e86ed4be2d36d8b3768e43"
+  version "5.2.6,22851"
+  sha256 "e8260a42fe0dd5191b5f8b77e2778f49b5f4000e5c95d7fa76c0314e65792760"
 
   url "https://updates.edovia.com/com.edovia.screens.connect.mac/ScreensConnect_#{version.csv.first}b#{version.csv.second}.zip"
   name "Screens Connect"

@@ -1,6 +1,6 @@
 cask "tinderbox" do
-  version "9.7.2"
-  sha256 "3626b23b282c4f47c9dbd6958e2c7c28ec097936211e15c3f862ecad75bfddd3"
+  version "11.6.0"
+  sha256 "2497afb444d55d454f26af4c7b9f5839020cd74dd33298fa885db00cc28f1c2f"
 
   url "https://www.eastgate.com/download/tbx#{version.no_dots}.dmg"
   name "Tinderbox"
@@ -9,19 +9,19 @@ cask "tinderbox" do
 
   livecheck do
     url :homepage
-    regex(/>Download.*?Tinderbox\s+v?(\d+(?:\.\d+)+)[<\s]/im)
+    regex(/>Download\s+<a[^>]*>\s*Tinderbox\s+v?(\d+(?:\.\d+)+)\s*</im)
   end
 
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :monterey"
 
   app "Tinderbox #{version.major}.app"
 
   zap trash: [
     "~/Library/Application Support/Tinderbox",
-    "~/Library/Caches/com.eastgate.Tinderbox-9",
-    "~/Library/Preferences/com.eastgate.Tinderbox-9.plist",
+    "~/Library/Caches/com.eastgate.Tinderbox-#{version.major}",
+    "~/Library/Preferences/com.eastgate.Tinderbox-#{version.major}.plist",
     "~/Library/Preferences/Tinderbox™ Preferences",
-    "~/Library/Saved Application State/com.eastgate.Tinderbox-9.savedState",
-    "~/Library/WebKit/com.eastgate.Tinderbox-9",
+    "~/Library/Saved Application State/com.eastgate.Tinderbox-#{version.major}.savedState",
+    "~/Library/WebKit/com.eastgate.Tinderbox-#{version.major}",
   ]
 end

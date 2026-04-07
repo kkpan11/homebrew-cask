@@ -1,9 +1,8 @@
 cask "vagrant" do
   arch arm: "arm64", intel: "amd64"
 
-  version "2.4.1"
-  sha256 arm:   "881953f7d4cea45aa8b2f2c6c8f5714c2ad4586edd17c6faeb163c6ebed2918e",
-         intel: "881953f7d4cea45aa8b2f2c6c8f5714c2ad4586edd17c6faeb163c6ebed2918e"
+  version "2.4.9"
+  sha256 "8de08bd435ef8ae0fc5fbd6acefa9c68e62fb898c5ae0fbdacd26853bea9d4d6"
 
   url "https://releases.hashicorp.com/vagrant/#{version}/vagrant_#{version}_darwin_#{arch}.dmg",
       verified: "hashicorp.com/vagrant/"
@@ -12,11 +11,13 @@ cask "vagrant" do
   homepage "https://www.vagrantup.com/"
 
   livecheck do
-    url "https://developer.hashicorp.com/vagrant/install"
-    regex(/href=[^ >]*?vagrant[._-]v?(\d+(?:\.\d+)+)(?:[._-]darwin)?(?:[._-]#{arch})?\.dmg/i)
+    url "https://releases.hashicorp.com/vagrant/"
+    regex(%r{href=.*?/v?(\d+(?:\.\d+)+)/}i)
   end
 
   pkg "vagrant.pkg"
+  bash_completion "/opt/vagrant/embedded/gems/gems/vagrant-#{version}/contrib/bash/completion.sh", target: "vagrant"
+  zsh_completion "/opt/vagrant/embedded/gems/gems/vagrant-#{version}/contrib/zsh/_vagrant"
 
   uninstall script:  {
               executable: "uninstall.tool",

@@ -7,10 +7,16 @@ cask "airtrash" do
   desc "Clone of Apple's Airdrop - easy P2P file transfer"
   homepage "https://github.com/maciejczyzewski/airtrash/"
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "Airtrash.app"
 
   zap trash: [
     "~/Library/Application Support/airtrash",
     "~/Library/Preferences/maciejczyzewski.airtrash.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

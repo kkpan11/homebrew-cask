@@ -1,20 +1,30 @@
 cask "remnote" do
   arch arm: "-arm64"
+  livecheck_arch = on_arch_conditional arm: "_m1"
 
-  version "1.8.52"
-  sha256 arm:   "18b3e49babdb8a789d93dcc3f1ff403f7c9f2209bb6859c971e4df6c51bfa363",
-         intel: "6fe3db58df49b19b32448eaf1f6bffa408d6db6161486f5787ef7c0357f2a07b"
+  on_arm do
+    version "1.24.7"
+    sha256 "b091608cdb597af7aee9659cdd5c4a212d050417a4834c17a1bb11f947bb6165"
+  end
+  on_intel do
+    version "1.24.5"
+    sha256 "bc479fac33554d9f514a513b4f19d9ea77c56e34cfe2ab03bd77da37ac92ac38"
+  end
 
-  url "https://download.remnote.io/RemNote-#{version}#{arch}.dmg",
-      verified: "download.remnote.io/"
+  url "https://download2.remnote.io/remnote-desktop2/RemNote-#{version}#{arch}-mac.zip",
+      verified: "download2.remnote.io/"
   name "RemNote"
   desc "Spaced-repetition powered note-taking tool"
   homepage "https://www.remnote.com/"
 
   livecheck do
-    url "https://s3.amazonaws.com/download.remnote.io/latest-mac.yml"
-    strategy :electron_builder
+    url "https://backend.remnote.com/desktop/mac#{livecheck_arch}"
+    regex(/RemNote[._-]v?(\d+(?:\.\d+)+)/i)
+    strategy :header_match
   end
+
+  auto_updates true
+  depends_on macos: ">= :big_sur"
 
   app "RemNote.app"
 

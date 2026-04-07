@@ -1,6 +1,6 @@
 cask "vallum" do
-  version "4.1.3"
-  sha256 "b22934ea092f06cd4261f5508c230ac4a0a920a9c7fd8ca1f14ebf8e66818114"
+  version "5.1"
+  sha256 "039e951b65eee1a7e3cc55c387c58861d450e217cc946f975733d056822d6e91"
 
   url "https://github.com/TheMurusTeam/Vallum/releases/download/v#{version}/vallum-#{version}.zip",
       verified: "github.com/TheMurusTeam/Vallum/"
@@ -12,8 +12,6 @@ cask "vallum" do
     url :url
     regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
-
-  depends_on macos: ">= :catalina"
 
   app "Vallum.app"
 

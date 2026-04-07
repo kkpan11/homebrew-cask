@@ -12,7 +12,15 @@ cask "cornerstone" do
     regex(/href=.*?Cornerstone[._-]v?(\d+(?:\.\d+)+)\.zip/i)
   end
 
-  depends_on macos: ">= :mojave"
-
   app "Cornerstone.app"
+
+  zap trash: [
+    "~/Library/Application Scripts/com.zennaware.Cornerstone*",
+    "~/Library/Caches/com.apple.helpd/Generated/Cornerstone Help*",
+    "~/Library/Containers/com.zennaware.Cornerstone*",
+  ]
+
+  caveats do
+    requires_rosetta
+  end
 end

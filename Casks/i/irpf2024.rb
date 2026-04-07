@@ -1,6 +1,6 @@
 cask "irpf2024" do
-  version "1.1"
-  sha256 "f20c2cd35cffd67d66a58091230f329480cadc4711b4bf561f82c7c3a1a4f481"
+  version "1.8"
+  sha256 "b1d4be0fcf49ffb1334820d70960fc18d110b13e36fe7e661c98948403cb7a7a"
 
   url "https://downloadirpf.receita.fazenda.gov.br/irpf/2024/irpf/arquivos/IRPF2024-v#{version}.dmg"
   name "IRPF 2024"
@@ -9,10 +9,12 @@ cask "irpf2024" do
 
   livecheck do
     url "https://downloadirpf.receita.fazenda.gov.br/irpf/2024/irpf/update/latest.xml"
-    regex(%r{<pkgver>(\d+(\.\d+)+)</pkgver>}i)
+    strategy :xml do |xml|
+      xml.elements["//pkgver"]&.text&.strip
+    end
   end
 
-  depends_on macos: ">= :sierra"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   installer manual: "IRPF2024.app"
 

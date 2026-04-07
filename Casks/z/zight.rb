@@ -1,20 +1,19 @@
 cask "zight" do
-  version "8.1.2,2685"
-  sha256 :no_check
+  version "8.7.2,3615"
+  sha256 "b64dfcbf9ab1a0b90f0346d7815f5547510d4e7cd9b3945ef62fc72c5663f40b"
 
-  url "https://d2plwz9jdz9z5d.cloudfront.net/mac/latest/Zight.zip",
-      verified: "d2plwz9jdz9z5d.cloudfront.net/mac/latest/"
+  url "https://downloads.zight.com/mac/Zight-#{version.csv.first}.#{version.csv.second}.zip"
   name "Zight"
   desc "Visual communication platform"
   homepage "https://zight.com/"
 
   livecheck do
-    url :url
-    strategy :extract_plist
+    url "https://share.zight.com/api/v4/clients/mac/current-version"
+    strategy :sparkle
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :ventura"
 
   app "Zight.app"
 

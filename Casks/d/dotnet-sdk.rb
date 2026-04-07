@@ -1,46 +1,55 @@
 cask "dotnet-sdk" do
   arch arm: "arm64", intel: "x64"
 
-  on_arm do
-    version "8.0.203,1951c62f-487d-4002-b3e6-92677e88b8b1,b1ed2348dbe68ac3f499252b7c9017e4"
-    sha256 "cce7e9f2404089fb02ffaf56a3255c5320a3ee8e86934bee71a661697fb0d4a5"
-  end
-  on_intel do
-    version "8.0.203,bcfcba7d-4a1d-4435-95c2-7c4143e01007,68804b02e9a3bcfd6f26b04d01219791"
-    sha256 "3581b0df0edb93dba281b9cbc7bc69d588352a3cdbb5e688833ed221fe9d1ec9"
-  end
+  version "10.0.201"
+  sha256 arm:   "0443386286ec778c4271a49b1447f7573d642e159717ad5033e24b14d6ce3d5c",
+         intel: "d853fbdd308b13e623eae07072027cc6254ddd429f647ff7ac841c0a44d844ab"
 
-  url "https://download.visualstudio.microsoft.com/download/pr/#{version.csv.second}/#{version.csv.third}/dotnet-sdk-#{version.csv.first}-osx-#{arch}.pkg"
+  url "https://builds.dotnet.microsoft.com/dotnet/Sdk/#{version}/dotnet-sdk-#{version}-osx-#{arch}.pkg"
   name ".NET SDK"
   desc "Developer platform"
   homepage "https://www.microsoft.com/net/core#macos"
 
+  # This identifies releases with the same major/minor version as the current
+  # cask version. New major/minor releases occur annually in November and the
+  # check will automatically update its behavior when the cask is updated.
   livecheck do
-    cask "dotnet"
-    regex(%r{/download/pr/([^/]+)/([^/]+)/dotnet-sdk-v?(\d+(?:\.\d+)+)-osx-#{arch}\.pkg}i)
+    url "https://builds.dotnet.microsoft.com/dotnet/release-metadata/#{version.major_minor}/releases.json"
+    regex(/^v?(\d+(?:\.\d+)+)$/i)
+    strategy :json do |json, regex|
+      json["releases"]&.map do |release|
+        version = release.dig("sdk", "version")
+        next unless version&.match(regex)
+
+        version
+      end
+    end
   end
 
   conflicts_with cask: [
-    "dotnet",
-    "dotnet-preview",
-    "dotnet-sdk-preview",
-  ], formula: "dotnet"
-  depends_on macos: ">= :mojave"
+    "dotnet-runtime",
+    "dotnet-runtime@preview",
+    "dotnet-sdk@preview",
+  ]
+  depends_on macos: ">= :monterey"
 
   pkg "dotnet-sdk-#{version.csv.first}-osx-#{arch}.pkg"
   binary "/usr/local/share/dotnet/dotnet"
+  binary "/usr/local/share/dotnet/dnx"
 
   uninstall pkgutil: [
-              "com.microsoft.dotnet.*",
-              "com.microsoft.netstandard.pack.targeting.*",
-            ],
-            delete:  [
-              "/etc/paths.d/dotnet",
-              "/etc/paths.d/dotnet-cli-tools",
-            ]
-
-  zap trash: [
-    "~/.dotnet",
-    "~/.nuget",
+    "com.microsoft.dotnet.*#{version.major_minor}*#{arch}",
+    "com.microsoft.dotnet.sharedhost*#{arch}",
+    "com.microsoft.netstandard.pack.targeting.*",
   ]
+
+  zap pkgutil: "com.microsoft.dotnet.*",
+      delete:  [
+        "/etc/paths.d/dotnet",
+        "/etc/paths.d/dotnet-cli-tools",
+      ],
+      trash:   [
+        "~/.dotnet",
+        "~/.nuget",
+      ]
 end

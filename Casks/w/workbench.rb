@@ -8,7 +8,12 @@ cask "workbench" do
   homepage "https://github.com/mxcl/Workbench"
 
   auto_updates true
-  depends_on macos: ">= :sierra"
 
   app "Workbench.app"
+
+  zap trash: "~/Library/Preferences/com.codebasesaga.macOS.Workbench.plist"
+
+  caveats do
+    requires_rosetta
+  end
 end

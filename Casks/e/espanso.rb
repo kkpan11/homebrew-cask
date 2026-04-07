@@ -1,11 +1,8 @@
 cask "espanso" do
-  arch arm: "M1", intel: "Intel"
+  version "2.3.0"
+  sha256 "e785543bc37e9860434e2e00ccc18a5df7409ab9b20d1f41bfc4801b5e543eae"
 
-  version "2.2.1"
-  sha256 arm:   "419687d4d954630c8690e315eb7830b28f03b95521d720fc2bd960e084d49993",
-         intel: "369ad7eb9a30015a3836012970acd15b3b06c6f67349a89ced6bb3ae9c3f2d20"
-
-  url "https://github.com/espanso/espanso/releases/download/v#{version}/Espanso-Mac-#{arch}.zip",
+  url "https://github.com/espanso/espanso/releases/download/v#{version}/Espanso-Mac-Universal.zip",
       verified: "github.com/espanso/espanso/"
   name "Espanso"
   desc "Cross-platform Text Expander written in Rust"
@@ -13,8 +10,11 @@ cask "espanso" do
 
   livecheck do
     url :url
-    regex(/^v?(\d+(?:\.\d+)+(?:-beta\.?\d*)?)$/i)
+    strategy :github_latest
   end
+
+  depends_on macos: ">= :big_sur"
+  container nested: "espanso/Espanso.dmg"
 
   app "Espanso.app"
   binary "#{appdir}/Espanso.app/Contents/MacOS/espanso"
@@ -28,8 +28,4 @@ cask "espanso" do
     "~/Library/Preferences/espanso.plist",
     "~/Library/Saved Application State/com.federicoterzi.espanso.savedState",
   ]
-
-  caveats do
-    unsigned_accessibility
-  end
 end

@@ -1,8 +1,11 @@
 cask "pdfsam-basic" do
-  version "5.2.2"
-  sha256 "683dbdc4ffe0a98f0bceba9dc0f8f720c1a2226e9705f3ebff60e84489d3adc8"
+  arch arm: "arm64", intel: "x64"
 
-  url "https://github.com/torakiki/pdfsam/releases/download/v#{version}/PDFsam-#{version}.dmg",
+  version "6.0.0"
+  sha256 arm:   "704b567abb2f76d36c5ea6ccf8329bc63335cfd873581c61f171eca757276dae",
+         intel: "bdd704ca47bb6c853ddda16f3f7a72052d30ee1020a65b9c9b366015d1e5b904"
+
+  url "https://github.com/torakiki/pdfsam/releases/download/v#{version}/pdfsam-basic-#{version}-macos-#{arch}.dmg",
       verified: "github.com/torakiki/pdfsam/"
   name "PDFsam Basic"
   desc "Extracts pages, splits, merges, mixes and rotates PDF files"

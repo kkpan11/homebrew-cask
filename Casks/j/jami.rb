@@ -1,8 +1,8 @@
 cask "jami" do
-  version "2024031718"
-  sha256 "0a6e9048a77b1a70b39ae5b40259d8a388751e3290f2268a14b7009ffa2aad1a"
+  version "2.39,2026032615"
+  sha256 "7f9b2f32d07c6f4f76b3f225c641096b43197052c0bf3d4410e5ff9b782c7cc5"
 
-  url "https://dl.jami.net/mac_osx/jami#{version}.dmg"
+  url "https://dl.jami.net/mac_osx/jami#{version.csv.second}.dmg"
   name "Jami"
   name "Savoir-faire Linux Ring"
   desc "Decentralised instant messenger and softphone"
@@ -10,11 +10,11 @@ cask "jami" do
 
   livecheck do
     url "https://dl.jami.net/mac_osx/sparkle-ring.xml"
-    regex(/jami(\d+(?:\.\d+)*)\.dmg/i)
+    strategy :sparkle
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :ventura"
 
   app "Jami.app"
 

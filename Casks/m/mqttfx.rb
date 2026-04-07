@@ -1,26 +1,22 @@
 cask "mqttfx" do
   arch arm: "applesilicon", intel: "intel"
 
-  version "5.7.0"
-  sha256 arm:   "7c2e1bdca94fe3f94611c24d6378ac9d258030f15426c05047dcf33a9b711de3",
-         intel: "c992a54d7d873c055566651df07d9cb89bdcc347fa2db5ee1ed98bdd4abb9157"
+  version "5.12.0"
+  sha256 arm:   "38d799f24727b9bdd06166ddda3ca2361339a2c58a08b40fed56d570f73d10e5",
+         intel: "897e1d8f296ae4b062f96decb0d8ff99ba903a0531cf4a7147d31dc5d4afea01"
 
   url "https://download.softblade.net/mqttfx-#{version}-macos-#{arch}.dmg",
       verified: "download.softblade.net/"
   name "MQTT.fx"
   desc "IoT route testing tool"
-  homepage "https://softblade.de/"
+  homepage "https://www.softblade.de/"
 
   livecheck do
-    url "https://softblade.de/download/"
+    url "https://www.softblade.de/download/"
     regex(/href=.*?mqttfx[._-]v?(\d+(?:\.\d+)+)-macos/i)
   end
 
-  installer script: {
-    executable: "MQTT.fx Installer.app/Contents/MacOS/JavaApplicationStub",
-    args:       ["-q"],
-    sudo:       true,
-  }
+  app "MQTT.fx.app"
 
   uninstall delete: "/Applications/MQTT.fx.app"
 

@@ -1,8 +1,8 @@
 cask "treesheets" do
-  version "8504377142"
-  sha256 "163fa4b9e36605b838b7b611062433b7ed6f16ae609e258e2ca94244b62606cb"
+  version "3055"
+  sha256 "266557c46a5490cd7eafc8518c6174fab0eaa0361a5d7bc94700ce7eba81b4cc"
 
-  url "https://github.com/aardappel/treesheets/releases/download/#{version}/mac_treesheets.zip",
+  url "https://github.com/aardappel/treesheets/releases/download/#{version.csv.second || version.csv.first}/TreeSheets-#{version.csv.first}-Darwin.dmg",
       verified: "github.com/aardappel/treesheets/"
   name "TreeSheets"
   desc "Hierarchical spreadsheet and outline application"
@@ -10,11 +10,20 @@ cask "treesheets" do
 
   livecheck do
     url :url
-    regex(/^(\d+)$/)
-    strategy :github_latest
+    regex(%r{/v?(\d+(?:\.\d+)*)/TreeSheets[._-]v?(\d+(?:\.\d+)*)(?:[._-]Darwin)?\.dmg$}i)
+    strategy :github_latest do |json, regex|
+      json["assets"]&.map do |asset|
+        match = asset["browser_download_url"]&.match(regex)
+        next if match.blank?
+
+        (match[2] == match[1]) ? match[1] : "#{match[2]},#{match[1]}"
+      end
+    end
   end
 
-  app "build/Build/Products/Release/TreeSheets.app"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
+  app "TreeSheets.app"
 
   uninstall quit: "dot3labs.TreeSheets"
 

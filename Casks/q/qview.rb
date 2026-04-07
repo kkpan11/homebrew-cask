@@ -1,13 +1,20 @@
 cask "qview" do
-  version "6.1"
-  sha256 "e407b0f2fdd208ec72778feda0c34dcd12bc28420f9d5abd07e9287c1c91656a"
+  version "7.1"
+  sha256 "fa34d0e54601b8557f4e879527b9bb1e728ace5c7c1c69cf126700ca4d0b5817"
 
   url "https://github.com/jurplel/qView/releases/download/#{version}/qView-#{version}.dmg"
   name "qView"
   desc "Image viewer"
   homepage "https://github.com/jurplel/qView/"
 
-  depends_on macos: ">= :mojave"
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
+  depends_on macos: ">= :monterey"
 
   app "qView.app"
 

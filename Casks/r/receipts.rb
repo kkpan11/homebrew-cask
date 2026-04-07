@@ -1,18 +1,16 @@
 cask "receipts" do
-  version "1.15-702"
-  sha256 "b19ccd98f2cd16c7f8d02097fec34998cabf881080eb8ab390038b7206196734"
+  version "1.18-818"
+  sha256 "4433aec2c1ec4efb91b377f5bf33f42b293a5b720f3707387791973eca9dbbdd"
 
-  url "https://www.receipts-app.com/update/download/Receipts-#{version}.zip"
+  url "https://receipts-app.com/update/download/Receipts-#{version}.zip"
   name "Receipts"
   desc "Document management"
-  homepage "https://www.receipts-app.com/"
+  homepage "https://receipts-app.com/"
 
   livecheck do
-    url "https://www.receipts-app.com/updater.php"
+    url "https://receipts-app.com/updater.php"
     regex(/href=.*?Receipts[._-]v?(\d+(?:[.-]\d+)+)\.zip/i)
   end
-
-  depends_on macos: ">= :high_sierra"
 
   app "Receipts.app"
 

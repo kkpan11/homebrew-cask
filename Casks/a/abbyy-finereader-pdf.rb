@@ -18,9 +18,13 @@ cask "abbyy-finereader-pdf" do
   depends_on macos: ">= :big_sur"
 
   app "ABBYY FineReader PDF.app"
+  binary "#{appdir}/ABBYY FineReader PDF.app/Contents/MacOS/ABBYY FineReader PDF Viewer.app",
+         target: "#{appdir}/ABBYY FineReader PDF Viewer.app"
 
   zap trash: [
     "~/Library/Application Support/ABBYY",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.abbyy.finereader.sfl*",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.abbyy.frpdfviewer.sfl*",
     "~/Library/Preferences/com.abbyy.finereader.pdf.plist",
     "~/Library/Preferences/com.abbyy.FineReader.plist",
     "~/Library/Preferences/com.abbyy.FRPDFViewer.plist",
@@ -28,4 +32,8 @@ cask "abbyy-finereader-pdf" do
     "~/Library/Saved Application State/com.abbyy.FineReader.savedState",
     "~/Library/Saved Application State/com.abbyy.FRPDFViewer.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

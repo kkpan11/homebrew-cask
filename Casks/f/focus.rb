@@ -1,6 +1,6 @@
 cask "focus" do
-  version "2.0.8"
-  sha256 "bfbd3ab0c95150afa4c6d439872fb04a20d1cd18b9a1c3ac4dcd26eac5a1f071"
+  version "2.4.1"
+  sha256 "afb2ba7e2e1893aa03a6898603e26f115c7ecce6787635e074b023eb5b84e3c5"
 
   url "https://heyfocus.com/uploads/Focus-v#{version}.zip"
   name "Focus"
@@ -12,15 +12,13 @@ cask "focus" do
     strategy :header_match
   end
 
-  depends_on macos: ">= :sierra"
-
   app "Focus.app"
 
   uninstall quit: "BradJasper.focus"
 
   zap trash: [
-    "~/Library/Application Support/Focus/",
-    "~/Library/Caches/BradJasper.focus/",
+    "~/Library/Application Support/Focus",
+    "~/Library/Caches/BradJasper.focus",
     "~/Library/Preferences/BradJasper.focus.plist",
   ]
 end

@@ -1,8 +1,18 @@
 cask "orange" do
-  version "3.36.2"
-  sha256 "0307bb30a583dc30a2a1e08802a83916b82b50032e77c62ec3cdcd09ce81ba70"
+  arch arm: "arm64", intel: "x86_64"
 
-  url "https://download.biolab.si/download/files/Orange#{version.major}-#{version}-Python3.9.12.dmg",
+  version "3.40.0"
+  sha256 arm:   "ff226be4cabf87442cc83168cad2341b673d2ee42e68536769c862c37a149ce3",
+         intel: "6ac6715e128f335046ea26b5d71f50e7c9812a06111caa3488df0726adf518df"
+
+  on_arm do
+    app "Orange.app"
+  end
+  on_intel do
+    app "Orange#{version.major}.app"
+  end
+
+  url "https://download.biolab.si/download/files/Orange#{version.major}-#{version}-Python3.12.10-#{arch}.dmg",
       verified: "download.biolab.si/download/"
   name "Orange"
   desc "Component-based data mining software"
@@ -13,7 +23,7 @@ cask "orange" do
     regex(/Orange#{version.major}[._-]v?(\d+(?:\.\d+)+)\.zip/i)
   end
 
-  app "Orange#{version.major}.app"
+  depends_on macos: ">= :big_sur"
 
   zap trash: [
     "~/Library/Application Support/Orange",

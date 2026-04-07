@@ -8,11 +8,8 @@ cask "bonitastudiocommunity" do
   desc "Business process automation and optimisation"
   homepage "https://www.bonitasoft.com/downloads"
 
-  livecheck do
-    url :url
-    regex(/(\d+(?:[.-]\d+)+(?:-\w+)?)/i)
-    strategy :github_latest
-  end
+  deprecate! date: "2025-04-03", because: :discontinued
+  disable! date: "2026-04-03", because: :discontinued
 
   installer script: {
     executable: "#{staged_path}/BonitaStudioCommunity-#{version}.app/Contents/MacOS/installbuilder.sh",
@@ -26,4 +23,8 @@ cask "bonitastudiocommunity" do
     "/Library/Caches/org.bonitasoft.studio.product",
     "~/Library/Preferences/org.bonitasoft.studio.product.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

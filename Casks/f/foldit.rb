@@ -1,5 +1,5 @@
 cask "foldit" do
-  version "33"
+  version "52"
   sha256 :no_check
 
   url "https://files.ipd.uw.edu/pub/foldit/Foldit-macos_x64.dmg",
@@ -14,9 +14,12 @@ cask "foldit" do
   end
 
   auto_updates true
-  depends_on macos: ">= :sierra"
 
   app "Foldit.app"
 
   zap trash: "~/Library/Saved Application State/edu.washington.foldit.savedState"
+
+  caveats do
+    requires_rosetta
+  end
 end

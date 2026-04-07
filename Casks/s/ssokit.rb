@@ -12,7 +12,13 @@ cask "ssokit" do
     strategy :github_latest
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "SSokit.app"
 
   zap trash: "~/Library/Preferences/cn.rangaofei.SSokit.plist"
+
+  caveats do
+    requires_rosetta
+  end
 end

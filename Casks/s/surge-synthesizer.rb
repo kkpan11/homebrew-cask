@@ -8,6 +8,9 @@ cask "surge-synthesizer" do
   desc "Hybrid synthesiser"
   homepage "https://surge-synthesizer.github.io/"
 
+  deprecate! date: "2025-03-02", because: :discontinued, replacement_cask: "surge-xt"
+  disable! date: "2026-03-02", because: :discontinued, replacement_cask: "surge-xt"
+
   pkg "Surge-#{version}-Setup.pkg"
 
   uninstall pkgutil: [
@@ -18,4 +21,8 @@ cask "surge-synthesizer" do
     "org.surge-synthesizer.fxau.pkg",
     "org.surge-synthesizer.fxvst3.pkg",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

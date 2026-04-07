@@ -2,13 +2,7 @@ cask "x2goclient" do
   version "4.1.2.2"
   sha256 :no_check
 
-  on_sierra :or_older do
-    url "https://code.x2go.org/releases/X2GoClient_latest_macosx_10_11.dmg"
-  end
-  on_high_sierra :or_newer do
-    url "https://code.x2go.org/releases/X2GoClient_latest_macosx_10_13.dmg"
-  end
-
+  url "https://code.x2go.org/releases/X2GoClient_latest_macosx_10_13.dmg"
   name "X2Go Client"
   desc "Remote desktop software"
   homepage "https://wiki.x2go.org/doku.php"
@@ -18,7 +12,7 @@ cask "x2goclient" do
     regex(/x2goclient[._-]v?(\d+(?:\.\d+)+)/i)
   end
 
-  depends_on macos: ">= :el_capitan"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "x2goclient.app"
 
@@ -28,4 +22,8 @@ cask "x2goclient" do
     "~/Library/Application Support/CrashReporter/x2goclient_*.plist",
     "~/Library/Preferences/x2goclient.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

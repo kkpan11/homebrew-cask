@@ -7,6 +7,8 @@ cask "git-it" do
   desc "Desktop app for learning Git and GitHub"
   homepage "https://github.com/jlord/git-it-electron"
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "Git-it-Mac-x64/Git-it.app"
 
   zap trash: [
@@ -14,4 +16,8 @@ cask "git-it" do
     "~/Library/Preferences/com.electron.git-it.helper.plist",
     "~/Library/Preferences/com.electron.git-it.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

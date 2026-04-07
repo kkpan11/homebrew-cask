@@ -1,6 +1,6 @@
 cask "beatunes" do
-  version "5.2.34"
-  sha256 "797051f6795e010364d97b8d0eee1af58ea613d0cfefd398673c111182fc514c"
+  version "5.2.36"
+  sha256 "c0420fec7f20decb52a27909bd0c27a572a735624b5a2a4e9a55f67f39db7b31"
 
   url "https://coxy.beatunes.com/download/beaTunes-#{version.dots_to_hyphens}.dmg"
   name "beaTunes"
@@ -15,8 +15,6 @@ cask "beatunes" do
     end
   end
 
-  depends_on macos: ">= :el_capitan"
-
   app "beaTunes#{version.major}.app"
 
   zap trash: [
@@ -25,4 +23,8 @@ cask "beatunes" do
     "~/Library/Logs/beaTunes",
     "~/Library/Preferences/com.tagtraum.beatunes.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

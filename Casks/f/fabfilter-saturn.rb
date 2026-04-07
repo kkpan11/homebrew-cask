@@ -1,23 +1,16 @@
 cask "fabfilter-saturn" do
-  version "2.10"
-  sha256 "b4b31ae09e47f9d3052844259e9381ff0afd57e728b1425660d8373643b5687a"
+  version "2.12"
+  sha256 "ca100f12b563e48d726b5d547ddab8cd64a2558533c09b31d59be24b47e8f454"
 
-  url "https://www.fabfilter.com/downloads/ffsaturn#{version.no_dots}.dmg"
+  url "https://cdn-b.fabfilter.com/downloads/ffsaturn#{version.no_dots}.dmg"
   name "FabFilter Saturn"
   desc "Multiband distorsion/saturation plug-in"
   homepage "https://www.fabfilter.com/products/saturn-2-multiband-distortion-saturation-plug-in"
 
   livecheck do
     url "https://www.fabfilter.com/download"
-    strategy :page_match do |page|
-      match = page.match(/ffsaturn(\d)(\d+)\.dmg/i)
-      next if match.blank?
-
-      "#{match[1]}.#{match[2]}"
-    end
+    regex(/FabFilter\s+Saturn.*?v?(\d+(?:\.\d+)+)/im)
   end
-
-  depends_on macos: ">= :sierra"
 
   pkg "FabFilter Saturn #{version} Installer.pkg"
 

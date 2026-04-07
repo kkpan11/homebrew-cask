@@ -1,6 +1,6 @@
 cask "vero" do
-  version "0.9.1567"
-  sha256 "c36cadf745293188f7c13534e0b0c3a7ded5e7bc4bd10685f8315d195c3552b0"
+  version "0.20.2431"
+  sha256 "a27621184577f12af29a22bc92915baa21ce11c395d385a191b60d48459cf6b7"
 
   url "https://downloads.vero.co/vero-beta-#{version}.dmg"
   name "VERO"

@@ -1,6 +1,6 @@
 cask "gdevelop" do
-  version "5.3.197"
-  sha256 "bd8d6071b6a1fd9c5b050f644c39c1782a2ebed4c344437d3fd7a0cfdb359cbe"
+  version "5.6.265"
+  sha256 "8dacba3852aaeb634a00d81b1fa52fd2720c8760db97c4739ca2c876df8a20b9"
 
   url "https://github.com/4ian/GDevelop/releases/download/v#{version}/GDevelop-#{version.major}-#{version}-universal.dmg",
       verified: "github.com/4ian/GDevelop/"
@@ -12,6 +12,8 @@ cask "gdevelop" do
     url :url
     strategy :github_latest
   end
+
+  depends_on macos: ">= :big_sur"
 
   app "GDevelop #{version.major}.app"
 

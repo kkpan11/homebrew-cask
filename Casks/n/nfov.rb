@@ -7,6 +7,9 @@ cask "nfov" do
   desc "ASCII / ANSI art viewer"
   homepage "https://github.com/nrlquaker/nfov"
 
+  deprecate! date: "2024-09-08", because: :unmaintained
+  disable! date: "2025-09-09", because: :unmaintained
+
   app "nfov.app"
 
   zap trash: [
@@ -17,4 +20,8 @@ cask "nfov" do
     "~/Library/Preferences/com.electron.nfov.plist",
     "~/Library/Saved Application State/com.electron.nfov.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

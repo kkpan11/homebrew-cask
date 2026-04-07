@@ -1,6 +1,6 @@
 cask "charles" do
-  version "4.6.6"
-  sha256 "ca67b827df8e9d58f64ae2a1cba493832f335f0d28257e704395839623a7cbb0"
+  version "5.0.3"
+  sha256 "2dc3535b295ff5b3214d474fb310c2a3fd42433f11d145a5d069c88de1b0dbe0"
 
   url "https://www.charlesproxy.com/assets/release/#{version}/charles-proxy-#{version}.dmg"
   name "Charles"
@@ -8,9 +8,11 @@ cask "charles" do
   homepage "https://www.charlesproxy.com/"
 
   livecheck do
-    url "https://www.charlesproxy.com/latest.do"
+    url "https://www.charlesproxy.com/latest.do", post_json: {}
     regex(/v?(\d+(?:\.\d+)+)/i)
   end
+
+  conflicts_with cask: "charles@4"
 
   app "Charles.app"
 

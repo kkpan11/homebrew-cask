@@ -1,19 +1,20 @@
 cask "entry" do
-  version "2.1.12"
-  sha256 "ee07d59d2cc141d704627ff6f4198789034d38627edfcd9ee0ed15f677a26f6d"
+  version "2.1.33"
+  sha256 "a7b466cc1efa2aea52a969486d810064a1f04f2383a17508fde879de82592d94"
 
   url "https://playentry.org/uploads/data/installers/Entry-#{version}.pkg"
   name "entry"
   desc "Block-based coding platform"
   homepage "https://playentry.org/"
 
-  # The download page (https://playentry.org/download/offline) fetches the
-  # version information from https://playentry.org/graphql using a `POST`
-  # request but livecheck can't do that yet. We check GitHub releases as a best
-  # guess of when a new version is released.
   livecheck do
-    url "https://github.com/entrylabs/entry-offline"
-    strategy :github_latest
+    url "https://playentry.org/api/checkVersion", post_json: {
+      category: "offline",
+      version:  version,
+    }
+    strategy :json do |json|
+      json["recentVersion"]
+    end
   end
 
   pkg "Entry-#{version}.pkg"

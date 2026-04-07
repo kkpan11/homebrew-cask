@@ -1,6 +1,6 @@
 cask "alacritty" do
-  version "0.13.2"
-  sha256 "c71ce23fc365c4d046de2a48161d26232a5734c519e6b5ff3f55c60258260f60"
+  version "0.17.0"
+  sha256 "ad8d7de35fb38e43184776cac6dfee05ca325caa0b6639a06a55e54e4b026620"
 
   url "https://github.com/alacritty/alacritty/releases/download/v#{version}/Alacritty-v#{version}.dmg"
   name "Alacritty"
@@ -12,25 +12,26 @@ cask "alacritty" do
     strategy :github_latest
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
+  depends_on macos: ">= :big_sur"
+
   app "Alacritty.app"
-  binary "Alacritty.app/Contents/MacOS/alacritty"
-  binary "Alacritty.app/Contents/Resources/completions/_alacritty",
-         target: "#{HOMEBREW_PREFIX}/share/zsh/site-functions/_alacritty"
-  binary "Alacritty.app/Contents/Resources/completions/alacritty.bash",
-         target: "#{HOMEBREW_PREFIX}/etc/bash_completion.d/alacritty"
-  binary "Alacritty.app/Contents/Resources/completions/alacritty.fish",
-         target: "#{HOMEBREW_PREFIX}/share/fish/vendor_completions.d/alacritty.fish"
-  binary "Alacritty.app/Contents/Resources/61/alacritty",
+  binary "#{appdir}/Alacritty.app/Contents/MacOS/alacritty"
+  binary "#{appdir}/Alacritty.app/Contents/Resources/61/alacritty",
          target: "#{ENV.fetch("TERMINFO", "~/.terminfo")}/61/alacritty"
-  binary "Alacritty.app/Contents/Resources/61/alacritty-direct",
+  binary "#{appdir}/Alacritty.app/Contents/Resources/61/alacritty-direct",
          target: "#{ENV.fetch("TERMINFO", "~/.terminfo")}/61/alacritty-direct"
-  manpage "Alacritty.app/Contents/Resources/alacritty.1.gz"
-  manpage "Alacritty.app/Contents/Resources/alacritty.5.gz"
-  manpage "Alacritty.app/Contents/Resources/alacritty-msg.1.gz"
-  manpage "Alacritty.app/Contents/Resources/alacritty-bindings.5.gz"
+  manpage "#{appdir}/Alacritty.app/Contents/Resources/alacritty.1.gz"
+  manpage "#{appdir}/Alacritty.app/Contents/Resources/alacritty.5.gz"
+  manpage "#{appdir}/Alacritty.app/Contents/Resources/alacritty-msg.1.gz"
+  manpage "#{appdir}/Alacritty.app/Contents/Resources/alacritty-bindings.5.gz"
+  bash_completion "#{appdir}/Alacritty.app/Contents/Resources/completions/alacritty.bash"
+  fish_completion "#{appdir}/Alacritty.app/Contents/Resources/completions/alacritty.fish"
+  zsh_completion "#{appdir}/Alacritty.app/Contents/Resources/completions/_alacritty"
 
   zap trash: [
-    "~/Library/Preferences/io.alacritty.plist",
-    "~/Library/Saved Application State/io.alacritty.savedState",
+    "~/Library/Preferences/org.alacritty.plist",
+    "~/Library/Saved Application State/org.alacritty.savedState",
   ]
 end

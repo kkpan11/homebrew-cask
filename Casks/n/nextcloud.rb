@@ -1,46 +1,43 @@
 cask "nextcloud" do
   on_big_sur :or_older do
-    version "3.8.1"
-    sha256 "448647db0068ff9a2b669ff2f9d715a36b4e5e1af82e9849e57d9f7078d1bd2e"
+    version "3.13.4"
+    sha256 "8c31281f2acecc2a4e384e01199767569a8f3aa2beedc8ae93513ba0c87062c6"
+
+    url "https://github.com/nextcloud-releases/desktop/releases/download/v#{version}/Nextcloud-legacy-#{version}.pkg",
+        verified: "github.com/nextcloud-releases/desktop/"
 
     livecheck do
-      skip "Legacy version"
+      url "https://nextcloud.com/install/#desktop-files"
+      regex(/href=.*?Nextcloud[._-]legacy[._-]v?(\d+(?:\.\d+)+)\.pkg/i)
     end
-
-    depends_on macos: ">= :mojave"
   end
   on_monterey :or_newer do
-    version "3.12.3"
-    sha256 "1c020cb3163b9c1da950f8a6c4876e58f80ebdc59b07b38c742c5159d0112e06"
+    version "33.0.2"
+    sha256 "c1cd72fef13708fbd61ff668df5bde89355466a9fa3cef80996a10f6af9654f0"
+
+    url "https://github.com/nextcloud-releases/desktop/releases/download/v#{version}/Nextcloud-#{version}.pkg",
+        verified: "github.com/nextcloud-releases/desktop/"
 
     livecheck do
-      url :url
-      regex(/^Nextcloud[._-]v?(\d+(?:\.\d+)+)\.pkg$/i)
-      strategy :github_latest do |json, regex|
-        json["assets"]&.map do |asset|
-          match = asset["name"]&.match(regex)
-          next if match.blank?
-
-          match[1]
-        end
-      end
+      url "https://nextcloud.com/install/#desktop-files"
+      regex(/href=.*?Nextcloud[._-]v?(\d+(?:\.\d+)+)\.pkg/i)
     end
   end
 
-  url "https://github.com/nextcloud-releases/desktop/releases/download/v#{version}/Nextcloud-#{version}.pkg",
-      verified: "github.com/nextcloud-releases/desktop/"
   name "Nextcloud"
   desc "Desktop sync client for Nextcloud software products"
   homepage "https://nextcloud.com/"
 
   auto_updates true
+  conflicts_with cask: "nextcloud-vfs"
 
   pkg "Nextcloud-#{version}.pkg"
   binary "/Applications/Nextcloud.app/Contents/MacOS/nextcloudcmd"
 
-  uninstall quit:    "com.nextcloud.desktopclient",
-            pkgutil: "com.nextcloud.desktopclient",
-            delete:  "/Applications/Nextcloud.app"
+  uninstall launchctl: "com.nextcloud.desktopclient",
+            quit:      "com.nextcloud.desktopclient",
+            pkgutil:   "com.nextcloud.desktopclient",
+            delete:    "/Applications/Nextcloud.app"
 
   zap trash: [
     "~/Library/Application Scripts/com.nextcloud.desktopclient.FinderSyncExt",

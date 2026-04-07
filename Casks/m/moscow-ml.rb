@@ -8,7 +8,15 @@ cask "moscow-ml" do
   desc "Light-weight implementation of Standard ML"
   homepage "https://mosml.org/"
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   pkg "mosml-#{version}.pkg"
 
   uninstall pkgutil: "org.mosml"
+
+  # No zap stanza required
+
+  caveats do
+    requires_rosetta
+  end
 end

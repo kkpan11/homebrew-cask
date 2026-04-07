@@ -1,8 +1,8 @@
 cask "chessx" do
-  version "1.6.0"
-  sha256 "40caf7d6fa85f934a539420a6cc5844d0c5bee1667889b8c59a0caeb10002c52"
+  version "1.6.10"
+  sha256 "525927ea622b1834694a5582370a5883cc7bc7dd50e449be96c8c8d553fc9870"
 
-  url "https://downloads.sourceforge.net/chessx/chessx/#{version}/chessx-#{version}.dmg",
+  url "https://downloads.sourceforge.net/chessx/chessx/#{version.csv.second || version.csv.first}/chessx-#{version.csv.first}.dmg",
       verified: "downloads.sourceforge.net/chessx/"
   name "ChessX"
   desc "Chess database"
@@ -10,12 +10,20 @@ cask "chessx" do
 
   livecheck do
     url "https://sourceforge.net/projects/chessx/rss?path=/chessx"
-    regex(%r{url=.*?/chessx[._-]v?(\d+(?:\.\d+)+)\.dmg}i)
+    regex(%r{url=.*?/v?(\d+(?:\.\d+)+)/chessx[._-]v?(\d+(?:\.\d+)+[a-z]?)\.dmg}i)
+    strategy :page_match do |page, regex|
+      match = page.match(regex)
+      next if match.blank?
+
+      (match[1] == match[2]) ? match[2] : "#{match[2]},#{match[1]}"
+    end
   end
 
-  pkg "chessx-installer.mpkg"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
-  uninstall pkgutil: "net.sourceforge.chessx"
+  depends_on macos: ">= :ventura"
+
+  app "ChessX.app"
 
   zap trash: [
     "~/.config/chessx",
@@ -23,4 +31,8 @@ cask "chessx" do
     "~/Library/Preferences/net.sourceforge.chessx.plist",
     "~/Library/Saved Application State/net.sourceforge.chessx.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

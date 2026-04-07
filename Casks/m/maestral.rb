@@ -1,6 +1,6 @@
 cask "maestral" do
-  version "1.9.2"
-  sha256 "24b0e575108717cd4a5cf823ea521682b623ab51f56827eaea14ceab2de2c66c"
+  version "1.9.5"
+  sha256 "cd8f393abba8a70794e527ee30c4d3f11b5da6e935fb315fbe6ff00bf8f79e4c"
 
   url "https://github.com/SamSchott/maestral/releases/download/v#{version}/Maestral-#{version}.dmg",
       verified: "github.com/SamSchott/maestral/"
@@ -9,12 +9,12 @@ cask "maestral" do
   homepage "https://maestral.app/"
 
   livecheck do
-    url :url
-    strategy :github_latest
+    url "https://maestral.app/appcast.xml"
+    strategy :sparkle, &:short_version
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :big_sur"
 
   app "Maestral.app"
   binary "#{appdir}/Maestral.app/Contents/MacOS/maestral-cli", target: "maestral"

@@ -6,15 +6,24 @@ cask "proxifier" do
     url "https://www.proxifier.com/download/legacy/ProxifierMac#{version.no_dots}.dmg"
 
     livecheck do
-      url "https://www.proxifier.com/changelog/mac#{version.major}.html"
-      regex(/Version\s*(\d+(?:\.\d+)+)/i)
+      skip "Legacy version"
     end
   end
-  on_big_sur :or_newer do
-    version "3.11"
-    sha256 "c391178f8e1b7ffe4175ec8e7218f1e488973a6aca0d55292b0f0c42184eab8c"
+  on_big_sur do
+    version "3.8"
+    sha256 "1f8bbad340500ad49c541570ba3233a88e60fd4e02030f596e7d32f93d244020"
 
-    url "https://www.proxifier.com/download/ProxifierMac#{version.major}.dmg"
+    url "https://www.proxifier.com/download/legacy/ProxifierMac#{version.no_dots}.dmg"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_monterey :or_newer do
+    version "3.15"
+    sha256 :no_check
+
+    url "https://www.proxifier.com/download/ProxifierMac.dmg"
 
     livecheck do
       url "https://www.proxifier.com/changelog/mac.html"
@@ -24,17 +33,17 @@ cask "proxifier" do
 
   name "Proxifier"
   desc "Proxy client"
-  homepage "https://www.proxifier.com/mac/"
+  homepage "https://www.proxifier.com/"
 
   app "Proxifier.app"
 
   zap trash: [
-    "~/Library/Application Scripts/com.initex.proxifier.v3.macos",
+    "~/Library/Application Scripts/com.initex.proxifier.*.macos",
     "~/Library/Application Support/Proxifier",
     "~/Library/Caches/com.apple.helpd/SDMHelpData/Other/English/HelpSDMIndexFile/Proxifier Help*",
     "~/Library/Caches/com.initex.proxifier.macosx",
-    "~/Library/Containers/com.initex.proxifier.v3.macos",
-    "~/Library/Group Containers/NXELXU5YLW.com.initex.proxifier.v3.macos",
+    "~/Library/Containers/com.initex.proxifier.*.macos",
+    "~/Library/Group Containers/*.com.initex.proxifier.*.macos",
     "~/Library/Logs/Proxifier",
     "~/Library/Preferences/com.initex.proxifier.macosx.plist",
     "~/Library/Saved Application State/com.initex.proxifier.macosx.savedState",

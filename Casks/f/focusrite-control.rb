@@ -1,15 +1,21 @@
 cask "focusrite-control" do
-  version "3.18"
-  sha256 "75e946eb0e1700df42a4220ac2477db5522bdacb739a6ab85669baa98248b4f2"
+  version "3.27.0.2"
+  sha256 "bbd8ffcc8bce23f1e45a30b58f242d740cab6c94fbcec1f23145351733d4555f"
 
-  url "https://fael-downloads-prod.focusrite.com/customer/prod/downloads/focusrite-control-#{version}.dmg"
+  url "https://fael-downloads-prod.focusrite.com/customer/prod/downloads/focusrite_control_v#{version.dots_to_underscores}.dmg"
   name "Focusrite Control"
   desc "Focusrite interface controller"
   homepage "https://focusrite.com/en"
 
   livecheck do
     url "https://downloads.focusrite.com/focusrite/scarlett-3rd-gen/scarlett-solo-3rd-gen"
-    regex(%r{href=.*?/focusrite[._-]control[._-]v?(\d+(?:\.\d+)+)\.dmg}i)
+    regex(/href=.*?focusrite[._-]control[._-]v?(\d+(?:[._]\d+)+)\.dmg/i)
+    strategy :page_match do |page, regex|
+      match = page.match(regex)
+      next if match.blank?
+
+      match[1].tr("_", ".")
+    end
   end
 
   pkg "Focusrite Control.pkg"

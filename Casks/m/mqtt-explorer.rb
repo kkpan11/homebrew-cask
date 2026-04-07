@@ -12,6 +12,8 @@ cask "mqtt-explorer" do
     strategy :github_latest
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "MQTT Explorer.app"
 
   uninstall quit: "de.t7n.apps.mqtt-explorer"
@@ -21,4 +23,8 @@ cask "mqtt-explorer" do
     "~/Library/Containers/de.t7n.apps.mqtt-explorer",
     "~/Library/Group Containers/*.de.t7n.apps.mqtt-explorer",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

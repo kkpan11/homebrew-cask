@@ -1,6 +1,6 @@
 cask "specter" do
-  version "2.0.2"
-  sha256 "20bfd7c4daea70499ab3e04831fb006867cb21c7299aad282ca566b35cd4e7fd"
+  version "2.0.5"
+  sha256 "2419d08e0cc32c6c1e8d7f09af90e4e867d786bc51ee238f62ff741785caccc3"
 
   url "https://github.com/cryptoadvance/specter-desktop/releases/download/v#{version}/Specter-v#{version}.dmg",
       verified: "github.com/cryptoadvance/specter-desktop/"
@@ -8,13 +8,25 @@ cask "specter" do
   desc "Desktop GUI for Bitcoin Core optimised to work with hardware wallets"
   homepage "https://specter.solutions/"
 
+  # Upstream doesn't reliably mark unstable versions as pre-release on GitHub.
+  # The first-party download page uses JavaScript to handle the download links,
+  # so we have to check the related JS file for the URL of the latest stable
+  # file on GitHub.
   livecheck do
-    url "https://github.com/cryptoadvance/specter-desktop/releases/"
-    regex(%r{v?(\d+(?:\.\d+)+)/Specter.*?\.dmg}i)
-    strategy :page_match
-  end
+    url "https://specter.solutions/downloads/"
+    regex(/Specter[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
+    strategy :page_match do |page, regex|
+      js_file_name = page[%r{src=["']?/assets/(index[._-]\w+\.js)}i, 1]
+      next unless js_file_name
 
-  depends_on macos: ">= :catalina"
+      js_file = Homebrew::Livecheck::Strategy.page_content(
+        "https://specter.solutions/assets/#{js_file_name}",
+      )[:content]
+      next if js_file.blank?
+
+      js_file.scan(regex).map { |match| match[0] }
+    end
+  end
 
   app "Specter.app"
 

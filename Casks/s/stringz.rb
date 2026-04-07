@@ -7,7 +7,12 @@ cask "stringz" do
   desc "Editor for localizable files"
   homepage "https://github.com/mohakapt/Stringz"
 
-  depends_on macos: ">= :catalina"
+  livecheck do
+    url "https://raw.githubusercontent.com/mohakapt/Stringz/master/appcast.xml"
+    strategy :sparkle, &:short_version
+  end
+
+  auto_updates true
 
   app "Stringz.app"
 

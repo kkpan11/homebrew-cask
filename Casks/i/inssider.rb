@@ -8,10 +8,12 @@ cask "inssider" do
   desc "Defeat slow wifi"
   homepage "https://www.metageek.com/products/inssider/"
 
-  livecheck do
-    url "https://metageek.link/inssider-5-mac-update-xml"
-    strategy :sparkle, &:short_version
-  end
+  deprecate! date: "2025-03-02", because: :unmaintained
+  disable! date: "2026-03-02", because: :unmaintained
 
   app "inSSIDer.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

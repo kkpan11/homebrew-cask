@@ -7,13 +7,10 @@ cask "cheatsheet" do
   desc "Tool to list all active shortcuts of the current application"
   homepage "https://www.mediaatelier.com/CheatSheet/"
 
-  livecheck do
-    url "https://www.mediaatelier.com/CheatSheet/feed.php"
-    strategy :sparkle
-  end
+  deprecate! date: "2024-11-09", because: :discontinued
+  disable! date: "2025-11-09", because: :discontinued
 
   auto_updates true
-  depends_on macos: ">= :mojave"
 
   app "CheatSheet.app"
 

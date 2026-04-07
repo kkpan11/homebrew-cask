@@ -1,8 +1,8 @@
 cask "xemu" do
-  version "0.7.120"
-  sha256 "d8f7ceeba7280edd00ddd3396a78e0e82ebaa11478087f0847ab5fdb602dbc1c"
+  version "0.8.134"
+  sha256 "aa7581db3211ab6c59a291c2bfa8c9eb4dfae2c6f394be89db07a0e90d2f8bcb"
 
-  url "https://github.com/xemu-project/xemu/releases/download/v#{version}/xemu-macos-universal-release.zip",
+  url "https://github.com/xemu-project/xemu/releases/download/v#{version}/xemu-#{version}-macos-universal.zip",
       verified: "github.com/xemu-project/xemu/"
   name "Xemu"
   desc "Original Xbox Emulator"

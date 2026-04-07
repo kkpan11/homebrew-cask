@@ -1,6 +1,6 @@
 cask "screens-assist" do
-  version "1.5,20075"
-  sha256 "ac09094af5b02bf8c4f1ed87796e4eaabaef609c954300622e4450eb1b7eaeb8"
+  version "2.0.2,32034"
+  sha256 "04c01e8bbfa0c471e4461654562d2f9f70adac398f30bd8fb3dc8cff636f593d"
 
   url "https://updates.edovia.com/com.edovia.screens.connect.express/ScreensAssist_#{version.csv.first}b#{version.csv.second}.zip"
   name "Screens Assist"
@@ -13,7 +13,6 @@ cask "screens-assist" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "Screens Assist.app"
 

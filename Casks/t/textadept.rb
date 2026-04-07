@@ -1,6 +1,6 @@
 cask "textadept" do
-  version "12.3"
-  sha256 "4cd057f6bb70ab6b564bc76ebcb93b8e9de5a6bcda3f8ccc4ba80549b949b401"
+  version "12.9"
+  sha256 "91e96761f1982504473e9d9217eb9543472064be45ab42ad6653b4d597879a96"
 
   url "https://github.com/orbitalquark/textadept/releases/download/textadept_#{version}/textadept_#{version}.macOS.zip",
       verified: "github.com/orbitalquark/textadept/"
@@ -12,6 +12,8 @@ cask "textadept" do
     url :url
     regex(/^textadept[._-]v?(\d+(?:\.\d+)+)$/i)
   end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "Textadept.app"
   binary "ta"

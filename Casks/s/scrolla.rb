@@ -1,20 +1,19 @@
 cask "scrolla" do
-  version "2828.13.0"
+  version "32"
   sha256 :no_check
 
-  url "https://scrolla.app/releases/Scrolla.zip"
+  url "https://releases.scrolla.app/Scrolla.zip"
   name "Scrolla"
   desc "Scroll with the keyboard using Vim motions"
   homepage "https://scrolla.app/"
 
   livecheck do
-    url "https://scrolla.app/releases/appcast.xml"
-    strategy :sparkle do |item|
-      item.version.to_s
-    end
+    url "https://releases.scrolla.app/appcast.xml"
+    strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :monterey"
+  auto_updates true
+  depends_on macos: ">= :sonoma"
 
   app "Scrolla.app"
 
@@ -25,6 +24,8 @@ cask "scrolla" do
     "~/Library/Caches/mo.com.sleeplessmind.Scrolla",
     "~/Library/Containers/mo.com.sleeplessmind.Scrolla",
     "~/Library/Containers/mo.com.sleeplessmind.Scrolla-LaunchAtLoginHelper",
+    "~/Library/HTTPStorages/mo.com.sleeplessmind.Scrolla",
+    "~/Library/HTTPStorages/mo.com.sleeplessmind.Scrolla.binarycookies",
     "~/Library/Preferences/mo.com.sleeplessmind.Scrolla.plist",
     "~/Library/Saved Application State/mo.com.sleeplessmind.Scrolla.savedState",
   ]

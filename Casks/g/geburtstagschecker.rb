@@ -11,10 +11,17 @@ cask "geburtstagschecker" do
     strategy :sparkle
   end
 
-  app "GeburtstagsChecker #{version.csv.first} (#{version.csv.second})/GeburtstagsChecker.app"
+  # The url is unversioned, but the download returns an app directory with a version number
+  rename "GeburtstagsChecker #{version.csv.first} (#{version.csv.second})", "GeburtstagsChecker"
+
+  app "GeburtstagsChecker/GeburtstagsChecker.app"
 
   zap trash: [
     "~/Library/Caches/earthlingsoft.GeburtstagsChecker",
     "~/Library/Preferences/earthlingsoft.GeburtstagsChecker.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

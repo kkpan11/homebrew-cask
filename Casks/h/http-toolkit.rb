@@ -1,8 +1,11 @@
 cask "http-toolkit" do
-  version "1.14.10"
-  sha256 "d5344a73cdae31f37e95f8693e8fef76632858d89116877322e89c2b5ec9f279"
+  arch arm: "arm64", intel: "x64"
 
-  url "https://github.com/httptoolkit/httptoolkit-desktop/releases/download/v#{version}/HttpToolkit-#{version}.dmg",
+  version "1.25.0"
+  sha256 arm:   "502acae812f6f03bbba71095f2c3ed4274060b249932b3aad6cf85601ad97ae5",
+         intel: "a0d701d5f687e1bb0ba0a9a0ec1648dee88ff28ecfabf4edcbcc49a6067be508"
+
+  url "https://github.com/httptoolkit/httptoolkit-desktop/releases/download/v#{version}/HttpToolkit-#{version}-#{arch}.dmg",
       verified: "github.com/httptoolkit/httptoolkit-desktop/"
   name "HTTP Toolkit"
   desc "HTTP(S) debugging proxy, analyzer, and client"
@@ -12,6 +15,8 @@ cask "http-toolkit" do
     url :url
     strategy :github_latest
   end
+
+  depends_on macos: ">= :monterey"
 
   app "HTTP Toolkit.app"
 

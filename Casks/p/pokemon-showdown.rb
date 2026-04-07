@@ -6,10 +6,11 @@ cask "pokemon-showdown" do
   name "Pokémon Showdown"
   homepage "https://pokemonshowdown.com/"
 
-  livecheck do
-    url :url
-    strategy :extract_plist
-  end
+  deprecate! date: "2025-06-07", because: :discontinued
 
   app "Pokemon Showdown.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -1,12 +1,16 @@
 cask "clibor" do
-  version "1.3"
+  version "1.6"
   sha256 :no_check
 
   language "en", default: true do
     url "https://chigusa-web.com/clibor-for-mac-en/dl/clibor-for-mac/"
+
+    "en-US"
   end
   language "ja" do
     url "https://chigusa-web.com/clibor-for-mac/dl/clibor-for-mac/"
+
+    "ja-JP-mac"
   end
 
   name "Clibor for Mac"
@@ -14,8 +18,10 @@ cask "clibor" do
   homepage "https://chigusa-web.com/clibor-for-mac-en/"
 
   livecheck do
-    url "https://chigusa-web.com/clibor-for-mac-en/download/"
-    regex(/Clibor\.dmg\s*(?:[–—-]|&[a-z]+;)?\s*v?(\d+(?:\.\d+)+)/i)
+    url "https://chigusa-web.com/appinfo/clibor-for-mac.json"
+    strategy :json do |json|
+      json["version"]
+    end
   end
 
   auto_updates true

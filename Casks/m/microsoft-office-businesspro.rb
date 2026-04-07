@@ -1,6 +1,6 @@
 cask "microsoft-office-businesspro" do
-  version "16.83.24031120"
-  sha256 "03186aaf7ba0df496420c0bb59d003906994f67a178183942c3635f5a9b4d61b"
+  version "16.107.26032814"
+  sha256 "f954a88e2f71051bfc25e4140ed1dfd41ccca27790c5f99f0c9cdc3f9f992a4b"
 
   url "https://officecdnmac.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/Microsoft_365_and_Office_#{version}_BusinessPro_Installer.pkg"
   name "Microsoft Office BusinessPro"
@@ -21,12 +21,11 @@ cask "microsoft-office-businesspro" do
     microsoft-outlook
     microsoft-powerpoint
     microsoft-teams
-    microsoft-teams-classic
+    microsoft-teams@classic
     microsoft-word
     onedrive
   ]
-  depends_on cask: "microsoft-auto-update"
-  depends_on macos: ">= :monterey"
+  depends_on macos: ">= :sonoma"
 
   pkg "Microsoft_365_and_Office_#{version}_BusinessPro_Installer.pkg",
       choices: [
@@ -48,11 +47,11 @@ cask "microsoft-office-businesspro" do
             ],
             quit:      "com.microsoft.autoupdate2",
             pkgutil:   [
+              "com.microsoft.m365copilot.shim",
               "com.microsoft.MSTeamsAudioDevice",
               "com.microsoft.OneDrive",
               "com.microsoft.package.DFonts",
               "com.microsoft.package.Frameworks",
-              "com.microsoft.package.Microsoft_AutoUpdate.app",
               "com.microsoft.package.Microsoft_Excel.app",
               "com.microsoft.package.Microsoft_OneNote.app",
               "com.microsoft.package.Microsoft_Outlook.app",
@@ -61,9 +60,13 @@ cask "microsoft-office-businesspro" do
               "com.microsoft.package.Proofing_Tools",
               "com.microsoft.pkg.licensing",
               "com.microsoft.teams",
+              "com.microsoft.teams2",
               "com.microsoft.wdav",
+              "com.microsoft.wdav.shim",
             ],
             delete:    [
+              "/Applications/Microsoft 365 Copilot Shim.app",
+              "/Applications/Microsoft Defender Shim.app",
               "/Applications/Microsoft Defender.app",
               "/Applications/Microsoft Excel.app",
               "/Applications/Microsoft OneNote.app",

@@ -1,6 +1,6 @@
 cask "workflowy" do
-  version "4.0.2404020659"
-  sha256 "78fd6498c4d429d22aba878fb3d33ce52487f43de53401aac599673db886272e"
+  version "4.3.2604021353"
+  sha256 "17de6fb152e235f94b7dd6394734b936c547b14bcdbba7fb1cbf09f3e69ca52f"
 
   url "https://github.com/workflowy/desktop/releases/download/v#{version}/WorkFlowy.zip",
       verified: "github.com/workflowy/desktop/"
@@ -8,7 +8,13 @@ cask "workflowy" do
   desc "Notetaking tool"
   homepage "https://workflowy.com/downloads/mac/"
 
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
   auto_updates true
+  depends_on macos: ">= :monterey"
 
   app "WorkFlowy.app"
 

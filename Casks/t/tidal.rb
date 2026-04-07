@@ -1,14 +1,15 @@
 cask "tidal" do
   arch arm: "arm64", intel: "x64"
 
-  version "2.36.2"
-  sha256 arm:   "f6d7b5e5f8bc159b85c3cc565c5ec26e0eb909037a9cf0e24da41b9288372839",
-         intel: "14170c8eb79a2da486fe125396f24a2876707ce3efc15cda1c984ebfffb3d786"
+  version "2.41.3"
+  sha256 arm:   "74ed472ddc243d9c784f6066150a5e6e5d68172a1cf4633fd0b7c3f7784ee373",
+         intel: "8e1e42b149cb77bb0803a8ab6c8d048d40925e2bc2978b72214247fe190efe38"
 
   url "https://download.tidal.com/desktop/mac/TIDAL.#{arch}.#{version}.zip"
   name "TIDAL"
   desc "Music streaming service with high fidelity sound and hi-def video quality"
-  homepage "https://tidal.com/"
+  # The main website is inaccessible due to using a verification system.
+  homepage "https://support.tidal.com/hc/en-us"
 
   livecheck do
     url "https://download.tidal.com/desktop/mac/update-#{arch}.json"
@@ -18,6 +19,7 @@ cask "tidal" do
   end
 
   auto_updates true
+  depends_on macos: ">= :monterey"
 
   app "TIDAL.app"
 

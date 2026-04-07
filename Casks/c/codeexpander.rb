@@ -20,6 +20,8 @@ cask "codeexpander" do
     end
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "CodeExpander.app"
 
   zap trash: [
@@ -29,4 +31,8 @@ cask "codeexpander" do
     "~/Library/Preferences/com.codeexpander.plist",
     "~/Library/Saved Application State/com.codeexpander.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

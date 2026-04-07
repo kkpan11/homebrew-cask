@@ -1,21 +1,39 @@
 cask "perimeter81" do
   # NOTE: "81" is not a version number, but an intrinsic part of the product name
-  version "10.4.2.1198"
-  sha256 "fc8f897197c0157067a4e3368a5c6a90a24bf113736afecd3a9be4ceb90b7f11"
+  version "12.7.0.8565"
+  sha256 "d19e49c17e977ada6b7289f46eace521f3f82d57d672d9b6f648ae1535f1a209"
 
-  url "https://static.perimeter81.com/agents/mac/Perimeter81_#{version}.pkg"
+  url "https://static.perimeter81.com/agents/mac/Harmony_SASE_#{version}.pkg"
   name "Perimeter 81"
   desc "Zero trust network as a service client"
   homepage "https://perimeter81.com/"
 
   livecheck do
-    url "https://support.perimeter81.com/v1/docs/en/downloading-the-agent"
-    regex(/href=.*?Perimeter81[._-]v?(\d+(?:\.\d+)+)\.pkg/i)
+    url "https://support.perimeter81.com/v1/docs/downloading-the-agent"
+    regex(/href=.*?Harmony[._-]SASE[._-]v?(\d+(?:\.\d+)+)\.pkg/i)
   end
 
-  pkg "Perimeter81_#{version}.pkg"
+  depends_on macos: ">= :big_sur"
 
+  # The pkg has detection for the `skip_autostart` flag to prevent launching after install
+  rename "Harmony_SASE_#{version}.pkg", "Harmony_SASE_#{version}_skip_autostart.pkg"
+
+  pkg "Harmony_SASE_#{version}_skip_autostart.pkg"
+
+  # Each uninstall declaration only allows a single script action,
+  # so multiple declarations are necessary here.
+  uninstall early_script: {
+    executable:   "/usr/bin/chflags",
+    args:         ["-RL", "noschg", "/Applications/Harmony SASE.app"],
+    must_succeed: false,
+  }
+  uninstall early_script: {
+    executable:   "/usr/bin/chflags",
+    args:         ["-RL", "noschg", "/Library/PrivilegedHelperTools/com.perimeter81.osx.HelperTool"],
+    must_succeed: false,
+  }
   uninstall launchctl: [
+              "com.harmonySASE.app",
               "com.perimeter81.osx.HelperTool",
               "com.perimeter81.Perimeter81",
               "com.perimeter81d",
@@ -24,10 +42,7 @@ cask "perimeter81" do
             ],
             signal:    ["TERM", "com.safervpn.osx.smb"],
             pkgutil:   "com.safervpn.osx.smb",
-            delete:    [
-              "/Library/PrivilegedHelperTools/com.perimeter81.osx.HelperTool",
-              "/Library/PrivilegedHelperTools/com.perimeter81d.app/Contents/MacOS/com.perimeter81d",
-            ]
+            delete:    "/Library/PrivilegedHelperTools/com.perimeter81.osx.HelperTool"
 
   zap trash: [
     "~/Library/Application Support/com.safervpn.osx.smb",

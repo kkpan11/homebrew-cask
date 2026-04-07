@@ -1,31 +1,34 @@
 cask "aliworkbench" do
-  version "9.04.02,LqEYADnbwALXMQPyQRIT"
-  sha256 "61caabd57a079e04fd30d4b40702f48704a503c397759cffc22a5cb7d96b4e34"
+  version "9.95.01QNM"
+  sha256 "10bc474553bd97fde78598d331327617f3ded8c81c13db32f4ef50973d42390f"
 
-  url "https://gw.alipayobjects.com/os/rmsportal/#{version.csv.second}.dmg",
-      verified: "gw.alipayobjects.com/os/rmsportal/"
+  url "https://download.alicdn.com/wangwang/AliworkbenchQN_(#{version}).dmg",
+      verified: "download.alicdn.com/wangwang/"
   name "AliWorkBench"
   name "Qian Niu"
   name "千牛"
-  desc "Merchant workbench"
-  homepage "https://cts.alibaba.com/product/qianniu/download-pc"
+  desc "Merchant workbench for Taobao and Tmall sellers"
+  homepage "https://work.taobao.com/"
 
   livecheck do
-    url "https://alimarket.taobao.com/markets/qnww/qianniu-download?wh_from=macos"
-    strategy :header_match do |headers|
-      id = headers["location"][%r{/([^/]+)\.dmg}i, 1]
-      version = headers["content-disposition"][/-(\d+(?:\.\d+)+)\.dmg/i, 1]
-      next if version.blank? || id.blank?
+    url "https://pc.work.taobao.com/version/getOfficialVersion"
+    strategy :json do |json|
+      json["model"]&.map do |item|
+        next if item["platform"] != "mac"
 
-      "#{version},#{id}"
+        item["version"]&.strip
+      end
     end
   end
 
   app "AliWorkBench.app"
 
   zap trash: [
+    "~/Library/Application Support/Aliworkbench",
     "~/Library/Caches/com.taobao.Aliworkbench",
-    "~/Library/Containers/com.taobao.Aliworkbench",
+    "~/Library/HTTPStorages/com.taobao.Aliworkbench*",
     "~/Library/Preferences/com.taobao.Aliworkbench.plist",
+    "~/Library/Saved Application State/com.taobao.Aliworkbench.savedState",
+    "~/Library/WebKit/com.taobao.Aliworkbench",
   ]
 end

@@ -1,8 +1,8 @@
 cask "amneziavpn" do
-  version "4.4.0.0"
-  sha256 "2f7c13cceef59c4c72b551e2a2abbaf7cde823a564ed7166f17e56f008a7fff5"
+  version "4.8.14.5"
+  sha256 "92b372ad61ddb5eda0968e584fc5e4756715ff3adcc43f23b152480827a8fd56"
 
-  url "https://github.com/amnezia-vpn/amnezia-client/releases/download/#{version}/AmneziaVPN_#{version}.dmg",
+  url "https://github.com/amnezia-vpn/amnezia-client/releases/download/#{version}/AmneziaVPN_#{version}_macos.pkg",
       verified: "github.com/amnezia-vpn/amnezia-client/"
   name "Amnezia VPN"
   desc "VPN client"
@@ -13,19 +13,22 @@ cask "amneziavpn" do
     strategy :github_latest
   end
 
-  depends_on macos: ">= :high_sierra"
+  pkg "AmneziaVPN_#{version}_macos.pkg"
 
-  app "AmneziaVPN.app"
-
-  uninstall quit:   [
+  uninstall launchctl: [
               "AmneziaVPN",
               "AmneziaVPN-service",
             ],
-            delete: "/Applications/AmneziaVPN.app"
+            quit:      "AmneziaVPN",
+            pkgutil:   "org.amneziavpn.package"
 
   zap trash: [
     "~/Library/Caches/AmneziaVPN.ORG",
     "~/Library/Preferences/AmneziaVPN.plist",
     "~/Library/Preferences/org.amneziavpn.AmneziaVPN.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

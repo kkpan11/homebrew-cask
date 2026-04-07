@@ -1,16 +1,21 @@
 cask "lm-studio" do
-  version "0.2.18"
-  sha256 :no_check
+  version "0.4.9,1"
+  sha256 "32ebd82799950ba52ccf7ec317f4c6e0cf20387b0a1b6b8df6aceaf9d5cd6bb3"
 
-  url "https://s3.amazonaws.com/releases.lmstudio.ai/#{version}/LM+Studio-darwin-arm64-#{version}.zip",
-      verified: "s3.amazonaws.com/releases.lmstudio.ai/"
+  url "https://installers.lmstudio.ai/darwin/arm64/#{version.tr(",", "-")}/LM-Studio-#{version.tr(",", "-")}-arm64.dmg"
   name "LM Studio"
   desc "Discover, download, and run local LLMs"
   homepage "https://lmstudio.ai/"
 
   livecheck do
-    url "https://s3.amazonaws.com/releases.lmstudio.ai/update.json"
-    regex(/LM\+Studio[._-]darwin[._-]arm64[._-]v?(\d+(?:\.\d+)+)\.zip/i)
+    url "https://versions-prod.lmstudio.ai/update/darwin/arm64/#{version.csv.first}"
+    strategy :json do |json|
+      version = json["version"]
+      build = json["build"]
+      next if version.blank? || build.blank?
+
+      "#{version},#{build}"
+    end
   end
 
   auto_updates true

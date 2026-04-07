@@ -6,7 +6,12 @@ cask "core-data-editor" do
   name "Core Data Editor"
   homepage "https://github.com/ChristianKienle/Core-Data-Editor/"
 
-  depends_on macos: ">= :sierra"
+  deprecate! date: "2024-10-10", because: :unmaintained
+  disable! date: "2025-10-11", because: :unmaintained
 
   app "Core Data Editor.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

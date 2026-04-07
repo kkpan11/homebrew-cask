@@ -2,12 +2,12 @@ cask "qcad" do
   arch arm: "-arm64"
 
   on_arm do
-    version "3.29.6,12.7-14-qt6"
-    sha256 "1c54b349ac01d36848e2d7685473da72dbf974942620dbfdcc8015757e24aaae"
+    version "3.32.6,12.7-26-qt6"
+    sha256 "31aa0a55cee290b379ddffbba6621c4cb27890605c546144eb47405129b1230f"
   end
   on_intel do
-    version "3.29.6,10.14-14"
-    sha256 "15e2147962eead47662dfd10271b7f206d9b642716badc664c6bcd6a5e11e01b"
+    version "3.32.6,10.14-26"
+    sha256 "234d825882892e22305e85ec89b41ea7b01a74c80478d852f5aad1f07e2f4853"
   end
 
   url "https://www.qcad.org/archives/qcad/qcad-#{version.csv.first}-trial-macos-#{version.csv.second}#{arch}.dmg"
@@ -15,13 +15,22 @@ cask "qcad" do
   desc "Free, open source application for computer aided drafting in 2D"
   homepage "https://www.qcad.org/"
 
+  # This only returns the version from the first matching file name link on the
+  # download page, as the QCAD Snapshot link (further down the page) use the
+  # same file name format as QCAD Professional (what the cask uses) and this
+  # can cause issues when the version/suffix differs.
   livecheck do
     url "https://www.qcad.org/en/download"
-    regex(/qcad[._-]v?(\d+(?:\.\d+)+)[._-]trial[._-]macos[._-](\d+(?:[._-]\d+)+(?:[._-]qt\d)?)#{arch}\.dmg/i)
+    regex(/href=.*?qcad[._-]v?(\d+(?:\.\d+)+)[._-]trial[._-]macos[._-](\d+(?:[._-]\d+)+(?:[._-]qt\d+)?)#{arch}\.dmg/i)
     strategy :page_match do |page, regex|
-      page.scan(regex).map { |match| "#{match.first},#{match.second}" }
+      match = page.match(regex)
+      next if match.blank?
+
+      "#{match[1]},#{match[2]}"
     end
   end
+
+  depends_on macos: ">= :monterey"
 
   app "QCAD.app"
 

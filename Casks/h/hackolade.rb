@@ -1,18 +1,27 @@
 cask "hackolade" do
   arch arm: "ARM64"
 
-  version "7.3.7"
-  sha256 :no_check
+  version "8.10.1"
+  sha256 arm:   "aa32ccdc94e4fcc7b897270fa4eb761dfb411fac57e2d28a737eeb7a5c96bd65",
+         intel: "c5c45c3df879ce6949aa7adba7c13650f7dd8474aeccade6f6062ec03e5a4b21"
 
-  url "https://s3-eu-west-1.amazonaws.com/hackolade/current/Hackolade-mac#{arch}-setup-signed.pkg",
-      verified: "s3-eu-west-1.amazonaws.com/hackolade/"
+  url "https://hackolade.s3.amazonaws.com/previous/v#{version}/Hackolade-mac#{arch}-setup-signed.pkg",
+      verified: "hackolade.s3.amazonaws.com/"
   name "Hackolade"
   desc "Polyglot data modelling software"
   homepage "https://hackolade.com/"
 
   livecheck do
-    url "https://hackolade.com/download.html"
-    regex(/Current\sversion:\sv?(\d+(?:\.\d+)+)/i)
+    url "https://hackolade.s3.amazonaws.com/?prefix=previous/&marker=previous/v#{version.major}"
+    regex(%r{previous/v?(\d+(?:\.\d+)+)/Hackolade[._-]mac#{arch}[._-]setup[._-]signed\.pkg}i)
+    strategy :xml do |xml, regex|
+      xml.get_elements("//Contents/Key").map do |item|
+        match = item.text&.strip&.match(regex)
+        next if match.blank?
+
+        match[1]
+      end
+    end
   end
 
   pkg "Hackolade-mac#{arch}-setup-signed.pkg"

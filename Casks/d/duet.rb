@@ -11,20 +11,15 @@ cask "duet" do
     end
   end
   on_big_sur :or_newer do
-    version "3.17.1.0"
-    sha256 "67b9a6b13075dc9b31b007ad3b29046f58e310362ec5eb3c0c22948aa08d5947"
+    version "3.20.3.0"
+    sha256 "2edcc20b4238f1490579595956c1e18dfd441d0e6abbb69c9cba788640e80ab9"
 
-    url "https://duetdownload.com/Mac/#{version.major}_x/duet-#{version.dots_to_hyphens}.zip",
+    url "https://duetdownload.com/Mac/#{version.major}_x/duet-dd-#{version.dots_to_hyphens}.dmg",
         verified: "duetdownload.com/Mac/"
 
     livecheck do
-      url "https://updates.duetdisplay.com/AppleSilicon"
-      regex(/duet[._-]v?(\d+(?:-\d+)+)\.zip/i)
-      strategy :header_match do |headers, regex|
-        headers["location"].scan(regex).map do |match|
-          match[0].tr("-", ".").to_s
-        end
-      end
+      url "https://updater.duetdownload.com/dd/sparkle.xml"
+      strategy :sparkle
     end
   end
 

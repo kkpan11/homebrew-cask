@@ -13,10 +13,16 @@ cask "bdinfo" do
     regex(/BDInfo\s+(\d+(?:\.\d+)+)\s+Mac/i)
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "BDInfo OSX.app"
 
   zap trash: [
     "~/Library/Preferences/com.yourcompany.BDInfo-OSX.plist",
     "~/Library/Saved Application State/com.yourcompany.BDInfo-OSX.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -1,5 +1,5 @@
 cask "keymapp" do
-  version "1.1.1"
+  version "1.3.7"
   sha256 :no_check
 
   url "https://oryx.nyc3.cdn.digitaloceanspaces.com/keymapp/keymapp-latest.dmg",
@@ -16,7 +16,6 @@ cask "keymapp" do
   end
 
   auto_updates true
-  depends_on macos: ">= :monterey"
 
   app "Keymapp.app"
 

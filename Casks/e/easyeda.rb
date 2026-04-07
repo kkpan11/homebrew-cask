@@ -1,16 +1,23 @@
 cask "easyeda" do
-  version "6.5.40"
-  sha256 "ae32b49d9e6c220483ead73ad66b106d367f13fa444982d2585a7c43c62d6acd"
+  arch arm: "arm64", intel: "x64"
 
-  url "https://image.easyeda.com/files/easyeda-mac-x64-#{version}.zip"
+  version "6.5.51"
+  sha256 arm:   "c683c0a61825219bc84fe76e21433a481384177d2e33ddc209c172ae5b227033",
+         intel: "a4568fb7c27d5640994c8a52c75987a4e19d05adcdebec5b5eb7298788bfbe37"
+
+  url "https://image.easyeda.com/files/easyeda-mac-#{arch}-#{version}.zip"
   name "EasyEDA"
   desc "PCB design tool"
   homepage "https://easyeda.com/"
 
   livecheck do
-    url "https://easyeda.com/page/download"
-    regex(%r{href=.*?/easyeda[._-]mac[._-]x64[._-]v?(\d+(?:\.\d+)+)\.zip}i)
+    url "https://easyeda.com/api/latestClientVersion"
+    strategy :json do |json|
+      json["result"]
+    end
   end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "EasyEDA.app"
 

@@ -1,6 +1,6 @@
 cask "astropad-studio" do
-  version "5.3.3,4771"
-  sha256 "a8796135f96b022acf45dee6cd8ba70a8c1550fbe21d367ae608a5182add78fc"
+  version "5.5.2,4987"
+  sha256 "d7e3c5ecbc1a59e5e62d6d649ab8e8416e522b5e92bf95293a4bbef7d51dc6cc"
 
   url "https://downloads.astropad.com/studio/mac/AstropadStudio-#{version.csv.first}.#{version.csv.second}.dmg"
   name "Astropad Studio"
@@ -12,14 +12,22 @@ cask "astropad-studio" do
     strategy :sparkle
   end
 
+  auto_updates true
+
   app "Astropad Studio.app"
 
   uninstall quit: "com.astro-hq.AstropadStudioMac"
 
   zap trash: [
-    "~/Library/Caches/Astropad",
-    "~/Library/Caches/com.astro-hq.AstropadStudioMac",
-    "~/Library/Preferences/com.astro-hq.AstropadStudioMac.plist",
-    "~/Library/Saved Application State/com.astro-hq.AstropadStudioMac.savedState",
-  ]
+        "~/Library/Application Support/astro-hq/AstropadStudio",
+        "~/Library/Application Support/com.astro-hq.AstropadStudioMac",
+        "~/Library/Caches/Astropad",
+        "~/Library/Caches/com.astro-hq.AstropadStudioMac",
+        "~/Library/Caches/SentryCrash/Astropad Studio",
+        "~/Library/HTTPStorages/com.astro-hq.AstropadStudioMac",
+        "~/Library/Logs/Astropad",
+        "~/Library/Preferences/com.astro-hq.AstropadStudioMac.plist",
+        "~/Library/Saved Application State/com.astro-hq.AstropadStudioMac.savedState",
+      ],
+      rmdir: "~/Library/Application Support/astro-hq"
 end

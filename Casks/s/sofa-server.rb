@@ -12,8 +12,6 @@ cask "sofa-server" do
     strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :high_sierra"
-
   app "Sofa Server.app"
 
   zap trash: [
@@ -23,4 +21,8 @@ cask "sofa-server" do
     "~/Library/Containers/org.tordini.flavio.SofaHelper",
     "~/Library/Preferences/org.tordini.flavio.sofa-server.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

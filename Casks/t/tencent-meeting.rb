@@ -2,12 +2,12 @@ cask "tencent-meeting" do
   arch arm: "arm64", intel: "x86_64"
 
   on_arm do
-    version "3.25.1.459,2a48c61e5dfd04f5a33526dba7f0b7d8"
-    sha256 "241c88f3c7d8382099d53d7e62b2491104c8bdf42c5395fb4a0db0b9747dff54"
+    version "3.42.3.403,8d4c62261dd559d009c837895d5870e4"
+    sha256 "976ce0f3d3ed0d03fc0542dfb665c61660d7115d8795f2c3bb74346483c7d15e"
   end
   on_intel do
-    version "3.25.1.459,6c2c9ce39099067bef73041403cfa1c5"
-    sha256 "e328fce848df5c74e59e41636ae48cd45a1f27184cf4afcda95d6eca50f9e9c5"
+    version "3.42.3.403,d63db1fd9ffd04367a61aa781f7ee73d"
+    sha256 "47b29d718784326f17ff6ca7074364c37b53b86f233f6630227afffe93bd4373"
   end
 
   url "https://updatecdn.meeting.qq.com/cos/#{version.csv.second}/TencentMeeting_0300000000_#{version.csv.first}.publish.#{arch}.officialwebsite.dmg",
@@ -19,19 +19,18 @@ cask "tencent-meeting" do
 
   livecheck do
     url %Q(https://meeting.tencent.com/web-service/query-download-info?q=[{"package-type":"app","channel":"0300000000","platform":"mac","arch":"#{arch}"}]&nonce=1234567890123456)
-    regex(%r{/cos/(\h+)/TencentMeeting[._-].+?v?(\d+(?:\.\d+)+)})
-    strategy :json do |json, regex|
+    strategy :json do |json|
       json["info-list"]&.map do |item|
-        match = item["url"]&.match(regex)
-        next if match.blank?
+        version = item["version"]
+        hash = item["md5"]
+        next if version.blank? || hash.blank?
 
-        "#{match[2]},#{match[1]}"
+        "#{version},#{hash}"
       end
     end
   end
 
   auto_updates true
-  depends_on macos: ">= :el_capitan"
 
   app "TencentMeeting.app"
 

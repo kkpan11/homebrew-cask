@@ -10,11 +10,8 @@ cask "elk" do
   desc "Mastodon web client"
   homepage "https://github.com/elk-zone/elk-native"
 
-  livecheck do
-    url :url
-    regex(/elk[._-]native[._-]v?(\d+(?:\.\d+)+)/i)
-    strategy :github_latest
-  end
+  deprecate! date: "2024-04-11", because: :unmaintained
+  disable! date: "2025-04-22", because: :unmaintained
 
   app "Elk.app"
 

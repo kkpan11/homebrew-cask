@@ -7,10 +7,8 @@ cask "focusrite-saffire-mixcontrol" do
   desc "Software for Focusrite products"
   homepage "https://focusrite.com/"
 
-  livecheck do
-    url "https://downloads.focusrite.com/focusrite/saffire/saffire-pro-26"
-    regex(/href=.*?Saffire(?:[._\s-]|%20)MixControl[._-]v?(\d+(?:[._]\d+)+)\.dmg/i)
-  end
+  deprecate! date: "2024-10-15", because: :discontinued
+  disable! date: "2025-10-15", because: :discontinued
 
   pkg "Saffire MixControl.pkg"
 

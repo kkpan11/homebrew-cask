@@ -14,7 +14,7 @@ cask "copytranslator" do
     strategy :page_match
   end
 
-  depends_on macos: ">= :sierra"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "copytranslator.app"
 
@@ -28,4 +28,8 @@ cask "copytranslator" do
         "~/Library/Saved Application State/com.copytranslator.copytranslator.savedState",
       ],
       rmdir: "~/copytranslator/locales"
+
+  caveats do
+    requires_rosetta
+  end
 end

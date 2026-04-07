@@ -7,10 +7,16 @@ cask "explorer" do
   desc "Data Explorer"
   homepage "https://github.com/jfbouzereau/explorer"
 
+  deprecate! date: "2025-04-20", because: :unmaintained
+
   app "Explorer-darwin-x64.app"
 
   zap trash: [
     "~/Library/Application Support/Explorer",
     "~/Library/Caches/Explorer",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

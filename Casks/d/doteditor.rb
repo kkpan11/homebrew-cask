@@ -8,7 +8,14 @@ cask "doteditor" do
   desc "GUI editor for dot language used in graphviz"
   homepage "https://vincenthee.github.io/DotEditor/"
 
+  deprecate! date: "2024-09-08", because: :unmaintained
+  disable! date: "2025-09-09", because: :unmaintained
+
   depends_on formula: "graphviz"
 
   app "DotEditor.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

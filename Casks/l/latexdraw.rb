@@ -12,6 +12,8 @@ cask "latexdraw" do
     regex(%r{url=.*?/LaTeXDraw[._-]v?(\d+(?:\.\d+)+)\.dmg}i)
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "LaTeXDraw.app"
 
   zap trash: [
@@ -19,4 +21,8 @@ cask "latexdraw" do
     "~/Library/Preferences/latexdraw.plist",
     "~/Library/Saved Application State/latexdraw.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

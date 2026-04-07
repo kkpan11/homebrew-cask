@@ -1,6 +1,6 @@
 cask "keyboard-maestro" do
-  version "11.0.2,1102"
-  sha256 "75c8c91412e57091b6873c26455c32006c35cff9dc39550357b4324599a181e8"
+  version "11.0.4,1104"
+  sha256 "f86d23bf729b5f9a2d1194e67eebc70c4756cf1e94e813d6fc4db6dfce66e99f"
 
   url "https://files.stairways.com/keyboardmaestro-#{version.csv.second}.zip",
       verified: "stairways.com/"
@@ -10,8 +10,9 @@ cask "keyboard-maestro" do
 
   livecheck do
     url "https://files.stairways.com/index.html"
-    strategy :page_match do |page|
-      match = page.match(/href=.*?keyboardmaestro[._-]v?(\d+)\.zip.*?Maestro\s*(\d+(?:\.\d+)+)/i)
+    regex(/href=.*?keyboardmaestro[._-]v?(\d+)\.zip.*?Maestro\s*(\d+(?:\.\d+)+)/i)
+    strategy :page_match do |page, regex|
+      match = page.match(regex)
       next if match.blank?
 
       "#{match[2]},#{match[1]}"
@@ -19,7 +20,6 @@ cask "keyboard-maestro" do
   end
 
   auto_updates true
-  depends_on macos: ">= :el_capitan"
 
   app "Keyboard Maestro.app"
 

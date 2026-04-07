@@ -1,23 +1,16 @@
 cask "fabfilter-pro-r" do
-  version "2.03"
-  sha256 "c04de2bda6f421df6a34be56fc4e59fd4991298ab4001ca742517f464ce40099"
+  version "2.05"
+  sha256 "22cd3df66d2297407166a202f602c8a67e4b0cebab2cdb47bccbe3c76d658bee"
 
-  url "https://www.fabfilter.com/downloads/ffpror#{version.no_dots}.dmg"
+  url "https://cdn-b.fabfilter.com/downloads/ffpror#{version.no_dots}.dmg"
   name "FabFilter Pro-R"
   desc "Reverb plug-in"
-  homepage "https://www.fabfilter.com/products/pro-r-reverb-plug-in"
+  homepage "https://www.fabfilter.com/products/pro-r-2-reverb-plug-in"
 
   livecheck do
     url "https://www.fabfilter.com/download"
-    strategy :page_match do |page|
-      match = page.match(/ffpror(\d)(\d+)\.dmg/i)
-      next if match.blank?
-
-      "#{match[1]}.#{match[2]}"
-    end
+    regex(/FabFilter\s+Pro-R.*?v?(\d+(?:\.\d+)+)/im)
   end
-
-  depends_on macos: ">= :sierra"
 
   pkg "FabFilter Pro-R #{version} Installer.pkg"
 

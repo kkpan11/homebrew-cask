@@ -1,26 +1,21 @@
 cask "foxit-pdf-editor" do
-  version "13.0.1"
-  sha256 "8a78d21be27174bec15ca0dc06526d164e74754243b711407a30c3ae3b2f2e0c"
+  version "14.0.3.69295"
+  sha256 "8f15abb738811c352b9c2583527298328f97ca16ae58043149d9c6680beda35d"
 
-  url "https://cdn01.foxitsoftware.com/pub/foxit/phantomPDF/desktop/mac/#{version.major}.x/FoxitPDFEditor#{version.no_dots}.L10N.Setup.pkg",
+  url "https://cdn01.foxitsoftware.com/pub/foxit/phantomPDF/desktop/mac/#{version.major}.x/#{version.major_minor_patch}/FoxitPDFEditor#{version.major_minor_patch.no_dots}.L10N.Setup.pkg",
       verified: "cdn01.foxitsoftware.com/pub/foxit/phantomPDF/desktop/mac/"
   name "Foxit PDF Editor"
   desc "PDF Editor"
   homepage "https://www.foxit.com/pdf-editor/"
 
   livecheck do
-    url "https://www.foxit.com/downloads/latest.html?product=Foxit-PDF-Editor-Mac&platform=Mac-OS-X&language=English"
-    regex(/FoxitPDFEditor(\d{2})(\d)(\d)\.L10N\.Setup\.pkg/i)
-    strategy :header_match do |headers, regex|
-      headers["location"].scan(regex).map do |match|
-        "#{match[0]}.#{match[1]}.#{match[2]}"
-      end
+    url "https://www.foxit.com/portal/download/getdownloadform.html?formId=download-phantom-mac&retJson=1&platform=Mac-OS-X"
+    strategy :json do |json|
+      json.dig("package_info", "version")
     end
   end
 
-  depends_on macos: ">= :sierra"
-
-  pkg "FoxitPDFEditor#{version.no_dots}.L10N.Setup.pkg"
+  pkg "FoxitPDFEditor#{version.major_minor_patch.no_dots}.L10N.Setup.pkg"
 
   uninstall launchctl: "com.foxit.PDFEditorUpdateService",
             pkgutil:   "com.foxit.pkg.pdfeditor",

@@ -1,6 +1,6 @@
 cask "splashtop-streamer" do
-  version "3.6.4.0"
-  sha256 "6db27ed7e8a2a54e534030b6ff6c7f1d285d18a0294c16592896c93d4ebe6d13"
+  version "3.8.2.0"
+  sha256 "3fec9ce3d376cf8e68ca67ebc971beec7eb7993f4fae48a299e8123885276355"
 
   url "https://d17kmd0va0f0mp.cloudfront.net/mac/Splashtop_Streamer_Mac_INSTALLER_v#{version}.dmg",
       verified: "d17kmd0va0f0mp.cloudfront.net/"

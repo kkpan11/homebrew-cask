@@ -1,11 +1,11 @@
 cask "saleae-logic" do
   arch arm: "arm64", intel: "x64"
 
-  version "2.4.14"
-  sha256 arm:   "8dc9bed248533ba29c35d3c8da8ad679c7e1e13e643937c263ef7d436f1e8a10",
-         intel: "346e675617700114313e96efd26d5647b97522a71d3687b3fb118bdfec6a574b"
+  version "2.4.44"
+  sha256 arm:   "c21c91749f6b9e04da35b8f6c55a44a3e496d9a250a1e3742cff2c1f62b66886",
+         intel: "2c4317d58cf193078ee011dfda5fa74509d0d76bc8f45b8184096cbe7707d30c"
 
-  url "https://downloads.saleae.com/logic#{version.major}/Logic-#{version}-macos-#{arch}.zip"
+  url "https://downloads#{version.major}.saleae.com/logic#{version.major}/Logic-#{version}-macos-#{arch}.zip"
   name "Saleae Logic2"
   desc "Signal analysis for Saleae's devices"
   homepage "https://www.saleae.com/"
@@ -16,9 +16,7 @@ cask "saleae-logic" do
     strategy :header_match
   end
 
-  depends_on macos: ">= :mojave"
-
-  app "Logic#{version.major}.app"
+  app "Saleae Logic.app"
 
   zap trash: [
     "~/Library/Application Support/Logic",

@@ -1,12 +1,14 @@
 cask "atlauncher" do
-  version "3.4.36.0"
-  sha256 "e4bf29d45dcc00b652bc182a59b71f7af47edb698082b5983888559b27534e4b"
+  version "3.4.40.4"
+  sha256 "69bd36692eea02f4139126cc0ca51d73a3babc9d90fcd5f6d9e58936b0fe554a"
 
   url "https://github.com/ATLauncher/ATLauncher/releases/download/v#{version}/ATLauncher-#{version}.zip",
       verified: "github.com/ATLauncher/ATLauncher/"
   name "ATLauncher"
   desc "Minecraft launcher"
   homepage "https://atlauncher.com/"
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "ATLauncher.app"
 

@@ -12,6 +12,8 @@ cask "oss-browser" do
     strategy :github_latest
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "oss-browser-darwin-x64/oss-browser.app"
 
   zap trash: [
@@ -22,4 +24,8 @@ cask "oss-browser" do
     "~/Library/Preferences/com.electron.oss-browser.plist",
     "~/Library/Saved Application State/com.electron.oss-browser.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

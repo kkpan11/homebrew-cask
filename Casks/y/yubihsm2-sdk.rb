@@ -1,9 +1,9 @@
 cask "yubihsm2-sdk" do
   arch arm: "arm64", intel: "amd64"
 
-  version "2023-11"
-  sha256 arm:   "0eb0a878ce3c35644b7a7a264f4ba5f3309af04e499ab258744b3a5f11bfe5ed",
-         intel: "b27a5dfa6e3a6c3deb282668220eda93a09c05ba80b25276d35ee95b35326ad2"
+  version "2026-03"
+  sha256 arm:   "738637874c5db6fa4f7349d5ce30ad6b9e6f0e5b5231c1db5e4dc65d05178e11",
+         intel: "d7b42d291d05fd6fbf87fcc6ba7506ae102e9a6bb13a83b57aec3bc589040fb0"
 
   url "https://developers.yubico.com/YubiHSM2/Releases/yubihsm2-sdk-#{version}-darwin-#{arch}.pkg"
   name "YubiHSM 2 SDK"
@@ -12,7 +12,7 @@ cask "yubihsm2-sdk" do
 
   livecheck do
     url "https://developers.yubico.com/YubiHSM2/Releases/"
-    regex(%r{href=.*?/yubihsm2-sdk[._-]v?(\d+(?:[.-]\d+)+)-darwin-#{arch}\.pkg}i)
+    regex(/href=.*?yubihsm2-sdk[._-]v?(\d+(?:[.-]\d+)+[a-z]?)[._-]darwin[._-]#{arch}\.pkg/i)
   end
 
   pkg "yubihsm2-sdk-#{version}-darwin-#{arch}.pkg"

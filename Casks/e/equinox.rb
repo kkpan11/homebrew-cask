@@ -1,14 +1,12 @@
 cask "equinox" do
-  version "3.0"
-  sha256 "b35388a43fe481e8acd391c0d644cb4c7be77e48f7ca049ddb8ef70dee6326de"
+  version "6.0"
+  sha256 "1271dfb05af237d5f31d18c67b8755c3d57a8683257ea2eef5bddcd9bbd24261"
 
-  url "https://github.com/rlxone/Equinox/releases/download/v#{version}/Equinox.dmg",
+  url "https://github.com/rlxone/Equinox/releases/download/v#{version}/Equinox-Installer.dmg",
       verified: "github.com/rlxone/Equinox/"
-  name "equinox"
+  name "Equinox"
   desc "Create dynamic wallpapers"
   homepage "https://equinoxmac.com/"
-
-  depends_on macos: ">= :mojave"
 
   app "Equinox.app"
 

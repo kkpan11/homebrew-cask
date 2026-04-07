@@ -7,10 +7,8 @@ cask "decloner" do
   desc "Duplicate files finder"
   homepage "https://www.pixelespressoapps.com/decloner/"
 
-  livecheck do
-    url "https://www.pixelespressoapps.com/decloner/appcast.xml"
-    strategy :sparkle, &:short_version
-  end
+  deprecate! date: "2025-03-31", because: :unmaintained
+  disable! date: "2026-04-01", because: :unmaintained
 
   app "Decloner.app"
 
@@ -21,4 +19,8 @@ cask "decloner" do
     "~/Library/Preferences/com.pixelespresso.Decloner.plist",
     "~/Library/Saved Application State/com.pixelespresso.Decloner.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

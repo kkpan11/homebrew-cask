@@ -1,12 +1,12 @@
 cask "squirrelsql" do
-  version "4.7.1"
-  sha256 "6f31f2559b50df85e05b7e6e3e208e28067cc8bb8bd7dc240ba686fddb02381d"
+  version "5.1.0"
+  sha256 "f7f46612844f3988c3f0a56f86aefb974430ca60cf80da8a5b06c8f2a4a99420"
 
   url "https://downloads.sourceforge.net/squirrel-sql/1-stable/#{version}/squirrel-sql-#{version}-MACOSX-install.jar",
       verified: "sourceforge.net/squirrel-sql/"
   name "SQuirrel SQL"
   desc "Graphical Java program for viewing the structure of a JDBC compliant database"
-  homepage "http://www.squirrelsql.org/"
+  homepage "https://squirrel-sql.sourceforge.io/"
 
   container type: :naked
 
@@ -79,7 +79,8 @@ cask "squirrelsql" do
 
   uninstall_preflight do
     system_command "/usr/bin/java",
-                   args: ["-jar", "#{appdir}/SQuirreLSQL.app/Uninstaller/uninstaller.jar", "-f", "-c"]
+                   args:         ["-jar", "#{appdir}/SQuirreLSQL.app/Uninstaller/uninstaller.jar", "-f", "-c"],
+                   must_succeed: false
   end
 
   uninstall delete: "#{appdir}/SQuirreLSQL.app"

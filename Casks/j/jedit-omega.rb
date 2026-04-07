@@ -1,12 +1,6 @@
 cask "jedit-omega" do
-  on_el_capitan :or_older do
-    version "1.32"
-    sha256 "251697fe6b76419b2cef41a89a2cb7d2e3f8caab0bc1ae82aed6c14a366fdad9"
-  end
-  on_sierra :or_newer do
-    version "3.07"
-    sha256 "6a8bbfc1c97f1378fe7274508953cd8ee9d221090d45e616656de60ffbb348b7"
-  end
+  version "3.12"
+  sha256 "2dba43a17c33c58fec0a401ade3331cb9459fdafe2ba65a45f4afba3b2eefc4a"
 
   url "https://artman21.site/JeditOmega#{version.no_dots}.pkg",
       verified: "artman21.site/"

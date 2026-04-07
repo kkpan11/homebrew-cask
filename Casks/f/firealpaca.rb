@@ -1,5 +1,5 @@
 cask "firealpaca" do
-  version "2.11.17"
+  version "2.15.2"
   sha256 :no_check
 
   url "https://firealpaca.com/download/mac",
@@ -9,9 +9,11 @@ cask "firealpaca" do
   homepage "https://firealpaca.com/"
 
   livecheck do
-    url :homepage
-    regex(/Version\s*:\s*(\d+(?:\.\d+)+)/i)
+    url :url
+    strategy :header_match
   end
+
+  depends_on macos: ">= :monterey"
 
   app "FireAlpaca.app"
 

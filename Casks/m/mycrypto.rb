@@ -13,6 +13,8 @@ cask "mycrypto" do
     strategy :github_latest
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "MyCrypto.app"
 
   zap trash: [
@@ -22,4 +24,8 @@ cask "mycrypto" do
     "~/Library/Preferences/com.github.mycrypto.mycryptohq.plist",
     "~/Library/Saved Application State/com.github.mycrypto.mycryptohq.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

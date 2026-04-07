@@ -1,14 +1,14 @@
 cask "alex313031-thorium" do
-  arch arm: "ARM64", intel: "X64"
+  arch arm: "ARM64", intel: "x64"
 
-  version "M122.0.6261.132"
-  sha256 arm:   "fffd61677db27fb15fb91a4d3b8a12c379d23edc315d1e4dd8fd29ebbe9b21ff",
-         intel: "baf7b11ccde3f5b06fdffde742d2b30b754ce661c21c7d0d63a21379762a912d"
+  version "M138.0.7204.303"
+  sha256  arm:   "01f77352f40445e5c39a838c6e48198a09b64c14b0ec423c83fd9b461e0d7069",
+          intel: "9a31c4d3fea1f6a49f2943f30d3400ef7cffbb8ab815567e83049b88652b8778"
 
   url "https://github.com/Alex313031/Thorium-MacOS/releases/download/#{version}/Thorium_MacOS_#{arch}.dmg",
       verified: "github.com/Alex313031/Thorium-MacOS/"
   name "Thorium"
-  desc "Web browser"
+  desc "Chromium-based web browser"
   homepage "https://thorium.rocks/"
 
   livecheck do
@@ -17,10 +17,11 @@ cask "alex313031-thorium" do
     strategy :github_latest
   end
 
-  conflicts_with cask: "thorium"
-  depends_on macos: ">= :high_sierra"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
-  app "Thorium.app"
+  depends_on macos: ">= :big_sur"
+
+  app "Thorium.app", target: "Thorium Browser.app"
   # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)
   shimscript = "#{staged_path}/thorium.wrapper.sh"
   binary shimscript, target: "thorium"
@@ -28,7 +29,7 @@ cask "alex313031-thorium" do
   preflight do
     File.write shimscript, <<~EOS
       #!/bin/bash
-      exec '#{appdir}/Thorium.app/Contents/MacOS/Thorium' "$@"
+      exec '#{appdir}/Thorium Browser.app/Contents/MacOS/Thorium' "$@"
     EOS
   end
 

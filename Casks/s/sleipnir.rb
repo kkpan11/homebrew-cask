@@ -12,5 +12,11 @@ cask "sleipnir" do
     strategy :sparkle, &:short_version
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "Sleipnir.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

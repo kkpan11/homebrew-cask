@@ -1,6 +1,6 @@
 cask "transmission" do
-  version "4.0.5"
-  sha256 "6a0e6838cb247ab1ed1390ef65368b82fc74b4e72cb0e291991f26c221436bc3"
+  version "4.1.1"
+  sha256 "744429da72cb2c57964f20b78b83d75f4ecbd3c68ce79aefda08a6e8d83c7930"
 
   url "https://github.com/transmission/transmission/releases/download/#{version}/Transmission-#{version}.dmg",
       verified: "github.com/transmission/transmission/"
@@ -14,7 +14,11 @@ cask "transmission" do
   end
 
   auto_updates true
-  conflicts_with cask: "homebrew/cask-versions/transmission-nightly"
+  conflicts_with cask: [
+    "transmission@beta",
+    "transmission@nightly",
+  ]
+  depends_on macos: ">= :big_sur"
 
   app "Transmission.app"
 

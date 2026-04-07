@@ -7,10 +7,12 @@ cask "surfeasy-vpn" do
   desc "VPN client"
   homepage "https://www.surfeasy.com/"
 
-  livecheck do
-    url :url
-    strategy :extract_plist
-  end
+  deprecate! date: "2024-12-30", because: :discontinued
+  disable! date: "2026-01-05", because: :discontinued
 
   app "SurfEasy VPN.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

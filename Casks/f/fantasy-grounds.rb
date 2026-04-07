@@ -6,11 +6,14 @@ cask "fantasy-grounds" do
   name "Fantasy Grounds"
   homepage "https://www.fantasygrounds.com/home/home.php"
 
-  livecheck do
-    skip "unversioned WineSkin application"
-  end
+  deprecate! date: "2025-03-15", because: :discontinued
+  disable! date: "2026-03-16", because: :discontinued
 
   app "Fantasy Grounds.app"
 
   zap trash: "~/Library/Saved Application State/Fantasy Grounds*"
+
+  caveats do
+    requires_rosetta
+  end
 end

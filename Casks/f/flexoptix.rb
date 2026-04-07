@@ -1,19 +1,24 @@
 cask "flexoptix" do
-  version "5.21.1-latest"
-  sha256 "cf1669eea5e235443eeb1d39e25d8a41ad096aebed57f167d0a754459da8da9c"
+  arch arm: "arm64", intel: "x64"
+  arch_suffix = on_arch_conditional arm: "-arm64"
 
-  url "https://flexbox.reconfigure.me/download/electron/mac/x64/FLEXOPTIX%20App-#{version}.dmg",
-      verified: "flexbox.reconfigure.me/download/electron/mac/x64/"
+  version "5.61.0-latest"
+  sha256 arm:   "7d406e47979cecf971bad9380f25ab75fec8f1d5d3c169bf7ada607e3d2aa915",
+         intel: "fb00840feb0de7fa7f7635c291089cb66110aaf403e77d72c4432701216804ee"
+
+  url "https://flexbox.reconfigure.me/download/electron/mac/#{arch}/FLEXOPTIX%20App-#{version}#{arch_suffix}.dmg",
+      verified: "flexbox.reconfigure.me/download/electron/mac/"
   name "FLEXOPTIX App"
   desc "Connect to your FLEXBOX without cables and configure transceivers"
   homepage "https://www.flexoptix.net/en/flexoptix-app/#"
 
   livecheck do
-    url "https://flexbox.reconfigure.me/download/electron/mac/x64/latest-mac.yml"
+    url "https://flexbox.reconfigure.me/download/electron/mac/#{arch}/latest-mac.yml"
     strategy :electron_builder
   end
 
-  depends_on macos: ">= :el_capitan"
+  auto_updates true
+  depends_on macos: ">= :big_sur"
 
   app "FLEXOPTIX App.app"
 
@@ -22,8 +27,4 @@ cask "flexoptix" do
     "~/Library/Preferences/net.flexoptix.flexoptix.app.plist",
     "~/Library/Saved Application State/net.flexoptix.flexoptix.app.savedState",
   ]
-
-  caveats do
-    requires_rosetta
-  end
 end

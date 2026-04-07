@@ -1,6 +1,6 @@
 cask "vagrant-vmware-utility" do
-  version "1.0.22"
-  sha256 "85ef6375d8a98cfb007d7dd9f7e4af5924b9a4ad102498e1d3ececdcf8bb1eb4"
+  version "1.0.24"
+  sha256 "5f42cb017dd07270409eaee7c3b4a164ffa7c0f21d85c65840c4f81aab21d457"
 
   url "https://releases.hashicorp.com/vagrant-vmware-utility/#{version}/vagrant-vmware-utility_#{version}_darwin_amd64.dmg"
   name "Vagrant VMware Utility"
@@ -9,7 +9,7 @@ cask "vagrant-vmware-utility" do
 
   livecheck do
     url "https://releases.hashicorp.com/vagrant-vmware-utility/"
-    regex(%r{href=["']?/?vagrant-vmware-utility/v?(\d+(?:\.\d+)+)/?["' >]}i)
+    regex(%r{href=.*?/v?(\d+(?:\.\d+)+)/}i)
   end
 
   pkg "VagrantVMwareUtility.pkg"

@@ -1,6 +1,6 @@
 cask "swish" do
-  version "1.10.3"
-  sha256 "b41b769d7ca7cdc8abf36fb6a27dd00ca9548af11634ab24c73cafa653f44608"
+  version "1.13.2"
+  sha256 "1db6ddcbc950f71d869114cee5dc069485e682d1be7bce494dee2fc3cb04f333"
 
   url "https://github.com/chrenn/swish-dl/releases/download/#{version}/Swish.dmg",
       verified: "github.com/chrenn/swish-dl/"
@@ -14,7 +14,6 @@ cask "swish" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "Swish.app"
 

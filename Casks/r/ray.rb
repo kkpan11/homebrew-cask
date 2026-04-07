@@ -2,12 +2,12 @@ cask "ray" do
   arch arm: "-arm64"
   folder = on_arch_conditional arm: "arm64/"
 
-  version "2.7.5"
-  sha256 arm:   "32a6995802810138b0f82b4da58e788eb70c1cd23e2c3f041c00fb7dac17324d",
-         intel: "ccd7a6ad3664401acb95ae7491841ec02f9e9d44da7a6c4563be70fa91aeff8c"
+  version "2.8.2"
+  sha256 arm:   "9557ecc4e9758a499b71b324466659a7e1a42d996edf0e1d4353cd2dd6494cee",
+         intel: "f6d9fb9a2721ec72146cc43967f17714a9c0bf9bf1d4744fb930de4b82e50e00"
 
-  url "https://ray-app.s3.eu-west-1.amazonaws.com/#{folder}Ray-#{version}#{arch}.dmg",
-      verified: "ray-app.s3.eu-west-1.amazonaws.com/"
+  url "https://ray-app.s3.amazonaws.com/#{folder}Ray-#{version}#{arch}.dmg",
+      verified: "ray-app.s3.amazonaws.com/"
   name "Ray"
   desc "Debug with Ray to fix problems faster"
   homepage "https://myray.app/"

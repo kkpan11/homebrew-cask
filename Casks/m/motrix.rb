@@ -16,15 +16,13 @@ cask "motrix" do
     strategy :github_latest
   end
 
-  depends_on macos: ">= :high_sierra"
-
   app "Motrix.app"
 
   zap trash: [
     "~/Library/Application Support/Motrix",
-    "~/Library/Caches/net.agalwood.Motrix",
+    "~/Library/Caches/app.motrix.native",
     "~/Library/Logs/Motrix",
-    "~/Library/Preferences/net.agalwood.Motrix.plist",
-    "~/Library/Saved Application State/net.agalwood.Motrix.savedState",
+    "~/Library/Preferences/app.motrix.native.plist",
+    "~/Library/Saved Application State/app.motrix.native.savedState",
   ]
 end

@@ -1,19 +1,21 @@
 cask "qgroundcontrol" do
-  version "4.3.0"
-  sha256 :no_check
+  version "5.0.8"
+  sha256 "1f5fc88f331302adcb4d00c3b92f05ef83bad748196a2646497c50800ab74822"
 
-  url "https://d176tv9ibo4jno.cloudfront.net/latest/QGroundControl.dmg",
-      verified: "d176tv9ibo4jno.cloudfront.net/latest/"
+  url "https://github.com/mavlink/qgroundcontrol/releases/download/v#{version}/QGroundControl.dmg",
+      verified: "github.com/mavlink/qgroundcontrol/"
   name "QGroundControl"
   desc "Ground control station for drones"
-  homepage "http://qgroundcontrol.com/"
+  homepage "https://qgroundcontrol.com/"
 
   livecheck do
-    url "https://github.com/mavlink/qgroundcontrol/releases/"
+    url :url
     strategy :github_latest
   end
 
-  app "qgroundcontrol.app"
+  depends_on macos: ">= :monterey"
+
+  app "QGroundControl.app"
 
   zap trash: [
     "~/Documents/QGroundControl",

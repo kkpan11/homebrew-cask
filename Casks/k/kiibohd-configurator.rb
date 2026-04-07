@@ -6,7 +6,9 @@ cask "kiibohd-configurator" do
       verified: "github.com/kiibohd/configurator/"
   name "Kiibohd Configurator"
   desc "Modular community keyboard firmware"
-  homepage "http://kiibohd.com/"
+  homepage "https://kiibohd.com/"
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   depends_on formula: "dfu-util"
 
@@ -20,4 +22,8 @@ cask "kiibohd-configurator" do
     "~/Library/Preferences/club.input.KiibohdConfigurator.plist",
     "~/Library/Saved Application State/club.input.KiibohdConfigurator.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

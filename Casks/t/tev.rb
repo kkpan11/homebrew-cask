@@ -1,10 +1,13 @@
 cask "tev" do
-  version "1.26"
-  sha256 "40a71c355171d4fc2159482ce6c7e56ce05b6d9e4e4a035e97a6d1c7c24d718b"
+  arch intel: "-intel"
 
-  url "https://github.com/Tom94/tev/releases/download/v#{version}/tev.dmg"
+  version "2.10.0"
+  sha256 arm:   "ab606c147c89ef68419fee8cdc97a607f289c5cc326cbcd69f02f11e031d5d74",
+         intel: "6f623d52ea9b17ef3c1b8cc8f4078ccc7f9fe72a614ad5ecb8fb79862c56a07f"
+
+  url "https://github.com/Tom94/tev/releases/download/v#{version}/tev#{arch}.dmg"
   name "tev"
-  desc "HDR image comparison tool with an emphasis on OpenEXR images"
+  desc "High dynamic range (HDR) image viewer with accurate color management"
   homepage "https://github.com/Tom94/tev"
 
   livecheck do
@@ -12,9 +15,8 @@ cask "tev" do
     regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 
-  depends_on macos: ">= :catalina"
-
   app "tev.app"
+  binary "#{appdir}/tev.app/Contents/MacOS/tev"
 
   zap trash: "~/Library/Preferences/org.tom94.tev.plist"
 end

@@ -7,7 +7,7 @@ cask "barrier" do
   desc "Open-source KVM software"
   homepage "https://github.com/debauchee/barrier/"
 
-  depends_on macos: ">= :sierra"
+  deprecate! date: "2025-05-13", because: :unmaintained
 
   app "Barrier.app"
 
@@ -15,4 +15,8 @@ cask "barrier" do
     "~/Library/Application Support/barrier",
     "~/Library/Saved Application State/barrier.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

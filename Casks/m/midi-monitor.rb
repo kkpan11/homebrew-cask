@@ -12,7 +12,7 @@ cask "midi-monitor" do
     strategy :sparkle
   end
 
-  depends_on macos: ">= :high_sierra"
+  auto_updates true
 
   app "MIDI Monitor.app"
 
@@ -24,7 +24,9 @@ cask "midi-monitor" do
   ]
 
   zap trash: [
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.snoize.midimonitor.sfl*",
     "~/Library/Caches/com.snoize.MIDIMonitor",
+    "~/Library/HTTPStorages/com.snoize.MIDIMonitor",
     "~/Library/Preferences/com.snoize.MIDIMonitor.plist",
     "~/Library/Saved Application State/com.snoize.MIDIMonitor.savedState",
   ]

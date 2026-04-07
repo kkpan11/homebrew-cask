@@ -1,8 +1,8 @@
 cask "chainner" do
-  version "0.22.2"
-  sha256 "450dab27a7d6d714d832a0b62418adb8768c46a06ce104b1ca29b1205c8f59c0"
+  version "0.25.1"
+  sha256 "18f1c38f86ec1c41a311a0e9db866b715bfca605b0e132acb325a45663ceabda"
 
-  url "https://github.com/chaiNNer-org/chaiNNer/releases/download/v#{version}/chaiNNer-#{version}-universal-macos.dmg",
+  url "https://github.com/chaiNNer-org/chaiNNer/releases/download/v#{version}/chaiNNer-#{version}-macos-universal.dmg",
       verified: "github.com/chaiNNer-org/chaiNNer/"
   name "chaiNNer"
   desc "Flowchart-based image processing GUI"
@@ -12,6 +12,8 @@ cask "chainner" do
     url :url
     strategy :github_latest
   end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   depends_on macos: ">= :big_sur"
 

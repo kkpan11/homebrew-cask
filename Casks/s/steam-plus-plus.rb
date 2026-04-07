@@ -1,6 +1,6 @@
 cask "steam-plus-plus" do
-  version "3.0.0-rc.7"
-  sha256 "0010aa2f5323df74fafbe8e158e01243018edac3dcb26d2aaea2cbf8819cfa84"
+  version "3.1.0"
+  sha256 "4016ed6bba5f4eef14ee7da550dff2d29a8d85483af2fcad77ebda02ebc0be7d"
 
   url "https://github.com/BeyondDimension/SteamTools/releases/download/#{version}/Steam++_v#{version}_macos.dmg",
       verified: "github.com/BeyondDimension/SteamTools/"
@@ -11,10 +11,11 @@ cask "steam-plus-plus" do
   livecheck do
     url :url
     strategy :github_latest
-    regex(/v?(\d+(?:\.\d+)+(?:-rc\.(\d+)?))/i)
   end
 
-  depends_on macos: ">= :mojave"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
+  depends_on macos: ">= :monterey"
 
   app "Steam++.app"
 

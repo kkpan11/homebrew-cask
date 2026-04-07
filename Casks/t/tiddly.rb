@@ -1,13 +1,20 @@
 cask "tiddly" do
-  version "0.0.20"
-  sha256 "d41af9408f0a3f160c486e568883ac55c7388274f63c6ec3117db616de3f1c0c"
+  arch arm: "applesilicon", intel: "64"
 
-  url "https://github.com/Jermolene/TiddlyDesktop/releases/download/v#{version}/tiddlydesktop-mac64-v#{version}.zip"
+  version "0.0.22"
+  sha256 arm:   "0b533f216c09216fec911d8a4608ff45d6e82b2ad19bb43cd845b23307a2d2a8",
+         intel: "bb94a2c5eaed576adf72ff84f95fb6a7760fe108b9cbbd3013f48144a02f9df5"
+
+  url "https://github.com/Jermolene/TiddlyDesktop/releases/download/v#{version}/tiddlydesktop-mac#{arch}-v#{version}.zip"
   name "TiddlyWiki"
   desc "Browser for TiddlyWiki"
   homepage "https://github.com/Jermolene/TiddlyDesktop"
 
-  app "TiddlyDesktop-mac64-v#{version}/TiddlyDesktop.app"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
+  depends_on macos: ">= :monterey"
+
+  app "TiddlyDesktop-mac#{arch}-v#{version}/TiddlyDesktop.app"
 
   zap trash: [
     "~/Library/Application Support/TiddlyDesktop",

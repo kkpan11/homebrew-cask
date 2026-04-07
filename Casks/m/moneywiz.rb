@@ -7,27 +7,15 @@ cask "moneywiz" do
   desc "Finance management application"
   homepage "https://wiz.money/"
 
-  livecheck do
-    url "https://macdistribution.wiz.money/version_info_free.xml"
-    strategy :sparkle, &:short_version
-  end
-
-  depends_on macos: ">= :high_sierra"
+  deprecate! date: "2024-04-15", because: :moved_to_mas
+  disable! date: "2025-04-22", because: :moved_to_mas
 
   app "MoneyWiz #{version.major}.app"
 
   zap trash: [
-    "~/Library/Application Scripts/com.moneywiz.personalfinance",
-    "~/Library/Application Scripts/com.moneywiz.personalfinance.MoneyWizWidgets",
-    "~/Library/Application Scripts/com.moneywiz.personalfinance.MoneyWizWidgetsIntentsExtension",
-    "~/Library/Application Scripts/group.com.silverwiz.moneywiz.personalfinance",
-    "~/Library/Application Support/CloudDocs/session/containers/iCloud.com.moneywiz.ios.free",
-    "~/Library/Application Support/CloudDocs/session/containers/iCloud.com.moneywiz.ios.free.plist",
-    "~/Library/Application Support/CloudDocs/session/containers/iCloud.moneywiz.personalfinance",
-    "~/Library/Application Support/CloudDocs/session/containers/iCloud.moneywiz.personalfinance.plist",
-    "~/Library/Containers/com.moneywiz.personalfinance",
-    "~/Library/Containers/com.moneywiz.personalfinance.MoneyWizWidgets",
-    "~/Library/Containers/com.moneywiz.personalfinance.MoneyWizWidgetsIntentsExtension",
+    "~/Library/Application Scripts/*.moneywiz.personalfinance*",
+    "~/Library/Application Support/CloudDocs/session/containers/iCloud.*.moneywiz.*",
+    "~/Library/Containers/com.moneywiz.personalfinance*",
     "~/Library/Group Containers/group.com.silverwiz.moneywiz.personalfinance",
   ]
 end

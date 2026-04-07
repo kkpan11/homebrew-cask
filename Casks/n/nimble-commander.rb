@@ -1,6 +1,6 @@
 cask "nimble-commander" do
-  version "1.5.0,3981"
-  sha256 "41ab9efb1dfbffff12bb98e475931f0b0411def5c895aa7a7bdc6dd18ee3b963"
+  version "1.8.0,4282"
+  sha256 "b827bbed9a9c3243c1a80e07abb2504d55b3e33fcfc3c3e4df62828727553471"
 
   url "https://magnumbytes.com/downloads/releases/nimble-commander-#{version.csv.first}(#{version.csv.second}).dmg"
   name "Nimble Commander"
@@ -13,7 +13,7 @@ cask "nimble-commander" do
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :big_sur"
 
   app "Nimble Commander.app"
 

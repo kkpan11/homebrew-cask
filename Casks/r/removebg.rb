@@ -1,15 +1,18 @@
 cask "removebg" do
-  version "2.0.1"
-  sha256 "87be3fcba58e2c04f5a0247795ffc3c24a1e29a9562952b646d9301b50839dd2"
+  version "2.4.1"
+  sha256 "dab0c5105d9980dbd5406890bc3f8bcf3065340a59be2404a217e5a1c9d40fbf"
 
-  url "https://static.remove.bg/download/removebg-for-mac-#{version}.dmg"
+  url "https://storage.googleapis.com/removebg-static/desktop/release/darwin/x64/remove.bg-darwin-x64-#{version}.zip",
+      verified: "storage.googleapis.com/removebg-static/"
   name "remove.bg"
   desc "Automatic bulk background removal"
   homepage "https://www.remove.bg/"
 
   livecheck do
-    url "https://www.remove.bg/windows-mac-linux/download"
-    regex(%r{/removebg[._-]for[._-]mac[._-](\d+(?:\.\d+)+)\.dmg}i)
+    url "https://storage.googleapis.com/removebg-static/desktop/release/darwin/x64/RELEASES.json"
+    strategy :json do |json|
+      json["currentRelease"]
+    end
   end
 
   app "remove.bg.app"
@@ -20,4 +23,8 @@ cask "removebg" do
     "~/Library/Preferences/bg.remove.mac.new.plist",
     "~/Library/Saved Application State/bg.remove.mac.new.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

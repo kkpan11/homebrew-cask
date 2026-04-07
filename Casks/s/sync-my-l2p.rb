@@ -9,4 +9,8 @@ cask "sync-my-l2p" do
   homepage "https://www.syncmyl2p.de/"
 
   app "Sync-my-L2P.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

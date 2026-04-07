@@ -1,6 +1,6 @@
 cask "skim" do
-  version "1.7.1"
-  sha256 "c5574bd49c9d23939e8fa16adc88a409215d17fffd326ff39f6a94b518d7c770"
+  version "1.7.13"
+  sha256 "685f33d6af6b7fbc569762bd2dc140696ade7fa80104590e5ac586e205ee3a3c"
 
   url "https://downloads.sourceforge.net/skim-app/Skim/Skim-#{version}/Skim-#{version}.dmg",
       verified: "downloads.sourceforge.net/skim-app/Skim/"
@@ -21,7 +21,8 @@ cask "skim" do
   binary "#{appdir}/Skim.app/Contents/SharedSupport/skimpdf"
 
   zap trash: [
-    "~/Library/Caches/com.apple.helpd/Generated/net.sourceforge.skim-app.skim.help*#{version.csv.first}",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/net.sourceforge.skim-app.skim.sfl*",
+    "~/Library/Caches/com.apple.helpd/Generated/net.sourceforge.skim-app.skim.help*",
     "~/Library/Caches/net.sourceforge.skim-app.skim",
     "~/Library/Cookies/net.sourceforge.skim-app.skim.binarycookies",
     "~/Library/HTTPStorages/net.sourceforge.skim-app.skim",

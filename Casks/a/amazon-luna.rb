@@ -7,12 +7,8 @@ cask "amazon-luna" do
   desc "Play your favorite games straight from the cloud"
   homepage "https://www.amazon.com/luna/"
 
-  # amazon-luna does use an appcast.xml for auto-updates, but
-  # the appcast uses an authentication token and is not easily accessible
-  livecheck do
-    url :url
-    strategy :extract_plist
-  end
+  deprecate! date: "2024-07-23", because: :discontinued
+  disable! date: "2025-07-23", because: :discontinued
 
   auto_updates true
 
@@ -28,4 +24,8 @@ cask "amazon-luna" do
     "~/Library/Preferences/Amazon.SpiderPorkClientMac.plist",
     "~/Library/WebKit/Amazon.SpiderPorkClientMac",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

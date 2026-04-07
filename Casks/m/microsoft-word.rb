@@ -1,55 +1,29 @@
 cask "microsoft-word" do
-  on_el_capitan :or_older do
-    version "16.16.20101200"
-    sha256 "0c61b7db7a6a13653270795c085a909aa54668e8de2f2ca749257ce6aa5957d1"
+  on_ventura :or_older do
+    on_catalina :or_older do
+      version "16.66.22101101"
+      sha256 "5a6a75d9a5b46cceeff5a1b7925c0eab6e4976cba529149b7b291a0355e7a7c9"
+    end
+    on_big_sur do
+      version "16.77.23091703"
+      sha256 "10c8db978206275a557faf3650763a656b1f7170c9b2a65fa6fdce220bd23066"
+    end
+    on_monterey do
+      version "16.89.24091630"
+      sha256 "e064013cf26dc3742f07436fae1bb1a37fdd21fc4fb09640c0de0fc977f4ffd3"
+    end
+    on_ventura do
+      version "16.101.25100321"
+      sha256 "c76066232b3367ad37eb03ce108c3a6de73aeb7c17e9a0baa6962c6cb88a5d6f"
+    end
 
     livecheck do
       skip "Legacy version"
     end
   end
-  on_sierra do
-    version "16.30.19101301"
-    sha256 "6abd7939b0d935023ebb8fabeb206c4cbbe8eb8f9a3ff7d318448d2ba5f332e4"
-
-    livecheck do
-      skip "Legacy version"
-    end
-  end
-  on_high_sierra do
-    version "16.43.20110804"
-    sha256 "3d957d534fb2142f6e95a688552890a31f0d942796f0128ca837a3e98405d413"
-
-    livecheck do
-      skip "Legacy version"
-    end
-  end
-  on_mojave do
-    version "16.54.21101001"
-    sha256 "7f3ed397b517aac3637d8b8f8b4233f9e7132941f0657eaca8ec423ac068616e"
-
-    livecheck do
-      skip "Legacy version"
-    end
-  end
-  on_catalina do
-    version "16.66.22101101"
-    sha256 "5a6a75d9a5b46cceeff5a1b7925c0eab6e4976cba529149b7b291a0355e7a7c9"
-
-    livecheck do
-      skip "Legacy version"
-    end
-  end
-  on_big_sur do
-    version "16.77.23091703"
-    sha256 "10c8db978206275a557faf3650763a656b1f7170c9b2a65fa6fdce220bd23066"
-
-    livecheck do
-      skip "Legacy version"
-    end
-  end
-  on_monterey :or_newer do
-    version "16.83.24031120"
-    sha256 "5b0e3d10d44ae0f9a62936cd2c6ae488a4f0f2050ceb256fac3f3b81a2b05f57"
+  on_sonoma :or_newer do
+    version "16.107.26032814"
+    sha256 "dae1e3b51dc8d5c59c46f535fcbea160c1c81e2007e58eb1fa308e3e38a3d0e6"
 
     livecheck do
       url "https://go.microsoft.com/fwlink/p/?linkid=525134"
@@ -67,7 +41,6 @@ cask "microsoft-word" do
     "microsoft-office",
     "microsoft-office-businesspro",
   ]
-  depends_on cask: "microsoft-auto-update"
 
   pkg "Microsoft_Word_#{version}_Installer.pkg",
       choices: [
@@ -86,10 +59,12 @@ cask "microsoft-word" do
             ]
 
   zap trash: [
-    "~/Library/Application Scripts/com.microsoft.Word",
+    "~/Library/Application Scripts/com.microsoft.Word*",
     "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.microsoft.word.sfl*",
     "~/Library/Application Support/CrashReporter/Microsoft Word_*.plist",
-    "~/Library/Containers/com.microsoft.Word",
+    "~/Library/Application Support/Microsoft",
+    "~/Library/Containers/com.microsoft.Word*",
+    "~/Library/Group Containers/UBF8T346G9.ms/Microsoft Word.MERP.params.txt",
     "~/Library/Preferences/com.microsoft.Word.plist",
     "~/Library/Saved Application State/com.microsoft.Word.savedState",
   ]

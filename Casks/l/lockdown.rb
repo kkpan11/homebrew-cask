@@ -6,7 +6,14 @@ cask "lockdown" do
       verified: "bitbucket.org/objective-see/"
   name "Lockdown"
   desc "Audits and remediates security configuration settings"
-  homepage "https://objective-see.com/products/lockdown.html"
+  homepage "https://objective-see.org/products/lockdown.html"
+
+  deprecate! date: "2025-03-02", because: :unmaintained
+  disable! date: "2026-03-02", because: :unmaintained
 
   app "Lockdown.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

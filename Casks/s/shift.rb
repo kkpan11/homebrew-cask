@@ -1,19 +1,25 @@
 cask "shift" do
   arch arm: "arm64", intel: "x64"
 
-  version "9.2.5.1070"
-  sha256 arm:   "0bcb9fe93b57aa4aa2213b4eacbe27bb9fa3a9f699e10fd435a983b808ecfd96",
-         intel: "fc8547e8d662d5e6b0155c9d30b4abd493574e2bd0f0229b6cb16906f230a1f9"
+  version "9.6.4.1231"
+  sha256 arm:   "51210315db71db2be06d95bacad1921c73011f0c62c239cd1cfa527189d255c5",
+         intel: "73e27d3d282406decde79c8204693ea3eb3eee2a2d0a89c3b83c0909b174baad"
 
-  url "https://updates.tryshift.com/v#{version.major_minor_patch}/stable/shift-v#{version}-stable-#{arch}.dmg"
+  url "https://updates.tryshift.com/v#{version.major_minor_patch}/stable/shift-v#{version}-stable-#{arch}.dmg",
+      verified: "updates.tryshift.com/"
   name "Shift"
   desc "Workstation to streamline your accounts, apps, and workflows"
-  homepage "https://tryshift.com/"
+  homepage "https://shift.com/"
 
   livecheck do
-    url "https://tryshift.com/download/?platform=mac"
-    regex(/href=.*?(\d+(?:[._-]\d+)+)[._-]stable.*?\.dmg/i)
+    url "https://updates.tryshift.com/appcast/stable/mac-#{arch}.xml"
+    regex(/shift[._-]v?(\d+(?:\.\d+)+)[._-]stable[._-]#{arch}\.dmg/i)
+    strategy :sparkle do |item, regex|
+      item.url[regex, 1]
+    end
   end
+
+  depends_on macos: ">= :big_sur"
 
   app "Shift.app"
 

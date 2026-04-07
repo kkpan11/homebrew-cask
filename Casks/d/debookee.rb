@@ -1,5 +1,5 @@
 cask "debookee" do
-  version "8.1.5"
+  version "8.2.0"
   sha256 :no_check
 
   url "https://www.iwaxx.com/debookee/debookee.zip",
@@ -8,13 +8,9 @@ cask "debookee" do
   desc "Network traffic analyser"
   homepage "https://debookee.com/"
 
-  livecheck do
-    url "https://www.iwaxx.com/debookee/appcast.php"
-    strategy :sparkle, &:short_version
-  end
+  disable! date: "2025-10-12", because: :no_longer_available
 
   auto_updates true
-  depends_on macos: ">= :mojave"
 
   app "Debookee.app"
 
@@ -31,4 +27,8 @@ cask "debookee" do
     "~/Library/Saved Application State/com.iwaxx.Debookee.savedState",
     "~/Library/WebKit/com.iwaxx.Debookee",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

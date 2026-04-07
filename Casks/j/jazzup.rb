@@ -18,4 +18,8 @@ cask "jazzup" do
     "~/Library/Caches/com.irradiatedsoftware.JazzUp",
     "~/Library/Preferences/com.irradiatedsoftware.JazzUp.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

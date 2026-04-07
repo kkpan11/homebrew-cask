@@ -8,12 +8,14 @@ cask "detexify" do
   desc "LaTeX handwritten symbol recognition"
   homepage "https://detexify.kirelabs.org/classify.html"
 
-  livecheck do
-    url :url
-    strategy :extract_plist
-  end
+  deprecate! date: "2025-03-21", because: :discontinued
+  disable! date: "2026-03-28", because: :discontinued
 
   app "Detexify.app"
 
   zap trash: "~/Library/Preferences/org.kirelabs.Detexify-Mac.plist"
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -1,5 +1,5 @@
 cask "tofu" do
-  version "3.0"
+  version "3.0.1"
   sha256 :no_check
 
   url "https://amarsagoo.info/tofu/Tofu.dmg"
@@ -7,12 +7,11 @@ cask "tofu" do
   desc "E-reader software"
   homepage "https://amarsagoo.info/tofu/"
 
+  # The homepage lists the current version but the website is gated behind a
+  # CAPTCHA, so we can't check it programmatically.
   livecheck do
-    url :homepage
-    regex(/Version\s+(\d+(?:\.\d+)+)/i)
+    skip "Upstream website uses a CAPTCHA"
   end
-
-  depends_on macos: ">= :high_sierra"
 
   app "Tofu.app"
 

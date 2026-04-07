@@ -11,7 +11,18 @@ cask "osmc" do
     skip "unversioned QT application"
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   # Renamed for clarity: app name is inconsistent with its branding.
   # Original discussion: https://github.com/Homebrew/homebrew-cask/pull/9420
   app "qt_host_installer.app", target: "OSMC.app"
+
+  zap trash: [
+    "~/Library/Saved Application State/tv.osmc.installer.savedState",
+    "~/omsc_installer_log.txt",
+  ]
+
+  caveats do
+    requires_rosetta
+  end
 end

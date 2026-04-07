@@ -1,6 +1,6 @@
 cask "keysafe" do
-  version "1.5.0"
-  sha256 "7a47630e6fc0b83de0640aeb355907bd89d29fb0185e1398d66e08dabc1ded40"
+  version "1.9.2"
+  sha256 "4679f62b10fd67aade65c54e8c4091a1f037491b21eee2f0e868be2ebef9bb3e"
 
   url "https://miln.eu/keysafe/miln-keysafe-v#{version}-darwin-universal.zip"
   name "Keysafe"
@@ -9,9 +9,10 @@ cask "keysafe" do
 
   livecheck do
     url "https://miln.eu/keysafe/miln-keysafe-darwin-universal.zip"
-    regex(/miln-keysafe[._-]v?(\d+(?:\.\d+)+)-darwin-universal\.zip/i)
     strategy :header_match
   end
 
   binary "miln-keysafe-v#{version}-darwin-universal/keysafe"
+
+  # No zap stanza required
 end

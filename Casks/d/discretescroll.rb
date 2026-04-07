@@ -1,11 +1,15 @@
 cask "discretescroll" do
-  version "0.1.1u"
-  sha256 "773a05b4add3763297b65a8c74335ccc4b5fa57b817b2420198326618198f669"
+  version "1.2.1"
+  sha256 "f2cc275e4537811bf35b2cec2128c086eefbe613c3b79b08819f4f966f1f7a60"
 
   url "https://github.com/emreyolcu/discrete-scroll/releases/download/v#{version}/DiscreteScroll.zip"
   name "DiscreteScroll"
   desc "Utility to fix a common scroll wheel problem"
   homepage "https://github.com/emreyolcu/discrete-scroll"
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "DiscreteScroll.app"
+
+  zap trash: "~/Library/Preferences/com.emreyolcu.DiscreteScroll.plist"
 end

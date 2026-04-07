@@ -1,9 +1,9 @@
 cask "chromedriver" do
   arch arm: "arm64", intel: "x64"
 
-  version "123.0.6312.86"
-  sha256 arm:   "b229321901b4635e1e3634f77ff679d1c3e69b7f13e7c5fbcd0206a295ce1ceb",
-         intel: "b01ea01f9939ccad4821cb414d7429c658262c4a086ad70b0d83be58815a6310"
+  version "147.0.7727.50"
+  sha256 arm:   "c7b53d2190f5a421f53b61b87402c74be95c292eee1ec1ad90adb3a654c1fb5d",
+         intel: "a7953923f83f2b0d70cfdceed9efb909c508c291c7134ac945098b9b559b9a87"
 
   url "https://storage.googleapis.com/chrome-for-testing-public/#{version}/mac-#{arch}/chromedriver-mac-#{arch}.zip",
       verified: "storage.googleapis.com/chrome-for-testing-public/"
@@ -12,14 +12,15 @@ cask "chromedriver" do
   homepage "https://chromedriver.chromium.org/"
 
   livecheck do
-    url "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json"
-    regex(/v?(\d+(?:\.\d+)+)/i)
-    strategy :json do |json, regex|
-      json["channels"]["Stable"]["version"]&.scan(regex) { |match| match[0] }
+    url "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions.json"
+    strategy :json do |json|
+      json.dig("channels", "Stable", "version")
     end
   end
 
-  conflicts_with cask: "chromedriver-beta"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
+  conflicts_with cask: "chromedriver@beta"
 
   binary "chromedriver-mac-#{arch}/chromedriver"
 

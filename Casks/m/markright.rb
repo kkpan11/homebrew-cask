@@ -1,11 +1,16 @@
 cask "markright" do
-  version "0.1.11"
-  sha256 "2d293121534a468e5f166e18eaa28f8db7e39a617b092e06c0d8b339191d9f47"
+  version "1.0.0"
+  sha256 "b92b8542d61cf04621d49897e83796e8369f6a9f037a633dbb0df507e81183ac"
 
-  url "https://github.com/dvcrn/markright/releases/download/#{version}/MarkRight_Mac.dmg"
+  url "https://github.com/dvcrn/markright/releases/download/#{version}/MarkRight_#{version}.dmg"
   name "MarkRight"
-  desc "Electron-powered markdown editor with live preview"
+  desc "Markdown editor with live preview"
   homepage "https://github.com/dvcrn/markright"
+
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
 
   app "MarkRight.app"
 

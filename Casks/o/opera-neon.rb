@@ -4,12 +4,11 @@ cask "opera-neon" do
 
   url "https://get.geo.opera.com/.private/OperaNeon.dmg"
   name "Opera Neon"
+  desc "Web browser"
   homepage "https://www.opera.com/computer/neon"
 
-  livecheck do
-    url :url
-    strategy :extract_plist
-  end
+  deprecate! date: "2024-07-29", because: :unmaintained
+  disable! date: "2025-07-29", because: :unmaintained
 
   app "Opera Neon.app"
 
@@ -17,4 +16,8 @@ cask "opera-neon" do
     "~/Library/Application Support/Opera Neon",
     "~/Library/Caches/Opera Neon",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

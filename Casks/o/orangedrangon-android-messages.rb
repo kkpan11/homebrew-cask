@@ -1,6 +1,6 @@
 cask "orangedrangon-android-messages" do
-  version "5.4.2"
-  sha256 "33b9d3f7b34a81496f71f5d02d1d173e2a424173ba7706913f7617946c604ff0"
+  version "5.7.1"
+  sha256 "7680578ba10c6d254c43180eee3d2f0c1302a8ec4553d46d692ad265098d2c6d"
 
   url "https://github.com/OrangeDrangon/android-messages-desktop/releases/download/v#{version}/Android-Messages-v#{version}-mac-universal.zip"
   name "Android Messages Desktop"
@@ -12,8 +12,9 @@ cask "orangedrangon-android-messages" do
     strategy :github_latest
   end
 
-  conflicts_with cask: "android-messages"
-  depends_on macos: ">= :high_sierra"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
+  depends_on macos: ">= :big_sur"
 
   app "Android Messages.app"
 

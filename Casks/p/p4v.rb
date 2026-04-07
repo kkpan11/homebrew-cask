@@ -1,6 +1,6 @@
 cask "p4v" do
-  version "2024.1,2573667"
-  sha256 "fd89300cdab59db1380ce61ece18fa8224e24c4de811b5d126d7b84d0656ddf9"
+  version "2026.1,2913202"
+  sha256 "f0c04b4ba1103957a7c59d54bfbe643f353c68ed8095d9b19303b3f897014696"
 
   url "https://filehost.perforce.com/perforce/r#{version.major[-2..]}.#{version.minor}/bin.macosx12u/P4V.dmg"
   name "Perforce Helix Visual Client"
@@ -10,19 +10,21 @@ cask "p4v" do
   homepage "https://www.perforce.com/products/helix-core-apps/helix-visual-client-p4v"
 
   livecheck do
-    url "https://www.perforce.com/support/software-release-index"
-    regex(%r{(?:Patch|Release) for[^<]+?Helix Visual Client[^<]+?v?(\d+(?:\.\d+)+)/(\d+)}im)
+    url "https://help.perforce.com/helix-core/release-notes/current/p4vnotes.txt"
+    regex(%r{\(\s*v?(\d+(?:\.\d+)+)/(\d+)\s*\)}i)
     strategy :page_match do |page, regex|
       page.scan(regex).map { |match| "#{match[0]},#{match[1]}" }
     end
   end
 
+  depends_on macos: ">= :big_sur"
+
   app "p4v.app"
   app "p4admin.app"
   app "p4merge.app"
-  binary "p4vc"
   # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)
   p4_wrapper = "#{staged_path}/p4.wrapper.sh"
+  binary "p4vc"
   binary p4_wrapper, target: "p4v"
   binary p4_wrapper, target: "p4admin"
   binary p4_wrapper, target: "p4merge"

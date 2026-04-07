@@ -7,10 +7,8 @@ cask "cryptr" do
   desc "GUI for Hashicorp's Vault"
   homepage "https://github.com/adobe/cryptr"
 
-  livecheck do
-    url :url
-    strategy :github_latest
-  end
+  deprecate! date: "2024-10-04", because: :unmaintained
+  disable! date: "2025-10-04", because: :unmaintained
 
   app "Cryptr.app"
 
@@ -19,4 +17,8 @@ cask "cryptr" do
     "~/Library/Preferences/io.cryptr.plist",
     "~/Library/Saved Application State/io.cryptr.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

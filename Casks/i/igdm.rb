@@ -8,6 +8,8 @@ cask "igdm" do
   desc "Desktop application for Instagram DMs"
   homepage "https://igdm.me/"
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "IGdm.app"
 
   uninstall quit: "com.ifedapoolarewaju.desktop.igdm"
@@ -19,4 +21,8 @@ cask "igdm" do
     "~/Library/Preferences/com.ifedapoolarewaju.desktop.igdm.plist",
     "~/Library/Saved Application State/com.ifedapoolarewaju.desktop.igdm.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -1,25 +1,24 @@
 cask "insta360-studio" do
-  version "5.0.0,RC_build171,6500b773e9cbaba798d5cb936351537c,20240326_025731_signed_1711393131783"
-  sha256 "8ebf85712157d2955c3e7bb0a68440dd1077866ae574ad2e2e398be2bcfa6be3"
+  version "5.9.2,release_insta360,RC_build54,_20260303_111658_signed_1772515615194,4125b6f1018d4b37b7c41309adc776e8"
+  sha256 "d2d1ad02c5ebad11236db9fbffa7c3138bfccb64db7fe00a3a458e0b5c165f07"
 
-  url "https://file.insta360.com/static/#{version.csv.third}/Insta360Studio_#{version.csv.first}(#{version.csv.second})_#{version.csv.fourth}.pkg"
+  url "https://wassets.insta360.com/common/#{version.csv.fifth}/Insta360_Studio_#{version.csv.first}_#{version.csv.second}(#{version.csv.third})#{version.csv.fourth}.zip"
   name "Insta360 Studio"
   desc "Video and photo editor"
   homepage "https://www.insta360.com/"
 
+  # The filename format can fluctuate between versions, so we have to include
+  # any text that may vary in the cask `version`. However, some filenames
+  # include parentheses and we can't include those characters in the cask
+  # `version`, so we have to chunk the text to work around this limitation.
+  # NOTE: We simply follow what upstream presents as the newest version and
+  # that may be beta, RC, etc.
   livecheck do
     url "https://openapi.insta360.com/app/appDownload/getGroupApp?group=insta360-go2&X-Language=en-us"
-    regex(%r{
-      /(\h+)/
-      Insta360Studio
-      (?:[._-]|%20)(?:\d+(?:\.\d+)+)
-      (?:[._-]?\(([^)]+?)\))?
-      [._-](\d+(?:[._-](?:\d+|signed))*)
-      \.pkg
-    }ix)
+    regex(%r{/(\h+)/Insta360(?:[._-]|%20)?Studio(?:[._-]|%20)v?(\d+(?:\.\d+)+)[._-](.+)\.(?:pkg|zip)}i)
     strategy :json do |json, regex|
       # Find the Insta360 Studio app
-      app = json.dig("data", "apps")&.find { |item| item["id"] == 38 }
+      app = json.dig("data", "apps")&.find { |item| item["app_id"] == 38 }
       next if app.blank?
 
       # Find the newest macOS version
@@ -31,29 +30,29 @@ cask "insta360-studio" do
       channel = newest_release["channels"]&.find { |item| item["channel"] == "official" }
       next if channel.blank?
 
-      # Collect the version parts
-      version = newest_release["version"]
       match = channel["download_url"]&.match(regex)
-      next if version.blank? || match.blank?
+      next if match.blank?
 
-      "#{version},#{match[2]},#{match[1]},#{match[3]}#{",#{match[4]}" if match[4].present?}"
+      "#{match[2]},#{match[3].tr("()", ",")},#{match[1]}"
     end
   end
 
-  pkg "Insta360Studio_#{version.csv.first}(#{version.csv.second})_#{version.csv.fourth}.pkg"
+  # The pkg is often inconsistently named comparatively to the url version
+  rename "Insta360_Studio*.pkg", "Insta360_Studio.pkg"
+
+  pkg "Insta360_Studio.pkg"
 
   uninstall quit:    "com.insta360.studio",
             pkgutil: [
               "com.insta360.insta360Studio",
-              "com.insta360.PremierePlugin",
+              "com.insta360.PremierePluginV2",
               "com.insta360.ThumbnailPlugin",
-            ],
-            delete:  "/Applications/Insta360 Studio #{version.csv.third.split("_")[0]}.app"
+            ]
 
   zap trash: [
-    "~/Library/Application Support/Insta360",
+    "~/Library/Application Support/Insta360/Insta360 Studio",
     "~/Library/Caches/com.plausiblelabs.crashreporter.data/com.insta360.studio",
-    "~/Library/Caches/Insta360",
+    "~/Library/Caches/Insta360/Insta360 Studio",
     "~/Library/Saved Application State/com.insta360.studio.savedState",
   ]
 end

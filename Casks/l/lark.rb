@@ -1,26 +1,34 @@
 cask "lark" do
   arch arm: "arm64", intel: "x64"
+  livecheck_arch = on_arch_conditional arm: "_m1"
 
   on_arm do
-    version "7.13.10,69a816a9"
-    sha256 "29141a08fc2454f6d1e283d45d88e662a1f8d5f2de0e5980af3bb5322ce62f15"
+    version "7.64.7,aefe5438"
+    sha256 "67db4a54e2e0c10e370c7a21b70c34048fa2843fdd354cd1b8ad2aa740567d7c"
+
+    depends_on macos: ">= :big_sur"
   end
   on_intel do
-    version "7.13.10,f00519e3"
-    sha256 "095c364651f847f38159fb73757e1eeadebaeb7ff2985e2db031582690190413"
+    version "7.64.7,b54da0f1"
+    sha256 "e9e67d8a71ea5e4da516276080013c905120065e8efa05af63f1749efe4603a5"
+
+    depends_on macos: ">= :catalina"
   end
 
-  url "https://sf16-va.larksuitecdn.com/obj/lark-artifact-storage/#{version.csv.second}/Lark-darwin_#{arch}-#{version.csv.first}-signed.dmg",
-      verified: "sf16-va.larksuitecdn.com/obj/lark-artifact-storage/"
+  url "https://sf16-sg.larksuitecdn.com/obj/lark-version-sg/#{version.csv.second}/Lark-darwin_#{arch}-#{version.csv.first}-signed.dmg",
+      verified: "sf16-sg.larksuitecdn.com/obj/lark-version-sg/"
   name "Lark"
   desc "Project management software"
   homepage "https://www.larksuite.com/"
 
   livecheck do
     url "https://www.larksuite.com/api/downloads"
-    regex(%r{/lark-artifact-storage/(\h+)/Lark-darwin_#{arch}[._-]v?(\d+(?:\.\d+)+)-signed\.dmg}i)
-    strategy :page_match do |page, regex|
-      page.scan(regex).map { |match| "#{match[1]},#{match[0]}" }
+    regex(%r{/lark-version-sg/(\h+)/Lark[._-]darwin[._-]#{arch}[._-]v?(\d+(?:\.\d+)+)[._-]signed\.dmg}i)
+    strategy :json do |json, regex|
+      match = json.dig("versions", "MacOS#{livecheck_arch}", "download_link")&.match(regex)
+      next if match.blank?
+
+      "#{match[2]},#{match[1]}"
     end
   end
 

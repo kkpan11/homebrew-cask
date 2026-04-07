@@ -1,6 +1,6 @@
 cask "wine-stable" do
-  version "9.0"
-  sha256 "9b0356a2b840a06facd69bb77901fe7cfe1d424510afc319418a44984ee41136"
+  version "11.0"
+  sha256 "573d43fc4618521148d98ad9c74e63387831827395c014925fdfdc52fe55cb5a"
 
   # Current winehq packages are deprecated and these are packages from
   # the new maintainers that will eventually be pushed to Winehq.
@@ -15,15 +15,15 @@ cask "wine-stable" do
   # recent releases instead of only the "latest" release.
   livecheck do
     url :url
-    regex(/^v?(\d+(?:[.-]\d+)+)$/i)
+    regex(/^v?(\d+(?:[._-]\d+)+)$/i)
     strategy :github_releases do |json, regex|
-      file_regex = /^wine-stable[._-].*?$/i
+      file_regex = /^wine[._-]stable[._-].*?$/i
 
       json.map do |release|
         next if release["draft"] || release["prerelease"]
         next unless release["assets"]&.any? { |asset| asset["name"]&.match?(file_regex) }
 
-        match = release["tag_name"].match(regex)
+        match = release["tag_name"]&.match(regex)
         next if match.blank?
 
         match[1]
@@ -31,22 +31,23 @@ cask "wine-stable" do
     end
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   conflicts_with cask: [
-    "wine-devel",
-    "wine-staging",
+    "wine@devel",
+    "wine@staging",
   ]
   depends_on cask: "gstreamer-runtime"
-  depends_on macos: ">= :catalina"
 
   app "Wine Stable.app"
   binary "#{appdir}/Wine Stable.app/Contents/Resources/start/bin/appdb"
   binary "#{appdir}/Wine Stable.app/Contents/Resources/start/bin/winehelp"
+  binary "#{appdir}/Wine Stable.app/Contents/Resources/wine/bin/msidb"
   binary "#{appdir}/Wine Stable.app/Contents/Resources/wine/bin/msiexec"
   binary "#{appdir}/Wine Stable.app/Contents/Resources/wine/bin/notepad"
   binary "#{appdir}/Wine Stable.app/Contents/Resources/wine/bin/regedit"
   binary "#{appdir}/Wine Stable.app/Contents/Resources/wine/bin/regsvr32"
   binary "#{appdir}/Wine Stable.app/Contents/Resources/wine/bin/wine"
-  binary "#{appdir}/Wine Stable.app/Contents/Resources/wine/bin/wine64"
   binary "#{appdir}/Wine Stable.app/Contents/Resources/wine/bin/wineboot"
   binary "#{appdir}/Wine Stable.app/Contents/Resources/wine/bin/winecfg"
   binary "#{appdir}/Wine Stable.app/Contents/Resources/wine/bin/wineconsole"
@@ -71,15 +72,7 @@ cask "wine-stable" do
         "~/.local/share/mime",
       ]
 
-  caveats <<~EOS
-    #{token} supports both 32-bit and 64-bit. It is compatible with an existing
-    32-bit wine prefix, but it will now default to 64-bit when you create a new
-    wine prefix. The architecture can be selected using the WINEARCH environment
-    variable which can be set to either win32 or win64.
-
-    To create a new pure 32-bit prefix, you can run:
-      $ WINEARCH=win32 WINEPREFIX=~/.wine32 winecfg
-
-    See the Wine FAQ for details: https://wiki.winehq.org/FAQ#Wineprefixes
-  EOS
+  caveats do
+    requires_rosetta
+  end
 end

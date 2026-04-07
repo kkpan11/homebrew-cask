@@ -8,10 +8,8 @@ cask "ultracopier" do
   desc "Replacement for files copy dialogs"
   homepage "https://ultracopier.herman-brule.com/"
 
-  livecheck do
-    url "https://ultracopier.herman-brule.com/#download"
-    regex(/ultracopier[._-]mac[._-]os[._-]x[._-](\d+(?:\.\d+)+)\.dmg/i)
-  end
+  deprecate! date: "2024-08-04", because: :discontinued
+  disable! date: "2025-08-04", because: :discontinued
 
   app "ultracopier.app"
 
@@ -20,4 +18,8 @@ cask "ultracopier" do
     "~/Library/Preferences/com.yourcompany.ultracopier.plist",
     "~/Library/Saved Application State/com.yourcompany.ultracopier.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

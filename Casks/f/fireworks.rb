@@ -12,12 +12,14 @@ cask "fireworks" do
     regex(/Download\s+v?(\d+(?:\.\d+)+)/i)
   end
 
-  depends_on macos: ">= :high_sierra"
-
   app "Fireworks.app"
 
   zap trash: [
     "~/Library/Application Scripts/com.Besher-Al-Maleh.fireworks",
     "~/Library/Containers/com.Besher-Al-Maleh.fireworks",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

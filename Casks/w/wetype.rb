@@ -1,19 +1,29 @@
 cask "wetype" do
-  version "1.0.3,269"
-  sha256 "8ffca2c895086677997b43ff9d442fb013e3abbdba88113f9378e3f43c1502a3"
+  version "2.0.0,570"
+  sha256 "197bf476cdb99819700883082f965bfca95aeb9a7e020c901e66d6d75b7ae304"
 
-  url "https://wetype.wxqcloud.qq.com/app/mac/#{version.csv.first}/WeTypeInstaller_#{version.csv.first}_#{version.csv.second}.zip"
+  url "https://download.z.weixin.qq.com/app/mac/#{version.csv.first}/WeTypeInstaller_#{version.csv.first}_#{version.csv.second}.zip"
   name "WeType"
-  desc "Text input app"
+  name "微信输入法"
+  desc "Text input app from WeChat team for Chinese users"
   homepage "https://z.weixin.qq.com/"
 
   livecheck do
-    strategy :sparkle
-    url "https://download.weread.qq.com/app/wxkb/mac/updates.xml"
+    url "https://z.weixin.qq.com/web/api/app_info"
+    regex(/WeTypeInstaller[._-]v?(\d+(?:\.\d+)+)[._-](\d+)\.zip/i)
+    strategy :json do |json, regex|
+      match = json.dig("data", "mac", "download_link")&.match(regex)
+
+      # Try to match the version from the `InstallInfo` file name if the
+      # Mac installer file name doesn't include a version
+      match ||= json.dig("data", "mac", "InstallInfo")&.match(/v?(\d+(?:\.\d+)+)[_-](\d+)/i)
+      next unless match
+
+      "#{match[1]},#{match[2]}"
+    end
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
 
   installer manual: "WeTypeInstaller_#{version.csv.first}_#{version.csv.second}.app"
 

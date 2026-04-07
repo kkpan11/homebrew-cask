@@ -1,20 +1,19 @@
 cask "sensei" do
-  version "1.5.9"
-  sha256 :no_check
+  version "2.0.2,127"
+  sha256 "9074c6060eeee00b6997932865df17407e72d85d5a8103bd63012efa1db83740"
 
-  url "https://cindori.s3.amazonaws.com/Sensei.dmg",
-      verified: "cindori.s3.amazonaws.com/"
+  url "https://cdn.cindori.com/apps/sensei/updates/#{version.csv.first}-#{version.csv.second}/Sensei.dmg"
   name "Sensei"
   desc "Monitors the computer system and optimises its performance"
-  homepage "https://sensei.app/"
+  homepage "https://cindori.com/sensei"
 
   livecheck do
-    url "https://api.appcenter.ms/v0.1/public/sparkle/apps/51fc066a-f4b4-49ec-b966-b2f476d2eede"
-    strategy :sparkle, &:short_version
+    url "https://cdn.cindori.com/apps/sensei/updates/update.xml"
+    strategy :sparkle
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :sonoma"
 
   app "Sensei.app"
 
@@ -27,10 +26,15 @@ cask "sensei" do
             ]
 
   zap trash: [
+    "/Library/Logs/DiagnosticReports/Sensei_*.cpu_resource.diag",
+    "/Library/Logs/DiagnosticReports/Sensei_*.hang",
+    "~/Library/Application Support/CrashReporter/Sensei_*.plist",
     "~/Library/Application Support/org.cindori.Sensei",
     "~/Library/Application Support/Sensei",
+    "~/Library/Caches/amplitude/org.cindori.Sensei",
     "~/Library/Caches/com.plausiblelabs.crashreporter.data/org.cindori.Sensei",
     "~/Library/Caches/org.cindori.Sensei",
+    "~/Library/Caches/SentryCrash/Sensei",
     "~/Library/Cookies/org.cindori.Sensei.binarycookies",
     "~/Library/HTTPStorages/org.cindori.Sensei",
     "~/Library/HTTPStorages/org.cindori.Sensei.binarycookies",

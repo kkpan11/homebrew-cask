@@ -1,6 +1,6 @@
 cask "ddnet" do
-  version "18.1"
-  sha256 "a6cbedf543ead3c7cbadbbf8c5a5bbfed842de2950785bb455546f5e1cf3e44b"
+  version "19.8"
+  sha256 "17f4dee026352063ae075755b811f676dd3dadac2d04b228ea3566f8df6673cc"
 
   url "https://ddnet.org/downloads/DDNet-#{version}-macos.dmg"
   name "DDNet"
@@ -13,6 +13,7 @@ cask "ddnet" do
   end
 
   auto_updates true
+  depends_on macos: ">= :big_sur"
 
   app "DDNet.app"
   app "DDNet-Server.app"
@@ -20,6 +21,6 @@ cask "ddnet" do
   zap trash: [
     "~/Library/Preferences/DDNet-Server-Launcher.plist",
     "~/Library/Saved Application State/org.DDNetClient.app.savedState",
-    # "~/Library/Application Support/Teeworlds/" is left out on purpose because teeworlds uses it as well.
+    # "~/Library/Application Support/Teeworlds" is left out on purpose because teeworlds uses it as well.
   ]
 end

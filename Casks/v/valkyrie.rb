@@ -13,6 +13,8 @@ cask "valkyrie" do
     regex(%r{/v?(\d+(?:\.\d+)+)$}i)
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "Valkyrie.app"
 
   zap trash: [
@@ -20,4 +22,8 @@ cask "valkyrie" do
     "~/Library/Preferences/unity.NA.Valkyrie.plist",
     "~/Library/Saved Application State/unity.NA.Valkyrie.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

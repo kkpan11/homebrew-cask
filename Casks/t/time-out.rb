@@ -12,7 +12,7 @@ cask "time-out" do
     strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :catalina"
+  auto_updates true
 
   app "Time Out.app"
 

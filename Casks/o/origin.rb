@@ -1,5 +1,5 @@
 cask "origin" do
-  version "10.5.126.54336"
+  version "10.5.128.55504"
   sha256 :no_check
 
   url "https://origin-a.akamaihd.net/Origin-Client-Download/origin/mac/live/Origin.dmg",
@@ -8,10 +8,7 @@ cask "origin" do
   desc "Play PC games and connect with your friends"
   homepage "https://www.origin.com/"
 
-  livecheck do
-    url :url
-    strategy :extract_plist
-  end
+  disable! date: "2025-08-06", because: :no_longer_available, replacement_cask: "ea"
 
   auto_updates true
 
@@ -24,4 +21,8 @@ cask "origin" do
     "~/Library/LaunchAgents/com.ea.origin.WebHelper.plist",
     "~/Library/Saved Application State/com.ea.Origin.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

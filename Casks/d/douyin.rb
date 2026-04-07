@@ -1,8 +1,8 @@
 cask "douyin" do
-  version "3.5.1,7044145585217083655,11634728"
-  sha256 "c7b3d8cc00b5fcce5eeb8f95ab3f8f19351b7e92456ab9dd354e047a018a0e6b"
+  version "7.6.0,7044145585217083655,335297983"
+  sha256 "4ace3adb9401f6dfb06de8e5b6127ad9721d544e80c03a3638a60bf1a5dcd041"
 
-  url "https://www.douyin.com/download/pc/obj/douyin-pc-client/#{version.csv.second}/releases/#{version.csv.third}/#{version.csv.first}/darwin-universal/douyin-v#{version.csv.first}-darwin-universal.dmg"
+  url "https://www.douyin.com/download/pc/obj/douyin-pc-web//douyin-pc-client/#{version.csv.second}/releases/#{version.csv.third}/#{version.csv.first}/darwin-universal/douyin-v#{version.csv.first}-darwin-universal.dmg"
   name "Douyin"
   name "抖音"
   desc "Social software for creating music short videos"
@@ -17,7 +17,6 @@ cask "douyin" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "抖音.app"
 

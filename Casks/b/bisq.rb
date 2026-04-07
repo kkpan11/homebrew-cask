@@ -1,6 +1,6 @@
 cask "bisq" do
-  version "1.9.14"
-  sha256 "9289a41f653377d2a34cb0256f531b8ec57edc09311da85db8d084ee2e81d1f8"
+  version "1.9.22"
+  sha256 "31785d3122f4494313124b37783e923da0f3f6f5d7a0d7e9d66d94b872db4e57"
 
   url "https://github.com/bisq-network/bisq/releases/download/v#{version}/Bisq-#{version}.dmg",
       verified: "github.com/bisq-network/bisq/"
@@ -13,10 +13,16 @@ cask "bisq" do
     strategy :github_latest
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "Bisq.app"
 
   zap trash: [
     "~/Library/Application Support/Bisq",
     "~/Library/Saved Application State/io.bisq.CAT.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

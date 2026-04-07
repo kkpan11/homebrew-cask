@@ -1,6 +1,6 @@
 cask "typinator" do
-  version "9.1"
-  sha256 "9921f35eafaa6d34e0d4a74dc50bf73ee43f12c3a00e36682d27ec22f45d3db6"
+  version "10.0"
+  sha256 "dc01024d8b36bbb5770b63336eaf1873ba0620265554ba6a973f96650065e6d8"
 
   url "https://www.ergonis.com/downloads/products/typinator/Typinator#{version.no_dots}-Install.dmg",
       user_agent: :fake
@@ -10,8 +10,12 @@ cask "typinator" do
 
   livecheck do
     url "https://update.ergonis.com/vck/typinator.xml"
-    regex(%r{<Program_Version>(\d+(?:\.\d+)+)</Program_Version>}i)
+    strategy :xml do |xml|
+      xml.elements["//Program_Info/Program_Version"]&.text&.strip
+    end
   end
+
+  depends_on macos: ">= :ventura"
 
   app "Typinator.app"
 

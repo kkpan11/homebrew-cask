@@ -3,21 +3,38 @@ cask "gcc-aarch64-embedded" do
   # https://github.com/Homebrew/homebrew-core/pull/45780#issuecomment-569246452
   arch arm: "arm64", intel: "x86_64"
 
-  version "13.2.rel1"
-  pkg_version = "13.2.Rel1"
-  gcc_version = "13.2.1"
-  sha256 arm:   "88e51daf993dfc93d7ced3908b81f077ea18a89784ce5f398cdcd2ac6197435b",
-         intel: "bbf320eb0a9115ba0f6a7de936805dfc6e19f767ed290032014a67443af87c20"
+  pkg_version = nil
+  gcc_version = nil
+  on_arm do
+    version "15.2.rel1"
+    pkg_version = "15.2.rel1"
+    gcc_version = "15.2.1"
+    sha256 "a616eb0a32738cbddc7b8653a20abbddc487712714d57ac993b8987a7451dbce"
 
-  url "https://developer.arm.com/-/media/Files/downloads/gnu/#{version}/binrel/arm-gnu-toolchain-#{version}-darwin-#{arch}-aarch64-none-elf.pkg"
+    livecheck do
+      url "https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads",
+          user_agent: :curl
+      regex(/href=.*?arm-gnu-toolchain-(\d+\.\d+\.\w+)-darwin-(?:\w+)-aarch64-none-elf\.pkg/i)
+    end
+
+    binary "/Applications/ArmGNUToolchain/#{pkg_version}/aarch64-none-elf/bin/aarch64-none-elf-gstack"
+  end
+  on_intel do
+    version "14.2.rel1"
+    pkg_version = "14.2.rel1"
+    gcc_version = "14.2.1"
+    sha256 "4e0da7bc82d316deb7f385d249bf7f87ce06d31b9d6f8b63f9b981a2203cf2ce"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+
+  url "https://developer.arm.com/-/media/Files/downloads/gnu/#{version}/binrel/arm-gnu-toolchain-#{version}-darwin-#{arch}-aarch64-none-elf.pkg",
+      user_agent: :curl
   name "GCC ARM Embedded"
   desc "Pre-built GNU bare-metal toolchain for 64-bit Arm processors"
   homepage "https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain"
-
-  livecheck do
-    url "https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads"
-    regex(/href=.*?arm-gnu-toolchain-(\d+\.\d+\.\w+)-darwin-(?:\w+)-aarch64-none-elf.pkg/i)
-  end
 
   pkg "arm-gnu-toolchain-#{version}-darwin-#{arch}-aarch64-none-elf.pkg"
   binary "/Applications/ArmGNUToolchain/#{pkg_version}/aarch64-none-elf/bin/aarch64-none-elf-addr2line"

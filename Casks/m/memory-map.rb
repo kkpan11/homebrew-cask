@@ -7,12 +7,8 @@ cask "memory-map" do
   desc "GPS navigation software"
   homepage "https://memory-map.com/"
 
-  livecheck do
-    url "https://memory-map.com/downloads/"
-    regex(%r{href=.*?/Memory-Map\.(\d+(?:\.\d+)*-\d+)\.pkg}i)
-  end
-
-  depends_on macos: ">= :mojave"
+  deprecate! date: "2024-10-14", because: :discontinued
+  disable! date: "2025-10-14", because: :discontinued
 
   pkg "Memory-Map.#{version}.pkg"
 

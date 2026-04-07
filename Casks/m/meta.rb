@@ -1,6 +1,6 @@
 cask "meta" do
-  version "2.2"
-  sha256 "18429c0f6875719af17f5845b1799b85c4bea45e7d915c45463cfa14e545236d"
+  version "2.3.9"
+  sha256 "bf064fbfb0c019a00879d3155e93f2b9737e31719b7e4f1d1cb0f036d5ffe01e"
 
   url "https://www.nightbirdsevolve.com/meta/updates/bin/Meta%20#{version}.zip"
   name "Meta"
@@ -15,4 +15,13 @@ cask "meta" do
   auto_updates true
 
   app "Meta.app"
+
+  zap trash: [
+    "~/Library/Application Support/Meta",
+    "~/Library/Caches/com.nightbirdsevolve.Meta",
+    "~/Library/HTTPStorages/com.nightbirdsevolve.Meta",
+    "~/Library/HTTPStorages/com.nightbirdsevolve.Meta.binarycookies",
+    "~/Library/Preferences/com.nightbirdsevolve.Meta.plist",
+    "~/Library/Saved Application State/com.nightbirdsevolve.Meta.savedState",
+  ]
 end

@@ -7,6 +7,9 @@ cask "gitee" do
   desc "Status bar application for GitHub"
   homepage "https://github.com/Nightonke/Gitee"
 
+  deprecate! date: "2024-07-11", because: :unmaintained
+  disable! date: "2025-07-11", because: :unmaintained
+
   app "Gitee.app"
 
   zap trash: [
@@ -15,4 +18,8 @@ cask "gitee" do
     "~/Library/Cookies/com.nightonke.VHGithubNotifier.binarycookies",
     "~/Library/Preferences/com.nightonke.VHGithubNotifier.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

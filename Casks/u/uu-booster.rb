@@ -1,8 +1,8 @@
 cask "uu-booster" do
-  version "2.8.0,249"
-  sha256 "6d19918fef202012c2682af6cd80c43e475de45657ee598a637681e9cf8e6f04"
+  version "2.8.14"
+  sha256 "7db0797d9499145404f25a7a27bfdc8f7defd5e6f230d3d7097a22298124cfda"
 
-  url "https://uu.gdl.netease.com/UU-macOS-#{version.csv.first}(#{version.csv.second}).dmg",
+  url "https://uu.gdl.netease.com/UU-macOS-#{version}.dmg",
       verified: "uu.gdl.netease.com/"
   name "UU Booster"
   desc "Network accelerator"
@@ -10,13 +10,8 @@ cask "uu-booster" do
 
   livecheck do
     url "https://adl.netease.com/d/g/uu/c/uumac?type=pc"
-    regex(%r{pc_link.*?/UU[._-]macOS[._-]v?(\d+(?:\.\d+)+)\((\d+)\)\.dmg}i)
-    strategy :page_match do |page, regex|
-      page.scan(regex).map { |match| "#{match[0]},#{match[1]}" }
-    end
+    regex(%r{pc_link.*?/UU[._-]macOS[._-]v?(\d+(?:\.\d+)+).dmg}i)
   end
-
-  depends_on macos: ">= :sierra"
 
   app "UUBooster.app"
 

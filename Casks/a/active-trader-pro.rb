@@ -7,22 +7,25 @@ cask "active-trader-pro" do
   desc "Trading platform"
   homepage "https://www.fidelity.com/trading/advanced-trading-tools/active-trader-pro/overview"
 
-  livecheck do
-    url "https://www.fidelity.com/webcontent/CodeweaverUpgradeInfo/activetrader-mac.xml"
-    strategy :sparkle, &:short_version
-  end
+  deprecate! date: "2025-12-17", because: :discontinued
+  disable! date: "2026-12-17", because: :discontinued
 
-  depends_on macos: ">= :sierra"
+  auto_updates true
 
   app "Active Trader Pro.app"
 
   uninstall quit: "com.fmr.activetrader"
 
   zap trash: [
+    "~/Documents/ATP-*.log",
     "~/Library/Application Support/Active Trader Pro",
     "~/Library/HTTPStorages/com.fmr.activetrader",
     "~/Library/HTTPStorages/com.fmr.activetrader.binarycookies",
     "~/Library/Preferences/com.fmr.activetrader.plist",
     "~/Library/Saved Application State/com.fmr.activetrader.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

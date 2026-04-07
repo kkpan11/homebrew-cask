@@ -10,6 +10,9 @@ cask "sonixd" do
   desc "Desktop client for Subsonic-API and Jellyfin music servers"
   homepage "https://github.com/jeffvli/sonixd"
 
+  deprecate! date: "2024-08-30", because: :discontinued
+  disable! date: "2025-08-30", because: :discontinued
+
   app "Sonixd.app"
 
   zap trash: [

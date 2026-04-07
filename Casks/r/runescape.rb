@@ -12,4 +12,8 @@ cask "runescape" do
   end
 
   app "RuneScape.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

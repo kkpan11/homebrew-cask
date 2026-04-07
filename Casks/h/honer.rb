@@ -7,5 +7,12 @@ cask "honer" do
   desc "Utility that draws a border around the focused window"
   homepage "https://github.com/puffnfresh/Honer.app"
 
+  deprecate! date: "2024-06-22", because: :discontinued
+  disable! date: "2025-06-22", because: :discontinued
+
   app "Honer.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

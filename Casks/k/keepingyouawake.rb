@@ -1,6 +1,6 @@
 cask "keepingyouawake" do
-  version "1.6.5"
-  sha256 "4e9d879c95cbf8e25370974c2b8875f17b2aa3b9c295bb76d0da74cd833afe04"
+  version "1.6.8"
+  sha256 "8001a149b4490c008fdac19898bce9902d516c4aa6412a7eb0f9a37443b15c6b"
 
   url "https://github.com/newmarcel/KeepingYouAwake/releases/download/#{version}/KeepingYouAwake-#{version}.zip",
       verified: "github.com/newmarcel/KeepingYouAwake/"
@@ -9,12 +9,11 @@ cask "keepingyouawake" do
   homepage "https://keepingyouawake.app/"
 
   livecheck do
-    url :url
-    regex(/^v?(\d+(?:\.\d+)+)$/i)
+    url "https://newmarcel.github.io/KeepingYouAwake/appcast.xml"
+    strategy :sparkle, &:short_version
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "KeepingYouAwake.app"
 

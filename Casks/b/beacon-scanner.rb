@@ -7,10 +7,12 @@ cask "beacon-scanner" do
   desc "Utility to scan for iBeacon-compatible devices"
   homepage "https://github.com/mlwelles/BeaconScanner/"
 
-  livecheck do
-    url :url
-    strategy :github_latest
-  end
+  deprecate! date: "2024-10-10", because: :unmaintained
+  disable! date: "2025-10-11", because: :unmaintained
 
   app "Beacon Scanner.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

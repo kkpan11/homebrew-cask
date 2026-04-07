@@ -7,12 +7,14 @@ cask "plain-clip" do
   desc "Removes formatting from copied text"
   homepage "https://www.bluem.net/en/mac/plain-clip/"
 
-  livecheck do
-    url :url
-    strategy :extract_plist
-  end
+  deprecate! date: "2024-07-06", because: :discontinued
+  disable! date: "2025-07-06", because: :discontinued
 
   app "Plain Clip/Plain Clip.app"
 
   zap trash: "~/Library/Preferences/net.bluem.plain-clip.plist"
+
+  caveats do
+    requires_rosetta
+  end
 end

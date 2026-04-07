@@ -1,9 +1,9 @@
 cask "truhu" do
-  version "310"
-  sha256 "5e62beb22eba58894a3d40c14b3622e8787c72392130650aeaf2d064ad9fe89b"
+  version "345"
+  sha256 "c53d36e489774cedb1771470ee72be05aba113b2e05d0bcdaa35b44dad1d7f87"
 
-  url "https://truhu-mobile-builds.s3.us-west-2.amazonaws.com/TruHu+Desktop+#{version}.dmg",
-      verified: "truhu-mobile-builds.s3.us-west-2.amazonaws.com/"
+  url "https://truhu-mobile-builds.s3.amazonaws.com/TruHu+Desktop+#{version}.dmg",
+      verified: "truhu-mobile-builds.s3.amazonaws.com/"
   name "TruHu"
   desc "Display calibration utility"
   homepage "https://truhu.app/"
@@ -21,8 +21,6 @@ cask "truhu" do
       version_page[:content].scan(regex).map { |match| match[0] }
     end
   end
-
-  depends_on macos: ">= :catalina"
 
   app "TruHu Mac Desktop.app"
 

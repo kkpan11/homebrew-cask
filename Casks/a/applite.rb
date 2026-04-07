@@ -1,6 +1,6 @@
 cask "applite" do
-  version "1.2.3"
-  sha256 "ed35b6b5c6dcc3fe90ba17d7633d24780d1f86c1484499ab9028b41b2f567078"
+  version "1.3.1"
+  sha256 "7c2972f21f373c1f64518212098a76604f14b05bd56eb7e56f84c25f4c9c8da2"
 
   url "https://github.com/milanvarady/Applite/releases/download/v#{version}/Applite.dmg",
       verified: "github.com/milanvarady/Applite/"
@@ -9,13 +9,12 @@ cask "applite" do
   homepage "https://aerolite.dev/applite"
 
   livecheck do
-    url :url
-    strategy :github_latest
+    url "https://milanvarady.github.io/Applite/appcast.xml"
+    strategy :sparkle, &:short_version
   end
 
   auto_updates true
   depends_on macos: ">= :ventura"
-  depends_on formula: "pinentry-mac"
 
   app "Applite.app"
 

@@ -11,10 +11,16 @@ cask "chiaki" do
     url :homepage
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "Chiaki.app"
 
   zap trash: [
     "~/Library/Application Support/Chiaki",
     "~/Library/Preferences/com.chiaki.Chiaki.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

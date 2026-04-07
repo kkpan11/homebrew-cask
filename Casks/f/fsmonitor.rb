@@ -5,6 +5,7 @@ cask "fsmonitor" do
   url "https://tristan-software.ch/FSMonitor/Archives/FSMonitor_#{version.csv.first}(#{version.csv.second}).zip",
       verified: "tristan-software.ch/FSMonitor/"
   name "FSMonitor"
+  desc "Visualize filesystem changes in realtime"
   homepage "https://fsmonitor.com/"
 
   livecheck do
@@ -27,4 +28,8 @@ cask "fsmonitor" do
     "~/Library/Preferences/com.tristan.FSMonitor.plist",
     "~/Library/Saved Application State/com.tristan.FSMonitor.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

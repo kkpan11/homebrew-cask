@@ -1,5 +1,5 @@
 cask "emby" do
-  version "2.2.18,24"
+  version "2.2.39,35"
   sha256 :no_check
 
   url "https://github.com/MediaBrowser/Emby.Releases/raw/master/macos/Emby.app.zip",
@@ -12,8 +12,6 @@ cask "emby" do
     url :url
     strategy :extract_plist
   end
-
-  depends_on macos: ">= :catalina"
 
   app "Emby.app"
 

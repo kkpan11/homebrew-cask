@@ -1,22 +1,31 @@
 cask "eclipse-platform" do
   arch arm: "aarch64", intel: "x86_64"
 
-  version "4.31,202402290520"
-  sha256 arm:   "c25a7bc1c2642499f6350f78fcf0bcf37789912975c5592d0ece254f1370165f",
-         intel: "be6e6f9e0c0692d17dec62d4826ac0164a404ea3fb7c1d7e2a6caf7ce2712ca2"
+  version "4.39,202602260420"
+  sha256 arm:   "52c2dcf7e4b628e57b11a971052f8616b419a6dc4cc1135c0f8801d702705388",
+         intel: "971bbab95fb995a27b1f394189aeb3d9019dfc4f89d2d60d51a50fe1534b0aea"
 
-  url "https://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops#{version.major}/R-#{version.csv.first}-#{version.csv.second}/eclipse-SDK-#{version.csv.first}-macosx-cocoa-#{arch}.dmg&r=1"
+  url "https://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops#{version.major}/R-#{version.csv.first}-#{version.csv.second}/eclipse-SDK-#{version.csv.first}-macosx-cocoa-#{arch}.dmg&mirror_id=1"
   name "Eclipse SDK"
   desc "SDK for the Eclipse IDE"
   homepage "https://eclipse.org/"
 
+  # The download page (https://download.eclipse.org/eclipse/downloads/) uses
+  # JavaScript to render download links from a JSON file.
   livecheck do
-    url "https://download.eclipse.org/eclipse/downloads/"
-    regex(%r{href=.*/R-(\d+(?:\.\d+)*)-(\d+)/}i)
-    strategy :page_match do |page, regex|
-      page.scan(regex).map { |match| "#{match[0]},#{match[1]}" }
+    url "https://download.eclipse.org/eclipse/downloads/data.json"
+    regex(/R-(\d+(?:\.\d+)*)-(\d+)/i)
+    strategy :json do |json, regex|
+      json["releases"].map do |item|
+        match = item["path"]&.match(regex)
+        next unless match
+
+        "#{match[1]},#{match[2]}"
+      end
     end
   end
+
+  depends_on macos: ">= :big_sur"
 
   # Renamed to avoid conflict with other Eclipse.
   app "Eclipse.app", target: "Eclipse Platform.app"

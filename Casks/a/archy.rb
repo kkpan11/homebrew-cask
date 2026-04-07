@@ -1,6 +1,6 @@
 cask "archy" do
-  version "2.27.0"
-  sha256 "b9c34b6f0d20ce467e94225d59f4309414c6b7523bd4c97c1a32e741c1b258f3"
+  version "2.38.0"
+  sha256 "7b089520d27125a528189da49a5a14416ccab1f83a2fbb6372f9bbf78bbf360d"
 
   url "https://sdk-cdn.mypurecloud.com/archy/#{version}/archy-macos.zip",
       verified: "sdk-cdn.mypurecloud.com/archy/"
@@ -10,10 +10,18 @@ cask "archy" do
 
   livecheck do
     url "https://sdk-cdn.mypurecloud.com/archy/versions.json"
-    regex(/"version"\s*:\s*"(\d+(?:\.\d+)+)"/i)
+    strategy :json do |json|
+      json.map { |item| item["version"] }
+    end
   end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   binary "archyBin/archy-macos-#{version}", target: "archy"
 
   zap trash: "~/.archy_config"
+
+  caveats do
+    requires_rosetta
+  end
 end

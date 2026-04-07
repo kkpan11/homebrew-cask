@@ -1,6 +1,6 @@
 cask "imgotv" do
-  version "6.4.16"
-  sha256 "55c8e749fc04b039fd0d0541c312730fccb57d063ad3d9cabd28d519922b0c9c"
+  version "6.5.7"
+  sha256 "36e882b10da45f09a199d5cea6e7838ad05cab66e7736176e75744706c91c8c8"
 
   url "https://download.imgo.tv/app/mac/#{version}/mgtv-mango-#{version}.dmg",
       verified: "download.imgo.tv/"
@@ -12,8 +12,6 @@ cask "imgotv" do
     url "https://pcconf.api.mgtv.com/getPcDownloadUrl?lastp=ch_home"
     strategy :header_match
   end
-
-  depends_on macos: ">= :sierra"
 
   app "芒果TV.app"
 

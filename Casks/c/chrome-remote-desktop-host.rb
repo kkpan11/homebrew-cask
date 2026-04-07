@@ -1,5 +1,5 @@
 cask "chrome-remote-desktop-host" do
-  version "123.0.6312.16"
+  version "147.0.7727.3"
   sha256 :no_check
 
   url "https://dl.google.com/chrome-remote-desktop/chromeremotedesktop.dmg"
@@ -14,10 +14,13 @@ cask "chrome-remote-desktop-host" do
 
   pkg "Chrome Remote Desktop Host.pkg"
 
-  uninstall launchctl: [
-              "com.google.GoogleUpdater.wake.system",
-              "org.chromium.chromoting",
-            ],
+  # Some launchctl and pkgutil items are shared with other Google apps, they should only be removed in the zap stanza
+  # See: https://github.com/Homebrew/homebrew-cask/pull/92704#issuecomment-727163169
+  # launchctl: com.google.GoogleUpdater.wake.system, com.google.keystone.daemon,
+  #            com.google.keystone.system.agent, com.google.keystone.system.xpcservice
+
+  # pkgutil: com.google.pkg.Keystone
+  uninstall launchctl: "org.chromium.chromoting",
             script:    {
               executable: "/Applications/Chrome Remote Desktop Host Uninstaller.app/Contents/MacOS/remoting_host_uninstaller",
               args:       ["--no-ui"],
@@ -29,7 +32,7 @@ cask "chrome-remote-desktop-host" do
               "com.google.pkg.ChromeRemoteDesktopHostUninstaller",
             ]
 
-  zap trash: "~/Library/Saved Application State/com.google.chromeremotedesktop.me2me-host-uninstaller.savedState/"
+  zap trash: "~/Library/Saved Application State/com.google.chromeremotedesktop.me2me-host-uninstaller.savedState"
 
   caveats do
     logout

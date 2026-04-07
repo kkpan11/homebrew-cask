@@ -1,6 +1,6 @@
 cask "touchswitcher" do
-  version "1.4.6"
-  sha256 "a3c22a09507dd668cd664be4dff2ef334907b3688eae7c02801405b890baf9dd"
+  version "1.4.7"
+  sha256 "91ec5381e015bb27cbab3325d10e4e838b0cd66c619ac77a28bcb4c39c14e65c"
 
   url "https://hazeover.com/touchswitcher/TouchSwitcher-#{version}.txz"
   name "TouchSwitcher"
@@ -12,7 +12,8 @@ cask "touchswitcher" do
     strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :sierra"
+  auto_updates true
+  depends_on macos: ">= :monterey"
 
   app "TouchSwitcher.app"
 

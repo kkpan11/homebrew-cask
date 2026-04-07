@@ -8,6 +8,13 @@ cask "opentoonz" do
   desc "Open-source full-featured 2D animation creation software"
   homepage "https://opentoonz.github.io/e/index.html"
 
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   pkg "OpenToonz.pkg"
 
   uninstall pkgutil: "io.github.opentoonz"

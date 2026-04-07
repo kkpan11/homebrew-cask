@@ -6,5 +6,12 @@ cask "livetail" do
   name "Sumologic livetail CLI"
   homepage "https://github.com/SumoLogic/livetail-cli"
 
+  deprecate! date: "2024-10-30", because: :unmaintained
+  disable! date: "2025-11-01", because: :unmaintained
+
   binary "livetail"
+
+  caveats do
+    requires_rosetta
+  end
 end

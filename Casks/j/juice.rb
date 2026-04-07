@@ -13,4 +13,8 @@ cask "juice" do
     "~/Library/Containers/com.bsm.macos.Juice",
     "~/Library/Containers/com.bsm.macos.JuiceHelper",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

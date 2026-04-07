@@ -1,9 +1,9 @@
 cask "touchdesigner" do
   arch arm: "arm64", intel: "intel"
 
-  version "2023.11510"
-  sha256 arm:   "5a77b6d733be88b6faea42202c14d9358771c70533afe854850d52244c98a516",
-         intel: "9c83f8a245c259b70bdf379ea15b29404bbcf6c080adbeaca273289b0abc9e13"
+  version "2025.32460"
+  sha256 arm:   "7447df344d6744c3b4f3292a7563a6cb32d9037240851b6edf5460e7eed9897f",
+         intel: "9f0faf901bd4614e238d3ec2cb844d618ac080e26e4b18cbbdf65b25779730f8"
 
   url "https://download.derivative.ca/TouchDesigner.#{version}.#{arch}.dmg"
   name "Derivative TouchDesigner"
@@ -11,15 +11,16 @@ cask "touchdesigner" do
   homepage "https://derivative.ca/"
 
   livecheck do
-    skip "No reliable way to get version info"
+    url "https://docs.derivative.ca/Release_Notes"
+    regex(/Build\s+(\d+(?:\.\d+)+)/i)
   end
 
-  depends_on macos: ">= :mojave"
+  depends_on macos: ">= :ventura"
 
   app "TouchDesigner.app"
 
   zap trash: [
-    "~/Library/Application Support/Derivative/TouchDesigner099/",
-    "~/Library/Saved Application State/ca.derivative.TouchDesigner.savedState/",
+    "~/Library/Application Support/Derivative/TouchDesigner099",
+    "~/Library/Saved Application State/ca.derivative.TouchDesigner.savedState",
   ]
 end

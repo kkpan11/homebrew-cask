@@ -1,6 +1,6 @@
 cask "hhkb" do
-  version "1.3.0"
-  sha256 "ad9bad341ebf6a189b907b0dd5ee68627d508664335ea75e0109964a25d268f9"
+  version "2.0.0"
+  sha256 "7da232553ac6d256002ba71a6babfd1ff3fa5f95d71887d41e14e0f07e205241"
 
   url "https://origin.pfultd.com/downloads/hhkb/mac/HHKBkeymapTool_#{version.no_dots}ma.dmg",
       verified: "origin.pfultd.com/downloads/hhkb/mac/"
@@ -10,10 +10,8 @@ cask "hhkb" do
 
   livecheck do
     url "https://happyhackingkb.com/download/"
-    regex(/macOS\s+:\s+Version\s+(\d+(?:\.\d+)+)/i)
+    regex(%r{macOS\s*</td>.*?HHKBkeymapTool[._-]v?\d+(?:\.\d+)*[^.]*?\.dmg.*?>\s*v?(\d+(?:\.\d+)+)\s*<}im)
   end
-
-  depends_on macos: ">= :mojave"
 
   pkg "HHKBkeymapTool_#{version.no_dots}ma.pkg"
 

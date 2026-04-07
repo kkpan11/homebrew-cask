@@ -2,12 +2,12 @@ cask "vimcal" do
   arch arm: "-arm64"
   host_suffix = on_arch_conditional arm: "m1", intel: "production"
 
-  version "1.0.29"
-  sha256 arm:   "ff607dc071fceda852f8d2a8b71df2c7460e562d63a62dde933b8674b9adcafa",
-         intel: "d8296528bc0fb3348261eb0fc89f79235f2e34474ba8ac3fd7c4ce4eb426baf4"
+  version "1.0.46"
+  sha256 arm:   "5317ff903de1e2f3958298b55824cf9cf848511c416ff5b3a7a3b798a2a44fb6",
+         intel: "8bfbb3a9f41060cbf0865ccc2d52a4fff5c49048ada74bfb076f9a37eb6d790d"
 
-  url "https://vimcal-#{host_suffix}.s3.us-west-1.amazonaws.com/Vimcal-#{version}#{arch}.dmg",
-      verified: "vimcal-#{host_suffix}.s3.us-west-1.amazonaws.com/"
+  url "https://vimcal-#{host_suffix}.s3.amazonaws.com/Vimcal-#{version}#{arch}.dmg",
+      verified: "vimcal-#{host_suffix}.s3.amazonaws.com/"
   name "Vimcal"
   desc "Calendar"
   homepage "https://vimcal.com/"
@@ -18,7 +18,7 @@ cask "vimcal" do
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :monterey"
 
   app "Vimcal.app"
 

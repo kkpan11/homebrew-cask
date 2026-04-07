@@ -10,4 +10,8 @@ cask "firebird-emu" do
   app "firebird-emu.app"
 
   zap trash: "~/Library/Preferences/org.firebird-emus.firebird-emu.plist"
+
+  caveats do
+    requires_rosetta
+  end
 end

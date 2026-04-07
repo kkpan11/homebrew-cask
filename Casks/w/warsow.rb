@@ -12,6 +12,8 @@ cask "warsow" do
     regex(%r{href=.*?/warsow-(\d+(?:\.\d+)*)\.dmg}i)
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "Warsow.app"
 
   zap trash: [
@@ -19,4 +21,8 @@ cask "warsow" do
     "~/Library/Caches/Warsow-#{version.major_minor}",
     "~/Library/Saved Application State/org.picmip.Warsow.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

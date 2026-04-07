@@ -1,9 +1,9 @@
 cask "openmw" do
   arch arm: "arm64", intel: "amd64"
 
-  version "0.48.0"
-  sha256 arm:   "72fdb7bc24d55685dfcd2973555e7a41bf7b7aabba0515c02904a48f48be6b05",
-         intel: "b3fa91fe8055690cc0b3b5518e6cbbdd31825b5b3c937a748843c95400336ccf"
+  version "0.50.0"
+  sha256 arm:   "f1787384b54ae6b76444ca0899c553c491800d28185e7ee8bf052a30656160ed",
+         intel: "8ba6c83933d999f5f1f6f9d1bb35b948c1d01972fc35e6bfe2c302735ca2db8e"
 
   url "https://github.com/OpenMW/openmw/releases/download/openmw-#{version}/OpenMW-#{version}-macos-#{arch}.dmg",
       verified: "github.com/OpenMW/openmw/"
@@ -16,6 +16,10 @@ cask "openmw" do
     regex(/openmw[._-]v?(\d+(?:\.\d+)+)/i)
     strategy :github_latest
   end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
+  depends_on macos: ">= :ventura"
 
   app "OpenMW.app"
   app "OpenMW-CS.app"

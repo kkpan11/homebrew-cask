@@ -1,6 +1,6 @@
 cask "tableplus" do
-  version "5.9.6,546"
-  sha256 "8d7e78b386a305263c3966a46b43443ab057a1d5a03ddeb01d0f383e07b1000e"
+  version "6.8.6,662"
+  sha256 "551d2c49365f4638effa9e03718722281246e431c8c23e0a2e14c73c646c497d"
 
   url "https://files.tableplus.com/macos/#{version.csv.second}/TablePlus.dmg"
   name "TablePlus"
@@ -13,7 +13,6 @@ cask "tableplus" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "TablePlus.app"
 

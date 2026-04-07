@@ -12,6 +12,8 @@ cask "alternote" do
     strategy :sparkle
   end
 
+  auto_updates true
+
   app "Alternote.app"
 
   uninstall quit: "com.Alternote"
@@ -20,4 +22,8 @@ cask "alternote" do
     "~/Library/Application Scripts/com.Alternote",
     "~/Library/Containers/com.Alternote",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

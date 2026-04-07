@@ -1,23 +1,16 @@
 cask "fabfilter-pro-c" do
-  version "2.19"
-  sha256 "ec095bcb2267bed0a58f558bc7bfbb438e84ed17b7ea881e48c5a711dcb57265"
+  version "3.01"
+  sha256 "b3fd711cd9866d1710b28d96a5b80c80a5c50a0d7b8f6ba5691c87901ceeb5e0"
 
-  url "https://www.fabfilter.com/downloads/ffproc#{version.no_dots}.dmg"
+  url "https://cdn-b.fabfilter.com/downloads/ffproc#{version.no_dots}.dmg"
   name "FabFilter Pro-C"
   desc "Compressor plug-in"
   homepage "https://www.fabfilter.com/products/pro-c-2-compressor-plug-in"
 
   livecheck do
     url "https://www.fabfilter.com/download"
-    strategy :page_match do |page|
-      match = page.match(/ffproc(\d)(\d+)\.dmg/i)
-      next if match.blank?
-
-      "#{match[1]}.#{match[2]}"
-    end
+    regex(/FabFilter\s+Pro-C.*?v?(\d+(?:\.\d+)+)/im)
   end
-
-  depends_on macos: ">= :sierra"
 
   pkg "FabFilter Pro-C #{version} Installer.pkg"
 

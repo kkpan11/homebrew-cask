@@ -1,6 +1,6 @@
 cask "outset" do
-  version "4.1.1.21918"
-  sha256 "5c38db5fcba9cc91e4dd815395796de083a3d8ff713886544d792858c259884c"
+  version "4.2.0.21973"
+  sha256 "f6e39f905b2877ccb5d7a2578e404282d76e7f228a4f8c17260a0ee88fb497c3"
 
   url "https://github.com/macadmins/outset/releases/download/v#{version}/Outset-#{version}.pkg"
   name "outset"
@@ -21,6 +21,7 @@ cask "outset" do
               "io.macadmins.Outset.login-privileged",
               "io.macadmins.Outset.login-window",
               "io.macadmins.Outset.on-demand",
+              "io.macadmins.Outset.on-demand-privileged",
             ],
             pkgutil:   "io.macadmins.Outset",
             delete:    "/usr/local/outset"

@@ -1,19 +1,29 @@
 cask "wiso-steuer-2023" do
   # NOTE: "2023" is not a version number, but an intrinsic part of the product name
-  version "30.13.4260"
-  sha256 :no_check
+  version "30.16.5130-RC1"
+  sha256 "c9dce5d0098d36d797d91b97b3d8b4cf062c9e1cc934d2a3c8defd0713b46feb"
 
-  url "https://download.buhl.de/ESD/Steuer/2023/WISOSteuer2023.dmg"
+  url "https://update.buhl-data.com/Updates/Steuer/2023/Mac/Files/#{version}/SteuerMac2023-#{version.split("-").first}.dmg",
+      verified: "update.buhl-data.com/Updates/Steuer/"
   name "WISO Steuer 2023"
   desc "Tax declaration for the fiscal year 2022"
   homepage "https://www.buhl.de/download/wiso-steuer-2023/"
 
   livecheck do
-    url :url
-    strategy :extract_plist
+    url "https://update.buhl-data.com/Updates/Steuer/2023/Mac/Aktuell/appcast-steuer.xml"
+    regex(%r{/v?(\d+(?:\.\d+)+[^/]*)/SteuerMac2023[._-]v?(\d+(?:\.\d+)+)\.dmg}i)
+    strategy :sparkle do |item, regex|
+      match = item.url&.match(regex)
+      next if match.blank?
+
+      match[1]
+    end
   end
 
-  app "SteuerMac 2023.app"
+  auto_updates true
+
+  # Renamed for consistency: app name differs in Finder to shell
+  app "SteuerMac 2023.app", target: "WISO Steuer 2023.app"
 
   zap trash: [
     "~/Library/Application Support/BuhlData.com/WISOsteuerMac2023",

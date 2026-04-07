@@ -1,16 +1,26 @@
 cask "gzdoom" do
-  version "4.11.3"
-  sha256 "4edfa387b74a116d8335d9c6c5f1f84d9e1cad342b07c0d7707dcc87cf0c6ed1"
+  version "4.14.2"
+  sha256 "0f2e638574ce2a2b5adec3613cf3fc1c66f63468019d412bb8dc8787ee78fb05"
 
-  url "https://github.com/ZDoom/gzdoom/releases/download/g#{version}/gzdoom-#{version.dots_to_hyphens}-macOS.zip"
+  url "https://github.com/ZDoom/gzdoom/releases/download/g#{version.csv.second || version.csv.first}/gzdoom-#{version.csv.first.dots_to_hyphens}-macOS.zip"
   name "GZDoom"
   desc "Adds an OpenGL renderer to the ZDoom source port"
   homepage "https://github.com/ZDoom/gzdoom"
 
   livecheck do
     url :url
-    regex(/^g?(\d+(?:\.\d+)+)$/i)
+    regex(%r{/g?(\d+(?:\.\d+)+)/gzdoom(?:-bin)?[._-]v?(\d+(?:[.-]\d+)+[a-z]?)(?:(?:-macOS)?\.dmg|-macOS\.zip)}i)
+    strategy :github_latest do |json, regex|
+      json["assets"]&.map do |asset|
+        match = asset["browser_download_url"]&.match(regex)
+        next if match.blank?
+
+        (match[2].tr("-", ".") == match[1]) ? match[1] : "#{match[2].tr("-", ".")},#{match[1]}"
+      end
+    end
   end
 
   app "GZDoom.app"
+
+  zap trash: "~/Library/Preferences/gzdoom.ini"
 end

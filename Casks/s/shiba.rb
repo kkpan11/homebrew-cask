@@ -7,5 +7,12 @@ cask "shiba" do
   desc "Rich markdown live preview app with linter"
   homepage "https://github.com/rhysd/Shiba/"
 
+  deprecate! date: "2024-11-16", because: :unmaintained
+  disable! date: "2025-11-16", because: :unmaintained
+
   app "Shiba-darwin-x64/Shiba.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

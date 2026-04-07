@@ -1,6 +1,6 @@
 cask "iina" do
-  version "1.3.4,140"
-  sha256 "7de50f5ad4a2fd5b27bf59a31b2060074c05331c7aafa533ad4adab65028d78c"
+  version "1.4.1,160"
+  sha256 "177ad469ea129bed95a82ac59b5fb58d0a06c35342fca7a37dba214a8821f848"
 
   url "https://dl-portal.iina.io/IINA.v#{version.csv.first}.dmg"
   name "IINA"
@@ -13,7 +13,6 @@ cask "iina" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "IINA.app"
   binary "#{appdir}/IINA.app/Contents/MacOS/iina-cli", target: "iina"

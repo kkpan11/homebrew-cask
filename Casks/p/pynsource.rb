@@ -13,6 +13,8 @@ cask "pynsource" do
     regex(/^version[._-]v?(\d+(?:\.\d+)+)$/i)
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "Pynsource.app"
 
   zap trash: [
@@ -21,4 +23,8 @@ cask "pynsource" do
     "~/Library/Preferences/PyNSource",
     "~/Library/Saved Application State/Pynsource.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

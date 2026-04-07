@@ -1,6 +1,6 @@
 cask "pallotron-yubiswitch" do
-  version "0.16"
-  sha256 "4ef75931712d44f3ae8f4038f7e59d4f3493b83990a8b3c828858ea3e3ec2a07"
+  version "0.18"
+  sha256 "79eee5f238f5a49763f928cc35670b7c757ffc6d051bd6dd06435cc5487c66e9"
 
   url "https://github.com/pallotron/yubiswitch/releases/download/v#{version}/yubiswitch_#{version}.dmg"
   name "Yubiswitch"
@@ -13,4 +13,10 @@ cask "pallotron-yubiswitch" do
   end
 
   app "yubiswitch.app"
+
+  zap trash: [
+    "/Library/LaunchDaemons/com.pallotron.yubiswitch.helper.plist",
+    "/Library/PrivilegedHelperTools/com.pallotron.yubiswitch.helper",
+    "~/Library/Preferences/com.pallotron.yubiswitch.plist",
+  ]
 end

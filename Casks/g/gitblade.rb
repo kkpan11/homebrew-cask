@@ -8,9 +8,22 @@ cask "gitblade" do
   homepage "https://gitblade.com/"
 
   livecheck do
-    url "https://gitblade.com/#download"
+    url :homepage
     regex(%r{href=.*?/gitblade[._-]v?(\d+(?:\.\d+)*)[._-]darwin[._-]x64\.dmg}i)
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "GitBlade.app"
+
+  zap trash: [
+    "~/Library/Application Support/GitBlade",
+    "~/Library/Logs/GitBlade",
+    "~/Library/Preferences/com.electron.gitblade.plist",
+    "~/Library/Saved Application State/com.electron.gitblade.savedState",
+  ]
+
+  caveats do
+    requires_rosetta
+  end
 end

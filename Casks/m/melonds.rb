@@ -1,12 +1,16 @@
 cask "melonds" do
-  version "0.9.5"
-  sha256 "649f9926894faf0776524a0885ecbe10eb9c5bd8b53ed1b33207ac464bd5a2f1"
+  version "1.1"
+  sha256 "79843a5e5cab93188bd11942bff5440b9505ee91c6f526f7e90c22e3cff6718d"
 
-  url "https://github.com/melonDS-emu/melonDS/releases/download/#{version}/melonDS_#{version}_mac_UB2.dmg",
+  url "https://github.com/melonDS-emu/melonDS/releases/download/#{version}/melonDS-#{version}-macOS-universal.zip",
       verified: "github.com/melonDS-emu/melonDS/"
   name "melonDS"
   desc "Nintendo DS and DSi emulator"
   homepage "https://melonds.kuribo64.net/"
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
+  depends_on macos: ">= :big_sur"
 
   app "melonDS.app"
 

@@ -36,4 +36,8 @@ cask "trim-enabler" do
     "~/Library/Preferences/org.cindori.TrimEnabler.plist",
     "~/Library/Saved Application State/org.cindori.TrimEnabler#{version.major}.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

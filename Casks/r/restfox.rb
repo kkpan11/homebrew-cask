@@ -1,8 +1,11 @@
 cask "restfox" do
-  version "0.9.1"
-  sha256 "57cbca1a6359b73fa22b128b41f1b34c2831e91016cc98daf06b4764b80aca58"
+  arch arm: "arm64", intel: "x64"
 
-  url "https://github.com/flawiddsouza/Restfox/releases/download/v#{version}/Restfox-darwin-x64-#{version}.zip",
+  version "0.40.0"
+  sha256 arm:   "09d35033e323a9bae998643116dfbc391bcdf6f2128b6c98224c604e07982c56",
+         intel: "f5b45cbf3de8125edaee7c3d61442173183ed869c116d0672171c4f9edf03e08"
+
+  url "https://github.com/flawiddsouza/Restfox/releases/download/v#{version}/Restfox-darwin-#{arch}-#{version}.zip",
       verified: "github.com/flawiddsouza/Restfox/releases/download/"
   name "Restfox"
   desc "Offline-first web HTTP client"
@@ -12,5 +15,14 @@ cask "restfox" do
 
   app "Restfox.app"
 
-  zap trash: "~/Library/Application Support/Restfox"
+  zap trash: [
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.electron.restfox.sfl*",
+    "~/Library/Application Support/Restfox",
+    "~/Library/Caches/com.electron.restfox*",
+    "~/Library/HTTPStorages/com.electron.restfox",
+    "~/Library/Logs/Restfox",
+    "~/Library/Preferences/ByHost/com.electron.restfox.*.plist",
+    "~/Library/Preferences/com.electron.restfox.plist",
+    "~/Library/Saved Application State/com.electron.restfox.savedState",
+  ]
 end

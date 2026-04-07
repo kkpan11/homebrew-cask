@@ -1,19 +1,30 @@
 cask "devonagent" do
-  version "3.11.7"
-  sha256 "7b59ba4b3e3f681b5c8bc14ec8792bf7ea069480ab81bdf655b64567cee6aec7"
+  on_catalina :or_older do
+    version "3.11.8"
+    sha256 "81809652d8821376d3c6df1b68212c61944ec18a874e1c49a310a535050e36fc"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_big_sur :or_newer do
+    version "3.11.11"
+    sha256 "470cb01ae5543fd60c846973437610a0c90c3ffd62999bdb9df560f51d5a5cde"
+
+    livecheck do
+      url "https://api.devontechnologies.com/1/apps/sparkle/sparkle.php?id=300005193"
+      strategy :sparkle do |items|
+        items.map(&:version)
+      end
+    end
+  end
 
   url "https://download.devontechnologies.com/download/devonagent/#{version}/DEVONagent_Pro.app.zip"
   name "DEVONagent Pro"
-  desc "Tool to help searching the web more efficiently"
+  desc "Assistant for efficient web searches"
   homepage "https://www.devontechnologies.com/apps/devonagent"
 
-  livecheck do
-    url "https://api.devontechnologies.com/1/apps/sparkle/sparkle.php?id=300005193"
-    strategy :sparkle
-  end
-
   auto_updates true
-  depends_on macos: ">= :el_capitan"
 
   app "DEVONagent.app"
 
@@ -24,7 +35,6 @@ cask "devonagent" do
     "~/Library/Caches/DEVONagent",
     "~/Library/Caches/TemporaryItems/DEVONagent",
     "~/Library/Containers/com.devon-technologies.get",
-    "~/Library/Group Containers/*.devon-technologies.*",
     "~/Library/Group Containers/*.devon-technologies.*",
     "~/Library/HTTPStorages/com.devon-technologies.agent",
     "~/Library/Preferences/com.devon-technologies.agent.plist",

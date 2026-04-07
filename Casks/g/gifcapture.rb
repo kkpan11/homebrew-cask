@@ -6,5 +6,12 @@ cask "gifcapture" do
   name "GifCapture"
   homepage "https://github.com/onmyway133/GifCapture"
 
+  deprecate! date: "2024-07-11", because: :unmaintained
+  disable! date: "2025-07-11", because: :unmaintained
+
   app "GifCapture.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

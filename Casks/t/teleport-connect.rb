@@ -1,6 +1,6 @@
 cask "teleport-connect" do
-  version "15.2.0"
-  sha256 "c81dc57e2dc46dbee16172d3cfeb6a5d0be6b552825fca0cce3f334cdc553b83"
+  version "18.7.3"
+  sha256 "8feae0a5ee67039ba00315d7c91e76a4e203919dffcb66a51d7d8648cda39ca5"
 
   url "https://cdn.teleport.dev/Teleport%20Connect-#{version}.dmg",
       verified: "cdn.teleport.dev/"
@@ -9,9 +9,12 @@ cask "teleport-connect" do
   homepage "https://goteleport.com/"
 
   livecheck do
-    url "https://goteleport.com/download/"
+    url "https://goteleport.com/download/",
+        user_agent: :browser
     regex(/href=.*?Teleport%20Connect[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
   end
+
+  depends_on macos: ">= :monterey"
 
   app "Teleport Connect.app"
 
@@ -20,8 +23,4 @@ cask "teleport-connect" do
     "~/Library/Preferences/gravitational.teleport.connect.plist",
     "~/Library/Saved Application State/gravitational.teleport.connect.savedState",
   ]
-
-  caveats do
-    requires_rosetta
-  end
 end

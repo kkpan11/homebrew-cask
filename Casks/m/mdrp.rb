@@ -1,23 +1,26 @@
 cask "mdrp" do
-  version "12.1.0"
-  sha256 "a64c78b17e8dfda590bf5113c79a5d61f6a971d7027a212ea48357f813d8c2c2"
+  version "14.1.7"
+  sha256 "f2b94506f848a2bbce82d2129e8b4ea1b375e4fd1379e38ba3c505342703a409"
 
-  url "https://www.macdvdripperpro.com/MDRP_v#{version.no_dots}.zip"
+  url "https://www.macdvdripperpro.com/MDRP_v#{version.csv.first.no_dots}#{"r#{version.csv.second}" if version.csv.second}.zip"
   name "Mac DVDRipper Pro"
   desc "Utility to rip and copy DVD content"
   homepage "https://www.macdvdripperpro.com/"
 
   livecheck do
-    url "https://www.macdvdripperpro.com/mdrp_sparkle#{version.major}.xml"
-    strategy :page_match do |page|
-      match = page.match(/MDRP[._-]v?(\d{2})(\d)(\d)\.zip/i)
+    url "https://www.macdvdripperpro.com/mdrp_sparkle.xml"
+    regex(/MDRP[._-]v?(\d{2})(\d)(\d)(?:r(\d+))?\.zip/i)
+    strategy :sparkle do |item, regex|
+      match = item.url.match(regex)
       next if match.blank?
 
-      "#{match[1]}.#{match[2]}.#{match[3]}"
+      next "#{match[1]}.#{match[2]}.#{match[3]}" unless match[4]
+
+      "#{match[1]}.#{match[2]}.#{match[3]},#{match[4]}"
     end
   end
 
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :big_sur"
 
   app "MDRP.app"
 

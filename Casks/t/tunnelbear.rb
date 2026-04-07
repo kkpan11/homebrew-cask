@@ -3,33 +3,29 @@ cask "tunnelbear" do
     version "4.1.8"
     sha256 "60c332511b91b794405249132ceb0c88e999b070c087b5f70f1cf09a84e5e5e9"
 
-    url "https://s3.amazonaws.com/tunnelbear/downloads/mac/TunnelBear-#{version}.zip",
-        verified: "s3.amazonaws.com/tunnelbear/downloads/mac/"
-
-    depends_on macos: ">= :sierra"
+    livecheck do
+      skip "Legacy version"
+    end
   end
   on_big_sur :or_newer do
-    version "5.2.3"
-    sha256 :no_check
+    version "5.8.1"
+    sha256 "66049c139c5bc32c5d8bde0f84ba485555a8685405cc46d11a47c6110769d76b"
 
-    url "https://s3.amazonaws.com/tunnelbear/downloads/mac/TunnelBear.zip",
-        verified: "s3.amazonaws.com/tunnelbear/downloads/mac/"
-
-    depends_on macos: ">= :big_sur"
+    # Older versions may have a more recent `pubDate` than newer versions, so we
+    # have to check all the items in the appcast.
+    livecheck do
+      url "https://tunnelbear.s3.amazonaws.com/downloads/mac/appcast.xml"
+      strategy :sparkle do |items|
+        items.map(&:short_version)
+      end
+    end
   end
 
+  url "https://tunnelbear.s3.amazonaws.com/downloads/mac/TunnelBear-#{version}.zip",
+      verified: "tunnelbear.s3.amazonaws.com/downloads/mac/"
   name "TunnelBear"
   desc "VPN client for secure internet access and private browsing"
   homepage "https://www.tunnelbear.com/"
-
-  # Older versions may have a more recent `pubDate` than newer versions, so we
-  # have to check all the items in the appcast.
-  livecheck do
-    url "https://tunnelbear.s3.amazonaws.com/downloads/mac/appcast.xml"
-    strategy :sparkle do |items|
-      items.map(&:short_version)
-    end
-  end
 
   auto_updates true
 
@@ -45,15 +41,13 @@ cask "tunnelbear" do
     "~/Library/Application Support/TunnelBear",
     "~/Library/Caches/com.crashlytics.data/com.tunnelbear.mac.TunnelBear",
     "~/Library/Caches/com.plausiblelabs.crashreporter.data/com.tunnelbear.mac.TunnelBear",
-    "~/Library/Caches/com.tunnelbear.mac.TunnelBear",
-    "~/Library/Caches/com.tunnelbear.sdk",
+    "~/Library/Caches/com.tunnelbear.*",
     "~/Library/Caches/io.fabric.sdk.mac.data/com.tunnelbear.mac.TunnelBear",
     "~/Library/Cookies/com.tunnelbear.mac.TunnelBear.binarycookies",
     "~/Library/HTTPStorages/com.tunnelbear.mac.TunnelBear",
     "~/Library/LaunchAgents/com.tunnelbear.mac.tbeara.plist",
     "~/Library/Logs/TunnelBear",
-    "~/Library/Preferences/com.tunnelbear.mac.TunnelBear.plist",
-    "~/Library/Preferences/group.com.tunnelbear.main.DataContainer.plist",
+    "~/Library/Preferences/*.tunnelbear*.plist",
     "~/Library/WebKit/com.tunnelbear.mac.TunnelBear",
   ]
 end

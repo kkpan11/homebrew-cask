@@ -1,6 +1,6 @@
 cask "tunein" do
-  version "1.28.0"
-  sha256 "2351345131a2badae04d87ebc1ec22c45da04f37cb544db4f7d6f209a31d44e0"
+  version "1.33.0"
+  sha256 "477a6709cc21e8fe220b1646ff520aadef26f33fdd9bc9ada28898bc127f9136"
 
   url "https://cdn-desktop.tunein.com/release/TuneIn-#{version}-universal.dmg"
   name "TuneIn"
@@ -11,6 +11,8 @@ cask "tunein" do
     url "https://gemini-desktop-prod.s3.amazonaws.com/release/latest-mac.yml"
     strategy :electron_builder
   end
+
+  depends_on macos: ">= :monterey"
 
   app "TuneIn.app"
 

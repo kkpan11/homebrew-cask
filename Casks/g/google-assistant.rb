@@ -7,6 +7,8 @@ cask "google-assistant" do
   desc "Cross-platform unofficial Google Assistant Client for Desktop"
   homepage "https://github.com/Melvin-Abraham/Google-Assistant-Unofficial-Desktop-Client"
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "Google Assistant.app"
 
   zap trash: [
@@ -16,4 +18,8 @@ cask "google-assistant" do
     "~/Library/Preferences/com.redvirus.g-assist.plist",
     "~/Library/Saved Application State/com.redvirus.g-assist.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

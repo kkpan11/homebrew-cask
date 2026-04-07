@@ -1,32 +1,21 @@
 cask "flrig" do
-  version "2.0.05"
+  version "2.0.10"
+  sha256 "49f325db62c889dcabe537d2fcde9d6eb9325b7e69decd1a83f51ec39f8b0514"
 
-  on_sierra :or_older do
-    sha256 "5c8bcb3c3d0c33183fad9a86a894f66a226e8614659b020f49b4b28f34551a5f"
-
-    url "https://downloads.sourceforge.net/fldigi/fldigi/flrig-#{version}_LI.dmg"
-  end
-  on_high_sierra :or_newer do
-    sha256 "71469b06d3d941985465857257dadd94ae880a526c8973874324b9362d73a1a0"
-
-    url "https://downloads.sourceforge.net/fldigi/fldigi/flrig-#{version}_VN.dmg"
-  end
-
+  url "https://downloads.sourceforge.net/fldigi/fldigi/flrig-#{version}.dmg",
+      verified: "sourceforge.net/fldigi/"
   name "flrig"
   desc "Ham radio rig control"
-  homepage "https://sourceforge.net/projects/fldigi/files/flrig/"
+  homepage "https://www.w1hkj.org/"
 
   livecheck do
     url "https://sourceforge.net/projects/fldigi/rss?path=/flrig"
-    regex(/flrig[._-]v?(\d+(?:\.\d+)+)\w*\.dmg/i)
-    strategy :page_match
+    regex(%r{url=.*?/flrig[._-]v?(\d+(?:\.\d+)+)[^"' >]*?\.dmg}i)
   end
 
-  app "flrig.app"
+  depends_on macos: ">= :big_sur"
 
-  preflight do
-    staged_path.glob("flrig-*.app").first.rename(staged_path/"flrig.app")
-  end
+  app "flrig-#{version}.app"
 
   zap trash: "~/.flrig"
 end

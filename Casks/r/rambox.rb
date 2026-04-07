@@ -1,17 +1,17 @@
 cask "rambox" do
-  version "2.3.1"
-  sha256 "e7933baeee1632f0101686a6d2813b3b70cbd18f460e417089e7ed8b831605c9"
+  version "2.6.2"
+  sha256 "b980ac0b2803f903e2b445a22a2e1e6c52ae8b2436a453dae941c8222d6c705c"
 
   url "https://github.com/ramboxapp/download/releases/download/v#{version}/Rambox-#{version}-mac.zip",
       verified: "github.com/ramboxapp/download/"
   name "Rambox"
-  desc "Free and Open Source messaging and emailing app"
+  desc "Workspace simplifier - to organize your workspace and boost your productivity"
   homepage "https://rambox.app/"
 
   auto_updates true
-  conflicts_with cask: "rambox-ce"
+  depends_on macos: ">= :big_sur"
 
-  app "Rambox.app"
+  app "Rambox-darwin-universal/Rambox.app"
 
   zap trash: [
     "~/Library/Application Support/CrashReporter/Rambox Helper_*.plist",

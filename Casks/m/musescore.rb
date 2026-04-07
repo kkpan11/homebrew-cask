@@ -1,8 +1,8 @@
 cask "musescore" do
-  version "4.2.1.240230937"
-  sha256 "c694c8002472faca507386ae9a44d44a37d08581d769e0ecf13f55bf783afd0e"
+  version "4.6.5.253511702,4.6.5"
+  sha256 "89624d9e6618bd7fd224b226e63e83722b9124bc2c466206b01762375c69d4ad"
 
-  url "https://github.com/musescore/MuseScore/releases/download/v#{version.major_minor_patch}/MuseScore-#{version}.dmg",
+  url "https://github.com/musescore/MuseScore/releases/download/v#{version.csv.second}/MuseScore-Studio-#{version.csv.first}.dmg",
       verified: "github.com/musescore/MuseScore/"
   name "MuseScore"
   desc "Open-source music notation software"
@@ -10,19 +10,18 @@ cask "musescore" do
 
   livecheck do
     url :url
-    regex(/^MuseScore[._-]v?(\d+(?:\.\d+)+)\.dmg$/i)
+    regex(%r{/v?(\d+(?:\.\d+)+)/MuseScore[._-]Studio[._-]v?(\d+(?:\.\d+)+)\.dmg}i)
     strategy :github_latest do |json, regex|
       json["assets"]&.map do |asset|
-        match = asset["name"]&.match(regex)
+        match = asset["browser_download_url"]&.match(regex)
         next if match.blank?
 
-        match[1]
+        "#{match[2]},#{match[1]}"
       end
     end
   end
 
   auto_updates true
-  depends_on macos: ">= :mojave"
 
   app "MuseScore #{version.major}.app"
   # shim script (https://github.com/caskroom/homebrew-cask/issues/18809)

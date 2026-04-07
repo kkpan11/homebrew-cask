@@ -7,12 +7,8 @@ cask "pdfpen" do
   desc "PDF editing software"
   homepage "https://smilesoftware.com/PDFpen"
 
-  livecheck do
-    url "https://cgi.pdfpen.com/appcast/PDFpen#{version.major}.xml"
-    strategy :sparkle, &:short_version
-  end
-
-  depends_on macos: ">= :sierra"
+  deprecate! date: "2024-09-30", because: :discontinued
+  disable! date: "2025-10-01", because: :discontinued
 
   app "PDFpen.app"
 

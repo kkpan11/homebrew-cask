@@ -1,18 +1,22 @@
 cask "pdf-reader-pro" do
-  version "3.3.1.0"
-  sha256 "e0cf3e6f232a5984d1e5df0ab15ec170c9d87fa0d57af1f8c0337ccce3776b87"
+  version "5.2.1"
+  sha256 "be0b73a8c264a926e13624d1e56dec7b204f4cb3a77d7d736470e310d7de4445"
 
-  url "https://www.pdfreaderpro.com/downloads/PDFReaderPro_v#{version.major_minor_patch}.dmg"
+  url "https://file.pdfreaderpro.com/download/PDFReaderPro_v#{version.major_minor_patch}.dmg"
   name "PDF Reader Pro"
   desc "Read, annotate, edit, convert, create, OCR, fill forms and sign PDFs"
   homepage "https://www.pdfreaderpro.com/"
 
   livecheck do
     url "https://www.pdfreaderpro.com/downloads/pdfreaderprocast.xml"
-    strategy :sparkle
+    regex(/PDFReaderPro[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
+    strategy :sparkle do |items, regex|
+      items.map { |item| item.url[regex, 1] }
+    end
   end
 
-  depends_on macos: ">= :high_sierra"
+  auto_updates true
+  depends_on macos: ">= :big_sur"
 
   app "PDF Reader Pro.app"
 

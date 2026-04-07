@@ -6,7 +6,9 @@ cask "jd-gui" do
       verified: "github.com/java-decompiler/jd-gui/"
   name "JD-GUI"
   desc "Standalone Java Decompiler GUI"
-  homepage "http://jd.benow.ca/"
+  homepage "https://java-decompiler.github.io/"
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "jd-gui-osx-#{version}/JD-GUI.app"
 

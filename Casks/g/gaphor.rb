@@ -1,14 +1,15 @@
 cask "gaphor" do
-  version "2.24.0"
-  sha256 "24dc3a3a6752130225a0a36d7e74d25da6f9a0de2e9accde140447ef3a184aba"
+  arch arm: "arm", intel: "intel"
 
-  url "https://github.com/gaphor/gaphor/releases/download/#{version}/Gaphor-#{version}.dmg",
+  version "3.2.0"
+  sha256 arm:   "ae59e7f232084e7091bbb31946900cd50d508faa12a27346c5bed96cab698c4e",
+         intel: "4fb5d766211d9688f1d7eb331a71fbb673453db9195643a225bf80596892d155"
+
+  url "https://github.com/gaphor/gaphor/releases/download/#{version}/Gaphor-#{version}-#{arch}.dmg",
       verified: "github.com/gaphor/gaphor/"
   name "Gaphor"
   desc "UML/SysML modelling tool"
   homepage "https://gaphor.org/"
-
-  depends_on macos: ">= :high_sierra"
 
   app "Gaphor.app"
 

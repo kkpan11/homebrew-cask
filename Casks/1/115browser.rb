@@ -1,9 +1,9 @@
 cask "115browser" do
   arch arm: "arm64", intel: "x64"
 
-  version "26.0.5.3"
-  sha256 arm:   "0adff4bf4a42dc4d23ddf8ab6efe3ae0b47efcae82876d868c6941a2e49575f1",
-         intel: "e225171038e26725869f3f5d0c27626e79f87e800cbab903cb36a2e7b9b50e9e"
+  version "36.0.0"
+  sha256 arm:   "4854217ba2455d5848f11c7087c2cff15d7a2f44fc35400f96a5e38e4e4ed539",
+         intel: "8b9c149426e9a9954f9da71d51e7e57c01480076218d9124b806738b49cb12eb"
 
   url "https://down.115.com/client/mac/115br_v#{version}_#{arch}.dmg"
   name "115Browser"
@@ -14,12 +14,11 @@ cask "115browser" do
   livecheck do
     url "https://appversion.115.com/1/web/1.0/api/chrome"
     strategy :json do |json|
-      json["data"]["mac"]["version_code"]
+      json.dig("data", "mac", "version_code")
     end
   end
 
   auto_updates true
-  depends_on macos: ">= :sierra"
 
   app "115Browser.app"
 

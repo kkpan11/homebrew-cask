@@ -1,6 +1,6 @@
 cask "missive" do
-  version "10.61.0"
-  sha256 "0a906bdc4c5184460e5b5140c9e912d42d0c769008940014fe00248200d64ed1"
+  version "11.12.4"
+  sha256 "d4cfc97624a02f38844d2d28dba14f92299ba546359236f59e322d571a5fbd4e"
 
   url "https://downloads.missiveapp.com/#{version}/Missive-#{version}.dmg"
   name "Missive"
@@ -11,6 +11,9 @@ cask "missive" do
     url "https://missiveapp.com/update/stable/latest-mac.yml"
     strategy :electron_builder
   end
+
+  auto_updates true
+  depends_on macos: ">= :monterey"
 
   app "Missive.app"
 

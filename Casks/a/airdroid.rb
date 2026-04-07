@@ -1,6 +1,6 @@
 cask "airdroid" do
-  version "3.7.2.0"
-  sha256 "b257d3fc6383fe7ba117400295a60f3393d43de89474b1ab679abfec5a57976f"
+  version "3.7.3.1"
+  sha256 "f0d8199dedc6daa3a93ca672d5e1c8d33554b07bc7371ba4538802926ea1acba"
 
   url "https://dl.airdroid.com/AirDroid_Desktop_Client_#{version}.dmg"
   name "AirDroid"
@@ -21,4 +21,8 @@ cask "airdroid" do
     "~/Library/Saved Application State/com.sandstudio.airdroid.savedState",
     "~/Library/WebKit/Databases/___IndexedDB/com.sandstudio.airdroid",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

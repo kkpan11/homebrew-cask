@@ -7,5 +7,12 @@ cask "graphql-ide" do
   desc "IDE for exploring GraphQL APIs"
   homepage "https://github.com/andev-software/graphql-ide"
 
+  deprecate! date: "2024-07-11", because: :unmaintained
+  disable! date: "2025-07-11", because: :unmaintained
+
   app "GraphQL IDE.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

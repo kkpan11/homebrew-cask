@@ -1,15 +1,27 @@
 cask "qudedup-extract-tool" do
-  version "1.1.5.21201"
-  sha256 "c156a73debb8f1250f761fd0380a94fbaa7643ddf3c00dda8a362c58e1708547"
+  version "1.1.7,26043"
+  sha256 "7e5c1712c209f566d9159ed4dae0c85037ad15e4c7ce483a7aea470dad53bffa"
 
-  url "https://download.qnap.com/Storage/Utility/QudedupExToolMac-#{version}.dmg"
+  url "https://download.qnap.com/Storage/Utility/QNAPQuDedupExToolMac-#{version.csv.first}.#{version.csv.second}.dmg"
   name "Qnap QuDedup Extract Tool"
   desc "Restoring deduplicated .qdff files to their normal status"
   homepage "https://www.qnap.com/en/utilities#utliity_18"
 
   livecheck do
     url "https://update.qnap.com/SoftwareReleaseS.xml"
-    regex(%r{/QudedupExToolMac-(\d+(?:\.\d+)*)\.dmg}i)
+    strategy :xml do |xml|
+      item = xml.elements[
+        "//application[productName[text()='QuDedup Extract Tool']]" \
+        "/platform[platformName[text()='Mac']]/software",
+      ]
+      next if item.blank?
+
+      version = item.elements["version"]&.text&.strip
+      build = item.elements["buildNumber"]&.text&.strip
+      next if version.blank? || build.blank?
+
+      "#{version},#{build}"
+    end
   end
 
   pkg "QudedupExTool.pkg"

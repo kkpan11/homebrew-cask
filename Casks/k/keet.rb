@@ -1,19 +1,27 @@
 cask "keet" do
   arch arm: "Apple-Silicon", intel: "Intel"
 
-  version "2.2.0"
-  sha256  arm:   "08167bbc5b449e1faf3c99083135853fb36c47a92daae35aca197fd1b7d0e6f6",
-          intel: "e0ae3436fe3bc36b9b1c2500a314dc0b368e2bf26f1d51666f4f5316e372cd53"
+  version "2.6.0"
+  sha256 arm:   "db417e3639b5b647b9d6991301b1cb6b6ee3706b0aeac03fcb6bca471a6c66d2",
+         intel: "6c2b868d93d6c9176a3912aaa391c1fd3d49d3652ab762ccaf82b1931e4309fc"
 
-  url "https://keet.io/downloads/#{version}/Keet-#{arch}.dmg"
+  url "https://static.keet.io/downloads/#{version}/Keet-#{arch}.dmg"
   name "keet"
   desc "Peer-to-peer video and text chat"
   homepage "https://keet.io/"
 
   livecheck do
-    url "https://keet.io/downloads/"
-    regex(/(\d+(?:\.\d+)+)/i)
+    url "https://static.keet.io/downloads/"
+    regex(%r{href=["']?v?(\d+(?:\.\d+)+)/?["' >]}i)
   end
 
+  auto_updates true
+
   app "Keet.app"
+
+  zap trash: [
+    "~/Library/Application Support/pear",
+    "~/Library/Application Support/pear-runtime",
+    "~/Library/Saved Application State/io.keet.app.savedState",
+  ]
 end

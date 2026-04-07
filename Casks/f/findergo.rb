@@ -7,7 +7,12 @@ cask "findergo" do
   desc "Open terminal quickly from Finder"
   homepage "https://github.com/onmyway133/FinderGo"
 
-  depends_on macos: ">= :sierra"
+  deprecate! date: "2025-02-22", because: :unmaintained
+  disable! date: "2026-02-22", because: :unmaintained
 
   app "FinderGo.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

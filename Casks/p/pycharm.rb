@@ -1,9 +1,9 @@
 cask "pycharm" do
   arch arm: "-aarch64"
 
-  version "2023.3.5,233.15026.15"
-  sha256 arm:   "6fe15528a5b0badead7f807384ffd138d648fe76f5c684c905a584e204a51138",
-         intel: "315081d461086495ab07483c5ac3858f6354b1f7bc684114c0d3c511e7ab6932"
+  version "2026.1,261.22158.340"
+  sha256 arm:   "1ca4123f1b56cb6aecc0299f052ef49cb539d7b879e1b299d1ac87883bba48eb",
+         intel: "8f3c408f143d23bbf928690534b7231ba65b8602d376ad24b87db604b1fd5c9a"
 
   url "https://download.jetbrains.com/python/pycharm-professional-#{version.csv.first}#{arch}.dmg"
   name "PyCharm"
@@ -14,17 +14,29 @@ cask "pycharm" do
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=PCP&latest=true&type=release"
     strategy :json do |json|
-      json["PCP"].map do |release|
-        "#{release["version"]},#{release["build"]}"
+      json["PCP"]&.map do |release|
+        version = release["version"]
+        build = release["build"]
+        next if version.blank? || build.blank?
+
+        "#{version},#{build}"
       end
     end
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "PyCharm.app"
-  binary "#{appdir}/PyCharm.app/Contents/MacOS/pycharm"
+  # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)
+  shimscript = "#{staged_path}/pycharm.wrapper.sh"
+  binary shimscript, target: "pycharm"
+
+  preflight do
+    File.write shimscript, <<~EOS
+      #!/bin/sh
+      exec '#{appdir}/PyCharm.app/Contents/MacOS/pycharm' "$@"
+    EOS
+  end
 
   zap trash: [
     "~/Library/Application Support/JetBrains/PyCharm#{version.major_minor}",
@@ -32,6 +44,8 @@ cask "pycharm" do
     "~/Library/Caches/JetBrains/PyCharm#{version.major_minor}",
     "~/Library/Logs/JetBrains/PyCharm#{version.major_minor}",
     "~/Library/Preferences/com.jetbrains.pycharm.plist",
+    "~/Library/Preferences/jetbrains.pc.*.plist",
+    "~/Library/Preferences/jetbrains.py.*.plist",
     "~/Library/Preferences/jetbrains.pycharm.*.plist",
     "~/Library/Preferences/PyCharm#{version.major_minor}",
     "~/Library/Saved Application State/com.jetbrains.pycharm.savedState",

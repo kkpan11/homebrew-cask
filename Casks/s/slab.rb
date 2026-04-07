@@ -1,9 +1,9 @@
 cask "slab" do
   arch arm: "arm64", intel: "x64"
 
-  version "1.5.3"
-  sha256 arm:   "f899111beaedba209aa11b64c3a52b6e3e8461bbc34722a919d8285f046ffe53",
-         intel: "d307cec07640568c5dd6eccfed3be64e84794b222c23b3f6d8b91ebacdff2b0f"
+  version "1.7.2"
+  sha256 arm:   "f26cc76229610e27b96a4ad286c590598105a2986e614faa83d1b3e8580f5056",
+         intel: "f84f8bcc022f1964fe1e149cfa66399d32ef8ac4307f959d15a952b8bc8daa3d"
 
   url "https://github.com/slab/desktop-releases/releases/download/v#{version}/Slab-#{version}-darwin-#{arch}.dmg",
       verified: "github.com/slab/desktop-releases/"
@@ -12,7 +12,7 @@ cask "slab" do
   homepage "https://slab.com/"
 
   auto_updates true
-  depends_on macos: ">= :el_capitan"
+  depends_on macos: ">= :monterey"
 
   app "Slab.app"
 

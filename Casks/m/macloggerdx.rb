@@ -1,6 +1,6 @@
 cask "macloggerdx" do
-  version "6.50"
-  sha256 "f4d537117c6fbd640f4dd2899dbe1c328c0da85c7c0e82ad0e22e8bac08f55c3"
+  version "6.59"
+  sha256 "5caed021a5737d4cc809864752880690dbaa9881dd371253416006d6336497ab"
 
   url "https://www.dogparksoftware.com/files/MacLoggerDX#{version.no_dots}.dmg"
   name "MacLoggerDX"
@@ -12,8 +12,7 @@ cask "macloggerdx" do
     regex(/Download:\s*v?(\d+(?:\.\d+)+)[\s<]/im)
   end
 
-  conflicts_with cask: "homebrew/cask-versions/macloggerdx-beta"
-  depends_on macos: ">= :high_sierra"
+  conflicts_with cask: "macloggerdx@beta"
 
   app "MacLoggerDX.app"
 

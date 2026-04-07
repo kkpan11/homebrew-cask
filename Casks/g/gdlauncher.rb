@@ -8,6 +8,8 @@ cask "gdlauncher" do
   desc "Custom Minecraft Launcher"
   homepage "https://gdevs.io/"
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "GDLauncher.app"
 
   zap trash: [
@@ -17,4 +19,8 @@ cask "gdlauncher" do
     "~/Library/Preferences/org.gorilladevs.GDLauncher.plist",
     "~/Library/Saved Application State/org.gorilladevs.GDLauncher.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

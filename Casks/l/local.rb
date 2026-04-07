@@ -1,9 +1,9 @@
 cask "local" do
   arch arm: "-arm64"
 
-  version "8.3.2,6660"
-  sha256  arm:   "9fa3811fb87d983aa8f5ced0034437a5a39b7a5a145d3588f4e756c41f89818f",
-          intel: "865081d9556a5fce3c27a60aa710e9a50809d1fa566375672d8b9d6be19ab06f"
+  version "10.0.0,6907"
+  sha256 arm:   "739104356839d91465c60d6454037822d6cf34197b34e3338f85e44ee17351ff",
+         intel: "e086dcf07d1fc4ee0486501b739a7e57f1ef5956bbf4dad37d143a02a68318ed"
 
   url "https://cdn.localwp.com/releases-stable/#{version.csv.first}+#{version.csv.second}/local-#{version.csv.first}-mac#{arch}.dmg"
   name "Local"
@@ -12,9 +12,9 @@ cask "local" do
 
   livecheck do
     url "https://cdn.localwp.com/stable/latest/mac#{arch}"
-    regex(%r{/(\d+(?:\.\d+)+)\+(\d+)/})
-    strategy :header_match do |headers|
-      match = headers["location"].match(regex)
+    regex(%r{/(\d+(?:\.\d+)+)\+(\d+)/}i)
+    strategy :header_match do |headers, regex|
+      match = headers["location"]&.match(regex)
       next if match.blank?
 
       "#{match[1]},#{match[2]}"
@@ -22,6 +22,7 @@ cask "local" do
   end
 
   auto_updates true
+  depends_on macos: ">= :big_sur"
 
   app "Local.app"
 

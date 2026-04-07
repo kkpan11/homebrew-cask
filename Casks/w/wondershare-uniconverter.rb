@@ -1,11 +1,11 @@
 cask "wondershare-uniconverter" do
-  arch arm: "arm_"
+  arch arm: "_arm"
 
-  version "15.5.5"
-  sha256 arm:   "b180c3dc393f799e084778a9e9716d289f954c04f303912a68734cd78fccd4e8",
-         intel: "173289151db8a100b5b4ef6c85ec8c4da8151a0895e840ba728db875ced16223"
+  version "17.3.0"
+  sha256 arm:   "56943f923bd1f9838826cf483956790920446dfe197929640da5f6e122134b07",
+         intel: "73eee0d139cf68541564c55166f264e9db52656e38eeea20a8b75a38116d8b2b"
 
-  url "https://download.wondershare.com/cbs_down/uniconverter#{version.major}-mac_#{arch}#{version}_full14207.zip"
+  url "https://download.wondershare.com/cbs_down/uniconverter-mac#{arch}_#{version}_full14207.zip"
   name "UniConverter"
   desc "Video editing software"
   homepage "https://videoconverter.wondershare.com/"
@@ -13,7 +13,7 @@ cask "wondershare-uniconverter" do
   livecheck do
     url "https://crm.wondershare.com/api/v1/support/14207/release-versions"
     strategy :json do |json|
-      json["data"].map { |release| release["version_name"] }
+      json["data"]&.map { |release| release["version_name"] }
     end
   end
 

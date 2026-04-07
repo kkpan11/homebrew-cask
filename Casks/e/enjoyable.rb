@@ -7,12 +7,14 @@ cask "enjoyable" do
   desc "Use your gamepad or joystick like a mouse and keyboard"
   homepage "https://yukkurigames.com/enjoyable/"
 
-  livecheck do
-    url "https://yukkurigames.com/enjoyable/appcast.xml"
-    strategy :sparkle, &:short_version
-  end
+  deprecate! date: "2025-03-31", because: :unmaintained
+  disable! date: "2026-04-01", because: :unmaintained
 
   app "Enjoyable.app"
 
   zap trash: "~/Library/Preferences/com.yukkurigames.Enjoyable.plist"
+
+  caveats do
+    requires_rosetta
+  end
 end

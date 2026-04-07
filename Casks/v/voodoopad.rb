@@ -13,8 +13,6 @@ cask "voodoopad" do
     strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :sierra"
-
   app "VoodooPad.app"
 
   zap trash: [
@@ -23,4 +21,8 @@ cask "voodoopad" do
     "~/Library/Caches/com.flyingmeat.VoodooPad5",
     "~/Library/Preferences/com.flyingmeat.VoodooPad5.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

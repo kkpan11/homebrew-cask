@@ -7,5 +7,26 @@ cask "knuff" do
   desc "Debug application for Apple Push Notification Service (APNs)"
   homepage "https://github.com/KnuffApp/Knuff"
 
+  livecheck do
+    url "https://knuffapp.github.io/sparkle.xml"
+    strategy :sparkle, &:short_version
+  end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
+  auto_updates true
+
   app "Knuff.app"
+
+  zap trash: [
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.madebybowtie.knuff-osx.sfl*",
+    "~/Library/Application Support/com.makebybowtie.Knuff-OSX",
+    "~/Library/Caches/com.crashlytics.data/com.madebybowtie.Knuff-OSX",
+    "~/Library/HTTPStorages/com.madebybowtie.Knuff-OSX",
+    "~/Library/Preferences/com.madebybowtie.Knuff-OSX.plist",
+  ]
+
+  caveats do
+    requires_rosetta
+  end
 end

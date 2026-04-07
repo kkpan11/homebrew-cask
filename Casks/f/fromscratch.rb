@@ -8,5 +8,12 @@ cask "fromscratch" do
   desc "Autosaving Scratchpad. A simple but smart note-taking app"
   homepage "https://fromscratch.rocks/"
 
+  deprecate! date: "2024-07-10", because: :unmaintained
+  disable! date: "2025-07-10", because: :unmaintained
+
   app "FromScratch.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

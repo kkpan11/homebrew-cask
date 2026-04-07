@@ -1,10 +1,10 @@
 cask "gitify" do
-  version "5.2.0"
-  sha256 "c2bddbacea0c8397ae1c3bb6bebef1a3487dd89d85253f72ef90ae898d40e080"
+  version "6.19.0"
+  sha256 "959eb4ced55f84668e9e5b0424c994be20186ba6fd854a40def236f1c303c9be"
 
   url "https://github.com/gitify-app/gitify/releases/download/v#{version}/Gitify-#{version}-universal-mac.zip"
   name "Gitify"
-  desc "App that shows GitHub notifications on the desktop"
+  desc "GitHub notifications on your menu bar"
   homepage "https://github.com/gitify-app/gitify"
 
   livecheck do
@@ -12,17 +12,23 @@ cask "gitify" do
     strategy :github_latest
   end
 
+  auto_updates true
+  depends_on macos: ">= :monterey"
+
   app "Gitify.app"
 
   uninstall quit: [
     "com.electron.gitify",
     "com.electron.gitify.helper",
-  ]
+  ], on_upgrade: :quit
 
   zap trash: [
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.electron.gitify.sfl*",
     "~/Library/Application Support/gitify",
-    "~/Library/Preferences/com.electron.gitify.helper.plist",
-    "~/Library/Preferences/com.electron.gitify.plist",
+    "~/Library/Caches/com.electron.gitify*",
+    "~/Library/Caches/gitify-updater",
+    "~/Library/HTTPStorages/com.electron.gitify",
+    "~/Library/Preferences/com.electron.gitify*.plist",
     "~/Library/Saved Application State/com.electron.gitify.savedState",
   ]
 end

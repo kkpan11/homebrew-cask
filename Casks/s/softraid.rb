@@ -1,8 +1,8 @@
 cask "softraid" do
-  version "8.0"
-  sha256 "da02a93555282ae20f1b3e3515912deaab39e4a020dbdb9847bbab1e71fb141d"
+  version "8.6.1"
+  sha256 "08db9e02751d787f99e52b36364612b47b5504e232d0d16ab58b26539b21cb0c"
 
-  url "https://downloads.owc.com/softraid/mac/#{version.major}/SoftRAID%20#{version}.dmg",
+  url "https://downloads.owc.com/softraid/mac/#{version.major}/softraid-#{version}.dmg",
       verified: "downloads.owc.com/softraid/"
   name "SoftRAID"
   desc "Powerful and intuitive software RAID utility"
@@ -13,14 +13,12 @@ cask "softraid" do
     strategy :header_match
   end
 
-  depends_on macos: ">= :mojave"
-
   app "SoftRAID.app"
 
   zap trash: [
-    "~/Library/Caches/com.apple.helpd/Generated/com.softraid.SoftRAID.help*#{version}/",
+    "~/Library/Caches/com.apple.helpd/Generated/com.softraid.SoftRAID.help*#{version}",
     "~/Library/Caches/com.softraid.SoftRAID_AM_#{version.major}",
-    "~/Library/HTTPStorages/com.softraid.SoftRAIDMonitor/",
+    "~/Library/HTTPStorages/com.softraid.SoftRAIDMonitor",
     "~/Library/LaunchAgents/com.softraid.SoftRAIDMonitor.plist",
     "~/Library/LaunchDaemons/com.OWC.HelperTool.RepairSRTool.plist",
     "~/Library/LaunchDaemons/com.softraid.softtraidd.plist",

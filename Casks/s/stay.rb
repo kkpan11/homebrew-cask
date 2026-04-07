@@ -1,6 +1,6 @@
 cask "stay" do
-  version "1.4"
-  sha256 "20362f8564cf7384350f19ee39d46db675473cf82417e7b552e2cdabc363fd4b"
+  version "1.5.1"
+  sha256 "f6a1a3a935ac237381360f463080bf9043676907fc7ec835eb39914b4440582d"
 
   url "https://cordlessdog.com/stay/versions/Stay%20#{version}.dmg"
   name "Stay"
@@ -12,7 +12,8 @@ cask "stay" do
     strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :catalina"
+  auto_updates true
+  depends_on macos: ">= :sonoma"
 
   app "Stay.app"
 

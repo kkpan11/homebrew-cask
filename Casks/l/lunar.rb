@@ -1,8 +1,8 @@
 cask "lunar" do
-  version "6.7.4"
-  sha256 "58e22c6c53223f5de149e906446c4f428e91f5dc2da97b30e381b642c8b13d42"
+  version "6.9.10"
+  sha256 "5b19c0f96bb69dca0333f345f54a533c9be508a4aba3775578e4aedf58c3ca9b"
 
-  url "https://static.lunar.fyi/releases/Lunar-#{version}.dmg"
+  url "https://files.lunar.fyi/releases/Lunar-#{version}.dmg"
   name "Lunar"
   desc "Adaptive brightness for external displays"
   homepage "https://lunar.fyi/"

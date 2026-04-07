@@ -1,6 +1,6 @@
 cask "zotero" do
-  version "6.0.37"
-  sha256 "b050f0a776122c114c22ba7ef0e0430c524a8fb189dd68cc73627612a3d140d5"
+  version "8.0.5"
+  sha256 "128023036bd4dd3a861042f5918333491d61cd72dec3fd604ddf7488fa154f37"
 
   url "https://download.zotero.org/client/release/#{version}/Zotero-#{version}.dmg"
   name "Zotero"
@@ -8,20 +8,22 @@ cask "zotero" do
   homepage "https://www.zotero.org/"
 
   livecheck do
-    url "https://www.zotero.org/download/"
-    regex(/standaloneVersions.*?"mac"\s*:\s*"(\d+(?:\.\d+)+)"/i)
+    url "https://www.zotero.org/download/client/dl?channel=release&platform=mac"
+    strategy :header_match
   end
 
   auto_updates true
-  conflicts_with cask: "zotero-beta"
-  depends_on macos: ">= :el_capitan"
+  conflicts_with cask: "zotero@beta"
 
   app "Zotero.app"
 
   zap trash: [
-    "~/Library/Application Support/Zotero",
-    "~/Library/Caches/Zotero",
-    "~/Library/Preferences/org.zotero.zotero.plist",
-    "~/Library/Saved Application State/org.zotero.zotero.savedState",
-  ]
+        "~/Library/Application Scripts/org.zotero.SafariExtensionApp.SafariExtension",
+        "~/Library/Application Support/Zotero",
+        "~/Library/Caches/Zotero",
+        "~/Library/Containers/org.zotero.SafariExtensionApp.SafariExtension",
+        "~/Library/Preferences/org.zotero.zotero.plist",
+        "~/Library/Saved Application State/org.zotero.zotero.savedState",
+      ],
+      rmdir: "~/Zotero"
 end

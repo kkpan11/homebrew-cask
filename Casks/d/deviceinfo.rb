@@ -7,12 +7,12 @@ cask "deviceinfo" do
   desc "Display device information"
   homepage "https://github.com/CoreNion/DeviceInfo/"
 
-  livecheck do
-    url :url
-    regex(/^v?(\d+(?:\.\d+)+)$/i)
-  end
-
-  depends_on macos: ">= :sierra"
+  deprecate! date: "2024-07-10", because: :unmaintained
+  disable! date: "2025-07-10", because: :unmaintained
 
   app "DeviceInfo.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

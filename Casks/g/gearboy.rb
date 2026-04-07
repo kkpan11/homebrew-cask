@@ -1,18 +1,21 @@
 cask "gearboy" do
-  arch arm: "arm", intel: "intel"
+  arch arm: "arm64", intel: "intel"
 
-  version "3.5.0"
-  sha256 arm:   "fd1a592afc7847c41ad933ae7a39656ad84d45042521e27f7ac62fa5347335f3",
-         intel: "317678aa721fc6747a07bb255ea5497aa2a47761f0ddc6d4f44ff45aa88429dd"
+  version "3.8.2"
+  sha256 arm:   "3c850054955f207074d458ff3548e63f310a1818d3e539877ee34718a600f0d0",
+         intel: "270f6d23019583b922becf3a334c9d17c4baa34bb92c086b6c5f62a75e4d01f1"
 
-  url "https://github.com/drhelius/Gearboy/releases/download/#{version}/Gearboy-#{version}-macos-#{arch}.zip"
+  url "https://github.com/drhelius/Gearboy/releases/download/#{version}/Gearboy-#{version}-desktop-macos-#{arch}.zip"
   name "Gearboy"
+  desc "Game Boy and Game Boy Color emulator"
   homepage "https://github.com/drhelius/Gearboy"
 
   livecheck do
     url :url
     strategy :github_latest
   end
+
+  container nested: "Gearboy.app.zip"
 
   app "Gearboy.app"
 

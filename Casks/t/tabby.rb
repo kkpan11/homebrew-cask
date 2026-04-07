@@ -1,9 +1,9 @@
 cask "tabby" do
   arch arm: "arm64", intel: "x86_64"
 
-  version "1.0.207"
-  sha256 arm:   "6ae803c17ded48c261999df1154da934e9a3d3503095274a384804dbdbd5e35e",
-         intel: "0456313f1b9f965d9986f9c14bc57065745a2577e0cdf3bc2c7d83f817084cb5"
+  version "1.0.230"
+  sha256 arm:   "6d26d1f6a3f416aa0a7c2108d4155acae3677b4d00d369ef4028887412654c13",
+         intel: "b7342e0c1dabda2ce7e919b913f31a6da2c51df4e2845a1123f67ee161767341"
 
   url "https://github.com/Eugeny/tabby/releases/download/v#{version}/tabby-#{version}-macos-#{arch}.zip",
       verified: "github.com/Eugeny/tabby/"
@@ -18,11 +18,17 @@ cask "tabby" do
   end
 
   auto_updates true
+  depends_on macos: ">= :monterey"
 
   app "Tabby.app"
 
   zap trash: [
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/org.tabby.sfl*",
     "~/Library/Application Support/tabby",
+    "~/Library/Caches/org.tabby",
+    "~/Library/Caches/org.tabby.ShipIt",
+    "~/Library/HTTPStorages/org.tabby",
+    "~/Library/Preferences/ByHost/org.tabby.ShipIt.*.plist",
     "~/Library/Preferences/org.tabby.helper.plist",
     "~/Library/Preferences/org.tabby.plist",
     "~/Library/Saved Application State/org.tabby.savedState",

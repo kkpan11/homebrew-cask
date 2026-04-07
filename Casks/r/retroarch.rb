@@ -1,11 +1,12 @@
 cask "retroarch" do
-  version "1.17.0"
+  version "1.22.2"
   sha256 :no_check # required as upstream package is often updated in place
 
-  url "https://buildbot.libretro.com/stable/#{version}/apple/osx/x86_64/RetroArch.dmg"
+  url "https://buildbot.libretro.com/stable/#{version}/apple/osx/x86_64/RetroArch.dmg",
+      verified: "buildbot.libretro.com/stable/"
   name "RetroArch"
-  desc "Emulator frontend (OpenGL graphics API version)"
-  homepage "https://www.libretro.com/"
+  desc "Frontend for emulators, game engines and media players (OpenGL graphics API)"
+  homepage "https://www.retroarch.com/"
 
   livecheck do
     url "https://buildbot.libretro.com/stable/"
@@ -21,4 +22,8 @@ cask "retroarch" do
     "~/Library/Application Support/RetroArch",
     "~/Library/Saved Application State/com.libretro.RetroArch.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

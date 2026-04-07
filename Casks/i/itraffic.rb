@@ -7,7 +7,7 @@ cask "itraffic" do
   desc "Monitor for displaying process traffic on status bar"
   homepage "https://github.com/foamzou/ITraffic-monitor-for-mac"
 
-  depends_on macos: ">= :catalina"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "ITraffic.app"
 

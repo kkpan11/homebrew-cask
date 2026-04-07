@@ -6,7 +6,8 @@ cask "noisebuddy" do
   name "NoiseBuddy"
   homepage "https://github.com/insidegui/NoiseBuddy"
 
-  depends_on macos: ">= :catalina"
+  deprecate! date: "2024-09-08", because: :unmaintained
+  disable! date: "2025-09-09", because: :unmaintained
 
   app "NoiseBuddy.app"
 end

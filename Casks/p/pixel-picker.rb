@@ -7,7 +7,12 @@ cask "pixel-picker" do
   desc "Menu bar application to pick colours from your screen"
   homepage "https://github.com/acheronfail/pixel-picker"
 
-  depends_on macos: ">= :sierra"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "Pixel Picker.app"
+
+  zap trash: [
+    "~/Library/Logs/Pixel Picker",
+    "~/Library/Preferences/Pixel Picker",
+  ]
 end

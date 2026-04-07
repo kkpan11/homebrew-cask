@@ -8,5 +8,8 @@ cask "visual" do
   desc "Learn ARM assembly language"
   homepage "https://salmanarif.bitbucket.io/visual/"
 
+  deprecate! date: "2024-06-28", because: :discontinued
+  disable! date: "2025-06-29", because: :discontinued
+
   app "VisUAL.app"
 end

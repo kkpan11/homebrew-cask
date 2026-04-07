@@ -1,6 +1,6 @@
 cask "paletro" do
-  version "1.9.0"
-  sha256 "1c103e2d77d39d1ea7304879f9464a143baa42021fcd30da6637abad75ef7cf5"
+  version "1.11.0"
+  sha256 "6b2d354e9d46d42c51011592940d1375e8e3d6da6953b6872d22958a8ff37430"
 
   url "https://appmakes.io/paletro/download/Paletro-#{version}.dmg"
   name "Paletro"
@@ -13,7 +13,6 @@ cask "paletro" do
   end
 
   auto_updates true
-  depends_on macos: ">= :mojave"
 
   app "Paletro.app"
 

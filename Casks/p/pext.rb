@@ -8,10 +8,8 @@ cask "pext" do
   desc "Python-based extendable tool"
   homepage "https://pext.io/"
 
-  livecheck do
-    url :url
-    strategy :github_latest
-  end
+  deprecate! date: "2024-09-06", because: :discontinued
+  disable! date: "2025-09-06", because: :discontinued
 
   app "Pext.app"
 end

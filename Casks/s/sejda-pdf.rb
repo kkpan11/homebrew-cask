@@ -1,8 +1,11 @@
 cask "sejda-pdf" do
-  version "7.6.12"
-  sha256 "6bf9807e0050f56af0cb3ee70691f9524dc90c959149c8b8dada4481949f5b9b"
+  arch arm: "_arm64"
 
-  url "https://downloads.sejda-cdn.com/sejda-desktop_#{version}.dmg",
+  version "7.9.3"
+  sha256 arm:   "e0ec4428edc7caf8872b823dae90421d715f62f029cca03b856b14eff4a1f800",
+         intel: "4ae55995bf2e70796654672668ab02c4cf4e8672fed79592a2b2a4864092a52c"
+
+  url "https://downloads.sejda-cdn.com/sejda-desktop_#{version}#{arch}.dmg",
       verified: "downloads.sejda-cdn.com/"
   name "Sejda PDF Desktop"
   desc "PDF editor"
@@ -12,8 +15,6 @@ cask "sejda-pdf" do
     url :homepage
     regex(/mac\s*:\s*["']sejda[._-]desktop[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
   end
-
-  depends_on macos: ">= :high_sierra"
 
   app "Sejda PDF Desktop.app"
 

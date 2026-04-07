@@ -1,9 +1,9 @@
 cask "cryptomator" do
   arch arm: "-arm64", intel: "-x64"
 
-  version "1.12.3"
-  sha256 arm:   "1c60197b1937a6db148d25f08095d9dab47b3f366bd0d0ac9ac703ef89d15f03",
-         intel: "e9f6a5fb112f18ebc5439e4533cca74361d785fd65e686c040d9fa13da7489c1"
+  version "1.19.2"
+  sha256 arm:   "e978a2da545d8aaca1192faf6dadf4c51bdf5e9bdc232a227618401c0b833f9a",
+         intel: "6f9ba5aa6deb5ef095926e6dcd7e6935d40791ff213dbbad14cd0ab375983a16"
 
   url "https://github.com/cryptomator/cryptomator/releases/download/#{version}/Cryptomator-#{version}#{arch}.dmg",
       verified: "github.com/cryptomator/cryptomator/"
@@ -11,26 +11,14 @@ cask "cryptomator" do
   desc "Multi-platform client-side cloud file encryption tool"
   homepage "https://cryptomator.org/"
 
-  # Not every GitHub release provides a file for macOS, so we check multiple
-  # recent releases instead of only the "latest" release.
   livecheck do
-    url :url
-    regex(/^Cryptomator[._-]v?(\d+(?:\.\d+)+).*?\.(?:dmg|pkg)$/i)
-    strategy :github_releases do |json, regex|
-      json.map do |release|
-        next if release["draft"] || release["prerelease"]
-
-        release["assets"]&.map do |asset|
-          match = asset["name"]&.match(regex)
-          next if match.blank?
-
-          match[1]
-        end
-      end.flatten
+    url "https://api.cryptomator.org/desktop/latest-version.json"
+    strategy :json do |json|
+      json["mac"]
     end
   end
 
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :big_sur"
 
   app "Cryptomator.app"
 

@@ -8,9 +8,15 @@ cask "opendnsupdater" do
   homepage "https://support.opendns.com/hc/en-us/articles/227987867"
 
   livecheck do
-    url "https://www.opendns.com/download/mac/"
+    url :url
     strategy :header_match
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "OpenDNSUpdater.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

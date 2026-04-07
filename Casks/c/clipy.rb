@@ -8,6 +8,13 @@ cask "clipy" do
   desc "Clipboard extension app"
   homepage "https://clipy-app.com/"
 
+  livecheck do
+    url "https://clipy-app.com/appcast.xml"
+    strategy :sparkle
+  end
+
+  auto_updates true
+
   app "Clipy.app"
 
   uninstall quit: "com.clipy-app.Clipy"
@@ -21,4 +28,8 @@ cask "clipy" do
     "~/Library/Cookies/com.clipy-app.Clipy.binarycookies",
     "~/Library/Preferences/com.clipy-app.Clipy.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

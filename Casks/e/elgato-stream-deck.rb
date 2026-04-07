@@ -1,6 +1,6 @@
 cask "elgato-stream-deck" do
-  version "6.5.2.19936"
-  sha256 "5e99071f26d809474ac24c320780b0acd9e120a995a0a275c8a70b9c564ac251"
+  version "7.4.0.22712"
+  sha256 "74c41c038fae9185856332307229add35c3161d1e5d664b530bb8bb8320f164a"
 
   url "https://edge.elgato.com/egc/macos/sd/Stream_Deck_#{version}.pkg"
   name "Elgato Stream Deck"
@@ -15,14 +15,17 @@ cask "elgato-stream-deck" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   pkg "Stream_Deck_#{version}.pkg"
 
   uninstall launchctl: "com.elgato.StreamDeck",
             quit:      "com.elgato.StreamDeck",
             pkgutil:   "com.elgato.StreamDeck",
-            delete:    "/Applications/Elgato Stream Deck.app"
+            delete:    [
+              "/Applications/Elgato Stream Deck.app",
+              "/Library/LaunchAgents/com.elgato.StreamDeck.plist",
+              "~/Library/LaunchAgents/com.elgato.StreamDeck.plist",
+            ]
 
   zap trash: [
     "~/Library/Application Support/com.elgato.StreamDeck",

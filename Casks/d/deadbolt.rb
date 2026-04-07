@@ -1,8 +1,11 @@
 cask "deadbolt" do
-  version "1.0.0"
-  sha256 "df5b9b0988f168946809f1db17711f589f62bc211a6dad724eac9b0844285370"
+  arch arm: "-arm64"
 
-  url "https://github.com/alichtman/deadbolt/releases/download/#{version}/Deadbolt-#{version}-mac.zip"
+  version "2.1.1"
+  sha256 arm:   "c8ce77caf427d24730fe0e9abd34cc49ebcb1650952cbbc79a2da180e7c8bee0",
+         intel: "4b3950a09cb8e46ce31bfc5d54853264217810641684d298d30ecf3a05a8a4fd"
+
+  url "https://github.com/alichtman/deadbolt/releases/download/v#{version}/Deadbolt-#{version}#{arch}.dmg"
   name "Deadbolt"
   desc "File encryption tool"
   homepage "https://github.com/alichtman/deadbolt"

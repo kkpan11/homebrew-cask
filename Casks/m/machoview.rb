@@ -7,10 +7,16 @@ cask "machoview" do
   desc "Visual Mach-O file browser"
   homepage "https://sourceforge.net/projects/machoview/"
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "MachOView.app"
 
   zap trash: [
     "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/machoview.sfl*",
     "~/Library/Preferences/MachOView.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

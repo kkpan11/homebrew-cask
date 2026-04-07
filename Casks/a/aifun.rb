@@ -1,6 +1,6 @@
 cask "aifun" do
-  version "0.8.2"
-  sha256 "02a7b737ff56a1eb08d92c07a9ce0e144166aa4ed4b29e28057417a8ea5bdc30"
+  version "0.8.10"
+  sha256 "a650c4ce9cbcc6e24243560fa38ade436ca2cc8880b16903f2b8e7a77d74527f"
 
   url "https://static.aifun.kapokcloud.com/v#{version}/AiFun_#{version}_macos.dmg",
       verified: "static.aifun.kapokcloud.com/"
@@ -11,12 +11,13 @@ cask "aifun" do
   livecheck do
     url "https://static.aifun.kapokcloud.com/updater/updater.json"
     strategy :json do |json|
-      json["version"].sub("v", "")
+      json["version"]&.sub("v", "")
     end
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   auto_updates true
-  depends_on macos: ">= :sierra"
 
   app "AiFun.app"
 

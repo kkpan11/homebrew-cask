@@ -7,7 +7,14 @@ cask "gray" do
   desc "Tool to set light or dark appearance on a per-app basis"
   homepage "https://github.com/zenangst/Gray"
 
-  depends_on macos: ">= :mojave"
-
   app "Gray.app"
+
+  zap trash: [
+    "~/Library/Application Scripts/com.zenangst.Gray",
+    "~/Library/Caches/com.zenangst.Gray",
+    "~/Library/Group Containers/com.zenangst.Gray",
+    "~/Library/HTTPStorages/com.zenangst.Gray",
+    "~/Library/Preferences/com.zenangst.Gray.plist",
+    "~/Library/Saved Application State/com.zenangst.Gray.savedState",
+  ]
 end

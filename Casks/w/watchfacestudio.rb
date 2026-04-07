@@ -1,6 +1,6 @@
 cask "watchfacestudio" do
-  version "1.6.9,1c780166-bca6-4885-9afa-f90bc4327f32"
-  sha256 "f5599186e718f06d375a98d4c46719599efb53cee0b53e449fdb26ab332cb351"
+  version "1.9.5,5a551792-9cf5-4b8e-b286-e7157146a4f3"
+  sha256 "ac1d9d27b103e1ac0222792386c57820ccdcc1e6711a25cbeb325b2b776339a8"
 
   url "https://developer.samsung.com/watchfacestudio/file/#{version.csv.second}"
   name "Watch Face Studio"
@@ -17,6 +17,8 @@ cask "watchfacestudio" do
       "#{match[2]},#{match[1]}"
     end
   end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   pkg "WatchFaceStudio_#{version.csv.first}.pkg"
 

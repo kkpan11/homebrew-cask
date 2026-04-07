@@ -1,8 +1,8 @@
 cask "liteide" do
-  version "38.3"
-  sha256 "eee15c537100c48e2d28a35a8df047e3d4d7e8551a0e57d81af834cfea2a8e45"
+  version "38.4"
+  sha256 "f1c650216d6280e705ae76a99de1421e567840719c2d35d45b9f3aa9c037cae7"
 
-  url "https://github.com/visualfc/liteide/releases/download/x#{version}/liteidex#{version}.macos-qt5.15.2.zip"
+  url "https://github.com/visualfc/liteide/releases/download/x#{version}/liteidex#{version}-macos-qt5.15.16.zip"
   name "LiteIDE"
   desc "Go IDE"
   homepage "https://github.com/visualfc/liteide"
@@ -13,9 +13,12 @@ cask "liteide" do
     strategy :github_latest
   end
 
-  depends_on macos: ">= :sierra"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "liteide/LiteIDE.app"
 
   # No zap stanza required
+  caveats do
+    requires_rosetta
+  end
 end

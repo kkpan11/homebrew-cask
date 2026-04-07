@@ -1,6 +1,6 @@
 cask "flycast" do
-  version "2.3"
-  sha256 "abf46c3ec2cf7059f765d23fe8bd7b9febac652f4b943188048f0c327aa06f0c"
+  version "2.6"
+  sha256 "1dc33d2a77b9c84d0ba1fe30a88f570701f15a47ffb40a306dc244b0a8213267"
 
   url "https://github.com/flyinghead/flycast/releases/download/v#{version}/flycast-macOS-#{version}.zip"
   name "Flycast"
@@ -9,13 +9,15 @@ cask "flycast" do
 
   livecheck do
     url :url
-    regex(/^v?(\d+(?:\.\d+)+)$/i)
+    strategy :github_latest
   end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "Flycast.app"
 
   zap rmdir: [
-    "/Library/Application Support/Flycast/",
+    "/Library/Application Support/Flycast",
     "~/.flycast",
     "~/.reicast",
   ]

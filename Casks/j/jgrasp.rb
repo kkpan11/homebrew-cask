@@ -1,6 +1,6 @@
 cask "jgrasp" do
-  version "2.0.6_16"
-  sha256 "4c1d70cea5cae2384886e159123f68cffb43bb01273958c57ff3fcad34479618"
+  version "2.0.6_19"
+  sha256 "3c0970328d34c95f5ddff02d60eeb0d34aeaeaf93ae7dd2f392afeea9afa6dfc"
 
   url "https://jgrasp.org/dl4g/jgrasp/jgrasp#{version.no_dots}.pkg"
   name "jgrasp"
@@ -15,6 +15,13 @@ cask "jgrasp" do
   pkg "jgrasp#{version.no_dots}.pkg"
 
   uninstall pkgutil: "jgrasp"
+
+  zap trash: [
+    "~/Library/Application Support/jGRASP",
+    "~/Library/Caches/org.jgrasp.jGRASP",
+    "~/Library/Preferences/org.jgrasp.jGRASP.plist",
+    "~/Library/Saved Application State/org.jgrasp.jGRASP.savedState",
+  ]
 
   caveats do
     depends_on_java "11+"

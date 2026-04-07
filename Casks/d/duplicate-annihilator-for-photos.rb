@@ -5,7 +5,7 @@ cask "duplicate-annihilator-for-photos" do
   url "https://brattoo.com/propaganda/downloadDap.php"
   name "Duplicate Annihilator for Photos"
   desc "Photo duplicate detector"
-  homepage "https://brattoo.com/propaganda/"
+  homepage "https://brattoo.com/duplicateannihilator/"
 
   livecheck do
     url :url

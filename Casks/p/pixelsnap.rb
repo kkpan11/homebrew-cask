@@ -1,11 +1,12 @@
 cask "pixelsnap" do
-  version "2.5.4"
-  sha256 "cc87e808901c88aa8cf7ac4a068655c89c52b4ddbb8c0ea667cbcf0247a6bcbb"
+  version "2.6.2"
+  sha256 "2b0b4934523fadb58e5ccb7214325cee19008ec044f36ebab88e8a75787a7ded"
 
-  url "https://updates.getpixelsnap.com/v#{version.major}/PixelSnap-#{version.major}-#{version}.dmg"
+  url "https://updates.getpixelsnap.com/v#{version.major}/PixelSnap-#{version.major}-#{version}.dmg",
+      verified: "updates.getpixelsnap.com/"
   name "PixelSnap"
   desc "Screen measuring tool"
-  homepage "https://getpixelsnap.com/"
+  homepage "https://pixelsnap.com/"
 
   livecheck do
     url "https://updates.getpixelsnap.com/v#{version.major}/appcast.xml"
@@ -19,7 +20,6 @@ cask "pixelsnap" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "PixelSnap #{version.major}.app"
 

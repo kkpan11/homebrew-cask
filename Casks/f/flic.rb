@@ -14,4 +14,9 @@ cask "flic" do
   end
 
   app "Flic.app"
+
+  zap trash: [
+    "~/Library/Application Scripts/com.shortcutlabs.FlicMac",
+    "~/Library/Containers/com.shortcutlabs.FlicMac",
+  ]
 end

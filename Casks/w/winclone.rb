@@ -1,6 +1,6 @@
 cask "winclone" do
-  version "10.3"
-  sha256 "907ffff3da10c2b6cdf32276001e581966e457b6eb4fc383055b1c015c8b8329"
+  version "10.5"
+  sha256 "cf19db5220339eb157aacf4cf1e179de783f9570fcb53b074861905da3ae6a40"
 
   url "https://twocanoes-software-updates.s3.amazonaws.com/Winclone#{version.major}.dmg",
       verified: "twocanoes-software-updates.s3.amazonaws.com/"
@@ -13,18 +13,15 @@ cask "winclone" do
     strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :catalina"
-
   pkg "Winclone.pkg"
 
-  uninstall_preflight do
-    system_command "/usr/sbin/installer",
-                   args:         ["-pkg", "#{staged_path}/Uninstaller/Uninstall Winclone.pkg", "-target", "/"],
-                   sudo:         true,
-                   sudo_as_root: true
-  end
-
   uninstall signal:  ["TERM", "com.twocanoes.Winclone#{version.major}"],
+            script:  {
+              executable:   "/usr/sbin/installer",
+              args:         ["-pkg", "#{staged_path}/Uninstaller/Uninstall Winclone.pkg", "-target", "/"],
+              sudo:         true,
+              must_succeed: false,
+            },
             pkgutil: "com.twocanoes.pkg.Winclone*"
 
   zap trash: [

@@ -1,12 +1,17 @@
 cask "mongodb-realm-studio" do
-  version "15.0.0"
-  sha256 "f7d0e2380fc9836059107b24470b6c7066ee477b67ce71a9874f29940caa96e0"
+  version "15.2.1"
+  sha256 "cdc7af2ccd8de7055f3a7fef59db8a0bc7154eed7ddb2a3a70dc60231b7b7a58"
 
   url "https://github.com/realm/realm-studio/releases/download/v#{version}/Realm.Studio-#{version}.dmg",
       verified: "github.com/realm/realm-studio/"
   name "Realm Studio"
   desc "Tool for the Realm Database and Realm Platform"
   homepage "https://realm.io/products/realm-studio/"
+
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
 
   auto_updates true
 
@@ -21,4 +26,8 @@ cask "mongodb-realm-studio" do
     "~/Library/Preferences/io.realm.realm-studio.plist",
     "~/Library/Saved Application State/io.realm.realm-studio.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

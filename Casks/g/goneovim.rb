@@ -1,8 +1,11 @@
 cask "goneovim" do
-  version "0.6.8"
-  sha256 "f2bcb700d525a3a03af0c7d65f7c2a978e37ce695631846668fbf3a771e73761"
+  arch arm: "arm64", intel: "x86_64"
 
-  url "https://github.com/akiyosi/goneovim/releases/download/v#{version}/Goneovim-v#{version}-macos.tar.bz2"
+  version "0.6.17"
+  sha256 arm:   "baba9f98917a474d308127ba615b896700732a644bf880f0b8290a5cf2947425",
+         intel: "0835f2726dbb75bbe4d2a7278acba9865c006f5489fa112521aba61dddadd0f8"
+
+  url "https://github.com/akiyosi/goneovim/releases/download/v#{version}/Goneovim-v#{version}-macos-#{arch}.tar.bz2"
   name "Goneovim"
   desc "Neovim GUI written in Golang, using a Golang qt backend"
   homepage "https://github.com/akiyosi/goneovim"
@@ -12,9 +15,12 @@ cask "goneovim" do
     strategy :github_latest
   end
 
-  depends_on formula: "neovim"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
-  app "goneovim-v#{version}-macos/goneovim.app"
+  depends_on formula: "neovim"
+  depends_on macos: ">= :big_sur"
+
+  app "goneovim-v#{version}-macos-#{arch}/goneovim.app"
   # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)
   shimscript = "#{staged_path}/goneovim.wrapper.sh"
   binary shimscript, target: "goneovim"

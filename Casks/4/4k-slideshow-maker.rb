@@ -12,8 +12,6 @@ cask "4k-slideshow-maker" do
     regex(/href=.*?4kslideshowmaker[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
   end
 
-  depends_on macos: ">= :high_sierra"
-
   app "4K Slideshow Maker.app"
 
   zap trash: [
@@ -21,4 +19,8 @@ cask "4k-slideshow-maker" do
     "~/Library/Preferences/com.4kdownload.4K Slideshow Maker.plist",
     "~/Library/Saved Application State/com.openmedia.4kslideshowmaker.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

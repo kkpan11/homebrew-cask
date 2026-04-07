@@ -13,11 +13,9 @@ cask "wondershare-filmora" do
   livecheck do
     url "https://crm.wondershare.com/api/v1/support/718/release-versions"
     strategy :json do |json|
-      json["data"].map { |release| release["version_name"] }
+      json["data"]&.map { |release| release["version_name"] }
     end
   end
-
-  depends_on macos: ">= :catalina"
 
   app "Wondershare Filmora Mac.app"
 

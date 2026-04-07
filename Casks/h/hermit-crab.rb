@@ -12,6 +12,8 @@ cask "hermit-crab" do
     strategy :sparkle
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   auto_updates true
 
   app "Hermit Crab.app"
@@ -19,4 +21,8 @@ cask "hermit-crab" do
   uninstall quit: "com.belkadan.Hermit-Crab"
 
   zap trash: "~/Library/Preferences/com.belkadan.Hermit-Crab.plist"
+
+  caveats do
+    requires_rosetta
+  end
 end

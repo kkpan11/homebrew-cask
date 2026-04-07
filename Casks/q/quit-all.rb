@@ -1,6 +1,6 @@
 cask "quit-all" do
-  version "1.3.2"
-  sha256 "ba4d982554832f963c238772d7387ced4e70332f8a42195fabec5d5fdadbed7b"
+  version "1.3.6"
+  sha256 "e5c5e797b4b1e35bbc24f9fce495efce9f48d4507f10dddd16295e737e1e12f8"
 
   url "https://amicoapps.com/wp-content/updates/quitall-#{version}.zip"
   name "QuitAll"
@@ -12,11 +12,10 @@ cask "quit-all" do
     strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :catalina"
-
   app "QuitAll.app"
 
   zap trash: [
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.quitallapp.quitall-paddle.sfl*",
     "~/Library/Application Support/com.quitallapp.quitall-paddle",
     "~/Library/Application Support/Quit All",
     "~/Library/Caches/com.quitallapp.quitall-paddle",

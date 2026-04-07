@@ -1,27 +1,28 @@
 cask "dolphin" do
-  version "5.0"
-  sha256 "1e7127cf9b110c5d7feabc0d05f620bad31d0f47a1d16e1f46e2e402d0ec233c"
+  version "2603a"
+  sha256 "2b7ddd8b18e0b0e8b492cfd5385da28014a5497061dc2d807222bb3cc4575dfd"
 
-  url "https://dl-mirror.dolphin-emu.org/#{version}/dolphin-#{version}.dmg"
+  url "https://dl.dolphin-emu.org/releases/#{version}/dolphin-#{version}-universal.dmg"
   name "Dolphin"
   desc "Emulator to play GameCube and Wii games"
   homepage "https://dolphin-emu.org/"
 
   livecheck do
-    url "https://dolphin-emu.org/download/"
-    regex(/href=.*?dolphin[._-]v?(\d+(?:\.\d+)+)(?:[._-]universal)?\.dmg/i)
+    url "https://dolphin-emu.org/update/latest/beta/"
+    strategy :json do |json|
+      json["shortrev"]
+    end
   end
 
-  conflicts_with cask: [
-    "homebrew/cask-versions/dolphin-beta",
-    "homebrew/cask-versions/dolphin-dev",
-  ]
-  depends_on macos: ">= :catalina"
+  auto_updates true
+  conflicts_with cask: "dolphin@dev"
+  depends_on macos: ">= :big_sur"
 
   app "Dolphin.app"
 
   zap trash: [
     "~/Library/Application Support/Dolphin",
     "~/Library/Preferences/org.dolphin-emu.dolphin.plist",
+    "~/Library/Saved Application State/org.dolphin-emu.dolphin.savedState",
   ]
 end

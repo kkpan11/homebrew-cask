@@ -1,20 +1,23 @@
 cask "tor-browser" do
-  version "13.0.13"
-  sha256 "a060a329c4574d4eca2c6a3e447493073875cd5c2088b60a09eb801a9c4965fd"
+  version "15.0.8"
+  sha256 "5f412aaa4eca23dee709384ff67fcd2a7f2c826e773dc5a315799fd4b6944455"
 
-  url "https://archive.torproject.org/tor-package-archive/torbrowser/#{version}/tor-browser-macos-#{version}.dmg"
+  url "https://www.torproject.org/dist/torbrowser/#{version}/tor-browser-macos-#{version}.dmg"
   name "Tor Browser"
   desc "Web browser focusing on security"
   homepage "https://www.torproject.org/"
 
+  # Upstream may publish a new version for platforms other than macOS. The JSON
+  # download information only provides information for the highest version,
+  # which is a problem if the newest version for macOS is lower. This checks
+  # the download page instead, which links to the newest file for macOS.
   livecheck do
     url "https://www.torproject.org/download/"
-    regex(%r{href=.*?/tor[._-]browser[._-]macos[._-]v?(\d+(?:.\d+)*)\.dmg}i)
+    regex(/href=.*?tor-browser(?:-macos)?[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
   end
 
   auto_updates true
-  conflicts_with cask: "homebrew/cask-versions/tor-browser-alpha"
-  depends_on macos: ">= :sierra"
+  conflicts_with cask: "tor-browser@alpha"
 
   app "Tor Browser.app"
 

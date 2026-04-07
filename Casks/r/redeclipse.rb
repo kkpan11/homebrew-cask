@@ -5,7 +5,10 @@ cask "redeclipse" do
   url "https://github.com/redeclipse/base/releases/download/v#{version}/redeclipse_#{version}_mac.tar.bz2",
       verified: "github.com/redeclipse/base/"
   name "Red Eclipse"
+  desc "Multiplayer & singleplayer first person shooter"
   homepage "https://www.redeclipse.net/"
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "redeclipse.app"
 end

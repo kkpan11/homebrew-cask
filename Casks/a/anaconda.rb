@@ -1,9 +1,18 @@
 cask "anaconda" do
   arch arm: "arm64", intel: "x86_64"
 
-  version "2024.02-1"
-  sha256 arm:   "14a1c80af18c2c2e743e63cdb41228cd554a3fdb250563b6978348c80b6860f6",
-         intel: "944aee9b90f7d8a2a997d0337cb37219757f22e76c10de38c7c68191c6b5b226"
+  on_arm do
+    version "2025.12-2"
+    sha256 "8d0b858358456d4ee159feb0c4ee6d635590b777f8b9ffa4aa7553c469aae2b6"
+  end
+  on_intel do
+    version "2025.06-1"
+    sha256 "58139fe195337f3041259e3a611339ed3afa4d164cc9aa2a7e8e84c0673e3670"
+
+    # https://www.anaconda.com/blog/intel-mac-package-support-deprecation
+    deprecate! date: "2025-12-10", because: :discontinued
+    disable! date: "2026-12-10", because: :discontinued
+  end
 
   url "https://repo.anaconda.com/archive/Anaconda3-#{version}-MacOSX-#{arch}.sh"
   name "Anaconda Distribution"
@@ -12,7 +21,7 @@ cask "anaconda" do
 
   livecheck do
     url "https://repo.anaconda.com/archive/"
-    regex(/Anaconda3-(\d+(?:\.\d+)+[._-]*\d+)-MacOSX-#{arch}\.sh/i)
+    regex(/href=.*?Anaconda3[._-]v?(\d+(?:[.-]\d+)+)[._-]MacOSX?[._-]#{arch}\.sh/i)
   end
 
   auto_updates true

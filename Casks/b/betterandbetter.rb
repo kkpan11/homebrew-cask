@@ -1,29 +1,38 @@
 cask "betterandbetter" do
-  version "2.6.0"
-  sha256 "2ce312fd95032b8aed75183898c7551b6d0a70f56985f9e9a4a2d678e3314654"
+  version "2.7.7,2026040601"
+  sha256 "304c7d57dd999fedd87b9baf14c4b1bc2125ad74d4b71cfaa266057eae3af3c0"
 
-  url "https://cdn.better365.cn/BetterAndBetter/BetterAndBetter#{version}Beta.dmg"
+  url "https://cdn.better365.cn/BetterAndBetter/#{version.csv.second[0, 4]}/BetterAndBetter_#{version.csv.first}_#{version.csv.second}.zip"
   name "Better And Better"
   desc "Keyboard, mouse and touchpad motion gestures"
   homepage "https://www.better365.cn/bab2.html"
 
+  # The Sparkle item version doesn't always strictly correspond to the number
+  # the file name (i.e. there can be typos), so this matches the version parts
+  # from the file name instead.
   livecheck do
     url "https://www.better365.cn/BetterAndBetterUpdate.xml"
-    strategy :sparkle, &:short_version
+    regex(/BetterAndBetter[._-]v?(\d+(?:[._]\d+)+)/i)
+    strategy :sparkle do |item, regex|
+      match = item.url&.match(regex)
+      next unless match
+
+      match[1].tr("_", ",")
+    end
   end
 
-  pkg "BetterAndBetter#{version}Beta.pkg"
+  auto_updates true
 
-  uninstall launchctl: "cn.better365.BetterAndBetterHelper",
-            quit:      "cn.better365.BetterAndBetter",
-            pkgutil:   [
-              "cn.better365.BetterAndBetter",
-              "cn.better365.BetterAndBetterHelper",
-            ]
+  app "BetterAndBetter.app"
 
   zap trash: [
     "~/Library/Application Support/BetterAndBetter",
     "~/Library/Application Support/cn.better365.BetterAndBetter",
     "~/Library/Caches/cn.better365.BetterAndBetter",
+    "~/Library/HTTPStorages/cn.better365.BetterAndBetter",
+    "~/Library/HTTPStorages/cn.better365.BetterAndBetter.binarycookies",
+    "~/Library/Preferences/cn.better365.BetterAndBetter.plist",
+    "~/Library/Preferences/com.better365.BetterAndBetterHelper.plist",
+    "~/Library/WebKit/com.better365.BetterAndBetter",
   ]
 end

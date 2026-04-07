@@ -1,8 +1,11 @@
 cask "bluebubbles" do
-  version "1.9.6"
-  sha256 "6289bc5d44a32e82a5b9d551b884c6f38a805d26e3982f4a734290c77c58059b"
+  arch arm: "-arm64"
 
-  url "https://github.com/BlueBubblesApp/bluebubbles-server/releases/download/v#{version}/BlueBubbles-#{version}.dmg",
+  version "1.9.9"
+  sha256 arm:   "fafd650c883f52e7494a6625e45249f2144d197378a4d57143ccf6198bb2e862",
+         intel: "9681e65f60214a6a95f3bd12b57bd4cc8ad6d8f58cd9c1d8811b2a4606ad7c04"
+
+  url "https://github.com/BlueBubblesApp/bluebubbles-server/releases/download/v#{version}/BlueBubbles-#{version}#{arch}.dmg",
       verified: "github.com/BlueBubblesApp/bluebubbles-server/"
   name "BlueBubbles"
   desc "Server for forwarding iMessages"
@@ -13,7 +16,7 @@ cask "bluebubbles" do
     strategy :github_latest
   end
 
-  depends_on macos: ">= :high_sierra"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "BlueBubbles.app"
 

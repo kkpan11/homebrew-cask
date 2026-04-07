@@ -1,19 +1,18 @@
 cask "libcblite" do
-  version "3.1.6"
-  sha256 "1726fd220cf02e2792cabb50f425d7549f99bf45ff39a9f034ebd402830ba53a"
+  version "4.0.3"
+  sha256 "e4ddd88181f7781e767b9c66ac2bb17e058a2968cf6c1f6ed434c1313f5cc695"
 
   url "https://packages.couchbase.com/releases/couchbase-lite-c/#{version}/couchbase-lite-c-enterprise-#{version}-macos.zip"
   name "Couchbase Lite (Enterprise Edition)"
   desc "Couchbase Lite Libraries for C and C++ (Enterprise Edition)"
-  homepage "https://www.couchbase.com/products/lite"
+  homepage "https://docs.couchbase.com/couchbase-lite/current/"
 
   livecheck do
-    url "http://appcast.couchbase.com/couchbase-lite-version.txt"
-    regex(/(\d+(?:\.\d+)+)/i)
+    url "https://docs.couchbase.com/couchbase-lite/current/c/gs-downloads.html"
+    regex(/href=.*?couchbase[._-]lite[._-]c[._-]enterprise[._-]v?(\d+(?:\.\d+)+)[._-]macos\.zip/i)
   end
 
   conflicts_with cask: "libcblite-community"
-  depends_on macos: ">= :mojave"
 
   artifact "libcblite-#{version}/include/cbl", target: "#{HOMEBREW_PREFIX}/include/cbl"
   artifact "libcblite-#{version}/include/fleece", target: "#{HOMEBREW_PREFIX}/include/fleece"
@@ -27,8 +26,10 @@ cask "libcblite" do
   end
 
   uninstall_postflight do
-    puts "Removing library symlinks in #{HOMEBREW_PREFIX}/lib"
-    File.unlink("#{HOMEBREW_PREFIX}/lib/libcblite.#{version.major}.dylib", "#{HOMEBREW_PREFIX}/lib/libcblite.dylib")
+    if File.symlink?("#{HOMEBREW_PREFIX}/lib/libcblite.#{version.major}.dylib")
+      puts "Removing library symlinks in #{HOMEBREW_PREFIX}/lib"
+      File.unlink("#{HOMEBREW_PREFIX}/lib/libcblite.#{version.major}.dylib", "#{HOMEBREW_PREFIX}/lib/libcblite.dylib")
+    end
   end
 
   # No zap stanza required

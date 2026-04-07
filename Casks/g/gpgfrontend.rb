@@ -1,25 +1,43 @@
 cask "gpgfrontend" do
-  version "2.1.2"
+  macos_version = nil
 
-  on_big_sur do
-    sha256 "46b285779f9674438df79a660c76a8baafa9aa25c788f20f6200d652cb1e78ff"
+  version "2.1.10"
 
-    url "https://github.com/saturneric/GpgFrontend/releases/download/v#{version}/GpgFrontend-#{version}-macos-11.dmg",
-        verified: "github.com/saturneric/GpgFrontend/"
+  on_arm do
+    on_ventura :or_older do
+      macos_version = 13
+
+      sha256 "f611956a9b3d7b8a2dfda11a93ebe10ef64100e144890df5efcbd61a4aeb5a37"
+
+      caveats do
+        requires_rosetta
+      end
+    end
+    on_sonoma do
+      macos_version = 14
+
+      sha256 "ae8af5945ac28ec214cb1eee8ae9e034de24f7e4519d5e6bce22bde17a983393"
+    end
+    on_sequoia :or_newer do
+      macos_version = 15
+
+      sha256 "28b05ae0b5e013e3de3d47006a1557d52557d09234313c586c3e4b2dd9ffa0a1"
+    end
   end
-  on_monterey :or_newer do
-    sha256 "d9ad042487a56800e44aff7111f03a0757ef1580c771ed99627cab988196cb67"
+  on_intel do
+    macos_version = 13
 
-    url "https://github.com/saturneric/GpgFrontend/releases/download/v#{version}/GpgFrontend-#{version}-macos-12.dmg",
-        verified: "github.com/saturneric/GpgFrontend/"
+    sha256 "f611956a9b3d7b8a2dfda11a93ebe10ef64100e144890df5efcbd61a4aeb5a37"
   end
 
+  url "https://github.com/saturneric/GpgFrontend/releases/download/v#{version}/GpgFrontend-#{version}-macos-#{macos_version}.dmg",
+      verified: "github.com/saturneric/GpgFrontend/"
   name "GpgFrontend"
   desc "OpenPGP/GnuPG crypto, sign and key management tool"
   homepage "https://gpgfrontend.bktus.com/"
 
-  depends_on macos: ">= :big_sur"
   depends_on formula: "gnupg"
+  depends_on macos: ">= :ventura"
 
   app "GpgFrontend.app"
 

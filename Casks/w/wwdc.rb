@@ -1,6 +1,6 @@
 cask "wwdc" do
-  version "7.4.2,1040"
-  sha256 "023abb817eb971eb514c27c53a0e1fb55913e680e7293742201ed0a69df6faa5"
+  version "7.5,1044"
+  sha256 "539aead52153a6decde115ba75f5a60848cbbdbd7bca3472347e5fc9d449d20c"
 
   url "https://github.com/insidegui/WWDC/releases/download/#{version.csv.first}/WWDC_v#{version.csv.first}-#{version.csv.second}.dmg",
       verified: "github.com/insidegui/WWDC/"
@@ -9,20 +9,12 @@ cask "wwdc" do
   homepage "https://wwdc.io/"
 
   livecheck do
-    url :url
-    regex(/^WWDC[._-]v?(\d+(?:[.-]\d+)+)\.dmg$/i)
-    strategy :github_latest do |json, regex|
-      json["assets"]&.map do |asset|
-        match = asset["name"]&.match(regex)
-        next if match.blank?
-
-        match[1].tr("-", ",")
-      end
-    end
+    url "https://github.com/insidegui/WWDC/raw/master/Releases/appcast_v5.xml"
+    strategy :sparkle
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :monterey"
 
   app "WWDC.app"
 

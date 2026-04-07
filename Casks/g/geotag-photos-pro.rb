@@ -1,8 +1,8 @@
 cask "geotag-photos-pro" do
-  version "1.9.7"
-  sha256 "4cf4414fad5c9c472f8c334b543868d8d6b9d0a3a90736285dd2ec0be3ee3238"
+  version "1.9.8"
+  sha256 "2a4bf21074fb45f51d69f3ce3744a3510dff87ae8de39451040552df5e7d6017"
 
-  url "https://github.com/tappytaps/geotag-desktop-app/releases/download/v#{version}/Geotag-Photos-Pro-2-#{version}.dmg",
+  url "https://github.com/tappytaps/geotag-desktop-app/releases/download/v#{version}/Geotag-Photos-Pro-2-#{version}-universal.dmg",
       verified: "github.com/tappytaps/geotag-desktop-app/"
   name "Geotag Photos Pro"
   desc "Geotagging software"
@@ -14,4 +14,12 @@ cask "geotag-photos-pro" do
   end
 
   app "Geotag Photos Pro 2.app"
+
+  zap trash: [
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.tappytaps.geotagphotosdesktop.sfl*",
+    "~/Library/Application Support/Geotag Photos Pro*",
+    "~/Library/Logs/Geotag Photos Pro*",
+    "~/Library/Preferences/com.tappytaps.geotagphotosdesktop.plist",
+    "~/Library/Saved Application State/com.tappytaps.geotagphotosdesktop.savedState",
+  ]
 end

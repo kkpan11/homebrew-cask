@@ -7,7 +7,14 @@ cask "dictunifier" do
   desc "Dictionary conversion tool"
   homepage "https://github.com/jjgod/mac-dictionary-kit/"
 
+  deprecate! date: "2024-07-10", because: :unmaintained
+  disable! date: "2025-07-10", because: :unmaintained
+
   app "DictUnifier.app"
 
   zap trash: "~/Library/Saved Application State/org.jjgod.DictUnifier.savedState"
+
+  caveats do
+    requires_rosetta
+  end
 end

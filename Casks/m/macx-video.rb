@@ -7,10 +7,8 @@ cask "macx-video" do
   desc "4K video processing software"
   homepage "https://www.videoproc.com/macxvideo/"
 
-  livecheck do
-    url :url
-    strategy :extract_plist
-  end
+  deprecate! date: "2024-07-15", because: :discontinued
+  disable! date: "2025-07-15", because: :discontinued
 
   app "macXvideo.app"
 
@@ -20,4 +18,8 @@ cask "macx-video" do
     "~/Library/Preferences/com.digiarty.macXvideo.plist",
     "~/Library/Saved Application State/com.digiarty.macXvideo.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

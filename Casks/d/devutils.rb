@@ -12,13 +12,19 @@ cask "devutils" do
     strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :high_sierra"
+  auto_updates true
 
   app "DevUtils.app"
 
   zap trash: [
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/tonyapp.devutils.sfl*",
+    "~/Library/Application Support/tonyapp.devutils",
+    "~/Library/Caches/com.plausiblelabs.crashreporter.data/tonyapp.devutils*",
     "~/Library/Caches/DevUtils",
     "~/Library/Caches/tonyapp.devutils",
-    "~/Library/Preferences/tonyapp.devutils",
+    "~/Library/HTTPStorages/tonyapp.devutils",
+    "~/Library/Preferences/tonyapp.devutils.plist",
+    "~/Library/Saved Application State/tonyapp.devutils.savedState",
+    "~/Library/WebKit/tonyapp.devutils",
   ]
 end

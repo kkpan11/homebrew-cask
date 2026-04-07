@@ -1,8 +1,8 @@
 cask "key-codes" do
-  version "2.2.1"
-  sha256 :no_check
+  version "2.2.3"
+  sha256 "1228476da2fe3ad32fed885405c6b96dcdcdc3eea5dd77caf2337149b4895b87"
 
-  url "https://manytricks.com/download/keycodes"
+  url "https://manytricks.com/download/_do_not_hotlink_/keycodes#{version.no_dots}.dmg"
   name "Key Codes"
   desc "Display key code, unicode value and modifier keys state for any key combination"
   homepage "https://manytricks.com/keycodes/"

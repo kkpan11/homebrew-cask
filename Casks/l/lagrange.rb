@@ -1,23 +1,23 @@
 cask "lagrange" do
   arch arm: "11.0-arm64", intel: "10.13-x86_64"
+  livecheck_arch = on_arch_conditional arm: "arm64", intel: "x86_64"
 
-  version "1.17.6"
-  sha256 arm:   "59509b262aea846c7eaee833a3aebb69883f3a72e6db38abecd5b5a498d35616",
-         intel: "28cb0f576a7fb4b85b0418424b73aefc813be88ed27027f5a008cc8146138926"
+  version "1.20.3"
+  sha256 arm:   "e3c546ca8686e07650698d1204bf9bb7069f8df30764225a60d03e93c1da90fa",
+         intel: "6a27e8b8cba7d6049cb2ad505563bbbe93e433a36680c8fdecb5516a12dec525"
 
-  url "https://github.com/skyjake/lagrange/releases/download/v#{version}/lagrange_v#{version}_macos#{arch}.tbz",
-      verified: "github.com/skyjake/lagrange/"
+  url "https://git.skyjake.fi/gemini/lagrange/releases/download/v#{version}/lagrange_v#{version}_macos#{arch}.tbz"
   name "Lagrange"
   desc "Desktop GUI client for browsing Geminispace"
   homepage "https://gmi.skyjake.fi/lagrange/"
 
   livecheck do
-    url :url
-    strategy :github_latest
+    url "https://etc.skyjake.fi/lagrange/appcast-#{livecheck_arch}.xml"
+    strategy :sparkle
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :big_sur"
 
   app "Lagrange.app"
 

@@ -13,5 +13,17 @@ cask "qxmledit" do
     regex(%r{url=.*?/QXmlEdit[._-]v?(\d+(?:\.\d+)+)\.dmg}i)
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "QXmlEdit.app"
+
+  zap trash: [
+    "~/Library/Application Support/QXmlEdit",
+    "~/Library/Preferences/org.qxmledit.QXmlEdit.plist",
+    "~/Library/Saved Application State/org.qxmledit.QXmlEdit.savedState",
+  ]
+
+  caveats do
+    requires_rosetta
+  end
 end

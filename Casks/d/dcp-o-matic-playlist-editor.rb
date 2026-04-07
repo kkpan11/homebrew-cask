@@ -1,15 +1,13 @@
 cask "dcp-o-matic-playlist-editor" do
-  version "2.16.79"
-  sha256 "5f5d2b1fc79d42e0085a778d8f1fbdb33df025b9e0f879c69d11d362c32e694a"
+  version "2.18.21"
+  sha256 "e53fd0c816216ff716821e080c5b93aaf626f5eb8abe86d1279e9d2198732114"
 
   url "https://dcpomatic.com/dl.php?id=osx-10.10-playlist&version=#{version}"
   name "DCP-o-matic Playlist Editor"
   desc "Convert video, audio and subtitles into DCP (Digital Cinema Package)"
   homepage "https://dcpomatic.com/"
 
-  livecheck do
-    cask "dcp-o-matic"
-  end
+  disable! date: "2025-07-28", because: "cannot be reliably fetched due to Cloudflare protections"
 
   app "DCP-o-matic #{version.major} Playlist Editor.app"
 

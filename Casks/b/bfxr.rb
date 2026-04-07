@@ -7,10 +7,12 @@ cask "bfxr" do
   desc "Make sound effects for computer games"
   homepage "https://www.bfxr.net/"
 
-  livecheck do
-    url :url
-    strategy :extract_plist
-  end
+  deprecate! date: "2024-07-04", because: :discontinued
+  disable! date: "2025-07-04", because: :discontinued
 
   app "Bfxr.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

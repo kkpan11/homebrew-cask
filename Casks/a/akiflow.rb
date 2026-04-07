@@ -1,17 +1,27 @@
 cask "akiflow" do
-  version "2.38.9"
-  sha256 "45adb1d9cc84a778705fe5116e6f4d08772c2c42380622246c25c3eb5a5c3947"
+  version "2.70.7,6676a46d"
+  sha256 "4bf154e15fca4341d92ef90d72d165f576fc729333715819913900b38719aca0"
 
-  url "https://download.akiflow.com/builds/Akiflow-#{version}-universal.dmg"
+  url "https://download.akiflow.com/builds/Akiflow-#{version.csv.first}-#{version.csv.second}-universal.dmg"
   name "Akiflow"
-  desc "Time blocking platform to save 2 hours every day"
+  desc "Time blocking and productivity platform"
   homepage "https://akiflow.com/"
 
   livecheck do
-    skip "Constantly changes between download page and direct download"
+    url "https://download.akiflow.com/builds/latest-mac.yml"
+    regex(/Akiflow[._-](\d+(?:\.\d+)+)[._-](\h+)[._-]universal\.dmg/i)
+    strategy :electron_builder do |yaml, regex|
+      yaml["files"]&.map do |item|
+        match = item["url"]&.match(regex)
+        next if match.blank?
+
+        "#{match[1]},#{match[2]}"
+      end
+    end
   end
 
-  depends_on macos: ">= :high_sierra"
+  auto_updates true
+  depends_on macos: ">= :monterey"
 
   app "Akiflow.app"
 

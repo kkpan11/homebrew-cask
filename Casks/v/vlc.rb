@@ -1,9 +1,9 @@
 cask "vlc" do
   arch arm: "arm64", intel: "intel64"
 
-  version "3.0.20"
-  sha256 arm:   "5d5f0ee52d81982a622f4021928a64b4705a9554499e20c33d0bac22590b118e",
-         intel: "a4dc1441fcab8e2b90c62974ce5399bb88acbf6c70d54f21c6158d9fb1fba279"
+  version "3.0.23"
+  sha256 arm:   "fc6fac08d87f538517d44aca0c5e7a244b67c8c4cb589bf478363a7315fd5e0d",
+         intel: "ec01530ce69d849dd057fba8876e68ac39bf279dc28de4e9c04e4aec11fc98db"
 
   url "https://get.videolan.org/vlc/#{version}/macosx/vlc-#{version}-#{arch}.dmg"
   name "VLC media player"
@@ -16,7 +16,7 @@ cask "vlc" do
   end
 
   auto_updates true
-  conflicts_with cask: "homebrew/cask-versions/vlc-nightly"
+  conflicts_with cask: "vlc@nightly"
 
   app "VLC.app"
   # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)

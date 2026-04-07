@@ -1,6 +1,6 @@
 cask "mplab-xc8" do
-  version "2.46"
-  sha256 "4a105af1472147f3a124ce5e7661266bbf716321a5a67313f0617551df61f243"
+  version "3.10"
+  sha256 "42569224273f43ae3f6a4d14d675766df17b0e99044c316e0b3b49d2d1a14145"
 
   url "https://ww1.microchip.com/downloads/aemDocuments/documents/DEV/ProductDocuments/SoftwareTools/xc8-v#{version}-full-install-macos-x64-installer.dmg"
   name "MPLab XC8 Compiler"
@@ -8,7 +8,8 @@ cask "mplab-xc8" do
   homepage "https://www.microchip.com/mplab/compilers"
 
   livecheck do
-    url "https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers/xc8"
+    url "https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers/xc8",
+        user_agent: :browser
     regex(%r{href=.*?ProductDocuments/SoftwareTools/xc8[._-]v?(\d+(?:\.\d+)+)-full-install-macos-x64-installer\.dmg}i)
   end
 
@@ -19,16 +20,16 @@ cask "mplab-xc8" do
       "--unattendedmodeui", "none",
       "--ModifyAll", "0",
       "--netservername", '""',
-      "--LicenseType", "FreeMode",
+      "--LicenseType", "WorkstationMode",
       "--prefix", staged_path.to_s
     ],
     input:      ["y"],
     sudo:       true,
   }
   binary "#{staged_path}/bin/xc-ccov"
-  binary "#{staged_path}/bin/xc8"
   binary "#{staged_path}/bin/xc8-ar"
   binary "#{staged_path}/bin/xc8-cc"
+  binary "#{staged_path}/bin/xc8-clangd"
   binary "#{staged_path}/bin/xclm"
 
   postflight do
@@ -40,4 +41,6 @@ cask "mplab-xc8" do
     args:       ["--mode", "unattended"],
     sudo:       true,
   }
+
+  # No zap stanza required
 end

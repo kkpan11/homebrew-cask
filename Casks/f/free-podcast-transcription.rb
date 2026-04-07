@@ -20,15 +20,13 @@ cask "free-podcast-transcription" do
     strategy :extract_plist
   end
 
-  depends_on macos: ">= :high_sierra"
-
   app "Free Podcast Transcription.app"
 
   zap trash: [
-    "~/Library/Application Support/com.spreaker.freepodcasttranscription/",
-    "~/Library/Caches/com.spreaker.freepodcasttranscription/",
+    "~/Library/Application Support/com.spreaker.freepodcasttranscription",
+    "~/Library/Caches/com.spreaker.freepodcasttranscription",
     "~/Library/Preferences/com.spreaker.freepodcasttranscription.plist",
-    "~/Library/Saved Application State/com.spreaker.freepodcasttranscription.savedState/",
-    "~/Library/WebKit/com.spreaker.freepodcasttranscription/",
+    "~/Library/Saved Application State/com.spreaker.freepodcasttranscription.savedState",
+    "~/Library/WebKit/com.spreaker.freepodcasttranscription",
   ]
 end

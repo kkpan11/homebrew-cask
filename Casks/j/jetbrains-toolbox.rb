@@ -1,9 +1,9 @@
 cask "jetbrains-toolbox" do
   arch arm: "-arm64"
 
-  version "2.2.3,2.2.3.20090"
-  sha256 arm:   "25f00c9022402e16c4a93c30abcd832bde60085d7bd37103c3156ef25e2727ca",
-         intel: "542fc6b1feb2dd071486f05792c15d18ab0241e2c22769f75c4af138cbd25b98"
+  version "3.4.1,3.4.1.78303"
+  sha256 arm:   "b66b2012026d0be666910ceda90270f0496f7f624622e4385f4c5cf649481f7d",
+         intel: "b0be9d44ca742082ad71ae42b1242fb33cf760bcefe40655e0b52cd8567ee480"
 
   url "https://download.jetbrains.com/toolbox/jetbrains-toolbox-#{version.csv.second}#{arch}.dmg"
   name "JetBrains Toolbox"
@@ -13,14 +13,17 @@ cask "jetbrains-toolbox" do
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release"
     strategy :json do |json|
-      json["TBA"].map do |release|
-        "#{release["version"]},#{release["build"]}"
+      json["TBA"]&.map do |release|
+        version = release["version"]
+        build = release["build"]
+        next if version.blank? || build.blank?
+
+        "#{version},#{build}"
       end
     end
   end
 
   auto_updates true
-  depends_on macos: ">= :mojave"
 
   app "JetBrains Toolbox.app"
 

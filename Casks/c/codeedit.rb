@@ -1,6 +1,6 @@
 cask "codeedit" do
-  version "0.1.0"
-  sha256 "0602900471039be43783d0192579349b19ebe936cd61ec382b5b63d4e0001962"
+  version "0.3.6"
+  sha256 "fa5478f80d591c15f08f5e7a93662b5baf33012718768bf0ae800b44ac4eeac9"
 
   url "https://github.com/CodeEditApp/CodeEdit/releases/download/v#{version}/CodeEdit.dmg",
       verified: "github.com/CodeEditApp/CodeEdit/"
@@ -8,6 +8,15 @@ cask "codeedit" do
   desc "Code editor"
   homepage "https://www.codeedit.app/"
 
+  # There can be a notable gap between when a version is tagged and a
+  # corresponding release is created, so we check the "latest" release instead
+  # of the Git tags.
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
+  auto_updates true
   depends_on macos: ">= :ventura"
 
   app "CodeEdit.app"

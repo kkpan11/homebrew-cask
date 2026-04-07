@@ -13,7 +13,19 @@ cask "encryptme" do
     strategy :sparkle, &:short_version
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   auto_updates true
+  depends_on macos: ">= :monterey"
 
   app "EncryptMe.app"
+
+  zap trash: [
+    "~/Library/Application Support/com.bourgeoisbits.cloak.agent",
+    "~/Library/Caches/com.bourgeoisbits.cloak.agent",
+    "~/Library/HTTPStorages/com.bourgeoisbits.cloak.agent",
+    "~/Library/HTTPStorages/com.bourgeoisbits.cloak.agent.binarycookies",
+    "~/Library/Preferences/com.bourgeoisbits.cloak.agent.plist",
+    "~/Library/WebKit/com.bourgeoisbits.cloak.agent",
+  ]
 end

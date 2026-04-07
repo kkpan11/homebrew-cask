@@ -7,12 +7,7 @@ cask "yubico-yubikey-manager" do
   desc "Application for configuring any YubiKey"
   homepage "https://developers.yubico.com/yubikey-manager-qt/"
 
-  livecheck do
-    url "https://developers.yubico.com/yubikey-manager-qt/Releases/"
-    regex(/href=.*?yubikey[._-]manager[._-]qt[._-]v?(\d+(?:\.\d+)+[a-z]?)[._-]mac\.pkg/i)
-  end
-
-  depends_on macos: ">= :sierra"
+  disable! date: "2025-07-27", because: :discontinued, replacement_cask: "yubico-authenticator"
 
   pkg "yubikey-manager-qt-#{version}-mac.pkg"
 

@@ -1,5 +1,5 @@
 cask "direqual" do
-  version "5.8.1,58105"
+  version "7.5.0.04"
   sha256 :no_check
 
   url "https://naarakstudio.com/download/DirEqual.dmg"
@@ -8,8 +8,13 @@ cask "direqual" do
   homepage "https://naarakstudio.com/direqual/"
 
   livecheck do
-    url :url
-    strategy :extract_plist
+    url "https://naarakstudio.com/download/direqual/update.ver"
+    regex(/v?(\d+(?:\.\d+)*):DirEqual\.dmg/i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map do |match|
+        match[0].split("", 4).join(".")
+      end
+    end
   end
 
   app "DirEqual.app"

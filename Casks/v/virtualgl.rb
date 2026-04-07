@@ -1,9 +1,9 @@
 cask "virtualgl" do
-  version "3.1"
-  sha256 "febcae980befdea6ea674e7fe8366cf6d36e603850565231fcfacd9560c995f1"
+  version "3.1.4"
+  sha256 "ea12422b2e1e3378c63a1fd1b37fa11b00303b7bf885aa49a1da295523b19a30"
 
-  url "https://downloads.sourceforge.net/virtualgl/VirtualGL-#{version}.dmg",
-      verified: "downloads.sourceforge.net/virtualgl/"
+  url "https://github.com/VirtualGL/virtualgl/releases/download/#{version}/VirtualGL-#{version}.dmg",
+      verified: "github.com/VirtualGL/virtualgl/"
   name "VirtualGL"
   desc "3D without boundaries"
   homepage "https://www.virtualgl.org/"
@@ -15,4 +15,6 @@ cask "virtualgl" do
               sudo:       true,
             },
             pkgutil: "com.virtualgl.vglclient"
+
+  # No zap stanza required
 end

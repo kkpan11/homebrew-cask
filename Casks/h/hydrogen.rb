@@ -1,6 +1,6 @@
 cask "hydrogen" do
-  version "1.2.3"
-  sha256 "a93321a565ecc8f629532a8309e59b2bc7efc15167fd8ee088a60cfb42433dd5"
+  version "1.2.6"
+  sha256 "05ba60a4c71745c591b22f472b80c79fdcdd0ef38bb3ef0b08b313d722e76811"
 
   url "https://github.com/hydrogen-music/hydrogen/releases/download/#{version}/Hydrogen-#{version}.dmg",
       verified: "github.com/hydrogen-music/hydrogen/"
@@ -13,9 +13,13 @@ cask "hydrogen" do
     strategy :github_latest
   end
 
-  depends_on macos: ">= :mojave"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "Hydrogen.app"
 
   zap trash: "~/Library/Application Support/Hydrogen"
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -1,6 +1,6 @@
 cask "screenfocus" do
-  version "1.1.23"
-  sha256 "f7c2ff9ec616c2bc316ddc796b87fcc003926cf8b1c6d366bf05093cbb6e99d1"
+  version "1.1.1"
+  sha256 "4b4bafc62e0f17896c11b3683cff2dbc7f4dc68f0d46a32c817bf9a6eb254959"
 
   url "https://www.apptorium.com/public/products/screenfocus/releases/ScreenFocus-#{version}.zip"
   name "ScreenFocus"
@@ -8,8 +8,8 @@ cask "screenfocus" do
   homepage "https://www.apptorium.com/screenfocus"
 
   livecheck do
-    url "https://www.apptorium.com/screenfocus/trial"
-    regex(/href=.*?ScreenFocus[._-]v?(\d+(?:\.\d+)+)\.zip/i)
+    url "https://www.apptorium.com/updates/screenfocus"
+    strategy :sparkle, &:short_version
   end
 
   app "ScreenFocus.app"

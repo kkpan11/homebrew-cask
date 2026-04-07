@@ -1,6 +1,6 @@
 cask "tdr-vos-slickeq" do
-  version "1.3.8"
-  sha256 "532221d58352ff9cf926f184079587b76b42ef623477280bf001955eca21b385"
+  version "1.3.9"
+  sha256 "9146a0e145680965c54296c68996a5982bd0e164b6fbfd767c8b26d32f8e70fa"
 
   url "https://www.tokyodawn.net/labs/SlickEQ/#{version}/TDR%20VOS%20SlickEQ.zip?x24775"
   name "TDR VOS SlickEQ"

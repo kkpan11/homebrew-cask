@@ -1,16 +1,22 @@
 cask "stack" do
-  version "2.11.1-20220906"
-  sha256 "d5b92e5f0070fbd1f92c36be58e0c979efcceb79b685dd7e665ebf165d70a82c"
+  arch arm: "arm64", intel: "x86_64"
 
-  url "https://filehosting-client.transip.nl/packages/stack/v#{version}/macos/stack-v#{version}.dmg"
+  version "6.0.2-20251124"
+  sha256 arm:   "21db02b3ffb7efa634115fa0976a6ca69840aa2bb346fc332fbaaa75c5da39ab",
+         intel: "bc1330291c618aef19537ba073e02f421a068a1d617af960775b24e11f3a737d"
+
+  url "https://filehosting-client.transip.nl/packages/stack/v#{version}/macos/stack-v#{version}.#{arch}.dmg"
   name "STACK"
   desc "Personal online hard drive to store, view and share files"
   homepage "https://www.transip.nl/stack/"
 
   livecheck do
-    url "https://filehosting-client.transip.nl/packages/stack/"
-    regex(%r{href=["'](?:.*?/)?v?(2(?:[.-]\d+)+)["' >]}i)
+    url "https://filehosting-client.transip.nl/packages/stack-macos-latest.#{arch}.dmg"
+    regex(/stack[._-]v?(\d(?:[.-]\d+)+)[._-]#{arch}\.dmg/i)
+    strategy :header_match
   end
+
+  depends_on macos: ">= :ventura"
 
   app "stack.app"
 
@@ -19,7 +25,7 @@ cask "stack" do
             pkgutil:    "nl.transip.stack"
 
   zap trash: [
-    "~/Library/Application Support/STACK/",
+    "~/Library/Application Support/STACK",
     "~/Library/Caches/nl.transip.stack",
   ]
 end

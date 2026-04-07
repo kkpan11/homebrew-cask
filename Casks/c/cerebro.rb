@@ -8,7 +8,7 @@ cask "cerebro" do
   desc "Open-source launcher"
   homepage "https://cerebroapp.vercel.app/"
 
-  depends_on macos: ">= :high_sierra"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "Cerebro.app"
 
@@ -20,4 +20,8 @@ cask "cerebro" do
     "~/Library/Preferences/com.cerebroapp.Cerebro.plist",
     "~/Library/Saved Application State/com.cerebroapp.Cerebro.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

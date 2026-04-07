@@ -1,17 +1,19 @@
 cask "bitbox" do
-  version "4.41.0"
-  sha256 "3439bbac6921d992fe78b780b7ae123d5d2b658903369df375974275bb7db5d6"
+  version "4.50.1"
+  sha256 "25eac2dec5820863bff81f671c3b9b3dae4805995361a3624bf639f1231f57ed"
 
-  url "https://github.com/digitalbitbox/bitbox-wallet-app/releases/download/v#{version}/BitBox-#{version}-macOS.zip",
-      verified: "github.com/digitalbitbox/bitbox-wallet-app/releases/download/"
+  url "https://github.com/BitBoxSwiss/bitbox-wallet-app/releases/download/v#{version}/BitBox-#{version}-macOS.dmg",
+      verified: "github.com/BitBoxSwiss/bitbox-wallet-app/releases/download/"
   name "BitBox"
   desc "Protect your coins with the latest Swiss made hardware wallet"
   homepage "https://bitbox.swiss/"
 
   livecheck do
-    url :url
-    strategy :github_latest
+    url "https://bitbox.swiss/download/"
+    regex(/href=.*?BitBox[._-]v?(\d+(?:\.\d+)+)(?:[._-]macOS)?\.dmg/i)
   end
+
+  depends_on macos: ">= :monterey"
 
   app "BitBox.app"
 

@@ -1,8 +1,10 @@
 cask "futubull" do
-  version "14.6.6418"
-  sha256 "24bfa49a36b03a0cec1a1d3813ee12a46aafbb5b7398c1a58b38cf73450611c6"
+  version "16.10.15508"
+  sha256 "3d0c218a770031ef50270da3ae1b0298e38ffeb0092da3db2957acbde6698ef5"
 
-  url "https://softwarefile.futunn.com/FTNNForMac_#{version}_Website.dmg"
+  url "https://softwaredownload.futunn.com/FTNN_desktop_#{version}_Website.dmg",
+      user_agent: :fake,
+      referer:    "https://www.futunn.com/"
   name "Futubull"
   name "FutuNiuniu"
   desc "Trading application"
@@ -10,14 +12,23 @@ cask "futubull" do
 
   livecheck do
     url "https://www.futunn.com/download/history?client=11"
-    regex(/FTNNForMac[._-]v?(\d+(?:\.\d+)+)[._-]Website\.dmg/i)
+    strategy :json do |json|
+      json["data"]&.map do |item|
+        next if item["is_beta"] == 1
+
+        item["version"]
+      end
+    end
   end
 
   # Renamed for consistency: app name is different in the Finder and in a shell.
-  app "FutuNiuniu.app", target: "Futubull.app"
+  app "富途牛牛.app", target: "Futubull.app"
+
+  uninstall quit: "cn.futu.niuniu.nx"
 
   zap trash: [
     "~/Library/Application Scripts/cn.futu.Niuniu",
     "~/Library/Containers/cn.futu.Niuniu",
+    "~/Library/Containers/cn.futu.niuniu.nx",
   ]
 end

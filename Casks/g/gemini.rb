@@ -1,6 +1,6 @@
 cask "gemini" do
-  version "2.9.11,399,1696867671"
-  sha256 "a94aa56531b855b48542c78053d3414106824ead57f95c5327d2f14b06488ee5"
+  version "2.10.0,405,1774975750"
+  sha256 "c3201c9bc191ddc440742005a0b3b785bd8ae55078c609a6253a3603ab265270"
 
   url "https://dl.devmate.com/com.macpaw.site.Gemini#{version.major}/#{version.csv.second}/#{version.csv.third}/Gemini#{version.major}-#{version.csv.second}.zip",
       verified: "dl.devmate.com/"
@@ -20,17 +20,17 @@ cask "gemini" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "Gemini #{version.major}.app"
 
   zap trash: [
-    "/Users/Shared/Gemini #{version.major}",
-    "~/Library/Application Support/Gemini*",
-    "~/Library/Caches/com.macpaw.site.Gemini*",
-    "~/Library/Cookies/com.macpaw.site.Gemini*.binarycookies",
-    "~/Library/Logs/com.macpaw.site.Gemini*",
-    "~/Library/Preferences/com.macpaw.site.Gemini*",
-    "~/Library/Saved Application State/com.macpaw.site.Gemini*",
-  ]
+        "/Users/Shared/Gemini #{version.major}",
+        "~/Library/Application Support/Gemini*",
+        "~/Library/Caches/com.macpaw.site.Gemini*",
+        "~/Library/Cookies/com.macpaw.site.Gemini*.binarycookies",
+        "~/Library/Logs/com.macpaw.site.Gemini*",
+        "~/Library/Preferences/com.macpaw.site.Gemini*",
+        "~/Library/Saved Application State/com.macpaw.site.Gemini*",
+      ],
+      rmdir: "~/.gemini"
 end

@@ -12,8 +12,6 @@ cask "freeze" do
     strategy :sparkle
   end
 
-  depends_on macos: ">= :high_sierra"
-
   app "Freeze.app"
 
   zap trash: [

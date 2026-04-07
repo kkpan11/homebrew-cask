@@ -1,22 +1,30 @@
 cask "wechat" do
-  version "3.8.7.18"
-  sha256 :no_check
+  version "4.1.8.100,37261"
+  sha256 "f40488335cd64422b7a4e144595da0b33cbc64ea8809278871a98b2de5dfed67"
 
-  url "https://dldir1.qq.com/weixin/mac/WeChatMac.dmg"
+  url "https://dldir1.qq.com/weixin/Universal/Mac/xWeChatMac_universal_#{version.csv.first}_#{version.csv.second}.dmg"
   name "WeChat for Mac"
   name "微信 Mac 版"
   desc "Free messaging and calling application"
   homepage "https://mac.weixin.qq.com/"
 
-  # This appcast is slower to update than the submissions we get. See:
-  #   https://github.com/Homebrew/homebrew-cask/pull/90907#issuecomment-710107547
+  # Some items in the Sparkle feed may not have a url, so it's necessary to
+  # work with all of the items in the feed (not just the newest one).
   livecheck do
     url "https://dldir1.qq.com/weixin/mac/mac-release.xml"
-    strategy :sparkle, &:short_version
+    regex(/xWeChatMac[._-]universal[._-]v?(\d+(?:\.\d+)+)[._-](\d+)\.dmg/i)
+    strategy :sparkle do |items, regex|
+      items.map do |item|
+        match = item.url.match(regex)
+        next if match.blank?
+
+        "#{match[1]},#{match[2]}"
+      end
+    end
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :big_sur"
 
   app "WeChat.app"
 

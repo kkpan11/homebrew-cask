@@ -1,9 +1,9 @@
 cask "runelite" do
   arch arm: "aarch64", intel: "x64"
 
-  version "2.7.1"
-  sha256 arm:   "86d04ef4a3bd79b9c0b7a1653d3107135291aa6084c1beeadf921b3ec4cc78e8",
-         intel: "721d427204e606460a843dc723f223ead7a0299ad236c524e9c35ac0a80443e6"
+  version "2.7.7"
+  sha256 arm:   "b8afe68ced65189de59a261f455991e75d7a4fe971d8dc3abeb4df6ff14d82b7",
+         intel: "c3a63e2b47fcf76ab65ae80a224dd18023addd2b29bba3b473c68671c5d279d3"
 
   url "https://github.com/runelite/launcher/releases/download/#{version}/RuneLite-#{arch}.dmg",
       verified: "github.com/runelite/launcher/"
@@ -15,6 +15,8 @@ cask "runelite" do
     url :homepage
     regex(%r{href=.*?/v?(\d+(?:\.\d+)+)/RuneLite[._-]#{arch}\.dmg}i)
   end
+
+  depends_on macos: ">= :big_sur"
 
   app "RuneLite.app"
 

@@ -7,7 +7,7 @@ cask "nanoem" do
   desc "Cross-platform MMD (MikuMikuDance) compatible implementation"
   homepage "https://github.com/hkrn/nanoem"
 
-  container nested: "nanoem-v#{version}-Darwin.dmg"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "nanoem.app"
 

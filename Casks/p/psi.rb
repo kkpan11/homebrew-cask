@@ -9,9 +9,11 @@ cask "psi" do
   homepage "https://psi-im.org/"
 
   livecheck do
-    url "https://psi-im.org/download/"
+    url "https://psi-im.org/downloads/"
     regex(/psi[._-]?(\d+(?:\.\d+)*)[._-]?mac\.dmg/i)
   end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "Psi.app"
 
@@ -22,4 +24,8 @@ cask "psi" do
     "~/Library/Caches/Psi",
     "~/Library/Saved Application State/org.psi-im.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

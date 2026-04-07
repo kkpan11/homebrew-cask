@@ -8,6 +8,8 @@ cask "pb" do
   desc "Unofficial Pushbullet desktop app to get push notifications"
   homepage "https://sidneys.github.io/pb-for-desktop"
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   auto_updates true
 
   app "PB for Desktop.app"
@@ -36,4 +38,8 @@ cask "pb" do
     "~/Library/Saved Application State/de.sidneys.pb-for-desktop.savedState",
     "~/Library/WebKit/de.sidneys.pb-for-desktop",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

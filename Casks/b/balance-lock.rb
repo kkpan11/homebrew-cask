@@ -12,12 +12,13 @@ cask "balance-lock" do
     strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :sierra"
+  auto_updates true
 
   app "Balance Lock.app"
 
   zap trash: [
     "~/Library/Application Support/Balance Lock",
+    "~/Library/HTTPStorages/com.tunabelly.balancelock",
     "~/Library/Preferences/com.tunabelly.balancelock.plist",
   ]
 end

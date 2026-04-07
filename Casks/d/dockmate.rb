@@ -14,11 +14,11 @@ cask "dockmate" do
   end
 
   auto_updates true
-  depends_on macos: ">= :mojave"
 
   app "DockMate.app"
 
   zap trash: [
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.macenhance.dockmate.sfl*",
     "~/Library/Application Support/com.macenhance.dockmate",
     "~/Library/Application Support/DockMate",
     "~/Library/Caches/com.macenhance.dockmate",

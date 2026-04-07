@@ -1,6 +1,6 @@
 cask "smplayer" do
-  version "23.12.0"
-  sha256 "617f3e1dc95d1b1bc42d203761e27349b4968849ab1f24c074b74489a446c67b"
+  version "25.6.0"
+  sha256 "de88cc07f128f4e99cb36fa0dc5ae38dea261e4d8f51cd0235eca427cb23672e"
 
   url "https://github.com/smplayer-dev/smplayer/releases/download/v#{version}/smplayer-#{version}.dmg",
       verified: "github.com/smplayer-dev/smplayer/"
@@ -13,10 +13,16 @@ cask "smplayer" do
     strategy :github_latest
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "SMPlayer.app"
 
   zap trash: [
     "~/Library/Preferences/info.smplayer.SMPlayer.plist",
     "~/Library/Saved Application State/info.smplayer.SMPlayer.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -1,6 +1,6 @@
 cask "openrefine" do
-  version "3.7.9"
-  sha256 "ba44cd31d82157a66868f0f004b1617b4d8b14033000945b2f14056ce585a650"
+  version "3.10.1"
+  sha256 "5aeedcd9eaca5aef3b938bb7766d28a85dffb19550635196c38586d24ffb93f3"
 
   url "https://github.com/OpenRefine/OpenRefine/releases/download/#{version}/openrefine-mac-#{version}.dmg",
       verified: "github.com/OpenRefine/OpenRefine/"
@@ -19,4 +19,8 @@ cask "openrefine" do
     "~/Library/Application Support/OpenRefine",
     "~/Library/Saved Application State/com.google.refine.Refine.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

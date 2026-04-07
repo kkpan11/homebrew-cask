@@ -1,9 +1,9 @@
 cask "phpstorm" do
   arch arm: "-aarch64"
 
-  version "2023.3.6,233.15026.12"
-  sha256 arm:   "892404f4e835b3248094ebf64a7de2c1311b3446e0334ddf90033dc0f226d54b",
-         intel: "1972219f45224fd3769fd78ba313ef6379c75d8b4980e049b438a2b2ebb5a977"
+  version "2026.1,261.22158.283"
+  sha256 arm:   "5774d022f6981f7f8d996203245c9370eed9c1d77e4cf3f44d21665f9a631213",
+         intel: "28de0e55e47b4c203e3e28077a68747884fecb7851280185265105991738e578"
 
   url "https://download.jetbrains.com/webide/PhpStorm-#{version.csv.first}#{arch}.dmg"
   name "JetBrains PhpStorm"
@@ -13,23 +13,36 @@ cask "phpstorm" do
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=PS&latest=true&type=release"
     strategy :json do |json|
-      json["PS"].map do |release|
-        "#{release["version"]},#{release["build"]}"
+      json["PS"]&.map do |release|
+        version = release["version"]
+        build = release["build"]
+        next if version.blank? || build.blank?
+
+        "#{version},#{build}"
       end
     end
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "PhpStorm.app"
-  binary "#{appdir}/PhpStorm.app/Contents/MacOS/phpstorm"
+  # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)
+  shimscript = "#{staged_path}/phpstorm.wrapper.sh"
+  binary shimscript, target: "phpstorm"
+
+  preflight do
+    File.write shimscript, <<~EOS
+      #!/bin/sh
+      exec '#{appdir}/PhpStorm.app/Contents/MacOS/phpstorm' "$@"
+    EOS
+  end
 
   zap trash: [
-    "~/Library/Application Support/PhpStorm#{version.major_minor}",
-    "~/Library/Caches/PhpStorm#{version.major_minor}",
-    "~/Library/Logs/PhpStorm#{version.major_minor}",
-    "~/Library/Preferences/jetbrains.phpstorm.*.plist",
-    "~/Library/Preferences/PhpStorm#{version.major_minor}",
+    "~/Library/Application Support/JetBrains/consentOptions",
+    "~/Library/Application Support/JetBrains/PhpStorm#{version.major_minor}",
+    "~/Library/Caches/JetBrains/PhpStorm#{version.major_minor}",
+    "~/Library/Logs/JetBrains/PhpStorm#{version.major_minor}",
+    "~/Library/Preferences/com.jetbrains.PhpStorm.plist",
+    "~/Library/Preferences/jetbrains.jetprofile.asset.plist",
   ]
 end

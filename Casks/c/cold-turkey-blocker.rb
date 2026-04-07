@@ -1,5 +1,5 @@
 cask "cold-turkey-blocker" do
-  version "4.5"
+  version "4.9"
   sha256 :no_check
 
   url "https://getcoldturkey.com/files/Cold_Turkey_Mac_Installer.pkg"
@@ -8,13 +8,14 @@ cask "cold-turkey-blocker" do
   homepage "https://getcoldturkey.com/"
 
   livecheck do
-    url :url
-    strategy :extract_plist
+    url "https://getcoldturkey.com/news/"
+    regex(/Blocker\s*v?(\d+(?:\.\d+)+)/i)
   end
 
   pkg "Cold_Turkey_Mac_Installer.pkg"
 
   uninstall launchctl: [
+              "com.getcoldturkey.blocker.agent",
               "launchkeep.cold-turkey",
               "launchkeep.cold-turkey-all-users",
             ],
@@ -33,4 +34,8 @@ cask "cold-turkey-blocker" do
     "~/Library/Preferences/com.getcoldturkey.blocker.plist",
     "~/Library/WebKit/com.getcoldturkey.blocker",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

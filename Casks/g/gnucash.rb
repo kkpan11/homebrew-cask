@@ -1,8 +1,11 @@
 cask "gnucash" do
-  version "5.6-1"
-  sha256 "2cc91f36d9939065dac366058aae1a6a8c41cfe84850b6b549ee87ba075d50d4"
+  arch arm: "Arm", intel: "Intel"
 
-  url "https://github.com/Gnucash/gnucash/releases/download/#{version.hyphens_to_dots.major_minor}/Gnucash-Intel-#{version}.dmg",
+  version "5.15-1"
+  sha256 arm:   "ef0c2c0fac275d4f2822223f3c908e9c28c559395159017eac14c4bf39b8499a",
+         intel: "59456ec48c973f6ac96d9fcd1d34174645f28954d9adf0b14998cadd420d3a51"
+
+  url "https://github.com/Gnucash/gnucash/releases/download/#{version.hyphens_to_dots.major_minor}/Gnucash-#{arch}-#{version}.dmg",
       verified: "github.com/Gnucash/gnucash/"
   name "GnuCash"
   desc "Double-entry accounting program"
@@ -10,7 +13,7 @@ cask "gnucash" do
 
   livecheck do
     url :url
-    regex(/^Gnucash-Intel[._-]v?(\d+(?:[.-]\d+)+)\.dmg$/i)
+    regex(/^Gnucash-#{arch}[._-]v?(\d+(?:[.-]\d+)+)\.dmg$/i)
     strategy :github_latest do |json, regex|
       json["assets"]&.map do |asset|
         match = asset["name"]&.match(regex)
@@ -20,6 +23,8 @@ cask "gnucash" do
       end
     end
   end
+
+  depends_on macos: ">= :big_sur"
 
   app "Gnucash.app"
 

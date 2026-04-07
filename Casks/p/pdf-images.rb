@@ -6,6 +6,13 @@ cask "pdf-images" do
   name "PDF-Images"
   homepage "https://sourceforge.net/projects/pdf-images/"
 
+  deprecate! date: "2024-09-01", because: :unmaintained
+  disable! date: "2025-09-02", because: :unmaintained
+
   app "PDF-Images.app"
   binary "#{appdir}/PDF-Images.app/Contents/MacOS/pdfimages"
+
+  caveats do
+    requires_rosetta
+  end
 end

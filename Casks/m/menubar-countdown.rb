@@ -7,7 +7,12 @@ cask "menubar-countdown" do
   desc "Countdown timer for the menu bar"
   homepage "https://github.com/kristopherjohnson/MenubarCountdown"
 
-  depends_on macos: ">= :mojave"
+  deprecate! date: "2024-07-27", because: :unmaintained
+  disable! date: "2025-07-27", because: :unmaintained
 
   app "Menubar Countdown.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

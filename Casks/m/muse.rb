@@ -7,7 +7,12 @@ cask "muse" do
   desc "Open-source Spotify controller with TouchBar support"
   homepage "https://github.com/xzzz9097/Muse"
 
-  depends_on macos: ">= :sierra"
+  deprecate! date: "2024-07-27", because: :unmaintained
+  disable! date: "2025-07-27", because: :unmaintained
 
   app "Muse.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

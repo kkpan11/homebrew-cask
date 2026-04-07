@@ -1,6 +1,6 @@
 cask "camerabag-photo" do
-  version "2024.1.0"
-  sha256 "e222767fc94aff9ce10e79bad6591dfb0d79d2237cf7e16bde6f7de773cf1648"
+  version "2026.1.0"
+  sha256 "0ae7e7fca2d28d44960fdd6b11b51debe169d677487057d5117df0816d88664c"
 
   url "https://nevercenter.com/camerabag/download/filearchive/Install_CameraBag_Photo_#{version.dots_to_underscores}_mac.dmg"
   name "CameraBag"
@@ -14,8 +14,6 @@ cask "camerabag-photo" do
       page.scan(regex).map { |match| match[0].tr("_", ".") }
     end
   end
-
-  depends_on macos: ">= :catalina"
 
   app "CameraBag Photo.app"
 

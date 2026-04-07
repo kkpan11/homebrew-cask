@@ -18,4 +18,8 @@ cask "journey" do
     "~/Library/Preferences/com.journey.mac#{version.major}.plist",
     "~/Library/Saved Application State/com.journey.mac#{version.major}.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

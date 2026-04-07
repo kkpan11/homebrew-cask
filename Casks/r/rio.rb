@@ -1,8 +1,8 @@
 cask "rio" do
-  version "0.0.36"
-  sha256 "105d0c21838b123bbae01218560b800e3e5c3d34338805dd2bab2bef595b3cc2"
+  version "0.3.1"
+  sha256 "3ab291808792f0ae1108b3b818c8dfb009d68cfe2b53cf23af133711308ec738"
 
-  url "https://github.com/raphamorim/rio/releases/download/v#{version}/Rio-v#{version}.dmg"
+  url "https://github.com/raphamorim/rio/releases/download/v#{version}/rio.dmg"
   name "Rio"
   desc "Hardware-accelerated GPU terminal emulator"
   homepage "https://github.com/raphamorim/rio/"
@@ -12,9 +12,9 @@ cask "rio" do
     strategy :github_latest
   end
 
-  app "Rio.app"
-  binary "Rio.app/Contents/MacOS/rio"
-  binary "Rio.app/Contents/Resources/72/rio",
+  app "rio.app"
+  binary "#{appdir}/rio.app/Contents/MacOS/rio"
+  binary "#{appdir}/rio.app/Contents/Resources/72/rio",
          target: "#{ENV.fetch("TERMINFO", "~/.terminfo")}/72/rio"
 
   zap trash: "~/Library/Saved Application State/com.raphaelamorim.rio.savedState"

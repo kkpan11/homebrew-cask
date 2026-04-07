@@ -1,5 +1,5 @@
 cask "yandex-disk" do
-  version "3.2.38,3134"
+  version "3.2.46,3288"
   sha256 :no_check
 
   url "https://disk.yandex.ru/download/Yandex.Disk.dmg/?instant=1"
@@ -21,4 +21,8 @@ cask "yandex-disk" do
     "~/Library/Preferences/ru.yandex.desktop.disk.screenshots.plist",
     "~/Library/Preferences/ru.yandex.desktop.disk2.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -19,6 +19,8 @@ cask "apple-hewlett-packard-printer-drivers" do
     end
   end
 
+  depends_on macos: "<= :sonoma"
+
   pkg "HewlettPackardPrinterDrivers.pkg"
 
   uninstall quit:    [

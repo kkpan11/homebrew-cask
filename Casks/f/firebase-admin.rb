@@ -4,12 +4,10 @@ cask "firebase-admin" do
 
   url "https://firebaseadmin.com/downloads/#{version}/firebase-admin-mac-#{version}.dmg"
   name "Firebase Admin"
+  desc "Admin user interface for Firebase"
   homepage "https://firebaseadmin.com/"
 
-  livecheck do
-    url "https://firebaseadmin.com/download.php?os=mac"
-    strategy :header_match
-  end
+  deprecate! date: "2025-06-01", because: :unmaintained
 
   app "firebase-admin.app"
 
@@ -18,4 +16,8 @@ cask "firebase-admin" do
     "~/Library/Preferences/com.firebaseadmin.firebase-admin.helper.plist",
     "~/Library/Preferences/com.firebaseadmin.firebase-admin.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

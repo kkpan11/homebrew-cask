@@ -1,6 +1,6 @@
 cask "preform" do
-  version "3.34.2,312_56125"
-  sha256 "2f641810ec8a93e043a7c321a7312900491522d252b2cd4d1bcc427e742d8b27"
+  version "3.48.0,523_98058"
+  sha256 "2758ca2e82768b81d1246c8b24a505d8e320241de5b6e4f5c3bc7349d329752a"
 
   url "https://downloads.formlabs.com/PreForm/Release/#{version.csv.first}/PreForm_mac_#{version.csv.first}_release_releaser_#{version.csv.second}.dmg"
   name "PreForm"
@@ -9,13 +9,11 @@ cask "preform" do
 
   livecheck do
     url "https://formlabs.com/download-preform-mac/"
-    regex(%r{/PreForm_mac_(\d+(?:\.\d+)+)_release_releaser_(\d+(?:[._-]\d+)+)\.dmg}i)
+    regex(%r{/PreForm[._-]mac[._-]v?(\d+(?:\.\d+)+)[._-]release[._-]releaser[._-](\d+(?:[._-]\d+)+)\.dmg}i)
     strategy :page_match do |page, regex|
       page.scan(regex).map { |match| "#{match[0]},#{match[1]}" }
     end
   end
-
-  depends_on macos: ">= :high_sierra"
 
   app "PreForm.app"
 
@@ -23,4 +21,8 @@ cask "preform" do
     "~/Library/Preferences/com.formlabs.PreForm.plist",
     "~/Library/Saved Application State/com.formlabs.PreForm.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -1,24 +1,25 @@
 cask "amethyst" do
-  on_el_capitan :or_older do
-    version "0.10.1"
-    sha256 "9fd1ac2cfb8159b2945a4482046ee6d365353df617f4edbabc4e8cadc448c1e7"
-
-    url "https://ianyh.com/amethyst/versions/Amethyst-#{version}.zip"
-
-    livecheck do
-      skip "Legacy version"
-    end
-  end
-  on_sierra :or_newer do
-    version "0.20.0"
-    sha256 "198a2bbe80832ce77fc584ad20691206a179423551dcf1cbdf46ff1e6f829c09"
+  on_catalina :or_older do
+    version "0.22.2"
+    sha256 "43b16fadf9d349c5d3f5a406917f60e31d0ea65b1f9fc529b09292e906f75e50"
 
     url "https://github.com/ianyh/Amethyst/releases/download/v#{version}/Amethyst.zip",
         verified: "github.com/ianyh/Amethyst/"
 
     livecheck do
-      url :url
-      strategy :github_latest
+      skip "Legacy version"
+    end
+  end
+  on_big_sur :or_newer do
+    version "0.24.3"
+    sha256 "442d2b9fe53f8062051dd63e5d01512ed2020c78cbdbe4f93ecf30290a5b0302"
+
+    url "https://github.com/ianyh/Amethyst/releases/download/v#{version}/Amethyst.zip",
+        verified: "github.com/ianyh/Amethyst/"
+
+    livecheck do
+      url "https://ianyh.com/amethyst/appcast.xml"
+      strategy :sparkle, &:short_version
     end
   end
 
@@ -27,7 +28,6 @@ cask "amethyst" do
   homepage "https://ianyh.com/amethyst/"
 
   auto_updates true
-  depends_on macos: ">= :catalina"
 
   app "Amethyst.app"
 

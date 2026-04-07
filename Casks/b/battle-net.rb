@@ -1,12 +1,16 @@
 cask "battle-net" do
-  version "1.18.10.3141"
+  version "1.19.0.3190"
   sha256 :no_check
 
   language "en", default: true do
     url "https://www.battle.net/download/getInstallerForGame?os=mac&locale=enUS&version=LIVE&gameProgram=BATTLENET_APP"
+
+    "en-US"
   end
   language "zh", "CN" do
     url "https://www.battle.net/download/getInstallerForGame?os=mac&installer=Battle.net-Setup-zhCN.zip"
+
+    "zh-CN"
   end
 
   name "Blizzard Battle.net"
@@ -17,6 +21,8 @@ cask "battle-net" do
     url :url
     strategy :extract_plist
   end
+
+  auto_updates true
 
   installer manual: "Battle.net-Setup.app"
 
@@ -41,8 +47,11 @@ cask "battle-net" do
       ],
       rmdir: "~/Blizzard"
 
-  caveats <<~EOS
-    If your installation directory is not /Applications, you will need to
-    uninstall this cask manually.
-  EOS
+  caveats do
+    requires_rosetta
+    <<~EOS
+      If your installation directory is not /Applications, you will need to
+      uninstall this cask manually.
+    EOS
+  end
 end

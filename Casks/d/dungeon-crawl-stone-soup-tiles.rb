@@ -1,6 +1,6 @@
 cask "dungeon-crawl-stone-soup-tiles" do
-  version "0.31.0"
-  sha256 "1a5fb6a7fbb79194db9566f1bdf26e9db215802ef60b4a53dd318b8ad4464d05"
+  version "0.34.1"
+  sha256 "b59b334d8cb06b5a5e26c490d4c08c8ac7762dc7b8f4a03cd800ca34aba6ac9a"
 
   url "https://github.com/crawl/crawl/releases/download/#{version}/dcss-#{version}-macos-tiles-universal.zip",
       verified: "github.com/crawl/crawl/releases/"
@@ -12,6 +12,8 @@ cask "dungeon-crawl-stone-soup-tiles" do
     url :url
     strategy :github_latest
   end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "Dungeon Crawl Stone Soup - Tiles.app"
 

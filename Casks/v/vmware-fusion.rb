@@ -1,32 +1,20 @@
 cask "vmware-fusion" do
-  version "13.5.1,23298085"
-  sha256 "7ff2797c44f9569980acb0c41ebf647c9db59556602d5d7f0a2f0d2be3c4cc86"
+  version "13.6.3,24585314"
+  sha256 "0415fc9c995ef959f3905bbd97d4560e6701856d2293b44aed1d9aa23a3b7c41"
 
-  url "https://download3.vmware.com/software/FUS-#{version.csv.first.no_dots}/VMware-Fusion-#{version.csv.first}-#{version.csv.second}_universal.dmg"
+  url "https://softwareupdate-prod.broadcom.com/cds/vmw-desktop/fusion/#{version.csv.first}/#{version.csv.second}/universal/core/com.vmware.fusion.zip.tar",
+      verified: "softwareupdate-prod.broadcom.com/"
   name "VMware Fusion"
   desc "Create, manage, and run virtual machines"
-  homepage "https://www.vmware.com/products/fusion.html"
+  homepage "https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion"
 
-  livecheck do
-    url "https://softwareupdate.vmware.com/cds/vmw-desktop/fusion-universal.xml"
-    regex(%r{fusion/(\d+(?:\.\d+)+/\d+)}i)
-    strategy :page_match do |page, regex|
-      page.scan(regex).map { |match| match&.first&.tr("/", ",") }
-    end
-  end
+  disable! date: "2025-06-23", because: "requires authentication to download"
 
   auto_updates true
-  conflicts_with cask: [
-    "homebrew/cask-versions/vmware-fusion7",
-    "homebrew/cask-versions/vmware-fusion8",
-    "homebrew/cask-versions/vmware-fusion10",
-    "homebrew/cask-versions/vmware-fusion11",
-    "homebrew/cask-versions/vmware-fusion12",
-    "homebrew/cask-versions/vmware-fusion-tech-preview",
-  ]
-  depends_on macos: ">= :monterey"
+  depends_on macos: ">= :ventura"
+  container nested: "com.vmware.fusion.zip"
 
-  app "VMware Fusion.app"
+  app "#{staged_path}/payload/VMware Fusion.app"
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vkd/bin/vctl"
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmnet-bridge"
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmnet-cfgcli"
@@ -35,6 +23,7 @@ cask "vmware-fusion" do
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmnet-natd"
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmnet-netifup"
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmnet-sniffer"
+  binary "#{appdir}/VMware Fusion.app/Contents/Library/vmcli"
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmrest"
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmrun"
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmss2core"
@@ -56,8 +45,9 @@ cask "vmware-fusion" do
 
   postflight do
     system_command "#{appdir}/VMware Fusion.app/Contents/Library/Initialize VMware Fusion.tool",
-                   args: ["set"],
-                   sudo: true
+                   args:         ["set"],
+                   sudo:         true,
+                   sudo_as_root: true
   end
 
   uninstall_preflight do

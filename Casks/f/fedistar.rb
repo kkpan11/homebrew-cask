@@ -1,6 +1,6 @@
 cask "fedistar" do
-  version "1.9.2"
-  sha256 "b52638d9cdd20045fe9c01c6a4212070a3a3cfce68d92ff974cc6a12fabad14c"
+  version "1.12.8"
+  sha256 "604a8086c94128c952b31f43934d2b6065ba3e7758d8f64f3f74a13c8afe7ce9"
 
   url "https://github.com/h3poteto/fedistar/releases/download/v#{version}/fedistar_#{version}_universal.dmg",
       verified: "github.com/h3poteto/fedistar/"
@@ -13,7 +13,7 @@ cask "fedistar" do
     strategy :github_latest
   end
 
-  depends_on macos: ">= :ventura"
+  depends_on macos: ">= :sonoma"
 
   app "fedistar.app"
 

@@ -8,5 +8,16 @@ cask "rolisteam" do
   desc "Virtual tabletop software"
   homepage "https://rolisteam.org/"
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "rolisteam.app"
+
+  zap trash: [
+    "~/Library/Preferences/com.rolisteam.rolisteam*",
+    "~/Library/Saved Application State/com.yourcompany.rolisteam.savedState",
+  ]
+
+  caveats do
+    requires_rosetta
+  end
 end

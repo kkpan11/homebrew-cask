@@ -12,5 +12,17 @@ cask "comictagger" do
     strategy :github_latest
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "ComicTagger.app"
+
+  zap trash: [
+    "~/.ComicTagger",
+    "~/Library/Preferences/ComicTagger.plist",
+    "~/Library/Saved Application State/ComicTagger.savedState",
+  ]
+
+  caveats do
+    requires_rosetta
+  end
 end

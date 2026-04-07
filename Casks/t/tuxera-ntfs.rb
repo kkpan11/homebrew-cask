@@ -1,15 +1,15 @@
 cask "tuxera-ntfs" do
-  version "2023.1"
+  version "26"
   sha256 :no_check # required as upstream package is updated in-place
 
-  url "https://tuxera.com/mac/tuxerantfs_#{version}.dmg"
+  url "https://download.tuxera.com/mac/tuxerantfs_#{version}.dmg"
   name "Tuxera NTFS"
   desc "File system and storage management software"
   homepage "https://ntfsformac.tuxera.com/"
 
   livecheck do
-    url "https://ntfsformac.tuxera.com/support/"
-    regex(/Release\s*?v?(\d+(?:\.\d+)*)/i)
+    url "https://download.tuxera.com/mac/tuxerantfs_latest.dmg"
+    strategy :header_match
   end
 
   auto_updates true

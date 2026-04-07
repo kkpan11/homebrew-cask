@@ -12,7 +12,7 @@ cask "adze" do
     strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :sierra"
+  auto_updates true
 
   app "Adze.app"
 
@@ -20,4 +20,8 @@ cask "adze" do
     "~/Library/Caches/com.Kobot.Adze",
     "~/Library/Preferences/com.Kobot.Adze.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -8,6 +8,8 @@ cask "puppetry" do
   desc "Web testing solution for non-developers on top of Puppeteer and Jest"
   homepage "https://puppetry.app/"
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "puppetry.app"
 
   zap trash: [
@@ -15,4 +17,8 @@ cask "puppetry" do
     "~/Library/Preferences/com.dsheiko.puppetry.plist",
     "~/Library/Saved Application State/com.dsheiko.puppetry.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

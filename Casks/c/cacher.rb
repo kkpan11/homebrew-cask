@@ -1,6 +1,6 @@
 cask "cacher" do
-  version "2.47.3"
-  sha256 "9647a55d28f2dfa78e66696b450fa7fa13c50df315c7e40f964e846e44b80b7f"
+  version "2.47.9"
+  sha256 "03e5268ab948e68135dbea2d25c7f2504992322fd8cf5ba1c12b08d8187b364a"
 
   url "https://cacher-download.nyc3.digitaloceanspaces.com/Cacher-#{version}-universal-mac.zip",
       verified: "cacher-download.nyc3.digitaloceanspaces.com/"
@@ -12,6 +12,8 @@ cask "cacher" do
     url "https://cacher-download.nyc3.digitaloceanspaces.com/latest-mac.yml"
     strategy :electron_builder
   end
+
+  auto_updates true
 
   app "Cacher.app"
 

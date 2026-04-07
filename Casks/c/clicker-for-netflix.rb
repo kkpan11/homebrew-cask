@@ -12,13 +12,16 @@ cask "clicker-for-netflix" do
     strategy :sparkle
   end
 
-  depends_on macos: ">= :sierra"
+  auto_updates true
 
   app "Clicker for Netflix.app"
 
   zap trash: [
     "~/Library/Caches/com.dbklabs.clicker-for-netflix",
+    "~/Library/HTTPStorage/com.dbklabs.clicker-for-netflix.binarycookies",
+    "~/Library/HTTPStorages/com.dbklabs.clicker-for-netflix",
     "~/Library/Preferences/com.dbklabs.clicker-for-netflix.plist",
+    "~/Library/Saved Application State/com.dbklabs.clicker-for-netflix.savedState",
     "~/Library/WebKit/com.dbklabs.clicker-for-netflix",
   ]
 end

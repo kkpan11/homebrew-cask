@@ -1,6 +1,6 @@
 cask "sqlpro-for-postgres" do
-  version "2023.10"
-  sha256 "4c13d8d77cea1032258463e36dbe85922adff07a7e3948d354ea0f8a28efbd10"
+  version "2026.07"
+  sha256 "5393dbbfd38e75b48bdaec4720b9362fbc46dbf33ee8324b2e590ee03682ca79"
 
   url "https://d3fwkemdw8spx3.cloudfront.net/postgres/SQLProPostgres.#{version}.app.zip",
       verified: "d3fwkemdw8spx3.cloudfront.net/postgres/"
@@ -12,6 +12,8 @@ cask "sqlpro-for-postgres" do
     url "https://www.macpostgresclient.com/download.php"
     strategy :header_match
   end
+
+  depends_on macos: ">= :ventura"
 
   app "SQLPro for Postgres.app"
 

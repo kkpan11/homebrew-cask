@@ -1,14 +1,12 @@
 cask "wakatime" do
-  version "5.14.3"
-  sha256 "f305bd53c37f152b9b9e6d26d9940b54aabb2a3058bd604f9b988a07aadb40f6"
+  version "5.28.3"
+  sha256 "b2532e1d43d3b23f85a83f9162a10f5f70a1802a20952e72b71e46cb88c85a64"
 
   url "https://github.com/wakatime/macos-wakatime/releases/download/v#{version}/macos-wakatime.zip",
       verified: "github.com/wakatime/macos-wakatime/"
   name "Wakatime"
   desc "System tray app for automatic time tracking"
   homepage "https://wakatime.com/mac"
-
-  depends_on macos: ">= :catalina"
 
   app "WakaTime.app"
 

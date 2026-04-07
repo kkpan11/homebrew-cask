@@ -1,5 +1,5 @@
 cask "adobe-acrobat-pro" do
-  version "24.001.20643"
+  version "26.001.21367"
   sha256 :no_check
 
   url "https://trials.adobe.com/AdobeProducts/APRO/Acrobat_HelpX/osx10/Acrobat_DC_Web_WWMUI.dmg",
@@ -7,7 +7,7 @@ cask "adobe-acrobat-pro" do
       cookies:    { "MM_TRIALS" => "1234" }
   name "Adobe Acrobat Pro DC"
   desc "View, create, manipulate, print and manage files in Portable Document Format"
-  homepage "https://acrobat.adobe.com/us/en/acrobat/pdf-reader.html"
+  homepage "https://www.adobe.com/acrobat/pdf-reader.html"
 
   livecheck do
     url "https://armmf.adobe.com/arm-manifests/mac/AcrobatDC/acrobat/current_version.txt"
@@ -15,6 +15,7 @@ cask "adobe-acrobat-pro" do
   end
 
   auto_updates true
+  depends_on macos: ">= :monterey"
 
   pkg "Acrobat/Acrobat DC Installer.pkg"
 
@@ -36,12 +37,12 @@ cask "adobe-acrobat-pro" do
             delete:    "/Applications/Adobe Acrobat DC/"
 
   zap trash: [
-    "~/Library/Application Support/Adobe/Acrobat/",
+    "~/Library/Application Support/Adobe/Acrobat",
     "~/Library/Caches/Acrobat",
     "~/Library/Caches/com.adobe.Acrobat.Pro",
     "~/Library/HTTPStorages/com.adobe.Acrobat.Pro",
     "~/Library/HTTPStorages/com.adobe.Acrobat.Pro.binarycookies",
-    "~/Library/Preferences/Adobe/Acrobat/",
+    "~/Library/Preferences/Adobe/Acrobat",
     "~/Library/Preferences/com.adobe.Acrobat.Pro.plist",
     "~/Library/Saved Application State/com.adobe.Acrobat.Pro.savedState",
     "~/Library/WebKit/com.adobe.Acrobat.Pro",

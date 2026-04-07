@@ -1,19 +1,19 @@
 cask "kkbox" do
-  version "23.6.10"
-  sha256 "f99a185db921a9a20afa3257ab3790aa87f7980efe8d28ab68f72f9d92c0aa6f"
+  version "26.3.4"
+  sha256 "99b0009d0b43085ad25d3a0e6d605ebb0cc304f41c4698038691246833970182"
 
-  url "https://dl-universal.kfs.io/#{version}/KKBOX-#{version}.dmg",
-      verified: "dl-universal.kfs.io/"
+  url "https://dl-universal-v2.kfs.io/KKBOX-#{version}-universal.dmg",
+      verified: "dl-universal-v2.kfs.io/"
   name "KKBOX"
   desc "Music streaming service"
   homepage "https://www.kkbox.com/"
 
   livecheck do
-    url "https://dl-universal.kfs.io/latest/darwin"
+    url "https://play.kkbox.com/download/macos"
     strategy :header_match
   end
 
-  depends_on macos: ">= :el_capitan"
+  depends_on macos: ">= :monterey"
 
   app "KKBOX.app"
 

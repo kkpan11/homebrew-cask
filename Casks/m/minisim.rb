@@ -1,6 +1,6 @@
 cask "minisim" do
-  version "0.8.2"
-  sha256 "c136983c7d18ac67331b96989ce9b35ac274ed92d296033a54b58e501df18ca8"
+  version "0.10.0"
+  sha256 "b6af5775f0afb1b3c12a438fc35c1f4207a87341fbd39e256e6d3fbfa5aca64d"
 
   url "https://github.com/okwasniewski/MiniSim/releases/download/v#{version}/MiniSim.app.zip",
       verified: "github.com/okwasniewski/MiniSim/"
@@ -8,7 +8,7 @@ cask "minisim" do
   desc "App for launching iOS and Android simulators"
   homepage "https://www.minisim.app/"
 
-  depends_on macos: ">= :big_sur"
+  depends_on macos: ">= :monterey"
 
   app "MiniSim.app"
 

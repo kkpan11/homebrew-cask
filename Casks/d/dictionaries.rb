@@ -1,6 +1,6 @@
 cask "dictionaries" do
-  version "2.3"
-  sha256 "49fb02bf7186f5e970453b735eb226a9013cc4116b776c12d28e6c45876745b5"
+  version "2.9"
+  sha256 "c4c189f0f4a80874e30777457ef089af5bafb27f5ceebec5e382d80fea99133c"
 
   url "https://download.dictionaries.io/mac/Dictionaries-#{version}.zip"
   name "Dictionaries"
@@ -11,8 +11,6 @@ cask "dictionaries" do
     url "https://dictionaries.io/updates/mac/v2/appcast"
     strategy :sparkle, &:short_version
   end
-
-  depends_on macos: ">= :mojave"
 
   app "Dictionaries.app"
 

@@ -12,8 +12,6 @@ cask "ripcord" do
     regex(%r{/Ripcord_Mac_(\d+(?:\.\d+)*)\.zip}i)
   end
 
-  depends_on macos: ">= :sierra"
-
   app "Ripcord.app"
 
   zap trash: [
@@ -21,4 +19,8 @@ cask "ripcord" do
     "~/Library/Preferences/com.cancelfm.Ripcord.plist",
     "~/Library/Saved Application State/com.cancelfm.Ripcord.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

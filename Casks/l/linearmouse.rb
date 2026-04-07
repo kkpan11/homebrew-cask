@@ -1,19 +1,29 @@
 cask "linearmouse" do
-  version "0.9.5"
-  sha256 "4f6e47d8298306ddc9e73682f20cbcecfc8938d3ec0d9a45ed2e5e92c47382b0"
+  version "0.10.4"
+  sha256 "da95342199693aff98dac56a9f0de795497b3b18105f8dabe28c4f6e5380c0ef"
 
-  url "https://github.com/linearmouse/linearmouse/releases/download/v#{version}/LinearMouse.dmg",
-      verified: "github.com/linearmouse/linearmouse/"
+  url "https://dl.linearmouse.org/v#{version}/LinearMouse.dmg"
   name "LinearMouse"
   desc "Customise mouse behavior"
   homepage "https://linearmouse.org/"
 
+  livecheck do
+    url "https://linearmouse.app/appcast.xml"
+    strategy :sparkle do |items|
+      items.find { |item| item.channel.nil? }&.nice_version
+    end
+  end
+
   auto_updates true
-  depends_on macos: ">= :catalina"
+  conflicts_with cask: "linearmouse@beta"
 
   app "LinearMouse.app"
 
-  uninstall quit: "com.lujjjh.LinearMouse"
+  uninstall quit:       "com.lujjjh.LinearMouse",
+            login_item: "LinearMouse"
 
-  zap trash: "~/Library/Preferences/com.lujjjh.LinearMouse.plist"
+  zap trash: [
+    "~/.config/linearmouse",
+    "~/Library/Preferences/com.lujjjh.LinearMouse.plist",
+  ]
 end

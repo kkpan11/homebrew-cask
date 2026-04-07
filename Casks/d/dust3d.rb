@@ -15,7 +15,13 @@ cask "dust3d" do
     regex(/^v?(\d+(?:\.\d+)+(?:-rc\.?\d*)?)$/i)
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "dust3d-#{version}.app"
 
   zap trash: "~/Library/Saved Application State/com.yourcompany.dust3d.savedState"
+
+  caveats do
+    requires_rosetta
+  end
 end

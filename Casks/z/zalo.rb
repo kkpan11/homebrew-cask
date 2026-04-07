@@ -1,6 +1,6 @@
 cask "zalo" do
-  version "24.3.1"
-  sha256 "3d217576d3e2621795d73188daed6187809c1fe3663774e5b0a39adb4e8d97d2"
+  version "26.3.20"
+  sha256 "a2cdfe5f42990d9d817725a69fe6a2e9e54cdff56d9f3216d2b091807c5393cd"
 
   url "https://res-zaloapp-aka.zdn.vn/mac/ZaloSetup-universal-#{version}.dmg",
       verified: "res-zaloapp-aka.zdn.vn/mac/"
@@ -13,7 +13,7 @@ cask "zalo" do
     strategy :header_match
   end
 
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :big_sur"
 
   app "Zalo.app"
 

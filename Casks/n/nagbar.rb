@@ -8,7 +8,7 @@ cask "nagbar" do
   desc "Status bar monitor for Nagios, Icinga/2 and Thruk"
   homepage "https://sites.google.com/site/nagbarapp/home"
 
-  depends_on macos: ">= :mojave"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "NagBar.app"
 
@@ -17,4 +17,8 @@ cask "nagbar" do
     "~/Library/Caches/com.volendavidov.NagBar",
     "~/Library/Preferences/com.volendavidov.NagBar.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

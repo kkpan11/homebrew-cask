@@ -1,44 +1,64 @@
 cask "cockatrice" do
-  on_mojave :or_older do
-    version "2.8.0,2021-01-26,Prismatic.Bridge"
-    sha256 "53a4db3e3b97196b42c20959da701de5713f0811907d07ba187192f53fccef1d"
-
-    url "https://github.com/Cockatrice/Cockatrice/releases/download/#{version.csv.second}-Release-#{version.csv.first}/Cockatrice-#{version.csv.third}-#{version.csv.first}-macOS-10.14_Mojave.dmg",
-        verified: "github.com/Cockatrice/Cockatrice/"
-  end
-  on_catalina do
-    version "2.9.0,2023-09-14,Rings.of.the.Wild"
-    sha256 "ca4bed42a54a90b1c15387134e29660a52507af7a691c6c136a4f64c57b0f1ed"
-
-    url "https://github.com/Cockatrice/Cockatrice/releases/download/#{version.csv.second}-Release-#{version.csv.first}/Cockatrice-#{version.csv.third}-#{version.csv.first}-macOS-10.15_Catalina.dmg",
-        verified: "github.com/Cockatrice/Cockatrice/"
-  end
-  on_big_sur :or_newer do
+  on_monterey :or_older do
     version "2.9.0,2023-09-14,Rings.of.the.Wild"
     sha256 "4524c5b95928e88073d1f8be46d881288d6d0bf07d8e65185fbebc0491f29e08"
 
     url "https://github.com/Cockatrice/Cockatrice/releases/download/#{version.csv.second}-Release-#{version.csv.first}/Cockatrice-#{version.csv.third}-#{version.csv.first}-macOS-11_Big_Sur.dmg",
         verified: "github.com/Cockatrice/Cockatrice/"
+
+    livecheck do
+      skip "Legacy version"
+    end
+
+    caveats do
+      requires_rosetta
+    end
+  end
+  on_ventura :or_newer do
+    version "2.10.3,2026-02-22,Omenpath,2.10.3"
+
+    on_ventura do
+      sha256 "b635b04316a565a0c6880b0e2490d0dd25f0acebf38cd581b3e1e552e0dca428"
+
+      url "https://github.com/Cockatrice/Cockatrice/releases/download/#{version.csv.second}-Release-#{version.csv.first}/Cockatrice-#{version.csv.third}-#{version.csv.fourth}-macOS13_Intel.dmg",
+          verified: "github.com/Cockatrice/Cockatrice/"
+
+      caveats do
+        requires_rosetta
+      end
+    end
+    on_sonoma do
+      sha256 "96a4f26f0d0014c449ce93cd708cc926dc8133452341b6d65c80a8b692cc6de1"
+
+      url "https://github.com/Cockatrice/Cockatrice/releases/download/#{version.csv.second}-Release-#{version.csv.first}/Cockatrice-#{version.csv.third}-#{version.csv.fourth}-macOS14.dmg",
+          verified: "github.com/Cockatrice/Cockatrice/"
+    end
+    on_sequoia :or_newer do
+      sha256 "5ebebf79bf50315f5f7e0dfc015a0775f9fd269fe4b26ffb4ab4f0ec7ebd1cfd"
+
+      url "https://github.com/Cockatrice/Cockatrice/releases/download/#{version.csv.second}-Release-#{version.csv.first}/Cockatrice-#{version.csv.third}-#{version.csv.fourth}-macOS15.dmg",
+          verified: "github.com/Cockatrice/Cockatrice/"
+    end
+
+    livecheck do
+      url :url
+      regex(%r{/(\d+(?:-\d+)+)-Release-([^/]+)/Cockatrice-([^-]+)-(\d+(?:\.\d+)+(?:-beta)?)-macOS[.\w]*\.dmg$}i)
+      strategy :github_latest do |json, regex|
+        json["assets"]&.map do |asset|
+          match = asset["browser_download_url"]&.match(regex)
+          next if match.blank?
+
+          "#{match[2]},#{match[1]},#{match[3]},#{match[4]}"
+        end
+      end
+    end
   end
 
   name "Cockatrice"
   desc "Virtual tabletop for multiplayer card games"
   homepage "https://cockatrice.github.io/"
 
-  livecheck do
-    url :url
-    regex(%r{/(\d+(?:-\d+)+)-Release-(\d+(?:\.\d+)+)/Cockatrice-([^/]+)-\2-macOS-[.\w]*\.dmg$}i)
-    strategy :github_latest do |json, regex|
-      json["assets"]&.map do |asset|
-        match = asset["browser_download_url"]&.match(regex)
-        next if match.blank?
-
-        "#{match[2]},#{match[1]},#{match[3]}"
-      end
-    end
-  end
-
-  depends_on macos: ">= :mojave"
+  depends_on macos: ">= :big_sur"
 
   app "cockatrice.app"
   app "oracle.app"

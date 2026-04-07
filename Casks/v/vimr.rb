@@ -1,26 +1,21 @@
 cask "vimr" do
-  version "0.46.1,20240114.181346"
-  sha256 "33aabbe736045f9901e89cef3fde7d8a758f39efca039ba7873c7961b79ee53a"
+  version "0.61.1,20260402.202245"
+  sha256 "807f038c62f974a5949bcfc61be87036eb7eb8a0515c70f68c95b99944a31ed6"
 
-  url "https://github.com/qvacua/vimr/releases/download/v#{version.csv.first}-#{version.csv.second}/VimR-v#{version.csv.first}.tar.bz2",
-      verified: "github.com/qvacua/vimr/"
+  url "https://github.com/qvacua/vimr/releases/download/v#{version.csv.first}-#{version.csv.second}/VimR-v#{version.csv.first}.tar.bz2"
   name "VimR"
   desc "GUI for the Neovim text editor"
-  homepage "http://vimr.org/"
+  homepage "https://github.com/qvacua/vimr"
 
   livecheck do
-    url :url
-    regex(/^v?(\d+(?:\.\d+)+)[._-](\d+(?:\.\d+)+)$/i)
-    strategy :github_latest do |json, regex|
-      match = json["tag_name"]&.match(regex)
-      next if match.blank?
-
-      "#{match[1]},#{match[2]}"
+    url "https://raw.githubusercontent.com/qvacua/vimr/refs/heads/master/appcast.xml"
+    strategy :sparkle do |item|
+      item.nice_version.delete_prefix("v")
     end
   end
 
   auto_updates true
-  depends_on macos: ">= :monterey"
+  depends_on macos: ">= :sonoma"
 
   app "VimR.app"
   binary "#{appdir}/VimR.app/Contents/Resources/vimr"

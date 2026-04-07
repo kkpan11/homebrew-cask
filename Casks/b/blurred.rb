@@ -7,8 +7,6 @@ cask "blurred" do
   desc "Utility to dim background/inactive content in the screen"
   homepage "https://github.com/dwarvesf/blurred/"
 
-  depends_on macos: ">= :catalina"
-
   app "Blurred.app"
 
   uninstall launchctl: "foundation.dwarves.blurredlaunche",
@@ -20,4 +18,8 @@ cask "blurred" do
     "~/Library/Containers/foundation.dwarves.blurred",
     "~/Library/Containers/foundation.dwarves.blurredlauncher",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

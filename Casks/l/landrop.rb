@@ -13,4 +13,8 @@ cask "landrop" do
   uninstall quit: "app.landrop.landrop"
 
   zap trash: "~/Library/Preferences/app.landrop.landrop.plist"
+
+  caveats do
+    requires_rosetta
+  end
 end

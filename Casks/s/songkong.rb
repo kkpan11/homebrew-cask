@@ -1,7 +1,7 @@
 cask "songkong" do
   arch arm: "-m1"
 
-  version "10.4.5,1.0"
+  version "12.3"
   sha256 :no_check
 
   url "https://www.jthink.net/songkong/downloads/current/songkong-osx#{arch}.dmg"
@@ -10,16 +10,15 @@ cask "songkong" do
   homepage "https://www.jthink.net/songkong/"
 
   livecheck do
-    url :url
-    strategy :extract_plist
+    url "https://www.jthink.net/songkong/en/download.jsp"
+    regex(/SongKong\s+v?(\d+(?:\.\d+)+)/i)
   end
-
-  depends_on macos: ">= :sierra"
 
   app "SongKong.app"
 
   zap trash: [
     "~/Library/Logs/SongKong",
+    "~/Library/Preferences/com.jthink.songkong.plist",
     "~/Library/Preferences/SongKong",
     "~/Library/Reports/SongKong",
     "~/Library/Saved Application State/com.jthink.songkong.savedState",

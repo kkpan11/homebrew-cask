@@ -1,55 +1,29 @@
 cask "microsoft-powerpoint" do
-  on_el_capitan :or_older do
-    version "16.16.20101200"
-    sha256 "0c898068408082124f7fe45717e3fb4b4f5647b609b54dc5fa6c90e295f499c3"
+  on_ventura :or_older do
+    on_catalina :or_older do
+      version "16.66.22101101"
+      sha256 "bea8c4790445f726debd0f64d24fbdac59e3a9b51e95c092fb31da3913164540"
+    end
+    on_big_sur do
+      version "16.77.23091703"
+      sha256 "9ece350fa314584aafacfcdf559bb67b8707bc2c2e7a961f7881d1ea280aac4d"
+    end
+    on_monterey do
+      version "16.89.24091630"
+      sha256 "44801ae2e12318f6f8982da6fabb1c7c1d79fb38cc464fecfd60189aa36e9555"
+    end
+    on_ventura do
+      version "16.101.25100321"
+      sha256 "6256fbb45f2922fa60c9a0101da3b27f933fcf0ada6f530ef1aca235803a7782"
+    end
 
     livecheck do
       skip "Legacy version"
     end
   end
-  on_sierra do
-    version "16.30.19101301"
-    sha256 "d0b16f96bb390a225c52808952a66f0e02bf3f355234cbe733b250d37bb44c72"
-
-    livecheck do
-      skip "Legacy version"
-    end
-  end
-  on_high_sierra do
-    version "16.43.20110804"
-    sha256 "a89e0aed18e5b1e56293b1f9eaccc3e3f5089eb37a9eec64bb6f3a3fa90587eb"
-
-    livecheck do
-      skip "Legacy version"
-    end
-  end
-  on_mojave do
-    version "16.54.21101001"
-    sha256 "75a57c82b46d0e2558c454f19610576b7a48baf1ccc5cd1fa61b69cca5bf0bd1"
-
-    livecheck do
-      skip "Legacy version"
-    end
-  end
-  on_catalina do
-    version "16.66.22101101"
-    sha256 "bea8c4790445f726debd0f64d24fbdac59e3a9b51e95c092fb31da3913164540"
-
-    livecheck do
-      skip "Legacy version"
-    end
-  end
-  on_big_sur do
-    version "16.77.23091703"
-    sha256 "9ece350fa314584aafacfcdf559bb67b8707bc2c2e7a961f7881d1ea280aac4d"
-
-    livecheck do
-      skip "Legacy version"
-    end
-  end
-  on_monterey :or_newer do
-    version "16.83.24031120"
-    sha256 "287b6ead075c037cccd9958471387af59b0e1fb828a88f23f15c256071874956"
+  on_sonoma :or_newer do
+    version "16.107.26032814"
+    sha256 "12a99155dfc63aad6ad7be89f36a3fedbf2c25b468a4ff9475c2167bd92b0e06"
 
     livecheck do
       url "https://go.microsoft.com/fwlink/p/?linkid=525136"
@@ -67,7 +41,6 @@ cask "microsoft-powerpoint" do
     "microsoft-office",
     "microsoft-office-businesspro",
   ]
-  depends_on cask: "microsoft-auto-update"
 
   pkg "Microsoft_PowerPoint_#{version}_Installer.pkg",
       choices: [
@@ -87,9 +60,9 @@ cask "microsoft-powerpoint" do
             delete:    "/Applications/Microsoft PowerPoint.app"
 
   zap trash: [
-    "~/Library/Application Scripts/com.microsoft.Powerpoint",
+    "~/Library/Application Scripts/com.microsoft.Powerpoint*",
     "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.microsoft.powerpoint.sfl*",
-    "~/Library/Containers/com.microsoft.Powerpoint",
+    "~/Library/Containers/com.microsoft.Powerpoint*",
     "~/Library/Preferences/com.microsoft.Powerpoint.plist",
     "~/Library/Saved Application State/com.microsoft.Powerpoint.savedState",
   ]

@@ -1,6 +1,6 @@
 cask "customshortcuts" do
-  version "1.1"
-  sha256 "e6bda7397e2c2eed0475e1210bf33c22d3d94a2d78ebff89843685969a73f4dc"
+  version "1.3"
+  sha256 "8bb0dade6f8f0ee8fbb0f3e84c5e8f6fb927a277af5c11f5df4c8be16989e1fa"
 
   url "https://dl.houdah.com/customShortcuts/updates/cast_assets/CustomShortcuts#{version}.zip"
   name "CustomShortcuts"
@@ -13,7 +13,6 @@ cask "customshortcuts" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "CustomShortcuts.app"
 

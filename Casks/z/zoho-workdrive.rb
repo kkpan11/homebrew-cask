@@ -1,5 +1,5 @@
 cask "zoho-workdrive" do
-  version "2.7.31"
+  version "2.7.48"
   sha256 :no_check
 
   url "https://files-accl.zohopublic.com/public/wdbin/download/46f971e4fc4a32b68ad5d7dade38a7d2",
@@ -13,8 +13,6 @@ cask "zoho-workdrive" do
     strategy :extract_plist
   end
 
-  depends_on macos: ">= :mojave"
-
   app "Zoho WorkDrive.app"
 
   zap trash: [
@@ -24,4 +22,8 @@ cask "zoho-workdrive" do
     "~/Library/Containers/com.zohosync.workdrive",
     "~/Library/Preferences/org.zoho.ZohoWorkDrive.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

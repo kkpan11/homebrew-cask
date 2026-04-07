@@ -1,15 +1,18 @@
 cask "netlogo" do
-  version "6.4.0"
-  sha256 "c4147815eaa093770cb99e641a244d0800b8b5089c734999f14fa1b81e3b00fe"
+  arch arm: "aarch64", intel: "x86_64"
 
-  url "https://ccl.northwestern.edu/netlogo/#{version}/NetLogo-#{version}.dmg"
+  version "7.0.3"
+  sha256 arm:   "14fb4870415fe78e7391641a62aaab96e570b4531ac3cd82d8d16ad8f60a24ca",
+         intel: "79ecc61c231559681f1d2f0f79943956ae681c538fc65fef1c781e483ae6b5e6"
+
+  url "https://downloads.netlogo.org/#{version}/NetLogo-#{version}-#{arch}.dmg"
   name "NetLogo"
   desc "Multi-agent programmable modelling environment"
-  homepage "https://ccl.northwestern.edu/netlogo/"
+  homepage "https://www.netlogo.org/"
 
   livecheck do
-    url "https://ccl.northwestern.edu/netlogo/oldversions.shtml"
-    regex(/NetLogo\s*(\d+(?:\.\d+)+)/i)
+    url "https://docs.netlogo.org/versions"
+    regex(/Version\s*(\d+(?:\.\d+)+)/i)
   end
 
   suite "NetLogo #{version}"

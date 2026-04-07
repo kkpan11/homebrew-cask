@@ -1,6 +1,6 @@
 cask "zandronum" do
-  version "3.1"
-  sha256 "2adcc9eca3ed7119bb8c28de371318b99ae691a0412f3fcacd4f577955d39933"
+  version "3.2.1"
+  sha256 "9067488a1d72847c87a29f6798b12b3d7b114b2654c3e8b7d7b96090393072a2"
 
   url "https://zandronum.com/downloads/zandronum#{version}-macosx.dmg"
   name "Zandronum"
@@ -11,6 +11,8 @@ cask "zandronum" do
     url "https://zandronum.com/downloads/"
     regex(/href=.*?zandronum[._-]?v?(\d+(?:\.\d+)+)[._-]macosx\.dmg/i)
   end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "Zandronum.app"
   app "Doomseeker.app"
@@ -24,11 +26,14 @@ cask "zandronum" do
     "~/Library/Saved Application State/org.doomseeker.app.savedState",
   ]
 
-  caveats <<~EOS
-    Install IWADs to ~/Library/Application Support/Zandronum/
+  caveats do
+    requires_rosetta
+    <<~EOS
+      Install IWADs to ~/Library/Application Support/Zandronum/
 
-    For more information, see:
+      For more information, see:
 
-      https://wiki.zandronum.com/Zandronum_and_IWAD_Files
-  EOS
+        https://wiki.zandronum.com/Zandronum_and_IWAD_Files
+    EOS
+  end
 end

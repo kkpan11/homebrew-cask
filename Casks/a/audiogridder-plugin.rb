@@ -9,8 +9,10 @@ cask "audiogridder-plugin" do
 
   livecheck do
     url "https://audiogridder.com/releases/latest.txt"
-    regex(/(\d+(?:.\d+)+)/i)
+    regex(/(\d+(?:[._]\d+)+)/i)
   end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   pkg "AudioGridderPlugin_#{version}_macOS-universal.pkg"
 

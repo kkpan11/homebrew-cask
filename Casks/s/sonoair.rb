@@ -6,10 +6,12 @@ cask "sonoair" do
   name "SonoAir"
   homepage "https://sonoair.mihosoft.eu/"
 
-  livecheck do
-    url "https://sonoair.mihosoft.eu/download.html"
-    regex(%r{href=.*?/([^/]+)/SonoAir\.zip}i)
-  end
+  deprecate! date: "2024-09-08", because: :unmaintained
+  disable! date: "2025-09-09", because: :unmaintained
 
   app "SonoAir.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

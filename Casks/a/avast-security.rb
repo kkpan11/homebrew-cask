@@ -1,5 +1,5 @@
 cask "avast-security" do
-  version "15.7.5"
+  version "15.8.0"
   sha256 :no_check
 
   url "https://bits.avcdn.net/productfamily_ANTIVIRUS/insttype_FREE/platform_MAC/installertype_ONLINE/build_RELEASE/",
@@ -9,7 +9,7 @@ cask "avast-security" do
   homepage "https://www.avast.com/"
 
   livecheck do
-    url "http://mac-av.u.avcdn.net/mac-av/10_11/AAFM/changelog.html"
+    url "https://mac-av.u.avcdn.net/mac-av/10_11/AAFM/changelog.html"
     regex(%r{<h2>(\d+(?:\.\d+)+).*</h2>}i)
   end
 

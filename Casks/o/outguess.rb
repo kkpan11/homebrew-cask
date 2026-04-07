@@ -3,16 +3,22 @@ cask "outguess" do
   sha256 :no_check
 
   url "https://www.rbcafe.com/download/outguess.zip",
-      user_agent: :fake
+      user_agent: :browser
   name "Outguess"
+  desc "Steganography tool to hide a document in an image"
   homepage "https://www.rbcafe.com/software/outguess/"
 
-  livecheck do
-    url :homepage
-    regex(/Version\s+(\d+(?:\.\d+)+)/i)
-  end
-
-  depends_on macos: ">= :el_capitan"
+  # The zip file URL is consistently unreachable in CI despite working locally
+  disable! date: "2026-02-08", because: :unreachable
 
   app "Outguess.app"
+
+  zap trash: [
+    "~/Library/Application Support/com.rbcafe.Outguess",
+    "~/Library/Saved Application State/com.rbcafe.Outguess.savedState",
+  ]
+
+  caveats do
+    requires_rosetta
+  end
 end

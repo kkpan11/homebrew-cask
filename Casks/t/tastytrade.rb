@@ -1,14 +1,14 @@
 cask "tastytrade" do
   arch arm: "-aarch64"
 
-  version "2.10.0"
-  sha256 arm:   "1f1e3384cdba6db4df6b95eeabfd846b86c6f162b8baa0d111c85343f7eae6c3",
-         intel: "45d943b68cc80fd38fc9f4dd204de5f02bd82d131e3e61b82301c9716d1a1575"
+  version "2.29.2"
+  sha256 arm:   "d450cbda6c5a0f7076553688a842219a27c119eca8079ba0873d758fbfd1ef74",
+         intel: "3f27d11bd06ab5af6c2da274ca6524da36b50396736c2fdcd4b04efc8ab2b471"
 
   url "https://download.tastytrade.com/desktop-#{version.major}.x.x/#{version}/tastytrade-#{version}#{arch}.dmg"
   name "tastytrade"
   desc "Desktop trading platform"
-  homepage "https://tastytrade.com/technology/"
+  homepage "https://tastytrade.com/desktop-platform/"
 
   # The version information is found in a random JSON file, which is referenced
   # from another JSON file. We can't tell which file will contain the version
@@ -18,20 +18,9 @@ cask "tastytrade" do
   # structure of the target JSON file changes. The latter would cause the check
   # to fetch all the JSON files before failing, which isn't ideal.
   livecheck do
-    url "https://tastytrade.com/page-data/technology/page-data.json"
+    url "https://tastytrade.com/page-data/desktop-platform/page-data.json"
     strategy :json do |json|
-      requests = 0
-      version = json["staticQueryHashes"]&.each do |static_hash|
-        requests += 1
-        break if requests > 4
-
-        content = Homebrew::Livecheck::Strategy.page_content("https://tastytrade.com/page-data/sq/d/#{static_hash}.json")
-        next if content.blank? || content[:content].blank?
-
-        hash_json = JSON.parse(content[:content])
-        version = hash_json.dig("data", "contentstackGlobalSettings", "tastyworksSoftware", "desktopVersion")
-        break version if version.present?
-      end
+      json.dig("result", "pageContext", "globalSettings", "tastyworksSoftware", "desktopVersion")
     end
   end
 

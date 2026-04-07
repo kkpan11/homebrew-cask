@@ -1,36 +1,24 @@
 cask "couchbase-server-enterprise" do
-  on_el_capitan :or_older do
-    version "4.5.1"
-    sha256 "de014c7c134eb97ff00be6b2e6f5d0da84295ce05bbb7bb3a4d3c747a365cd22"
+  arch arm: "arm64", intel: "x86_64"
 
-    url "https://packages.couchbase.com/releases/#{version}/couchbase-server-enterprise_#{version}-macos_x86_64.zip"
+  version "8.0.0"
+  sha256 arm:   "a79613f10fc085899ff8ea31dccb85866098bd6ae812baca498582c641366ced",
+         intel: "2aee2d8d762331376022d0c50042c43847fed08dbc7bdcfac7f9dde8221ed70c"
 
-    livecheck do
-      skip "Legacy version"
-    end
-
-    app "couchbase-server-enterprise_#{version}/Couchbase Server.app"
-  end
-  on_sierra :or_newer do
-    version "7.6.0"
-    sha256 "3e864c759c000d03e92b45e0d194f91fd7c8ced6bc6b627c2c4d709442188354"
-
-    url "https://packages.couchbase.com/releases/#{version}/couchbase-server-enterprise_#{version}-macos_x86_64.dmg"
-
-    livecheck do
-      url "https://www.couchbase.com/downloads/"
-      regex(/couchbase[._-]server[._-]enterprise[._-]v?(\d+(:?\.\d+)+)[._-]macos[._-]x86[._-]64\.dmg/i)
-    end
-
-    app "Couchbase Server.app"
-  end
-
+  url "https://packages.couchbase.com/releases/#{version}/couchbase-server-enterprise_#{version}-macos_#{arch}.dmg"
   name "Couchbase Server"
   desc "Distributed NoSQL cloud database"
   homepage "https://www.couchbase.com/"
 
+  livecheck do
+    url "https://www.couchbase.com/downloads/",
+        user_agent: :browser
+    regex(/couchbase[._-]server[._-]enterprise[._-]v?(\d+(:?\.\d+)+)[._-]macos[._-]#{arch}\.dmg/i)
+  end
+
   conflicts_with cask: "couchbase-server-community"
-  depends_on macos: ">= :catalina"
+
+  app "Couchbase Server.app"
 
   zap trash: [
     "~/Library/Application Support/Couchbase",

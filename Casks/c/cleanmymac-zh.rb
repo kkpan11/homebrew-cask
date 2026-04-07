@@ -1,6 +1,6 @@
 cask "cleanmymac-zh" do
-  version "4.15.2"
-  sha256 "66f654e92f8d46563f6315f0566ee3f77e55e652cf51f684dbf837c4f4589151"
+  version "4.15.14"
+  sha256 "c39b42a128b3b5542e7b9a6fcc51eb26d1ab2d123d991dc17e314b092ce671b4"
 
   url "https://dl.devmate.com/com.macpaw.zh.CleanMyMac#{version.major}/CleanMyMacXChinese.dmg",
       verified: "dl.devmate.com/"
@@ -15,7 +15,6 @@ cask "cleanmymac-zh" do
 
   auto_updates true
   conflicts_with cask: "cleanmymac"
-  depends_on macos: ">= :high_sierra"
 
   app "CleanMyMac-X.app"
 
@@ -41,35 +40,19 @@ cask "cleanmymac-zh" do
     "/Users/Shared/CleanMyMac-X Menu",
     "/Users/Shared/CleanMyMac-X",
     "~/Library/Application Scripts/com.macpaw.zh.CleanMyMac#{version.major}.CleanMyMacWidget",
-    "~/Library/Application Support/CleanMyMac-X Menu",
-    "~/Library/Application Support/CleanMyMac-X",
+    "~/Library/Application Support/CleanMyMac-X*",
     "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.macpaw.zh.CleanMyMac#{version.major}.scheduler.sfl*",
     "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.macpaw.zh.CleanMyMac#{version.major}.sfl*",
     "~/Library/Caches/CleanMyMac #{version.major}",
     "~/Library/Caches/com.apple.helpd/SDMHelpData/Other/English/HelpSDMIndexFile/com.macpaw.zh.CleanMyMac#{version.major}.help*",
-    "~/Library/Caches/com.macpaw.zh.CleanMyMac#{version.major}",
-    "~/Library/Caches/com.macpaw.zh.CleanMyMac#{version.major}.HealthMonitor",
-    "~/Library/Caches/com.macpaw.zh.CleanMyMac#{version.major}.KnowledgeBase",
-    "~/Library/Caches/com.macpaw.zh.CleanMyMac#{version.major}.Menu",
-    "~/Library/Caches/com.macpaw.zh.CleanMyMac#{version.major}.Scheduler",
-    "~/Library/Caches/com.macpaw.zh.CleanMyMac#{version.major}.Updater",
+    "~/Library/Caches/com.macpaw.zh.CleanMyMac#{version.major}*",
     "~/Library/Containers/com.macpaw.zh.CleanMyMac#{version.major}.CleanMyMacWidget",
     "~/Library/Group Containers/*.com.macpaw.zh.CleanMyMac#{version.major}",
-    "~/Library/HTTPStorages/com.macpaw.zh.CleanMyMac#{version.major}",
-    "~/Library/HTTPStorages/com.macpaw.zh.CleanMyMac#{version.major}.binarycookies",
-    "~/Library/HTTPStorages/com.macpaw.zh.CleanMyMac#{version.major}.Menu",
-    "~/Library/HTTPStorages/com.macpaw.zh.CleanMyMac#{version.major}.Updater",
-    "~/Library/LaunchAgents/com.macpaw.zh.CleanMyMac#{version.major}.HealthMonitor.plist",
-    "~/Library/LaunchAgents/com.macpaw.zh.CleanMyMac#{version.major}.Updater.plist",
+    "~/Library/HTTPStorages/com.macpaw.zh.CleanMyMac#{version.major}*",
+    "~/Library/LaunchAgents/com.macpaw.zh.CleanMyMac#{version.major}*",
     "~/Library/Logs/CleanMyMac X Menu",
     "~/Library/Logs/com.macpaw.zh.CleanMyMac#{version.major}",
-    "~/Library/Preferences/*.com.macpaw.zh.CleanMyMac#{version.major}.plist",
-    "~/Library/Preferences/com.macpaw.zh.CleanMyMac#{version.major}.HealthMonitor.plist",
-    "~/Library/Preferences/com.macpaw.zh.CleanMyMac#{version.major}.KnowledgeBase.plist",
-    "~/Library/Preferences/com.macpaw.zh.CleanMyMac#{version.major}.Menu.plist",
-    "~/Library/Preferences/com.macpaw.zh.CleanMyMac#{version.major}.plist",
-    "~/Library/Preferences/com.macpaw.zh.CleanMyMac#{version.major}.Scheduler.plist",
-    "~/Library/Preferences/com.macpaw.zh.CleanMyMac-#{version.major}-Helper.plist",
+    "~/Library/Preferences/*.com.macpaw.zh.CleanMyMac#{version.major}*.plist",
     "~/Library/Saved Application State/com.macpaw.zh.CleanMyMac#{version.major}.savedState",
     "~/Library/WebKit/com.macpaw.zh.CleanMyMac#{version.major}",
     "~/Pictures/Photos Library.photoslibrary/private/com.macpaw.zh.CleanMyMac#{version.major}",

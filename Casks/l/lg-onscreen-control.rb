@@ -1,6 +1,6 @@
 cask "lg-onscreen-control" do
-  version "6.15,NARNBhb3qqsYnMpR3PadQ"
-  sha256 "e32fc963cb03ce56d4995059fa9fa02683539894783349ee2394da6703282ce8"
+  version "7.30,clVHLZBprha2LMY4GyIBsQ"
+  sha256 "bb174c4158876f4c8a0c5393bb69aa20cd14817afd86278926299ff57b7ed070"
 
   url "https://gscs-b2c.lge.com/downloadFile?fileId=#{version.csv.second}",
       verified: "lge.com/"
@@ -8,11 +8,26 @@ cask "lg-onscreen-control" do
   desc "Displays all connected LG monitor information"
   homepage "https://www.lg.com/us/support/monitors"
 
+  # There is no page available specifically for the software
+  # so we return the downloads from one of the popular products
   livecheck do
-    skip "No version information available"
-  end
+    url "https://www.lg.com/us/support/product/lg-27GN950-B.AUS"
+    regex(/Mac[._-]OSC[._-]v?(\d+(?:\.\d+)+)\.zip/i)
+    strategy :page_match do |page, regex|
+      json_string = page[/NEXT[._-]DATA[^>]*>\s*([^<]+)\s*</i, 1]
+      next if json_string.blank?
 
-  depends_on macos: ">= :mojave"
+      json = Homebrew::Livecheck::Strategy::Json.parse_json(json_string)
+      json.dig("props", "pageProps", "softwareData", "fileData")&.map do |_, files|
+        files.map do |file|
+          match = file["originalFileName"]&.match(regex)
+          next if match.blank? || (filename = file["fileName"]).blank?
+
+          "#{match[1]},#{filename}"
+        end
+      end&.flatten
+    end
+  end
 
   pkg "OSC_V#{version.csv.first}_signed.pkg"
 

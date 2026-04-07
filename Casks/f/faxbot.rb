@@ -7,14 +7,7 @@ cask "faxbot" do
   desc "Send Faxes via FRITZ!Box"
   homepage "https://www.hosy.de/faxer/"
 
-  livecheck do
-    url "https://www.hosy.de/faxer/version.xml"
-    strategy :sparkle do |item|
-      item.title[/Version (\d+(?:\.\d+)*)/i, 1].to_s
-    end
-  end
-
-  depends_on macos: ">= :sierra"
+  disable! date: "2025-08-03", because: :no_longer_available
 
   app "Faxbot.app"
 

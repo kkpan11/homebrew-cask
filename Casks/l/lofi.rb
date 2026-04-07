@@ -8,6 +8,8 @@ cask "lofi" do
   desc "Spotify player with WebGL visualisations"
   homepage "https://www.lofi.rocks/"
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "lofi.app"
 
   zap trash: [
@@ -15,4 +17,8 @@ cask "lofi" do
     "~/Library/Preferences/lofi.rocks.plist",
     "~/Library/Saved Application State/lofi.rocks.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

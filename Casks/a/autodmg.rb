@@ -12,8 +12,6 @@ cask "autodmg" do
     strategy :github_latest
   end
 
-  depends_on macos: ">= :sierra"
-
   app "AutoDMG.app"
 
   zap trash: [
@@ -22,4 +20,8 @@ cask "autodmg" do
     "~/Library/Logs/AutoDMG",
     "~/Library/Preferences/se.gu.it.AutoDMG.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -1,5 +1,5 @@
 cask "box-tools" do
-  version "4.24.0.1029"
+  version "4.32"
   sha256 :no_check
 
   url "https://e3.boxcdn.net/box-installers/boxedit/mac/currentrelease/BoxToolsInstaller.dmg",
@@ -9,9 +9,16 @@ cask "box-tools" do
   homepage "https://www.box.com/resources/downloads"
 
   livecheck do
-    url :url
-    strategy :extract_plist
+    url "https://support.box.com/api/v2/help_center/en-us/sections/360009152333/articles.json"
+    regex(/Box\s+Tools\s+v?(\d+(?:\.\d+)+)/i)
+    strategy :json do |json, regex|
+      json["articles"]&.map do |item|
+        item["title"]&.match(regex) { |match| match[1] }
+      end
+    end
   end
+
+  depends_on macos: ">= :ventura"
 
   apps = [
     "Device Trust",
@@ -32,8 +39,11 @@ cask "box-tools" do
   zap trash: "~/Library/Application Support/Box/Box Edit",
       rmdir: "~/Library/Application Support/Box"
 
-  caveats <<~EOS
-    Box Edit currently only works with Safari and Firefox.
-    Restart your browser to load the plugin.
-  EOS
+  caveats do
+    requires_rosetta
+    <<~EOS
+      Box Edit currently only works with Safari and Firefox.
+      Restart your browser to load the plugin.
+    EOS
+  end
 end

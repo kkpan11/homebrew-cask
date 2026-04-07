@@ -13,5 +13,16 @@ cask "sigdigger" do
     strategy :github_latest
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "SigDigger.app"
+
+  zap trash: [
+    "~/Library/Preferences/org.actinid.SigDigger.plist",
+    "~/Library/Saved Application State/org.actinid.SigDigger.savedState",
+  ]
+
+  caveats do
+    requires_rosetta
+  end
 end

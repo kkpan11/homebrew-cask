@@ -1,6 +1,6 @@
 cask "rocket" do
-  version "1.9.3,85"
-  sha256 "02aff7ebf6615624adb7b20106ed1d2fd887a48d9b0e918e133b166ebf64863e"
+  version "1.9.5,88"
+  sha256 "a6050156f5cf583fdd8d7f2714967d0d06f9547f91ef9d3ba094f076e0a58c34"
 
   url "https://macrelease.matthewpalmer.net/distribution/appcasts/Rocket-#{version.csv.second}.dmg"
   name "Rocket"
@@ -13,6 +13,7 @@ cask "rocket" do
   end
 
   auto_updates true
+  depends_on macos: ">= :ventura"
 
   app "Rocket.app"
 

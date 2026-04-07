@@ -1,5 +1,5 @@
 cask "elmedia-player" do
-  version "8.18"
+  version "8.24"
   sha256 :no_check
 
   url "https://cdn.electronic.us/products/elmedia/mac/download/elmediaplayer.dmg"
@@ -13,12 +13,13 @@ cask "elmedia-player" do
   end
 
   auto_updates true
-  depends_on macos: ">= :sierra"
 
   app "Elmedia Player.app"
 
   zap trash: [
+    "~/Library/Application Support/Elmedia Player",
     "~/Library/Caches/com.Eltima.ElmediaPlayer",
+    "~/Library/HTTPStorages/com.Eltima.ElmediaPlayer",
     "~/Library/Preferences/com.eltima.activator.xml",
     "~/Library/Preferences/com.Eltima.ElmediaPlayer.LSSharedFileList.plist",
     "~/Library/Preferences/com.Eltima.ElmediaPlayer.plist",

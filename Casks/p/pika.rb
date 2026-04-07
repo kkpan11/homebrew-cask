@@ -1,6 +1,6 @@
 cask "pika" do
-  version "0.0.16"
-  sha256 "ce0fe7a8c2fa3a0342588353a83c99a8e38b8d1c15f101615be1a39aae680475"
+  version "1.5.0"
+  sha256 "9ec2b00cc780036e96d922049c3a86a48cde827546d6b36c9545b073de396a37"
 
   url "https://github.com/superhighfives/pika/releases/download/#{version}/Pika-#{version}.dmg",
       verified: "github.com/superhighfives/pika/"
@@ -14,7 +14,7 @@ cask "pika" do
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :sonoma"
 
   app "Pika.app"
 

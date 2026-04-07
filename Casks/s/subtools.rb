@@ -12,10 +12,16 @@ cask "subtools" do
     regex(/href=.*?subtools[._-]?v?(\d+(?:\.\d+)+)\.zip/i)
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "subtools#{version}/SUBtools.app"
 
   zap trash: [
     "~/Library/Application Support/EmmGunn",
     "~/Library/Preferences/com.emmgunn.SUBtools.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

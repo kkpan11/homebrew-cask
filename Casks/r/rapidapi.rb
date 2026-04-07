@@ -1,6 +1,6 @@
 cask "rapidapi" do
-  version "4.2.0"
-  sha256 "5174283faf3960144abf3674703e520f868de64070df820a81c6e116ed08f119"
+  version "4.5.4"
+  sha256 "cc8953efdde6eb142c294001d4dec30b49d1389513a7cecd7ad87eaf7c1f7991"
 
   url "https://cdn-builds.paw.cloud/paw/RapidAPI-#{version}.zip"
   name "RapidAPI"
@@ -13,7 +13,7 @@ cask "rapidapi" do
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :ventura"
 
   app "RapidAPI.app"
 

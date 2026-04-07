@@ -1,16 +1,20 @@
 cask "tiled" do
-  version "1.10.2"
+  version "1.12.1"
 
-  on_catalina :or_older do
-    sha256 "9cd3dae263fd142c72ede7d6b78190860e25580f7ae645145daa39d918aa1ce5"
+  on_monterey :or_older do
+    sha256 "7ccac675b6e71e7a87d558f5b3330040c59a091eafba9cff313261eb84eb8214"
 
-    url "https://github.com/mapeditor/tiled/releases/download/v#{version}/Tiled-#{version}_macOS-10.12-10.15.zip",
+    url "https://github.com/mapeditor/tiled/releases/download/v#{version}/Tiled-#{version}_macOS-10.13-12.zip",
         verified: "github.com/mapeditor/tiled/"
-  end
-  on_big_sur :or_newer do
-    sha256 "0e82e42daa384644a8a795730efcad600cc35ca631693328a6ce65830dc8afa0"
 
-    url "https://github.com/mapeditor/tiled/releases/download/v#{version}/Tiled-#{version}_macOS-11+.zip",
+    caveats do
+      requires_rosetta
+    end
+  end
+  on_ventura :or_newer do
+    sha256 "bc6b4958d4fa8701137ff9c61327f53b708f2b8b2feb8db51c925b8908eb1298"
+
+    url "https://github.com/mapeditor/tiled/releases/download/v#{version}/Tiled-#{version}_macOS-13+.zip",
         verified: "github.com/mapeditor/tiled/"
   end
 
@@ -22,8 +26,6 @@ cask "tiled" do
     url :url
     strategy :github_latest
   end
-
-  depends_on macos: ">= :sierra"
 
   app "Tiled.app"
   # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)

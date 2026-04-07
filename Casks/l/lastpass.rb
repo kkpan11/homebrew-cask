@@ -13,7 +13,6 @@ cask "lastpass" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "LastPass.app"
 
@@ -27,4 +26,8 @@ cask "lastpass" do
     "~/Library/Preferences/com.lastpass.lastpassmacdesktop.plist",
     "~/Library/WebKit/com.lastpass.lastpassmacdesktop",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

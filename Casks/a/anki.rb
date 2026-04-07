@@ -1,34 +1,51 @@
 cask "anki" do
   arch arm: "apple", intel: "intel"
 
-  version "24.04"
-
   on_catalina :or_older do
-    sha256 "24de21187d667d2831e4d09fe906e8c7ed97ed77d7d1db11f813a8abe7827966"
+    version "24.11"
+    sha256 "4d44b763ea114e2aae61aaaa8171fd54a9095a06cd8e84a863675b1bbc75a24a"
 
     url "https://github.com/ankitects/anki/releases/download/#{version}/anki-#{version}-mac-#{arch}-qt5.dmg",
         verified: "github.com/ankitects/anki/"
+
+    livecheck do
+      skip "Legacy version"
+    end
   end
-  on_big_sur :or_newer do
-    sha256 arm:   "6d1a4f54e5e90d1abe117c16d725a2020ce471d2e12e732b1e8fedf49833b61d",
-           intel: "69bf1c73e40cb77649a75359980c33d95359c1640ad0304f2a7cf67c6982ec5b"
+  on_big_sur do
+    version "25.02.7"
+    sha256 arm:   "b2df44bf951404e1d5d56150ee50e158ca5dfd77416b442ed02218348bf1a43b",
+           intel: "0d7eb9781596e44c0a833df71c6948706b97c4e89e8bdb315707de33c33c6052"
 
     url "https://github.com/ankitects/anki/releases/download/#{version}/anki-#{version}-mac-#{arch}-qt6.dmg",
         verified: "github.com/ankitects/anki/"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_monterey :or_newer do
+    version "25.09"
+    sha256 "a20952ad45400db2522ff8e8c6e2303d8f5f3ba0fa0ca9e57a14a42912439e77"
+
+    url "https://github.com/ankitects/anki/releases/download/#{version}/anki-launcher-#{version}-mac.dmg",
+        verified: "github.com/ankitects/anki/"
+
+    livecheck do
+      url :homepage
+      regex(/href=.*?anki[._-]launcher[._-]v?(\d+(?:\.\d+)+)(?:[._-]mac)?\.dmg/i)
+    end
   end
 
   name "Anki"
   desc "Memory training application"
   homepage "https://apps.ankiweb.net/"
 
-  livecheck do
-    url :url
-    strategy :github_latest
-  end
-
-  depends_on macos: ">= :high_sierra"
-
   app "Anki.app"
 
-  zap trash: "~/Library/Application Support/Anki*"
+  zap trash: [
+    "~/Library/Application Support/Anki*",
+    "~/Library/Caches/Anki",
+    "~/Library/Saved Application State/net.ankiweb.dtop.savedState",
+  ]
 end

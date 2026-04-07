@@ -1,5 +1,5 @@
 cask "free-download-manager" do
-  version "6.21"
+  version "6.33.2"
   sha256 :no_check # required as upstream package is updated in-place
 
   url "https://files2.freedownloadmanager.org/#{version.major}/latest/fdm.dmg"
@@ -13,7 +13,6 @@ cask "free-download-manager" do
   end
 
   auto_updates true
-  depends_on macos: ">= :sierra"
 
   app "Free Download Manager.app"
 
@@ -37,6 +36,10 @@ cask "free-download-manager" do
       ],
       rmdir: [
         "~/Library/Application Support/Softdeluxe",
-        "~/Library/Caches/Softdeluxe/",
+        "~/Library/Caches/Softdeluxe",
       ]
+
+  caveats do
+    requires_rosetta
+  end
 end

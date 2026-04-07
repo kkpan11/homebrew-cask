@@ -12,6 +12,8 @@ cask "zy-player" do
     strategy :github_latest
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "ZY Player.app"
 
   zap trash: [
@@ -19,4 +21,8 @@ cask "zy-player" do
     "~/Library/Preferences/com.hunlongyu.zy.plist",
     "~/Library/Saved Application State/com.hunlongyu.zy.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

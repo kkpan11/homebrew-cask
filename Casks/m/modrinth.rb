@@ -1,6 +1,6 @@
 cask "modrinth" do
-  version "0.6.3"
-  sha256 "ff4e4a2f8eda552c16b27b1851c8bfdfc22335fcba9e54e98aa419bc772d681c"
+  version "0.12.6"
+  sha256 "1e90e230366a399dd263df1a87c95ea37959e7f7f354ff6f55de1d925448c872"
 
   url "https://launcher-files.modrinth.com/versions/#{version}/macos/Modrinth%20App_#{version}_universal.dmg"
   name "Modrinth App"
@@ -8,12 +8,13 @@ cask "modrinth" do
   homepage "https://modrinth.com/"
 
   livecheck do
-    url "https://modrinth.com/app"
-    regex(/Modrinth%20App[._-]v?(\d+(?:\.\d+)+)[._-]universal\.dmg/i)
+    url "https://launcher-files.modrinth.com/updates.json"
+    strategy :json do |json|
+      json["version"]
+    end
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "Modrinth App.app"
 

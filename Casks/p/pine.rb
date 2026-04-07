@@ -7,7 +7,7 @@ cask "pine" do
   desc "Native markdown editor"
   homepage "https://github.com/lukakerr/pine"
 
-  depends_on macos: ">= :sierra"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "Pine.app"
 
@@ -19,4 +19,8 @@ cask "pine" do
     "~/Library/Saved Application State/io.github.lukakerr.Pine.savedState",
     "~/Library/WebKit/io.github.lukakerr.Pine",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

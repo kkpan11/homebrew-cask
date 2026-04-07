@@ -7,5 +7,12 @@ cask "uncrustifyx" do
   desc "Uncrustify utility and documentation browser"
   homepage "https://github.com/ryanmaxwell/UncrustifyX"
 
+  deprecate! date: "2024-09-09", because: :unmaintained
+  disable! date: "2025-09-09", because: :unmaintained
+
   app "UncrustifyX.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

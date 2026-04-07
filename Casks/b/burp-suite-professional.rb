@@ -1,9 +1,9 @@
 cask "burp-suite-professional" do
   arch arm: "MacOsArm64", intel: "MacOsx"
 
-  version "2024.2.1.3"
-  sha256 arm:   "140c48b391f8b0ffc1791fc1daf33b4b443084d14bbb957ea325da2563e0d09a",
-         intel: "a98001e6aa567cf56f69213e16af9c79e05fad0741a90aa671f0b3fec0113279"
+  version "2026.1.5"
+  sha256 arm:   "778be81b606f9ad5aeb1910b8f962b3fb17cd926cc72aea793bebdc3ae4f53c5",
+         intel: "3591192e83820f5abde85b9170e6e863990d481efee20c8b2f6e9ac1eea8c312"
 
   url "https://portswigger-cdn.net/burp/releases/download?product=pro&version=#{version}&type=#{arch}",
       verified: "portswigger-cdn.net/burp/releases/"
@@ -14,19 +14,21 @@ cask "burp-suite-professional" do
   livecheck do
     url "https://portswigger.net/burp/releases/data"
     strategy :json do |json|
-      all_versions = json["ResultSet"]["Results"]
+      all_versions = json.dig("ResultSet", "Results")
       next if all_versions.blank?
 
       all_versions.filter_map do |item|
         item["version"] if
-              item["releaseChannels"].include?("Stable") &&
-              item["categories"].include?("Professional") &&
-              item["builds"].any? do |build|
+              item["releaseChannels"]&.include?("Stable") &&
+              item["categories"]&.include?("Professional") &&
+              item["builds"]&.any? do |build|
                 build["ProductPlatform"] == arch.to_s
               end
       end
     end
   end
+
+  conflicts_with cask: "burp-suite-professional@early-adopter"
 
   app "Burp Suite Professional.app"
 

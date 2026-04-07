@@ -7,12 +7,8 @@ cask "prezi-next" do
   desc "Presentation software"
   homepage "https://prezi.com/"
 
-  livecheck do
-    url "https://prezidesktop.s3.amazonaws.com/assets/mac/pitch/updates/prezi-business.xml"
-    strategy :sparkle, &:short_version
-  end
-
-  depends_on macos: ">= :el_capitan"
+  deprecate! date: "2025-04-05", because: :discontinued
+  disable! date: "2026-04-06", because: :discontinued
 
   app "Prezi Next.app"
 

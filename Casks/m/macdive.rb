@@ -1,6 +1,6 @@
 cask "macdive" do
-  version "2.16.2"
-  sha256 "ea18062585b1bed799d27ee68cfa8cce27ca5b005eaf255118cb153e3a44f82e"
+  version "2.16.3"
+  sha256 "558ac4b14ae99391f425d31b44b86b6f28f3daeb46c738909be32de24a39d160"
 
   url "https://www.mac-dive.com/downloads/MacDive_#{version}.dmg"
   name "MacDive"
@@ -12,11 +12,14 @@ cask "macdive" do
     strategy :sparkle
   end
 
+  auto_updates true
+
   app "MacDive.app"
 
   zap trash: [
     "~/Library/Application Support/MacDive",
-    "~/Library/Preferences/com.mintsoftware.MacDive2.plist",
-    "~/Library/Saved Application State/com.mintsoftware.MacDive2.savedState",
+    "~/Library/HTTPStorages/com.mintsoftware.MacDive#{version.major}",
+    "~/Library/Preferences/com.mintsoftware.MacDive#{version.major}.plist",
+    "~/Library/Saved Application State/com.mintsoftware.MacDive#{version.major}.savedState",
   ]
 end

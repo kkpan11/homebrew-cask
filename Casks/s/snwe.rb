@@ -7,5 +7,12 @@ cask "snwe" do
   desc "Extensible, customisable, menu bar replacement"
   homepage "https://github.com/blahsd/snwe"
 
+  deprecate! date: "2024-09-08", because: :unmaintained
+  disable! date: "2025-09-09", because: :unmaintained
+
   app "snwe.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

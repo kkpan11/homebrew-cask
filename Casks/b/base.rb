@@ -1,18 +1,19 @@
 cask "base" do
-  version "2.5.2"
-  sha256 "84848093681459b039572a15a82e1cc60e4366ccf5fb69a4de5c90d240871d8c"
+  version "3.3.0"
+  sha256 "1e943707779f277848aac9c430a4cf5fe0a67f1403f73334dd5781dccecfcbf6"
 
-  url "https://files.menial.co.uk/base/base_#{version}.zip"
+  url "https://files.menial.co.uk/base/Base-#{version}.zip"
   name "Menial Base"
   desc "App to create, design, edit and browse SQLite 3 database files"
   homepage "https://menial.co.uk/base/"
 
   livecheck do
-    url "https://update.menial.co.uk/software/base/"
+    url "https://update.menial.co.uk/software/base3/"
     strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :mojave"
+  auto_updates true
+  depends_on macos: ">= :sequoia"
 
   app "Base.app"
 

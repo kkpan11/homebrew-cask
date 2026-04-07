@@ -7,10 +7,12 @@ cask "wowmatrix" do
   desc "WoW AddOn Installer and Updater"
   homepage "https://www.wowmatrix.com/"
 
-  livecheck do
-    url :url
-    strategy :extract_plist
-  end
+  deprecate! date: "2024-08-05", because: :unmaintained
+  disable! date: "2025-08-05", because: :unmaintained
 
   app "WowMatrix.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

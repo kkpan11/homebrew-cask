@@ -1,16 +1,25 @@
 cask "djv" do
-  version "1.3.0"
-  sha256 "5702e1a084377e0c0486b68c0fb5014b4e7aa3f4dbcd61bd489359859ad7589f"
+  version "3.3.4"
+  sha256 "3ffc220a1b7c5eb74300136676f5fcfe182b4e4ebb61a886095a5f8e5fd50fba"
 
-  url "https://downloads.sourceforge.net/djv/djv-stable/#{version}/DJV-#{version}-Darwin.dmg",
-      verified: "downloads.sourceforge.net/djv/"
-  name "DJV Imaging"
+  url "https://github.com/grizzlypeak3d/DJV/releases/download/#{version}/DJV-#{version}-macOS-arm64.dmg",
+      verified: "github.com/grizzlypeak3d/DJV/"
+  name "DJV"
   desc "Review software for VFX, animation, and film production"
-  homepage "https://darbyjohnston.github.io/DJV/"
+  homepage "https://grizzlypeak3d.github.io/DJV/"
 
   livecheck do
-    url "https://sourceforge.net/projects/djv/rss?path=/djv-stable"
+    url :url
+    strategy :github_latest
   end
 
+  depends_on arch: :arm64
+
   app "DJV.app"
+
+  zap trash: [
+        "~/Documents/DJV/djv.log",
+        "~/Library/Preferences/com.djv-sourceforge-net-*.plist",
+      ],
+      rmdir: "~/Documents/DJV"
 end

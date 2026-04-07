@@ -1,6 +1,6 @@
 cask "prism" do
-  version "10.2.2"
-  sha256 "c117d1238ae77fec8af9cc11be334ab2e6cc0386b609bb65317c7d782a900a9c"
+  version "11.0.0"
+  sha256 "a3244bd28024bd921b73b542243503c2db68c11038a3cb3914c97d79d7c819e1"
 
   url "https://cdn.graphpad.com/downloads/prism/#{version.major}/#{version}/InstallPrism#{version.major}.dmg"
   name "GraphPad Prism"
@@ -16,7 +16,7 @@ cask "prism" do
   end
 
   auto_updates true
-  depends_on macos: ">= :mojave"
+  depends_on macos: ">= :monterey"
 
   app "Prism #{version.major}.app"
 

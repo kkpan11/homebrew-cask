@@ -19,6 +19,8 @@ cask "quickhash" do
     end
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   container nested: "Quickhash-GUI_#{version.csv.third}#{version.csv.fourth}#{version.csv.fifth}.dmg"
 
   app "Quickhash-GUI.app"
@@ -27,4 +29,8 @@ cask "quickhash" do
     "~/.Quickhash-GUI",
     "~/Library/Saved Application State/www.Quickhash-GUI.org.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

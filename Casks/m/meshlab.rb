@@ -1,8 +1,11 @@
 cask "meshlab" do
-  version "2023.12"
-  sha256 "03e722dd4b7d9241d5d203bc1d15854ac3d122dbddee1835f0cdc65c537d53a9"
+  arch arm: "arm64", intel: "x86_64"
 
-  url "https://github.com/cnr-isti-vclab/meshlab/releases/download/MeshLab-#{version}/MeshLab#{version}-macos.dmg",
+  version "2025.07"
+  sha256 arm:   "9a29ff3dbc0bef74fdee0e47eb8201be2509b45c965ca1f1abdf49c1ea48dac0",
+         intel: "49704f0b12cc524efa31c114f3a5557fe65aa076dc1217fa4716461a503609f7"
+
+  url "https://github.com/cnr-isti-vclab/meshlab/releases/download/MeshLab-#{version}/MeshLab#{version}-macos_#{arch}.dmg",
       verified: "github.com/cnr-isti-vclab/meshlab/"
   name "MeshLab"
   desc "Mesh processing system"

@@ -8,7 +8,8 @@ cask "corona-tracker" do
   desc "Coronavirus tracker app with maps and charts"
   homepage "https://coronatracker.samabox.com/"
 
-  depends_on macos: ">= :catalina"
+  deprecate! date: "2025-11-30", because: :discontinued
+  disable! date: "2026-11-30", because: :discontinued
 
   app "Corona Tracker.app"
 
@@ -16,4 +17,8 @@ cask "corona-tracker" do
     "~/Library/Application Scripts/maccatalyst.com.samabox.corona",
     "~/Library/Containers/maccatalyst.com.samabox.corona",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

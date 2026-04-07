@@ -1,15 +1,26 @@
 cask "adobe-air" do
-  version "50.2.4.5"
-  sha256 :no_check
+  version "51.3.1.2"
+  sha256 "48006e4d0acccbcd8ffa6487c57ca76c432a2fab5d3425da4b19209581435a41"
 
-  url "https://airsdk.harman.com/assets/downloads/AdobeAIR.dmg"
+  url "https://airsdk.harman.com/assets/downloads/#{version}/AdobeAIR.dmg"
   name "Adobe AIR"
   desc "Framework used in the development of applications and games"
   homepage "https://airsdk.harman.com/"
 
+  # The download page is rendered using JavaScript with the download links
+  # obtained from https://airsdk.harman.com/main.<number>.js
+  # Since the <number> is not fixed in the filename, the current JavaScript
+  # file needs to be extracted from the download page.
   livecheck do
-    url "https://airsdk.harman.com/api/config-settings/download"
-    regex(/"versionName"\s*:\s*"(\d+(?:\.\d+)+)/i)
+    url :homepage
+    regex(%r{/v?(\d+(?:\.\d+)+)/AdobeAIR\.dmg}i)
+    strategy :page_match do |page, regex|
+      js_file = page[/src=["']?(main.+\.js)\??["' >]/i, 1]
+      next if js_file.blank?
+
+      version_page = Homebrew::Livecheck::Strategy.page_content("https://airsdk.harman.com/#{js_file}")
+      version_page[:content]&.scan(regex)&.map { |match| match[0] }
+    end
   end
 
   installer script: {
@@ -33,5 +44,5 @@ cask "adobe-air" do
         "~/Library/Application Support/Adobe/AIR",
         "~/Library/Caches/com.adobe.air.ApplicationInstaller",
       ],
-      rmdir: "~/Library/Application Support/Adobe/"
+      rmdir: "~/Library/Application Support/Adobe"
 end

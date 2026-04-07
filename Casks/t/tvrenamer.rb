@@ -6,16 +6,15 @@ cask "tvrenamer" do
       verified: "github.com/tvrenamer/tvrenamer/"
   name "TVRenamer"
   desc "Utility to rename TV episodes from TV listings"
-  homepage "http://tvrenamer.org/"
+  homepage "https://www.tvrenamer.org/"
 
-  livecheck do
-    url :url
-    strategy :github_latest
-  end
+  deprecate! date: "2025-03-02", because: :unmaintained
+  disable! date: "2026-03-02", because: :unmaintained
 
   app "TVRenamer-#{version}.app"
 
   caveats do
     depends_on_java
+    requires_rosetta
   end
 end

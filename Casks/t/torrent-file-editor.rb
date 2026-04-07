@@ -1,6 +1,6 @@
 cask "torrent-file-editor" do
-  version "0.3.18"
-  sha256 "55ac51bea3df120b236b438f0eab78ba144a7217ae98a67f86e1343e76e366b7"
+  version "1.0.2"
+  sha256 "ca32e993d17fb61d39ad3305d2bd5d518174ffb5a20dba025f7382dec5400599"
 
   url "https://github.com/torrent-file-editor/torrent-file-editor/releases/download/v#{version}/torrent-file-editor-#{version}.dmg",
       verified: "github.com/torrent-file-editor/torrent-file-editor/"
@@ -8,7 +8,7 @@ cask "torrent-file-editor" do
   desc "GUI for editing and creating torrent files"
   homepage "https://torrent-file-editor.github.io/"
 
-  depends_on macos: ">= :sierra"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "Torrent File Editor.app"
 
@@ -19,4 +19,8 @@ cask "torrent-file-editor" do
     "~/Library/Preferences/net.sourceforge.torrent-file-editor.plist",
     "~/Library/Saved Application State/net.sourceforge.torrent-file-editor.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

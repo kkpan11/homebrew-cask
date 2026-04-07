@@ -12,8 +12,6 @@ cask "fluid" do
     strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :sierra"
-
   app "Fluid.app"
 
   zap trash: [
@@ -22,4 +20,8 @@ cask "fluid" do
     "~/Library/Preferences/com.fluidapp.Fluid*",
     "~/Library/Saved Application State/com.fluidapp.Fluid*",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

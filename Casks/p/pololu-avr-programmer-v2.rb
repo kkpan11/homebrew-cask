@@ -9,13 +9,13 @@ cask "pololu-avr-programmer-v2" do
 
   livecheck do
     url :homepage
-    regex(%r{href=.*?/([a-zA-Z0-9]+)/pololu-usb-avr-programmer-v2-(\d+(\.\d+)*[a-z]?)-macos\.pkg}i)
+    regex(%r{href=.*?/([a-z0-9]+)/pololu-usb-avr-programmer-v2[._-]v?(\d+(\.\d+)*[a-z]?)-macos\.pkg}i)
     strategy :page_match do |page, regex|
       page.scan(regex).map { |match| "#{match[0]},#{match[1]}" }
     end
   end
 
-  depends_on macos: ">= :el_capitan"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   pkg "pololu-usb-avr-programmer-v2-#{version.csv.second}-macos.pkg"
 

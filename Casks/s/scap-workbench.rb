@@ -8,7 +8,12 @@ cask "scap-workbench" do
   desc "SCAP Scanner And Tailoring Graphical User Interface"
   homepage "https://www.open-scap.org/tools/scap-workbench/"
 
-  depends_on macos: ">= :sierra"
+  deprecate! date: "2024-10-04", because: :unmaintained
+  disable! date: "2025-10-04", because: :unmaintained
 
   app "scap-workbench.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

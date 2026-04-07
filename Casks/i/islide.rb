@@ -15,4 +15,8 @@ cask "islide" do
   auto_updates true
 
   app "iSlide.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

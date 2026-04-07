@@ -5,7 +5,21 @@ cask "powder-player" do
   url "https://github.com/jaruba/PowderPlayer/releases/download/v#{version}/PowderPlayer_v#{version}.dmg",
       verified: "github.com/jaruba/PowderPlayer/"
   name "Powder Player"
+  desc "Torrent client and streaming media player"
   homepage "https://powder.media/"
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "Powder Player.app"
+
+  zap trash: [
+    "~/Library/Application Support/Powder-Player",
+    "~/Library/Caches/Powder-Player",
+    "~/Library/Preferences/media.powder.player.plist",
+    "~/Library/Saved Application State/media.powder.player.savedState",
+  ]
+
+  caveats do
+    requires_rosetta
+  end
 end

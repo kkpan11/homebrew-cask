@@ -1,15 +1,15 @@
 cask "itk-snap" do
   arch arm: "arm64", intel: "x86_64"
 
-  version "4.0.2"
-  sha256 arm:   "aba01235a44b9080fae2c5cf0b35485f96b335f1a50442ee4fb941d4c4846501",
-         intel: "333071f6703e6d3a8554fcc33f2a632cf3106a0bdc230893807a4c288e9e13da"
+  version "4.4.0,20250909"
+  sha256 arm:   "9d12dc5a437e3d0979ce62ad0550fe5c150337160e5417d80bf6396f2f716ee8",
+         intel: "96c56c64bfe7a89adfe3b71d55c74e4711c73cb88dd85262d3a877443cfdea8b"
 
-  url "https://downloads.sourceforge.net/itk-snap/itksnap-#{version.csv.first}-Darwin-#{arch}.dmg",
+  url "https://downloads.sourceforge.net/itk-snap/itksnap-#{version.csv.first}-#{version.csv.second}-Darwin-#{arch}.dmg",
       verified: "downloads.sourceforge.net/itk-snap/"
   name "ITK-SNAP"
   desc "Segment structures in 3D medical images"
-  homepage "http://www.itksnap.org/pmwiki/pmwiki.php"
+  homepage "https://www.itksnap.org/pmwiki/pmwiki.php"
 
   livecheck do
     url "https://sourceforge.net/projects/itk-snap/rss?path=/itk-snap"
@@ -20,6 +20,8 @@ cask "itk-snap" do
       end
     end
   end
+
+  depends_on macos: ">= :monterey"
 
   app "ITK-SNAP.app"
 

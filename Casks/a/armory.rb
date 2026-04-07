@@ -8,5 +8,11 @@ cask "armory" do
   desc "Python-Based Bitcoin Software"
   homepage "https://btcarmory.com/"
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "Armory.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

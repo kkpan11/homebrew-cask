@@ -1,20 +1,23 @@
 cask "element" do
-  version "1.11.63"
-  sha256 :no_check
+  version "1.12.13"
+  sha256 "a1dc0f515e97e4d8001e27d636a11c7168b09a5f5e8992c3b89b3612695627aa"
 
-  url "https://packages.element.io/desktop/install/macos/Element.dmg"
+  url "https://packages.element.io/desktop/update/macos/Element-#{version}-universal-mac.zip"
   name "Element"
   desc "Matrix collaboration client"
   homepage "https://element.io/get-started"
 
-  # The upstream website doesn't appear to provide version information. We check
-  # GitHub releases as a best guess of when a new version is released.
+  # The `releases.json` file is served with a `Content-Encoding: aws-chunked`
+  # header, which will cause curl to error if the `--compressed` option is used.
+  # This checks the version on the directory listing page until we can account
+  # for this situation in livecheck.
   livecheck do
-    url "https://github.com/vector-im/element-desktop"
-    strategy :github_latest
+    url "https://packages.element.io/desktop/update/macos/index.html"
+    regex(/href=.*?Element[._-]v?(\d+(?:\.\d+)+)[._-]universal[._-]mac\.zip/i)
   end
 
   auto_updates true
+  depends_on macos: ">= :monterey"
 
   app "Element.app"
 
@@ -23,7 +26,9 @@ cask "element" do
     "~/Library/Application Support/Riot",
     "~/Library/Caches/im.riot.app",
     "~/Library/Caches/im.riot.app.ShipIt",
+    "~/Library/HTTPStorages/im.riot.app",
     "~/Library/Logs/Riot",
+    "~/Library/Preferences/ByHost/im.riot.app.ShipIt.*.plist",
     "~/Library/Preferences/im.riot.app.helper.plist",
     "~/Library/Preferences/im.riot.app.plist",
     "~/Library/Saved Application State/im.riot.app.savedState",

@@ -1,32 +1,24 @@
 cask "smartgit" do
-  arch arm: "aarch64", intel: "x86_64"
+  arch arm: "arm64", intel: "x86_64"
 
-  on_sierra :or_older do
-    version "20.2.6"
-    sha256 "af5fbf8db26edde3d996d99c6e82287332598359fe63ff2cd97c712a1685a2ea"
+  version "25.1.128"
+  sha256 arm:   "1e52b7cf013e6edf6426bd926e77c85dc3bfecd7a0db54fb4da347e618959f87",
+         intel: "ab5524e1613fc26fe12fbb01e3331530780fbe1a1219da1cb582cd48eddca1ee"
 
-    url "https://www.syntevo.com/downloads/smartgit/smartgit-macosx-#{version.dots_to_underscores}.dmg"
-  end
-  on_high_sierra :or_newer do
-    version "23.1.2"
-    sha256 arm:   "17f8fbd5ced4679db712a6ac49abecff15a945204428ff253e152fafa4f97f3a",
-           intel: "0f810d2f540b932a0de7ef4b80ac0679864c245a01a73582b9b55a874e29c6e5"
-
-    url "https://www.syntevo.com/downloads/smartgit/smartgit-#{arch}-#{version.dots_to_underscores}.dmg"
-  end
-
+  url "https://download.smartgit.dev/smartgit/smartgit-#{version.dots_to_underscores}-macos-#{arch}.dmg"
   name "SmartGit"
   desc "Git client"
-  homepage "https://www.syntevo.com/smartgit/"
+  homepage "https://www.smartgit.dev/"
 
   livecheck do
-    url "https://www.syntevo.com/smartgit/download/"
-    regex(/href=.*?smartgit[._-]#{arch}[._-]v?(\d+(?:[._]\d+)+)\.dmg/i)
+    url "https://www.smartgit.dev/download/"
+    regex(/href=.*?smartgit[._-]v?(\d+(?:[._]\d+)+)(?:[._-]macos)?[._-]#{arch}\.dmg/i)
     strategy :page_match do |page, regex|
-      page.scan(regex)
-          .map { |match| match[0].tr("_", ".") }
+      page.scan(regex).map { |match| match[0].tr("_", ".") }
     end
   end
+
+  depends_on macos: ">= :big_sur"
 
   app "SmartGit.app"
   binary "#{appdir}/SmartGit.app/Contents/MacOS/SmartGit"

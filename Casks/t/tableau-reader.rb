@@ -1,23 +1,28 @@
 cask "tableau-reader" do
-  version "2024.1.1"
-  sha256 "d4f57fe4005e93a6f080a3321628a0c5d454d15e7e0a46b32c6012effd983ae3"
+  arch arm: "-arm64"
 
-  url "https://downloads.tableau.com/tssoftware/TableauReader-#{version.dots_to_hyphens}.dmg"
+  version "2026.1.0"
+  sha256 arm:   "6d0b36377fbd46b59fa35862eab008ca7ab3d6c328088e65f078dfa066206b00",
+         intel: "4305b954c45a9076043f8c45ce60c07f36a1fe4edc1c06927d937711541f9a95"
+
+  on_arm do
+    depends_on macos: ">= :ventura"
+  end
+  on_intel do
+    depends_on macos: ">= :catalina"
+  end
+
+  url "https://downloads.tableau.com/esdalt/#{version}/TableauReader-#{version.dots_to_hyphens}#{arch}.pkg",
+      user_agent: :curl
   name "Tableau Reader"
   desc "Open and interact with data visualisations built in Tableau Desktop"
   homepage "https://www.tableau.com/products/reader"
 
   livecheck do
-    url "https://www.tableau.com/downloads/reader/mac"
-    regex(/-(\d+(?:-\d+)+)\.dmg/i)
-    strategy :header_match do |headers, regex|
-      headers["location"].scan(regex).map do |match|
-        match[0].tr("-", ".").to_s
-      end
-    end
+    cask "tableau"
   end
 
-  pkg "Tableau Reader.pkg"
+  pkg "TableauReader-#{version.dots_to_hyphens}#{arch}.pkg"
 
   uninstall pkgutil: [
     "com.tableausoftware.FLEXNet.*",

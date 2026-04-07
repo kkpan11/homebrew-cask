@@ -1,14 +1,14 @@
 cask "orcaslicer" do
-  arch arm: "arm64", intel: "x86_64"
+  version "2.3.2"
+  sha256 "334f7265b1df930e94ac75a318005bbe63f670fe719a9e7778c30f4d7c887cc2"
 
-  version "2.0.0"
-  sha256 arm:   "3af72e3c47b9989e77a56af9464a6904a9bfbba7251f881d94c6ae9b27ec0c8b",
-         intel: "5db95e189449a07850fed3d2535b9886c283712a639cd12d7e5cedca7049e75b"
-
-  url "https://github.com/SoftFever/OrcaSlicer/releases/download/v#{version}/OrcaSlicer_Mac_#{arch}_V#{version}.dmg"
+  url "https://github.com/SoftFever/OrcaSlicer/releases/download/v#{version}/OrcaSlicer_Mac_universal_V#{version}.dmg"
   name "Orca Slicer"
   desc "G-code generator for 3D printers"
   homepage "https://github.com/SoftFever/OrcaSlicer"
+
+  conflicts_with cask: "orcaslicer@nightly"
+  depends_on macos: ">= :big_sur"
 
   app "OrcaSlicer.app"
 

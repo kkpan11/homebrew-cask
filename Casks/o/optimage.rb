@@ -13,7 +13,6 @@ cask "optimage" do
   end
 
   auto_updates true
-  depends_on macos: ">= :el_capitan"
 
   app "Optimage.app"
   binary "#{appdir}/Optimage.app/Contents/MacOS/cli/optimage"
@@ -22,4 +21,8 @@ cask "optimage" do
     "~/Library/Application Support/com.vmdanilov.optimage.cfg",
     "~/Library/Preferences/com.vmdanilov.optimage.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

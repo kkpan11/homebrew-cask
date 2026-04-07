@@ -8,10 +8,7 @@ cask "serene" do
   desc "Productivity app for focus and planning"
   homepage "https://sereneapp.com/"
 
-  livecheck do
-    url "https://app.sereneapp.com/latest-mac.yml"
-    strategy :electron_builder
-  end
+  deprecate! date: "2025-08-02", because: :unmaintained
 
   app "Serene.app"
 
@@ -20,4 +17,8 @@ cask "serene" do
     "~/Library/Logs/Serene",
     "~/Library/Saved Application State/com.vh.sereneapp.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

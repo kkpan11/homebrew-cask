@@ -1,11 +1,9 @@
 cask "naver-whale" do
-  arch arm: "ARM64"
-
-  version "3.25.232.19"
+  version "4.36.368.16"
   sha256 :no_check
 
-  url "http://update.whale.naver.net/downloads/installers/NaverWhale#{arch}.dmg",
-      verified: "update.whale.naver.net/downloads/installers/"
+  url "https://installer-whale.pstatic.net/downloads/installers/NaverWhale.dmg",
+      verified: "installer-whale.pstatic.net/downloads/installers/"
   name "NAVER Whale"
   desc "Web browser"
   homepage "https://whale.naver.com/"
@@ -13,11 +11,12 @@ cask "naver-whale" do
   livecheck do
     url "https://cv.whale.naver.com/version/latest_version"
     strategy :json do |json|
-      json["message"]["@version"]
+      json.dig("message", "@version")
     end
   end
 
   auto_updates true
+  depends_on macos: ">= :monterey"
 
   app "Whale.app"
 

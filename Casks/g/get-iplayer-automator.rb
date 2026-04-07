@@ -1,6 +1,6 @@
 cask "get-iplayer-automator" do
-  version "1.26.1,20240329001"
-  sha256 "02aa183f6174c5b24f0860c849b3b846e0ba67505eecb8ab58edad81268a5704"
+  version "1.27.1,20250809002"
+  sha256 "c97cc2833fa667344a36c8ed0807761af4d3952ab44e7372a951cfa18f9463b1"
 
   url "https://github.com/Ascoware/get-iplayer-automator/releases/download/v#{version.csv.first}/Get.iPlayer.Automator.v#{version.csv.first}.b#{version.csv.second}.zip"
   name "Get iPlayer Automator"
@@ -9,7 +9,7 @@ cask "get-iplayer-automator" do
 
   livecheck do
     url :url
-    regex(/^Get\.?iPlayer\.?Automator\.?v?(\d+(?:.\d+)*)\.b(\d+)\.zip$/i)
+    regex(/^Get\.?iPlayer\.?Automator\.?v?(\d+(?:\.\d+)*)\.b(\d+)\.zip$/i)
     strategy :github_latest do |json, regex|
       json["assets"]&.map do |asset|
         match = asset["name"]&.match(regex)

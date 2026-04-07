@@ -1,67 +1,39 @@
 cask "coteditor" do
-  on_el_capitan :or_older do
-    version "3.5.4"
-    sha256 "0b2cbf38cc531268e3691f307445e05ae5da64b48ceaf86c4d16b993c9be3e9f"
+  on_sonoma :or_older do
+    on_catalina :or_older do
+      version "4.0.9"
+      sha256 "969e891f4a36146c317150806fee01559d177f956734595c73537affc8897e79"
+    end
+    on_big_sur do
+      version "4.3.6"
+      sha256 "8c1ecf6fd66a9885d428a6303d9d1c5ecb811c1c35c97bdbccdad72359d96ad9"
+    end
+    on_monterey do
+      version "4.5.9"
+      sha256 "fa3e4a1fdf7edfc109c5588292906d864d430d2e8bd3d84161b1f0a7892163f6"
+    end
+    on_ventura do
+      version "4.8.7"
+      sha256 "9c439ace99d6b74cf94738d24368ccc39c579902c7062f8e107c596061a58dda"
+    end
+    on_sonoma do
+      version "5.2.3"
+      sha256 "c01fa87e31d7aafd475f72bb41a340e1e34db27cc8afb73ba2f5e2ad316739a9"
+    end
 
     livecheck do
       skip "Legacy version"
     end
   end
-  on_sierra do
-    version "3.9.7"
-    sha256 "be34d4f800e73cc8363d8b83e1b257a06176dc85d345d680149b108f51686cf2"
+  on_sequoia :or_newer do
+    version "6.2.6"
+    sha256 "6ccc029ede9da8eb497f31a8423cfea91bf34e7a08c67b66be0e331a922e8fc2"
 
     livecheck do
-      skip "Legacy version"
-    end
-  end
-  on_high_sierra do
-    version "3.9.7"
-    sha256 "be34d4f800e73cc8363d8b83e1b257a06176dc85d345d680149b108f51686cf2"
-
-    livecheck do
-      skip "Legacy version"
-    end
-  end
-  on_mojave do
-    version "3.9.7"
-    sha256 "be34d4f800e73cc8363d8b83e1b257a06176dc85d345d680149b108f51686cf2"
-
-    livecheck do
-      skip "Legacy version"
-    end
-  end
-  on_catalina do
-    version "4.0.9"
-    sha256 "969e891f4a36146c317150806fee01559d177f956734595c73537affc8897e79"
-
-    livecheck do
-      skip "Legacy version"
-    end
-  end
-  on_big_sur do
-    version "4.3.6"
-    sha256 "8c1ecf6fd66a9885d428a6303d9d1c5ecb811c1c35c97bdbccdad72359d96ad9"
-
-    livecheck do
-      skip "Legacy version"
-    end
-  end
-  on_monterey do
-    version "4.5.9"
-    sha256 "fa3e4a1fdf7edfc109c5588292906d864d430d2e8bd3d84161b1f0a7892163f6"
-
-    livecheck do
-      skip "Legacy version"
-    end
-  end
-  on_ventura :or_newer do
-    version "4.7.4"
-    sha256 "392137c67c5553eb710a8419326b0427c56fb9cf83d75d0577c6f3b44fdcb42e"
-
-    livecheck do
-      url :url
-      strategy :github_latest
+      url "https://coteditor.com/appcast.xml"
+      strategy :sparkle do |items|
+        items.find { |item| item.channel.nil? }&.short_version
+      end
     end
   end
 
@@ -72,7 +44,6 @@ cask "coteditor" do
   homepage "https://coteditor.com/"
 
   auto_updates true
-  depends_on macos: ">= :ventura"
 
   app "CotEditor.app"
   binary "#{appdir}/CotEditor.app/Contents/SharedSupport/bin/cot"
@@ -85,6 +56,7 @@ cask "coteditor" do
     "~/Library/Caches/com.apple.helpd/Generated/com.coteditor.CotEditor.help*",
     "~/Library/Caches/com.apple.helpd/SDMHelpData/Other/English/HelpSDMIndexFile/com.coteditor.CotEditor.help*",
     "~/Library/Caches/com.apple.helpd/SDMHelpData/Other/Japanese/HelpSDMIndexFile/com.coteditor.CotEditor.help*",
+    "~/Library/Caches/com.coteditor.CotEditor",
     "~/Library/Containers/com.coteditor.CotEditor",
     "~/Library/Preferences/com.coteditor.CotEditor.plist",
   ]

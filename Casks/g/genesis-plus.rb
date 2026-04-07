@@ -12,8 +12,6 @@ cask "genesis-plus" do
     regex(/<h2>Genesis\s+Plus\s+v?(\d+(?:\.\d+)+)[" <]/i)
   end
 
-  depends_on macos: ">= :mojave"
-
   app "Genesis Plus v#{version}/Genesis Plus.app"
 
   zap trash: [

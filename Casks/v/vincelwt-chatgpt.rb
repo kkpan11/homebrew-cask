@@ -10,6 +10,8 @@ cask "vincelwt-chatgpt" do
   desc "Menu bar application for ChatGPT"
   homepage "https://github.com/vincelwt/chatgpt-mac"
 
+  deprecate! date: "2025-06-21", because: :unmaintained
+
   app "Chatgpt.app"
 
   zap trash: [

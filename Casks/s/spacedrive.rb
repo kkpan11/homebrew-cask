@@ -1,9 +1,9 @@
 cask "spacedrive" do
   arch arm: "aarch64", intel: "x86_64"
 
-  version "0.2.10"
-  sha256 arm:   "fd4744ea59637717f77cb85a0ba09539e81b99225367dee3f6dd8c4d7a7f0de1",
-         intel: "b72fc6d912a7c8f9754294e9dbae60df4ad76b23b0ab48a76c2f7aeb17e6f979"
+  version "0.4.3"
+  sha256 arm:   "d018fa1a3b312d480b972700df7a5722f22da2a16d6ad8c997667f6708e70b47",
+         intel: "1355c219e5817bfa071c4de2cccca44fcc05ac81a134cbe6c4489e32b9d27d9f"
 
   url "https://github.com/spacedriveapp/spacedrive/releases/download/#{version}/Spacedrive-darwin-#{arch}.dmg"
   name "Spacedrive"
@@ -11,9 +11,13 @@ cask "spacedrive" do
   homepage "https://github.com/spacedriveapp/spacedrive"
 
   livecheck do
-    url :url
-    strategy :github_latest
+    url "https://www.spacedrive.com/api/releases"
+    strategy :json do |json|
+      json.map { |item| item["version"] }
+    end
   end
+
+  auto_updates true
 
   app "Spacedrive.app"
 

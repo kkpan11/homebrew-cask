@@ -1,32 +1,18 @@
 cask "ncar-ncl" do
   version "6.6.2"
+  sha256 "e2cd644f6b1bb41f55480b8818319e60c450998e31e5e489c69a5e84f3d1f359"
 
-  on_high_sierra :or_older do
-    sha256 "4e937a6de4303a4928f0f42390d991b12a37659726d15b9da7e8072db74e1867"
-
-    url "https://www.earthsystemgrid.org/api/v1/dataset/ncl.#{version.no_dots}.dap/file/ncl_ncarg-#{version}-MacOS_10.13_64bit_gnu710.tar.gz",
-        verified: "earthsystemgrid.org/api/v1/dataset/"
-  end
-  on_mojave :or_newer do
-    sha256 "e2cd644f6b1bb41f55480b8818319e60c450998e31e5e489c69a5e84f3d1f359"
-
-    url "https://www.earthsystemgrid.org/api/v1/dataset/ncl.#{version.no_dots}.dap/file/ncl_ncarg-#{version}-MacOS_10.14_64bit_gnu730.tar.gz",
-        verified: "earthsystemgrid.org/api/v1/dataset/"
-  end
-
+  url "https://www.earthsystemgrid.org/api/v1/dataset/ncl.#{version.no_dots}.dap/file/ncl_ncarg-#{version}-MacOS_10.14_64bit_gnu730.tar.gz",
+      verified: "earthsystemgrid.org/api/v1/dataset/"
   name "NCAR Command Language"
   name "ncl"
   desc "Interpreted language for scientific data analysis and visualization"
   homepage "https://www.ncl.ucar.edu/"
 
-  livecheck do
-    url :homepage
-    regex(/>Current\s*Version.*?v?(\d+(?:\.\d+)+)\s*?</i)
-  end
+  disable! date: "2026-01-27", because: :no_longer_available
 
   depends_on cask: "xquartz"
   depends_on formula: "gcc"
-  depends_on macos: ">= :high_sierra"
 
   artifact "include", target: "#{HOMEBREW_PREFIX}/ncl-#{version}/include"
   artifact "bin", target: "#{HOMEBREW_PREFIX}/ncl-#{version}/bin"

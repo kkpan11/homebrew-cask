@@ -6,5 +6,11 @@ cask "blheli-configurator" do
   name "BLHeli Configurator"
   homepage "https://github.com/blheli-configurator/blheli-configurator"
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "BLHeli Configurator.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -1,6 +1,6 @@
 cask "accordance" do
-  version "14.0.9"
-  sha256 "d4da148a2541eeb426ae063155b63c867b9b70b5d1dbc804e165fd67874633de"
+  version "14.1.2"
+  sha256 "0ea778147a93b1e4fb20d8fe272859bb27bb624c12bdc99a44c1de2908d93aea"
 
   url "https://d366ra67x2bs56.cloudfront.net/mac/Acc_#{version}.zip",
       verified: "d366ra67x2bs56.cloudfront.net/"
@@ -14,7 +14,6 @@ cask "accordance" do
   end
 
   auto_updates true
-  depends_on macos: ">= :mojave"
 
   app "Accordance.app"
 

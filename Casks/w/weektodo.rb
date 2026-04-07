@@ -13,6 +13,8 @@ cask "weektodo" do
     strategy :github_latest
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "WeekToDo.app"
 
   zap trash: [
@@ -20,4 +22,8 @@ cask "weektodo" do
     "~/Library/Preferences/weektodo-app.netlify.app.plist",
     "~/Library/Saved Application State/weektodo-app.netlify.app.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

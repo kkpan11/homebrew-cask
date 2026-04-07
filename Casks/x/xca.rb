@@ -1,6 +1,6 @@
 cask "xca" do
-  version "2.6.0"
-  sha256 "34caf717016921c19707719db35c967c2b18fe59efca76473a9008f7d462ba9b"
+  version "2.9.0"
+  sha256 "90df40a56bb57bbf46158b4db1c9fddd8a2d7cc48477b5522b457ec4e12cd45a"
 
   url "https://github.com/chris2511/xca/releases/download/RELEASE.#{version}/xca-#{version}-Darwin.dmg",
       verified: "github.com/chris2511/xca/"

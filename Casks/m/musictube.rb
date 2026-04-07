@@ -1,5 +1,5 @@
 cask "musictube" do
-  version "2.0"
+  version "2.0.1"
   sha256 :no_check
 
   url "https://flavio.tordini.org/files/musictube/musictube.dmg"
@@ -12,12 +12,14 @@ cask "musictube" do
     strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :high_sierra"
-
   app "Musictube.app"
 
   zap trash: [
     "~/Library/Preferences/org.tordini.flavio.musictube.plist",
     "~/Library/Saved Application State/org.tordini.flavio.musictube.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

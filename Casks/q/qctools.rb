@@ -1,6 +1,6 @@
 cask "qctools" do
-  version "1.3.1"
-  sha256 "8151679f9e648e00008f60810dcb29632308fb78a2053ca178686e47dd9a3eea"
+  version "1.4.1"
+  sha256 "bafce2600d2dfc6efefecfa156b550b6383f26a9739cba4f83a62255bcf51975"
 
   url "https://mediaarea.net/download/binary/qctools/#{version}/QCTools_#{version}_mac.dmg"
   name "QCTools"
@@ -12,5 +12,13 @@ cask "qctools" do
     regex(/href=.*?QCTools[._-]v?(\d+(?:\.\d+)+)[^"' >]*?\.dmg/i)
   end
 
+  depends_on macos: ">= :big_sur"
+
   app "QCTools.app"
+
+  zap trash: [
+    "~/Library/Preferences/net.mediaarea.qctools.mac.plist",
+    "~/Library/Preferences/net.mediaarea.QCTools.plist",
+    "~/Library/Saved Application State/net.mediaarea.qctools.mac.savedState",
+  ]
 end

@@ -1,9 +1,9 @@
 cask "wowup" do
   arch arm: "-arm64"
 
-  version "2.10.0"
-  sha256 arm:   "cbe35839240a592862169db6b0e4f77529eccb90d940c5ebfa29ad999c4f2fc6",
-         intel: "006bb26c2556e564dd16942dd23bf167c688656e0b440fc08c5ebc7f734abb36"
+  version "2.22.0"
+  sha256 arm:   "9c8afe0c233f2d100f8b4ffd0ba92aa28aa4a4fbdd171b12911e6739fdc83609",
+         intel: "4bfe2c0dcae893faa685fa44621f37183dcd67a83b76dd5cf15ff8f32ff4ef3e"
 
   url "https://github.com/WowUp/WowUp/releases/download/v#{version}/WowUp-#{version}#{arch}.dmg",
       verified: "github.com/WowUp/WowUp/"
@@ -12,6 +12,7 @@ cask "wowup" do
   homepage "https://wowup.io/"
 
   auto_updates true
+  depends_on macos: ">= :monterey"
 
   app "WowUp.app"
 

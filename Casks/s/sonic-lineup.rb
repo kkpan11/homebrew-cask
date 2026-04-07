@@ -16,8 +16,6 @@ cask "sonic-lineup" do
     end
   end
 
-  depends_on macos: ">= :sierra"
-
   app "Sonic Lineup.app"
 
   zap trash: [
@@ -26,4 +24,8 @@ cask "sonic-lineup" do
     "~/Library/Preferences/org.sonicvisualiser.SonicLineup.plist",
     "~/Library/Saved Application State/org.sonicvisualiser.SonicLineup.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

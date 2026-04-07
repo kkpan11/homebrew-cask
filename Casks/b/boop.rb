@@ -11,11 +11,9 @@ cask "boop" do
   livecheck do
     url "https://boop.okat.best/version.json"
     strategy :json do |json|
-      json["standalone"]["version"]
+      json.dig("standalone", "version")
     end
   end
-
-  depends_on macos: ">= :mojave"
 
   app "Boop.app"
 

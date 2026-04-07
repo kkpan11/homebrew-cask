@@ -7,7 +7,8 @@ cask "insomnium" do
   desc "HTTP and GraphQL Client"
   homepage "https://github.com/ArchGPT/insomnium"
 
-  depends_on macos: ">= :high_sierra"
+  deprecate! date: "2024-07-28", because: :discontinued
+  disable! date: "2025-07-28", because: :discontinued
 
   app "Insomnium.app"
 

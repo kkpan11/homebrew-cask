@@ -1,6 +1,6 @@
 cask "electron-cash" do
-  version "4.4.0"
-  sha256 "c9313b3f15ea310ad827d32e8c2df8bb8378c6d166d1d0745c02f0f2dbfd91de"
+  version "4.4.3"
+  sha256 "14c627c6fd1819833dd4ce242c29bc5b502e0d3d75030a8a49540160740ee8db"
 
   url "https://electroncash.org/downloads/#{version.major_minor_patch}/mac/Electron-Cash-#{version}-macosx.dmg"
   name "Electron Cash"
@@ -15,4 +15,8 @@ cask "electron-cash" do
   app "Electron-Cash.app"
 
   zap trash: "~/.electron-cash"
+
+  caveats do
+    requires_rosetta
+  end
 end

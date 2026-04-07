@@ -1,6 +1,6 @@
 cask "duo-connect" do
-  version "2.0.4"
-  sha256 "17f6a70e2150278e90303be9a7c5693297edcb296d2882ecd7a9e8271c33cdcf"
+  version "2.0.9"
+  sha256 "12e8dd11775db5094ee2c9577ba3c11fb4c2fc4a3c696260ce2957a8d22e0b29"
 
   url "https://dl.duosecurity.com/DuoConnect-#{version}.pkg",
       verified: "dl.duosecurity.com/"
@@ -22,4 +22,14 @@ cask "duo-connect" do
               "com.duo.connect.tun.plist",
             ],
             pkgutil:   "com.duo.connect.bin"
+
+  zap trash: [
+        "~/.duoconnect",
+        "~/Liibrary/Logs/Duo/Duoconnect",
+      ],
+      rmdir: "~/Library/Logs/Duo"
+
+  caveats do
+    requires_rosetta
+  end
 end

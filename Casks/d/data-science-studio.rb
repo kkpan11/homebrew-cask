@@ -1,6 +1,6 @@
 cask "data-science-studio" do
-  version "1.3.7"
-  sha256 "19aaf9a6b4bc1d80148427ce4c978e57f2178a207a78f09bc5300bf3e35e4a1a"
+  version "14.0.3"
+  sha256 "56a687b84efb970d21ae0d6f0c377814e42d8e81b95b6004eac3020678d892b7"
 
   url "https://cdn.downloads.dataiku.com/public/launcher/macos/DataScienceStudio-#{version}-mac.zip"
   name "Dataiku Data Science Studio"
@@ -20,4 +20,8 @@ cask "data-science-studio" do
     "~/Library/Preferences/com.dataiku.datasciencestudio.plist",
     "~/Library/Saved Application State/com.dataiku.datasciencestudio.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

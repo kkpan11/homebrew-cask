@@ -6,10 +6,12 @@ cask "fauxpas" do
   name "Faux Pas"
   homepage "http://fauxpasapp.com/"
 
-  livecheck do
-    url "http://files.fauxpasapp.com/appcast.xml"
-    strategy :sparkle
-  end
+  deprecate! date: "2024-10-12", because: :unmaintained
+  disable! date: "2025-10-12", because: :unmaintained
 
   app "FauxPas.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

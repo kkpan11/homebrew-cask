@@ -1,8 +1,9 @@
 cask "cisdem-pdf-converter-ocr" do
-  version "8.3.0"
+  version "9.6.0"
   sha256 :no_check
 
-  url "https://download.cisdem.com/cisdem-pdfconverterocr.dmg"
+  url "https://download.cisdem.com/cisdem-pdfconverterocr.dmg",
+      user_agent: :fake
   name "Cisdem PDF Converter OCR"
   desc "PDF Converter with OCR capability"
   homepage "https://www.cisdem.com/pdf-converter-ocr-mac.html"
@@ -11,8 +12,6 @@ cask "cisdem-pdf-converter-ocr" do
     url "https://www.cisdem.com/js/notes/pdf-converter-ocr-mac.js"
     regex(/(\d+(?:\.\d+)*)\s+\(\d+(?:-\d+)+\)/i)
   end
-
-  depends_on macos: ">= :high_sierra"
 
   app "Cisdem PDF Converter OCR.app"
 
@@ -25,4 +24,8 @@ cask "cisdem-pdf-converter-ocr" do
     "~/Library/Preferences/com.cisdem.pdfconverterocr.plist",
     "~/Library/Saved Application State/com.cisdem.pdfconverterocr.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

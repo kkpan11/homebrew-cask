@@ -12,8 +12,6 @@ cask "noto" do
     strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :sierra"
-
   app "Noto.app"
 
   zap trash: [
@@ -24,4 +22,8 @@ cask "noto" do
     "~/Library/Preferences/com.brunophilipe.Noto.plist",
     "~/Library/Saved Application State/com.brunophilipe.Noto.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

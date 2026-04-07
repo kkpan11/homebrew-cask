@@ -6,14 +6,20 @@ cask "gingko" do
       verified: "github.com/gingko/client/"
   name "Gingko"
   desc "Word processor that shows structure and content"
-  homepage "https://gingko.io/"
+  homepage "https://gingkowriter.com/"
 
   livecheck do
     url :url
     strategy :github_latest
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "Gingko.app"
 
   zap trash: "~/Library/Application Support/Gingko"
+
+  caveats do
+    requires_rosetta
+  end
 end

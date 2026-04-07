@@ -1,6 +1,6 @@
 cask "paperpile" do
-  version "0.8.1"
-  sha256 "9079e2b8a3bdb56049fffe7ae90588b793132416788022351e118b676b1932c1"
+  version "0.10.0"
+  sha256 "226a37dc17f12e6a8105403f01d2ea2d800c06247703821e42046cede6f4ff80"
 
   url "https://cdn.paperpile.com/download/desktop/Paperpile-#{version}.dmg"
   name "Paperpile"
@@ -13,6 +13,7 @@ cask "paperpile" do
   end
 
   auto_updates true
+  depends_on macos: ">= :big_sur"
 
   app "Paperpile.app"
 
@@ -21,4 +22,8 @@ cask "paperpile" do
     "~/Library/Group Containers/*.Office/User Content.localized/Startup.localized/Word/paperpile*",
     "~/Library/Preferences/com.paperpile.paperpile.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -7,6 +7,8 @@ cask "betwixt" do
   desc "Web Debugging Proxy based on Chrome DevTools Network panel"
   homepage "https://github.com/kdzwinel/betwixt"
 
+  deprecate! date: "2025-04-21", because: :unmaintained
+
   app "Betwixt-darwin-x64/Betwixt.app"
 
   uninstall_postflight do
@@ -38,4 +40,8 @@ cask "betwixt" do
     "~/Library/Preferences/com.electron.betwixt.plist",
     "~/Library/Saved Application State/com.electron.betwixt.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

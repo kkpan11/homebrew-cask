@@ -14,7 +14,6 @@ cask "shimo" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "Shimo.app"
 
@@ -24,4 +23,8 @@ cask "shimo" do
     "~/Library/HTTPStorages/com.feingeist.Shimo.binarycookies",
     "~/Library/Preferences/com.feingeist.Shimo.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

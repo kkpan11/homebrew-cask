@@ -12,6 +12,8 @@ cask "nault" do
     strategy :github_latest
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   auto_updates true
 
   app "Nault.app"
@@ -22,4 +24,8 @@ cask "nault" do
     "~/Library/Preferences/cc.nault.plist",
     "~/Library/Saved Application State/cc.nault.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

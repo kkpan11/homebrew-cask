@@ -12,5 +12,18 @@ cask "hedgewars" do
     regex(%r{href=.*?/Hedgewars[._-]v?(\d+(?:\.\d+)+)\.dmg}i)
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "Hedgewars.app"
+
+  zap trash: [
+    "~/Library/Application Support/Hedgewars",
+    "~/Library/HTTPStorages/org.hedgewars.desktop",
+    "~/Library/Preferences/org.hedgewars.desktop.plist",
+    "~/Library/Saved Application State/org.hedgewars.desktop.savedState",
+  ]
+
+  caveats do
+    requires_rosetta
+  end
 end

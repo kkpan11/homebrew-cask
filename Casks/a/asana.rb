@@ -1,19 +1,24 @@
 cask "asana" do
-  version "2.1.2"
-  sha256 :no_check
+  arch arm: "arm64", intel: "x64"
 
-  url "https://desktop-downloads.asana.com/darwin_universal/prod/latest/Asana.dmg"
+  version "2.6.0"
+  sha256 arm:   "086f0dd28a291f1d7affbe99d725eee799951c25917cd7ff5a021e1a7c4210da",
+         intel: "b1a714a7d0949701bb7402d3b43d5725fc77dc946728000068ec8cf576cfdb74"
+
+  url "https://desktop-downloads.asana.com/darwin_#{arch}/prod/v#{version}/Asana-darwin-#{arch}-#{version}.zip"
   name "Asana"
   desc "Manage team projects and tasks"
   homepage "https://asana.com/"
 
   livecheck do
-    url :url
-    strategy :extract_plist
+    url "https://desktop-downloads.asana.com/darwin_#{arch}/prod/RELEASES.json"
+    strategy :json do |json|
+      json["currentRelease"]
+    end
   end
 
   auto_updates true
-  depends_on macos: ">= :el_capitan"
+  depends_on macos: ">= :big_sur"
 
   app "Asana.app"
 

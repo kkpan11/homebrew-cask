@@ -1,5 +1,5 @@
 cask "mbed-studio" do
-  version "1.4.5"
+  version "1.5.0"
   sha256 :no_check
 
   url "https://studio.mbed.com/installers/latest/mac/MbedStudio.pkg"
@@ -12,11 +12,9 @@ cask "mbed-studio" do
     strategy :header_match
   end
 
-  pkg "MbedStudio.pkg"
+  rename "MbedStudio-*.pkg", "MbedStudio.pkg"
 
-  preflight do
-    staged_path.glob("MbedStudio-*.pkg").first.rename("#{staged_path}/MbedStudio.pkg")
-  end
+  pkg "MbedStudio.pkg"
 
   uninstall pkgutil: "com.arm.mbed.studio"
 

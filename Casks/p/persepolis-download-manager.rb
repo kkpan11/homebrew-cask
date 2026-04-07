@@ -1,14 +1,11 @@
 cask "persepolis-download-manager" do
-  arch arm: "M", intel: "Intel"
+  version "5.2.0"
+  sha256 "548b4b07904f8ec57d7f5d746459bf32a1bd0e0ae710e58108a37e3f17043895"
 
-  version "4.0.1"
-  sha256 arm:   "67c430937e6062a40a432cd09282188487f2c6af0a861f3de1131e483447fe55",
-         intel: "563a591c92c1fd3a6ea11761ba29614eef2b1a0e78eb7f0827bde452c1b5b610"
-
-  url "https://github.com/persepolisdm/persepolis/releases/download/#{version}/Persepolis.Download.Manager.#{arch}.Chips.dmg",
+  url "https://github.com/persepolisdm/persepolis/releases/download/#{version}/persepolis_#{version}_macos.dmg",
       verified: "github.com/persepolisdm/persepolis/"
   name "Persepolis"
-  desc "GUI for aria2"
+  desc "Download manager"
   homepage "https://persepolisdm.github.io/"
 
   livecheck do
@@ -16,10 +13,16 @@ cask "persepolis-download-manager" do
     strategy :github_latest
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "Persepolis Download Manager.app"
 
   zap trash: [
     "~/.persepolis",
     "~/Library/Application Support/persepolis_download_manager",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -8,7 +8,6 @@ cask "shadowsocksx-ng-r" do
   homepage "https://github.com/qinyuhang/ShadowsocksX-NG-R/"
 
   conflicts_with cask: "shadowsocksx"
-  depends_on macos: ">= :el_capitan"
 
   app "ShadowsocksX-NG-R8.app"
 
@@ -35,4 +34,8 @@ cask "shadowsocksx-ng-r" do
     "~/Library/Caches/com.qiuyuzhou.ShadowsocksX-NG",
     "~/Library/Preferences/com.qiuyuzhou.ShadowsocksX-NG.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -7,10 +7,12 @@ cask "cinch" do
   desc "Window management tool"
   homepage "https://www.irradiatedsoftware.com/cinch/"
 
-  livecheck do
-    url "https://www.irradiatedsoftware.com/updates/profiles/cinch.php"
-    strategy :sparkle, &:short_version
-  end
+  deprecate! date: "2025-03-01", because: :unmaintained
+  disable! date: "2026-03-01", because: :unmaintained
 
   app "Cinch.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

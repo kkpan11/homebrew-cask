@@ -1,18 +1,19 @@
 cask "salt" do
   arch arm: "arm64", intel: "x86_64"
 
-  version "3007.0"
-  sha256 arm:   "f43a71ef5455f86cc67512886918be798415a87edd0780f7475de06f772cc76b",
-         intel: "559d46cfee21c6d69234b1f3c1020cbc1800ccd447ddaf8ae16aaa4f7f320be0"
+  version "3007.13"
+  sha256 arm:   "a9eed16ac593c79fc26397deae1842e2926527a8ee9e7c208404446a043679e7",
+         intel: "09e60ba4e24d4b8f65623275407574a59f65e9ffd5d3e8014e04726f1a33517d"
 
-  url "https://repo.saltproject.io/salt/py3/macos/minor/#{version}/salt-#{version}-py3-#{arch}.pkg"
+  url "https://packages.broadcom.com/artifactory/saltproject-generic/macos/#{version}/salt-#{version}-py3-#{arch}.pkg",
+      verified: "packages.broadcom.com/artifactory/saltproject-generic/"
   name "Salt"
   desc "Automation and infrastructure management engine"
   homepage "https://saltproject.io/"
 
   livecheck do
-    url "https://repo.saltproject.io/salt/py3/macos/latest"
-    regex(/salt[._-]v?(\d+(?:\.\d+)+)-py3-#{arch}\.pkg/)
+    url "https://docs.saltproject.io/salt/install-guide/en/latest/topics/install-by-operating-system/macos.html"
+    regex(/salt[._-]v?(\d+(?:\.\d+)+)-py3-#{arch}\.pkg/i)
   end
 
   pkg "salt-#{version}-py3-#{arch}.pkg"
@@ -26,15 +27,4 @@ cask "salt" do
             pkgutil:   "com.saltstack.salt"
 
   zap trash: "/etc/salt"
-
-  def caveats
-    <<~CAVEATS
-      Included services:
-
-      sudo launchctl load -w /Library/LaunchDaemons/com.saltstack.salt.api.plist
-      sudo launchctl load -w /Library/LaunchDaemons/com.saltstack.salt.master.plist
-      sudo launchctl load -w /Library/LaunchDaemons/com.saltstack.salt.minion.plist
-      sudo launchctl load -w /Library/LaunchDaemons/com.saltstack.salt.syndic.plist
-    CAVEATS
-  end
 end

@@ -1,14 +1,14 @@
 cask "qdirstat" do
-  version "1.9"
-  sha256 "b05637c023ef9781ea1d45663f228151a7793b79f8af8e8765cf72260cfd74f3"
+  version "2.0"
+  sha256 "03ff7fc6e1d5b820ca2b1b2fcb983d0539d86f6b53ff94096eed9ded709b3c88"
 
-  url "https://github.com/jesusha123/qdirstat-macos/releases/download/#{version}/QDirStat-#{version}.dmg"
+  url "https://github.com/jesusha123/qdirstat-macos/releases/download/#{version}/QDirStat.dmg"
   name "QDirStat"
   desc "Disk utilisation visualiser"
   homepage "https://github.com/jesusha123/qdirstat-macos/"
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :ventura"
 
   app "QDirStat.app"
 

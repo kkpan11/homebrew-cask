@@ -12,10 +12,16 @@ cask "redream" do
     regex(/redream\.x86_64-mac-v(\d+(?:\.\d+)*)\.t/i)
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "redream.app"
 
   zap trash: [
     "~/Library/Application Support/redream",
     "~/Library/Saved Application State/io.recompiled.redream.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

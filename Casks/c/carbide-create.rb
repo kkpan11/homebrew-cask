@@ -1,6 +1,6 @@
 cask "carbide-create" do
-  version "764"
-  sha256 "3f4dae5bd30826b93d7d6bb85291e39d406218bac06e70e4bee40200a5abf6c6"
+  version "842"
+  sha256 "97c993705a1c3ef86aca8a6ec298bf7f564dfc6d20c9336434b29409d0ce0e5d"
 
   url "https://carbide-downloads.website-us-east-1.linodeobjects.com/cc/stable/#{version}/CarbideCreate-#{version}.dmg",
       verified: "carbide-downloads.website-us-east-1.linodeobjects.com/"
@@ -11,7 +11,7 @@ cask "carbide-create" do
   livecheck do
     url "https://carbide-downloads.website-us-east-1.linodeobjects.com/builds.json"
     strategy :json do |json|
-      json["cc"]["stable"]["osx"]["build"].to_s
+      json.dig("cc", "stable", "osx", "build")&.to_s
     end
   end
 
@@ -22,4 +22,8 @@ cask "carbide-create" do
     "~/Library/Preferences/com.carbide*.Carbide Create.plist",
     "~/Library/Saved Application State/com.carbide3d.Carbide Create.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

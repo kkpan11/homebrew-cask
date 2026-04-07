@@ -12,6 +12,8 @@ cask "yep" do
     strategy :sparkle, &:short_version
   end
 
+  auto_updates true
+
   app "Yep.app"
 
   zap trash: [

@@ -1,17 +1,17 @@
 cask "bridge" do
-  version "2023.1.0"
-  sha256 :no_check
+  version "2025.0.0"
+  sha256 "3e74ba32f28d29a9f951f1f7cc98b2207049ce618c269ee15cfcd1652bfa1249"
 
-  url "https://d2shgxa8i058x8.cloudfront.net/bridge/mac/Bridge.dmg",
-      verified: "d2shgxa8i058x8.cloudfront.net/bridge/mac/"
+  url "https://d2shgxa8i058x8.cloudfront.net/bridge/mac/Bridge-#{version}.dmg",
+      verified: "d2shgxa8i058x8.cloudfront.net/bridge/"
   name "Quixel Bridge"
-  desc "Your gateway to Megascans and Metahumans"
-  homepage "https://quixel.com/bridge/"
+  desc "3D asset manager"
+  homepage "https://quixel.com/"
 
-  livecheck do
-    url "https://quixel-apps.s3.amazonaws.com/bridge/mac/latest-mac.yml"
-    strategy :electron_builder
-  end
+  deprecate! date: "2025-12-18", because: :discontinued, replacement_cask: "epic-games"
+  disable! date: "2026-12-18", because: :discontinued, replacement_cask: "epic-games"
+
+  auto_updates true
 
   app "Bridge.app"
 
@@ -20,4 +20,8 @@ cask "bridge" do
     "~/Library/Preferences/se.quixel.bridge.plist",
     "~/Library/Saved Application State/se.quixel.bridge.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

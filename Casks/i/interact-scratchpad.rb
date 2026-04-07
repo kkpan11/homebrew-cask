@@ -8,10 +8,8 @@ cask "interact-scratchpad" do
   desc "Menu bar utility to create contacts from snippets of text"
   homepage "https://docs.getdrafts.com/docs/misc/interact-scratchpad"
 
-  livecheck do
-    url :url
-    strategy :extract_plist
-  end
+  deprecate! date: "2024-11-15", because: :discontinued
+  disable! date: "2025-11-15", because: :discontinued
 
   depends_on macos: ">= :monterey"
 
